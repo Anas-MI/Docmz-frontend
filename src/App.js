@@ -1,7 +1,9 @@
 import React from 'react';
 import { Route, Switch, withRouter } from "react-router-dom";
 import { connect } from 'react-redux'
-import Search from "./components/Home/Search"
+import Dr_list from "./components/drList/Dr_list"
+import Home from "./components/Home/Home";
+import Dr_layout from "./dr/components/Dr_layout";
 import './App.scss';
 
 
@@ -9,15 +11,20 @@ import './App.scss';
 function App() {
   return (
     <div className="App">
-       
-      <header className="App-header">
-      <Search/>
-      </header>
       <Switch>
           <Route
             path="/"
             exact
-            component={props => <div {...props} >Home</div>}
+            component={props => <Home {...props} />}
+          />
+          <Route
+            path="/search"
+            exact
+            component={props => <Dr_list {...props} />}
+          />
+          <Route
+            path="/dr"
+            component={props => <Dr_layout {...props} />}
           />
       </Switch>
     </div>

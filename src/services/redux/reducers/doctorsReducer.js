@@ -1,18 +1,17 @@
-import { SET_USER, UNSET_USER } from "../type";
+import { SET_DOCTORS } from "../type";
 
 const initialState = {
-  name: ""
+  all: []
 };
 
 export default (state = initialState, action) => {
   const { payload, type } = action;
-
   switch (type) {
-    case SET_USER:
-      return payload;
-
-    case UNSET_USER:
-      return payload;
+    case SET_DOCTORS:
+      return {
+        ...state,
+        all: payload
+      };
 
     default:
       return state;

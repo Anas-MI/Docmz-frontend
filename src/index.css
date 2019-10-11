@@ -11,3 +11,33 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.ant-list.scroll-list.ant-list-sm.ant-list-split.ant-list-bordered {
+  overflow-y: scroll;
+  height: 200px;
+}
+
+
+.search_box {
+  display: flex;
+  width: 90%;
+}
+
+.ant-search-select , input#address-input {
+  width: 45%;
+}
+.ant-search-select .ant-select-selection{
+  border-radius: unset;
+}
+.ant-search-select input{
+  border-radius: unset;
+}
+input#address-input {
+  border-radius: inherit;
+}
+button.ant-btn.search_button.ant-btn-primary {
+  border-radius: initial;
+}
+.search_button a {
+  color: #fff;
+}

@@ -27,7 +27,9 @@ export default class LocationSearchInput extends Component{
           <React.Fragment>
             <Input
               {...getInputProps({
-                id: "address-input"
+                id: "address-input",
+                placeholder:"Search Location",
+                
               })}
             />
             <div className="autocomplete-dropdown-container">

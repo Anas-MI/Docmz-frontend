@@ -1,0 +1,16 @@
+import { SET_DOCTORS } from "../type";
+import { getDoctorsList } from '../../api'
+
+export const getDoctors = () => dispatch => {
+    getDoctorsList().then(res => {
+        console.log({
+            res
+        })
+        if(res.data && res.data.data){
+            dispatch({
+                type: SET_DOCTORS,
+                payload: res.data.data
+            })
+        }
+    })
+}

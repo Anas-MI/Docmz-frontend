@@ -35,10 +35,10 @@ const persistConfig = {
     //   ...otherReducer,
     //   referrer: persistReducer(sessionRedConfig, referrer)
 // });
-const { user } = rootReducer;
+const { user, ...otherReducer } = rootReducer;
 const allReducers = combineReducers({
-    user
-//   ...otherReducer,
+    user,
+  ...otherReducer,
 //   referrer: persistReducer(sessionRedConfig, referrer)
 });
 const persistedReducer = persistReducer(persistConfig, allReducers);
