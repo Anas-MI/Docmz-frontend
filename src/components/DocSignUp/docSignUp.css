@@ -1,0 +1,28 @@
+.search{
+    display:flex;
+  
+}
+
+.loader{
+    align-items: center;
+    float: right;
+   
+}
+
+.searchBox{
+    padding-right: 11px;
+    float: left;
+}
+
+.userInfo{
+    background: #cca8cac4; 
+    padding: 30px;
+}
+
+.ant-input-affix-wrapper .ant-input{
+    width:200px
+}
+
+.ant-row{
+    display:flex
+}
