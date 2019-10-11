@@ -24,3 +24,9 @@ export const validatePassword = (value) => {
   }
   return errors;
 };
+
+export const validateName = value => {
+	let errors;
+
+	return errors;
+}
