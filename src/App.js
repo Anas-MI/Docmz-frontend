@@ -2,7 +2,8 @@ import React from 'react';
 import { Route, Switch, withRouter } from "react-router-dom";
 import { connect } from 'react-redux'
 import Dr_list from "./components/drList/Dr_list"
-import Home from "./components/Home/Home";
+import Home from "./pages/Home/Home";
+import DoctorsProfile from "./pages/DoctorsProfile";
 import Dr_layout from "./dr/components/Dr_layout";
 import './App.scss';
 
@@ -16,6 +17,11 @@ function App() {
             path="/"
             exact
             component={props => <Home {...props} />}
+          />
+          <Route
+            path="/doctors"
+            exact
+            component={props => <DoctorsProfile {...props} />}
           />
           <Route
             path="/search"

@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { Select, DatePicker, Spin, Icon, Divider, Row, Col, Button, Steps, List } from 'antd';
 import debounce from 'lodash/debounce';
 import axios from 'axios';
-import LocationSearchInput from '../AddressAutoComplete/AddressAutoComplete';
+import LocationSearchInput from '../../components/AddressAutoComplete/AddressAutoComplete';
 import carriers from "../../services/extra/Carriers.json";
-import MultiStepSelect from "../multiStepSelect/MultiStepSelect";
+import MultiStepSelect from "../../components/multiStepSelect/MultiStepSelect";
 import { Redirect } from 'react-router-dom'
 import {
   Link

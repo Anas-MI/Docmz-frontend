@@ -9,7 +9,7 @@ import {
   getDoctors
 } from '../../services/redux/actions'
 import Dr_single_card from "./Dr_single_card";
-import Search from "../Home/Search";
+import Search from "../../pages/Home/Search";
 import DrCardLong from "./DrCardLong";
 import AppointmentSlider from "../appointment/AppointmentSlider"
 // const { Option, OptGroup } = Select;
