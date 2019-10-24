@@ -25,7 +25,7 @@ function App() {
           />
           <Route
             path="/search"
-            exact
+            
             component={props => <Dr_list {...props} />}
           />
           <Route

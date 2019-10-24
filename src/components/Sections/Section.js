@@ -6,7 +6,8 @@ export default class Section extends Component {
         const {
             parentClass,
             type,
-            children
+            children,
+            bgImg
         } = this.props
         console.log({
             type
@@ -18,6 +19,7 @@ export default class Section extends Component {
                 [parent]: parentClass,
                 [typeClass]: typeClass,
             })}>
+                {bgImg && <img src={bgImg} className="c-section__bg-img" />}
                 {children}
             </div>
         )

@@ -3,9 +3,6 @@ import { getDoctorsList } from '../../api'
 
 export const getDoctors = () => dispatch => {
     getDoctorsList().then(res => {
-        console.log({
-            res
-        })
         if(res.data && res.data.data){
             dispatch({
                 type: SET_DOCTORS,

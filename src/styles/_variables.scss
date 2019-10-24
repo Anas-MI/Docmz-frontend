@@ -2,6 +2,18 @@ $bannerHeight: 300px;
 $bannerHeightMd: 600px;
 $bannerHeightLg: 1000px;
 
+$logoHeight: 85px;
+//colors 
+// $main-color-1: #954fba; 
+$main-color-1: #1890ff; 
+$main-color-2: #4593e0;
+
+$text-color-1: #111111;
+$text-color-2: #444444;
+$text-color-3: #666666;
+$text-color-4: #aaaaaa;
+//
+$mainFont: "Roboto", "sarif";
 // {
 //     xs: '480px',
 //     sm: '576px',
@@ -10,3 +22,8 @@ $bannerHeightLg: 1000px;
 //     xl: '1200px',
 //     xxl: '1600px',
 // }
+
+
+.ant-layout {
+    background: transparent;
+}

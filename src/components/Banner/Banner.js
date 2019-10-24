@@ -6,7 +6,8 @@ export default class Banner extends Component {
     render() {
         const {
             parentClass,
-            type
+            type,
+            image
         } = this.props
         const typeClass =  getVersions(type, "c-banner")
         const parent    = `${parentClass}__banner`
@@ -15,7 +16,7 @@ export default class Banner extends Component {
                 [parent]: parentClass,
                 [typeClass]: typeClass,
             })}>
-                <img className="c-banner__img" src="//via.placeholder.com/1920x1080" alt="banner" />
+                <img className="c-banner__img" src={image} alt="banner" />
             </div>
         )
     }
