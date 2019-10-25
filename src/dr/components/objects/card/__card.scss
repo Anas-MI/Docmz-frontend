@@ -7,7 +7,7 @@
     }
 }
 .c-info-card{
-    box-shadow: 0px 0px 10px rgba(black, .12);
+    @include box-shadow;
     border-radius: 5px;
     padding: 3px 10px;
     position: relative;
@@ -168,6 +168,15 @@
         &:after{
             background-image: linear-gradient(rgba($main-color-1, 0), rgba($main-color-1, 0),rgba($main-color-1, .1), rgba($main-color-1, .2))
         }
+    }
+}
+.c-history-card{
+    padding: 10px;
+    @include box-shadow;
+    border-radius: 5px;
+    margin-bottom: 30px;
+    &__footer{
+        padding-top: 30px;
     }
 }
 .ant-card-body {

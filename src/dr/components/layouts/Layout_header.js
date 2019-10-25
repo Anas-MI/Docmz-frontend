@@ -75,6 +75,10 @@ export default class Layout_header extends Component {
             <Icon type="file" />
             <span>File</span>
           </Menu.Item>
+          <Menu.Item key="10">
+            <Icon type="history" />
+            <span><Link to="/dr/history">History</Link></span>
+          </Menu.Item>
         </Menu>
         <Availability_drower
           visible={visible}

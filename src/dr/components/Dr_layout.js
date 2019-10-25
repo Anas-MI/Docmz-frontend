@@ -7,6 +7,7 @@ import Layout_top_header from "./layouts/Layout_top_header";
 import Layout_footer from "./layouts/Layout_footer";
 import Calendars from "./pages/calendar/Calendars";
 import Single_patient from "./pages/patient/Single_patient";
+import History from './pages/history/History';
 export default class Dr_layout extends Component {
 	constructor(props) {
 		super(props);
@@ -48,6 +49,11 @@ export default class Dr_layout extends Component {
                               path="/dr/patients/single"
                               exact
                               component={props => <Single_patient {...props} />}
+                            />
+                            <Route
+                              path="/dr/history"
+                              exact
+                              component={props => <History {...props} />}
                             />
                           
                           <Route
