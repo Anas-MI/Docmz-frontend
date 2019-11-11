@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Card, Row, Col, version } from 'antd';
+import { Card, Row, Col, version ,Divider } from 'antd';
 import { getComponentClass, getVersions } from '../../../../services/extra/bem'
 import LabelValue from '../labelValue/LabelValue'
 import Button from '../buttons/Button'
@@ -28,6 +28,7 @@ export default class HistoryCard extends Component {
             </LabelValue>
           </Col>
         </Row>
+        <Divider/>
         <Row className={elementClasses.footer} align="middle" justify="space-between" type="flex">
           <Col span={12}>
             <Row>

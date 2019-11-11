@@ -1,4 +1,5 @@
 export const validateEmail = (value) => {
+	console.log(value);
 	let errors;
 
 	if (!value) {
@@ -14,8 +15,7 @@ export const isRequired = (value) => (!value ? 'Required!' : '');
 
 export const validatePassword = (value) => {
 	let errors;
-
-	if (!value) {
+     if (!value) {
 		errors = 'Password is Required!';
 	} else if (value.length <= 3) {
 		errors = 'Password too short!';

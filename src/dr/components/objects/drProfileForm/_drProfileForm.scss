@@ -1,0 +1,68 @@
+.c-multistep-update-profile {
+//   padding: 0 15px;
+  &__form-body {
+    min-height: 300px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.12);
+    padding: 30px;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 25px;
+    margin-top: 20px;
+    width: 600px;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  &__progress{
+    height: 5px;
+  }
+  &__heading{
+    font-size: 30px;
+    text-align: center;
+    margin-top: 40px;
+  }
+}
+
+.c-multistep-dr-form{
+    
+}
+
+.ant-progress-bg{
+  transition: all 1s ease-out 0s ;
+}
+
+.ant-progress-outer {
+  top: -22px;
+  position: absolute;
+}
+
+
+.welcome-screen{
+    
+     &__wrapper{
+      text-align: center;
+      padding: 20px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    &__logo {
+        width: 80px;
+        margin-bottom: 40px;
+    }
+    &__title{
+      font-size: 22px;
+      font-weight: 500;
+    }
+    &__divider{
+      margin-bottom: 5px;
+    }
+    &__btn{
+      margin-top: 40px;
+    }
+    &__footer-text{
+      font-size: 12px;
+    }
+}

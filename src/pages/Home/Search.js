@@ -4,8 +4,7 @@ import debounce from 'lodash/debounce';
 import axios from 'axios';
 import LocationSearchInput from '../../components/AddressAutoComplete/AddressAutoComplete';
 import carriers from "../../services/extra/Carriers.json";
-import MultiStepSelect from "../../components/multiStepSelect/MultiStepSelect";
-import { Redirect } from 'react-router-dom'
+
 import {
   Link
 } from "react-router-dom";

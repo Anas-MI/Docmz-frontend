@@ -38,7 +38,7 @@ export default class Layout_header extends Component {
             </span>
           </Menu.Item>
           <SubMenu
-            key="sub1"
+            key="2"
             title={
               <span>
                 <Icon type="control" />
@@ -53,14 +53,14 @@ export default class Layout_header extends Component {
               <Link to="/dr/calendar">Availability Calendar</Link>
             </Menu.Item>
           </SubMenu>
-          <Menu.Item key="12">
+          <Menu.Item key="5">
             <Icon type="pie-chart" />
             <span>
               <Link to="/dr/patients/single">Patients</Link>
             </span>
           </Menu.Item>
           <SubMenu
-            key="sub2"
+            key="6"
             title={
               <span>
                 <Icon type="team" />
@@ -68,7 +68,7 @@ export default class Layout_header extends Component {
               </span>
             }
           >
-            <Menu.Item key="6">Team 1</Menu.Item>
+            <Menu.Item key="7">Team 1</Menu.Item>
             <Menu.Item key="8">Team 2</Menu.Item>
           </SubMenu>
           <Menu.Item key="9">

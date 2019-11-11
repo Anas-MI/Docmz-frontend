@@ -34,18 +34,7 @@ export default ({ handleSubmit, values, submitCount }) => (
       password
       prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
     />
-    <Field
-      component={SelectField}
-      name="type"
-      label="Type"
-      defaultValue={""}
-      selectOptions={values.selectOptions}
-      validate={isRequired}
-      submitCount={submitCount}
-      tokenSeparators={[","]}
-      style={{ width: 200 }}
-      hasFeedback
-    />
+  
     <div className="submit-container">
       <button className="ant-btn ant-btn-primary" type="submit">
         Submit

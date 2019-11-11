@@ -24,6 +24,30 @@ export const getName = doctor => {
   return wholeName
 }
 
+export const getSlug = doctor => {
+  const {
+    basic
+  } = doctor
+  if (!basic)
+    return "no-slug"
+
+  const {
+    name_prefix,
+    name,
+    credential
+  } = basic
+  var nameVal = getValidValue(name);
+  nameVal = nameVal.replace(" ", "-");
+  const wholeName = `${nameVal}`
+  
+  if (wholeName.trim() === "")
+    return "No Name"
+
+  return wholeName
+}
+
+
+
 export const getAddress = doctor => {
   const {
     address
@@ -71,4 +95,18 @@ export const getTaxonomy = doctor => {
     desc
   } = taxonomies[0]
   return getValidValue(desc)
+}
+
+
+export const removeDublecatVale = (originalArray,key) =>{
+  var newArray = [];
+     var lookupObject  = {};
+     for(var i in originalArray) {
+        lookupObject[originalArray[i][key]] = originalArray[i];
+     }
+
+     for(i in lookupObject) {
+         newArray.push(lookupObject[i]);
+     }
+      return newArray;
 }

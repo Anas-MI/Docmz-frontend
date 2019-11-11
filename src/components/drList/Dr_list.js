@@ -16,7 +16,9 @@ import AppointmentSlider from "../appointment/AppointmentSlider"
 class Dr_list extends Component {
   constructor(props) {
     super(props);
-
+    this.state = {
+      dateArr : []
+    }
   }
 
   componentDidMount() {
@@ -24,20 +26,24 @@ class Dr_list extends Component {
   }
 
   render() {
-
+    
     return (
       <div>
-        <header className="App-header">
+        <div className={`${componentClass}__search-wrap`}>
 				  <Search />
-				</header>
+				</div>
 
-        <div style={{ background: '#ECECEC', padding: '30px' }}>
+        <div style={{ padding: '30px 8px'  }}>
           <Row >
             <Col span={8} offset={10}>
-              <AppointmentSlider />
+              <AppointmentSlider onDateChange={(e)=> {
+                this.setState({
+                  dateArr: e
+                })
+              }} />
             </Col>
           </Row>
-          <Row gutter={16}>
+          <Row gutter={16} style={{marginTop : "30px"}}>
              <Col span={18}>
               {
                 this.props.doctors.map((el, key) => (
@@ -53,6 +59,7 @@ class Dr_list extends Component {
     );
   }
 }
+const componentClass = "c-dr-list"
 Dr_list.defaultProps = {
   doctors: []
 }

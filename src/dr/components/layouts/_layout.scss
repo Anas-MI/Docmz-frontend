@@ -1,4 +1,5 @@
 .c-layout-header{
+    border-bottom:1px solid #e8e8e8 ; 
     &__col-user a{
         color: $main-color-1;
         margin-right: 10px;
@@ -26,7 +27,7 @@
     &__col-time{
         padding-left: 15px;
         & h3{
-            margin-top: 25px;
+            // margin-top: 25px;
         }
     }
    

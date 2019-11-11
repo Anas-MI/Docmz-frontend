@@ -8,6 +8,7 @@ import Layout_footer from "./layouts/Layout_footer";
 import Calendars from "./pages/calendar/Calendars";
 import Single_patient from "./pages/patient/Single_patient";
 import History from './pages/history/History';
+import MultiStepProfileUpdate from "./pages/profile/MultiStepProfileUpdate"
 export default class Dr_layout extends Component {
 	constructor(props) {
 		super(props);
@@ -22,6 +23,7 @@ export default class Dr_layout extends Component {
       };
     render() {
        const { Header, Content, Sider } = Layout;
+      
 		return (
 			<div>
                 <Layout style={{ minHeight: '100vh' }} theme="light">
@@ -30,7 +32,7 @@ export default class Dr_layout extends Component {
                     </Sider>
                     <Layout>
                     <Header style={{ background: '#fff', padding: 0 }} >
-                       <Layout_top_header />
+                       <Layout_top_header history={this.props.history} />
                     </Header>
                     <Content style={{ margin: '25px 16px' }}>
                         
@@ -55,6 +57,7 @@ export default class Dr_layout extends Component {
                               exact
                               component={props => <History {...props} />}
                             />
+                            
                           
                           <Route
                               path="/"

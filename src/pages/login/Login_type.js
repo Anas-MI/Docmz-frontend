@@ -1,0 +1,48 @@
+import React, { PureComponent } from "react";
+import { Icon, Row, Col } from "antd";
+
+export default class Login_type extends PureComponent {
+    constructor(props){
+        super(props);
+        this.state={
+            toggle:false,
+            
+        }
+    }
+    toggleDown(){
+        this.setState({
+            toggle:!this.state.toggle
+        })
+    }
+  render() {
+    const { icon, title, details, children } = this.props;
+    const {toggle} = this.state
+    return (
+      <div>
+        <Row>
+          <Col span="24">
+            <Icon type={icon} style={{ fontSize: "24px" }} />
+          </Col>
+        </Row>
+        <Row>
+          <Col xs={24} sm={24} md={12} lg={8} xl={12}>
+            <h3 onClick={()=>this.toggleDown()}>{title}</h3>
+            <p>{details}</p>
+          </Col>
+          <Col xs={24} sm={24} md={12} lg={12} xl={12}>
+           {toggle ? 
+            <Icon type="arrow-up" onClick={()=>this.toggleDown()} style={{ fontSize: "24px" }} />
+             :
+             <Icon type="arrow-right" onClick={()=>this.toggleDown()} style={{ fontSize: "24px" }} />}
+            
+          </Col>
+        </Row>
+        <Row>
+          <Col span="20">
+            {toggle ? children :''}
+           </Col>
+        </Row>
+      </div>
+    );
+  }
+}

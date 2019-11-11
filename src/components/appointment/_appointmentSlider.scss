@@ -1,10 +1,8 @@
 .date-slider-cart{
-    &__day{
-        line-height: 1px;
+    &__day,&__time{
+        line-height: 1;
+        margin-bottom: 0;
         font-weight: bold;
-    }
-    &__time{
-        line-height: 1px;
-        font-weight: bold;
+        text-align: center;
     }
 }
