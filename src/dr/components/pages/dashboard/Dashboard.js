@@ -5,6 +5,7 @@ import InfoCard from "../../objects/card/InfoCard";
 import ShortCalender from "../../objects/calenders/shortCalender/ShortCalender";
 import Timeline_drovar from "../../objects/timeline/Timeline_drovar";
 import Tour from "react-user-tour";
+import './ddemo.css'
 export default class Dashboard extends Component {
   constructor(props) {
     super(props);
@@ -51,18 +52,18 @@ export default class Dashboard extends Component {
       <div>
         <Row>
           <Col span={16}
-            class="stop-1"
+            // class="stop-1"
           >
             {/* <Timelines /> */}
            
-            <InfoCard />
+            <InfoCard className="stop-3"/>
             <InfoCard />
             <InfoCard />
             <InfoCard />
            
           </Col>
           <Col span={8}
-          class="stop-2"
+          // class="stop-2"
           >
             <div
               style={{
@@ -82,21 +83,29 @@ export default class Dashboard extends Component {
             </div>
           </Col>
         </Row>
-        {/* <Row>
-        <Col span={4}
+        <Row>
+        <Col span={2}
         className="stop-1"
         >
         Demo content
         </Col>
         </Row>
-
         <Row>
-        <Col span={6}
+        <Col span={4}
         className="stop-2"
         >
        Demo content 2
         </Col>
-        </Row> */}
+        </Row>
+        <Row>
+        <Col span={2}
+        className="stop-3"
+        >
+       Demo content 3
+        </Col>
+        </Row>  
+
+       
        
         <div style={{position: "absolute", top: 0}}>
 					<Tour
