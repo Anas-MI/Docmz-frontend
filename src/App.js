@@ -13,10 +13,13 @@ import MultiStepProfileUpdate from "./dr/components/pages/profile/MultiStepProfi
 import './App.scss';
 import  Demomultisteps  from './dr/components/Demoform/Demomultisteps';
 import  Firststepformdemo  from './dr/components/objects/drProfileForm/Firststepformdemo';
+import Newtour from './dr/components/objects/drProfileForm/Newtour';
+
 
 
 
 function App() {
+   
   return (
     <div className="App">
       <Switch>
@@ -45,11 +48,12 @@ function App() {
             path="/payment"
             component={props => <Payment {...props} />}
           />
-          
+     
           <Route
             path="/dr"
             component={props => <Dr_layout {...props} />}
           />
+   
           <Route
                 path="/dr-profile-stap"
                 component={props => <MultiStepProfileUpdate {...props} />}
@@ -59,6 +63,7 @@ function App() {
              component = {Firststepformdemo}
             // component={props => <Firststepformdemo {...props} />}
             />
+             <Route path="/Newtour" exact = {true} component = {Newtour} />
       </Switch>
     </div>
   );
