@@ -11,7 +11,8 @@ export default class Dashboard extends Component {
     this.state = {
       visible: false,
       isTourActive: false,
-      tourStep: 1
+      tourStep: 1,
+      timelinevisible : false
     };
   }
   componentDidMount() {
@@ -26,6 +27,16 @@ export default class Dashboard extends Component {
     });
   };
 
+  manualnext = (step) => {
+    this.setState({ 
+      tourStep: step ,
+      visible : true
+    })
+    console.log(this.state.tourStep)
+
+  }
+
+
   onClose = () => {
     if (this.state.visible) {
       this.setState({
@@ -34,6 +45,7 @@ export default class Dashboard extends Component {
     }
   };
   render() {
+    
     const { visible } = this.state;
     const tourTitleStyle = {
       fontWeight: 700,
@@ -51,7 +63,7 @@ export default class Dashboard extends Component {
       <div>
         <div class="stop-1">
           <Row
-            
+
           >
             <Col span={16}
 
@@ -115,7 +127,8 @@ export default class Dashboard extends Component {
           <Tour
             active={this.state.isTourActive}
             step={this.state.tourStep}
-            onNext={(step) => this.setState({ tourStep: step })}
+            // onNext={(step) => this.setState({ tourStep: step })}
+            onNext={(step) => this.manualnext(step)}
             onBack={(step) => this.setState({ tourStep: step })}
             onCancel={() => this.setState({ isTourActive: false })}
             steps={[
