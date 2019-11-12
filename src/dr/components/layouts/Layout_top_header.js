@@ -11,9 +11,10 @@ export default class Layout_header extends Component {
   }
   componentDidMount(){
     const {docInfo}=this.state
-    if(!docInfo._id){
-      this.props.history.push("/login")
-      }
+    console.log('docinfohere',docInfo)
+    // if(!docInfo._id){
+    //   this.props.history.push("/login")
+    //   }
       this.toggleWelcom();
     }
     toggleWelcom = ()=>{

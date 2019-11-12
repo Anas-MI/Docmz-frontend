@@ -10,7 +10,7 @@ import Single_patient from "./pages/patient/Single_patient";
 import History from './pages/history/History';
 import MultiStepProfileUpdate from "./pages/profile/MultiStepProfileUpdate";
 import Tour from "react-user-tour";
-import './drlayout.css';
+// import './drlayout.css';
 export default class Dr_layout extends Component {
 	constructor(props) {
 		super(props);
