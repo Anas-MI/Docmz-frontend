@@ -27,6 +27,25 @@ export default class Dashboard extends Component {
     });
   };
 
+  manualnext = (step) => {
+    this.setState({ 
+      tourStep: step ,
+      visible : true
+    })
+    console.log(this.state.tourStep)
+
+  }
+
+  manualprev = (step) => {
+    this.setState({ 
+      tourStep: step
+     })
+     this.setState({
+      visible: false
+    });
+     console.log('prevstep',this.state.tourStep)
+  }
+
   onClose = () => {
     if (this.state.visible) {
       this.setState({
@@ -35,6 +54,7 @@ export default class Dashboard extends Component {
     }
   };
   render() {
+    
     const { visible } = this.state;
     const tourTitleStyle = {
       fontWeight: 700,
@@ -48,6 +68,11 @@ export default class Dashboard extends Component {
       fontSize: 12,
       paddingLeft: 10
     };
+    if(this.state.isTourActive == false){
+      this.setState({
+        visible : false
+      })
+    }
     return (
       <div>
         <Row>
@@ -85,6 +110,15 @@ export default class Dashboard extends Component {
                 onClose={() => {
                   this.onClose();
                 }}
+                class="stop-2"
+
+              />
+                <Button onClick={this.showDrawer} className="fr" type="primary">Timeline</Button>
+                <Timeline_drovar
+                  visible={visible}
+                  onClose={() => {
+                    this.onClose();
+                  }}
                 // className="stop-1"
               />
               {/* <ShortCalender /> */}

@@ -14,6 +14,9 @@ import './App.scss';
 import  Demomultisteps  from './dr/components/Demoform/Demomultisteps';
 import  Firststepformdemo  from './dr/components/objects/drProfileForm/Firststepformdemo';
 import Newtour from './dr/components/objects/drProfileForm/Newtour';
+import Demotour from './dr/components/pages/dashboard/Demotour';
+import Patienthome from './pages/Patient/Home';
+import Patientcard from './pages/Patient/Patientcard';
 
 
 
@@ -64,6 +67,9 @@ function App() {
             // component={props => <Firststepformdemo {...props} />}
             />
              <Route path="/Newtour" exact = {true} component = {Newtour} />
+             <Route path="/Demotour" exact = {true} component = {Demotour} />
+             <Route path="/Patient" exact = {true} component = {Patienthome} />
+             <Route path="/Patientcard" exact = {true} component = {Patientcard} />
       </Switch>
     </div>
   );
