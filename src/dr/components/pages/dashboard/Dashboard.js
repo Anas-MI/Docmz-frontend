@@ -12,7 +12,8 @@ export default class Dashboard extends Component {
       visible: false,
       isTourActive: false,
       tourStep: 1,
-      timelinevisible : false
+      // timelinevisible : false
+
     };
   }
   componentDidMount() {
@@ -36,6 +37,15 @@ export default class Dashboard extends Component {
 
   }
 
+  manualprev = (step) => {
+    this.setState({ 
+      tourStep: step
+     })
+     this.setState({
+      visible: false
+    });
+     console.log('prevstep',this.state.tourStep)
+  }
 
   onClose = () => {
     if (this.state.visible) {
@@ -59,6 +69,11 @@ export default class Dashboard extends Component {
       fontSize: 12,
       paddingLeft: 10
     };
+    if(this.state.isTourActive == false){
+      this.setState({
+        visible : false
+      })
+    }
     return (
       <div>
         <div class="stop-1">
@@ -129,7 +144,7 @@ export default class Dashboard extends Component {
             step={this.state.tourStep}
             // onNext={(step) => this.setState({ tourStep: step })}
             onNext={(step) => this.manualnext(step)}
-            onBack={(step) => this.setState({ tourStep: step })}
+            onBack={(step) => this.manualprev(step)}
             onCancel={() => this.setState({ isTourActive: false })}
             steps={[
               {
@@ -145,30 +160,30 @@ export default class Dashboard extends Component {
                 title: <div style={tourTitleStyle}>Simply</div>,
                 body: <div style={tourMessageStyle}>pass in a class class prefixe with `.` or id prefixed with `#`</div>
               },
-              {
-                step: 3,
-                selector: ".stop-3",
-                title: <div style={tourTitleStyle}>And</div>,
-                body: <div style={tourMessageStyle}>React User Tour will figure out where to position the element.</div>
-              },
-              {
-                step: 4,
-                selector: ".stop-4",
-                title: <div style={tourTitleStyle}>Wow</div>,
-                body: <div style={tourMessageStyle}>That sounds amazing, can it be true?</div>
-              },
-              {
-                step: 5,
-                selector: ".stop-5",
-                title: <div style={tourTitleStyle}>Yes</div>,
-                body: <div style={tourMessageStyle}>and guess what?</div>
-              },
-              {
-                step: 6,
-                selector: ".stop-6",
-                title: <div style={tourTitleStyle}>What?</div>,
-                body: <div style={tourMessageStyle}>we'll even take care of scrolling to elements outside of the viewbox. Enjoy!</div>
-              }
+              // {
+              //   step: 3,
+              //   selector: ".stop-3",
+              //   title: <div style={tourTitleStyle}>And</div>,
+              //   body: <div style={tourMessageStyle}>React User Tour will figure out where to position the element.</div>
+              // },
+              // {
+              //   step: 4,
+              //   selector: ".stop-4",
+              //   title: <div style={tourTitleStyle}>Wow</div>,
+              //   body: <div style={tourMessageStyle}>That sounds amazing, can it be true?</div>
+              // },
+              // {
+              //   step: 5,
+              //   selector: ".stop-5",
+              //   title: <div style={tourTitleStyle}>Yes</div>,
+              //   body: <div style={tourMessageStyle}>and guess what?</div>
+              // },
+              // {
+              //   step: 6,
+              //   selector: ".stop-6",
+              //   title: <div style={tourTitleStyle}>What?</div>,
+              //   body: <div style={tourMessageStyle}>we'll even take care of scrolling to elements outside of the viewbox. Enjoy!</div>
+              // }
             ]}
           />
         </div>

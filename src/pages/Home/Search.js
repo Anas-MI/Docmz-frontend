@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Select, DatePicker, Spin, Icon, Divider, Row, Col, Button, Steps, List } from 'antd';
+import './search.css'
 import debounce from 'lodash/debounce';
 import axios from 'axios';
 import LocationSearchInput from '../../components/AddressAutoComplete/AddressAutoComplete';
@@ -86,7 +87,7 @@ export default class Search extends Component {
     };
     const { Step } = Steps;
     return (
-      <div className="search_box">
+      <div className="search_box custom-search-box-width-home">
         <Select
           suffixIcon={<Icon type="search" />}
           showSearch
@@ -94,7 +95,7 @@ export default class Search extends Component {
           optionFilterProp="children"
           onChange={onChange}
           onSearch={onSearch}
-          className="ant-search-select"
+          className="ant-search-select custom-ant-search-select-home"
 
         >
           <OptGroup label="Popular Specialties">
@@ -115,14 +116,14 @@ export default class Search extends Component {
 
         </Select>
         <LocationSearchInput className="ant-search-select" />
-        <DatePicker onChange={onChange} className="ant-search-select" />
+        <DatePicker onChange={onChange} className="ant-search-select custom-ant-search-select-home-date ant-calendar-home" />
         <Select
           suffixIcon={<Icon type="bars" />}
           placeholder="custom dropdown render"
           value={value}
           open={isOpen}
           onDropdownVisibleChange={this.toggleSelect}
-          className="ant-search-select"
+          className="ant-search-select "
           dropdownRender={menu => (
             <div className="col-12">
 
@@ -137,7 +138,7 @@ export default class Search extends Component {
               {/* <Divider /> */}
               <Row type="flex">
 
-                <Col span={24} className="select-carriers">
+                <Col span={24} className="select-carriers custom-ant-selection-single-home">
                   {carrierSelected ?
                     <List
                       size="small"
@@ -176,7 +177,7 @@ export default class Search extends Component {
 
         </Select>
 
-        <Button type="primary" icon="search" className="search_button">
+        <Button type="primary" icon="search" className="search_button custom-home-search-btn">
           <Link to="/search">Search</Link>
         </Button>
 

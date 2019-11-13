@@ -1,0 +1,75 @@
+.doctor-header h1 {
+    font: 36px sharp-sans-bold, Arial, sans-serif!important;
+    /* font-size: 48px; */
+}
+.search_box p {
+    padding-top: 50px;
+    font-size: 18px;
+}
+.drimg-wrapper {
+    background-color: rgb(0, 215, 250);
+    height: 105px;
+    width: 105px;
+    cursor: pointer;
+    border-radius: 50%;
+    overflow: hidden;
+}
+.obgyn-foreground-wrapper {
+    background-color: rgb(255, 159, 169);
+    height: 105px;
+    width: 105px;
+    cursor: pointer;
+    border-radius: 50%;
+    overflow: hidden;
+}
+.dentists-foreground-wrapper {
+    background-color: rgb(215, 177, 255);
+    height: 105px;
+    width: 105px;
+    cursor: pointer;
+    border-radius: 50%;
+    overflow: hidden;
+}
+.dermatology-foreground-wrapper {
+    background-color: rgb(255, 100, 115);
+    height: 105px;
+    width: 105px;
+    cursor: pointer;
+    border-radius: 50%;
+    overflow: hidden;
+}
+.therapy-foreground-wrapper {
+    background-color: rgb(0, 230, 175);
+    height: 105px;
+    width: 105px;
+    cursor: pointer;
+    border-radius: 50%;
+    overflow: hidden;
+}
+.optometry-foreground-wrapper {
+    background-color: rgb(255, 240, 75);
+    height: 105px;
+    width: 105px;
+    cursor: pointer;
+    border-radius: 50%;
+    overflow: hidden;
+}
+.ent-foreground-wrapper {
+    background-color: rgb(0, 215, 250);
+    height: 105px;
+    width: 105px;
+    cursor: pointer;
+    border-radius: 50%;
+    overflow: hidden;
+}
+.gastro-foreground-wrapper {
+    background-color: rgb(195, 130, 255);
+    height: 105px;
+    width: 105px;
+    cursor: pointer;
+    border-radius: 50%;
+    overflow: hidden;
+}
+.primary-care-para {
+    padding-top: 20px;
+}
