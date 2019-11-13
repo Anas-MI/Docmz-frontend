@@ -12,7 +12,7 @@ import { Icon, Col, Row } from "antd";
 const selectYearOption = [...Array(100).keys()];
 export default ({ handleSubmit, values, submitCount }) => (
   <Form className="form-container"  onSubmit={handleSubmit}>
-    <Row>
+    <Row className="form-field-group-fixed">
       <Col xs={24} sm={24} md={12} lg={12} xl={12}>
         <Field
           component={SelectField}
@@ -44,12 +44,12 @@ export default ({ handleSubmit, values, submitCount }) => (
    
     
     <Row 
+    className="form-field-group-button"
     // style={{display:"none"}}
     >
       <Col xs={24} className="button_wrapper" type="flex" align="bottom" >
         <button 
-        id="from-0"
-         className="ant-btn ant-btn-primary btn-right" type="submit">
+        id="from-0" className="ant-btn ant-btn-primary btn-right" type="submit">
           Next <Icon type="arrow-right" />
         </button>
       </Col>

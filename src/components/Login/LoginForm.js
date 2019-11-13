@@ -45,6 +45,35 @@ export default class LoginForm extends PureComponent {
         })
       }
     });
+    }else{
+      const requestData={
+        "email":email,
+        "password":password
+      }
+      let url = baseUrl+`/patient/authenticate`;
+      axios.post(url,requestData)
+     .then(res => {
+      const msg={
+        error:res.data.status,
+        msg:res.data.error
+      }
+      if(res.data.status){
+        this.setState({
+          notification:msg,
+          isLoading:false
+        },()=>{
+          const userInfo=JSON.stringify(res.data.user) ;
+          window.localStorage.setItem("patient",userInfo)
+          this.props.history.push("search");
+        })
+      }else{
+        this.setState({
+          notification:msg,
+          notificationToggle:true,
+          isLoading:false
+        })
+      }
+    });
     }
    
   };

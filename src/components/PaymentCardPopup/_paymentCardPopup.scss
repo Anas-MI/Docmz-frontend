@@ -1,0 +1,13 @@
+.c-payment-card-form{
+    &__modal{
+        width: 900px;
+        max-width: 100%;
+        .ant-modal-body{
+            padding: 0;
+        }
+        .ant-modal-content{
+            border-radius: 20px;
+            overflow: hidden;
+        }
+    }
+}

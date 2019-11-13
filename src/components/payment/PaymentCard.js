@@ -126,41 +126,52 @@ export default class PaymentCard extends Component {
     } = this.state;
     const logo =
       cardDesingInfo && cardDesingInfo.logo ? cardDesingInfo.logo : "";
+    const {
+      submitText,
+      backBtnText,
+    } = this.props
     return (
-      <div>
-        <div className="container preload">
-          <div className="creditcard ">
-            <ReactCardFlip
-              flipSpeedBackToFront={1}
-              flipSpeedFrontToBack={1}
-              isFlipped={this.state.flip}
-              flipDirection="horizontal"
-            >
-              <div
-                className="front"
-                key="front"
-                onClick={() => {
-                  this.setState({ flip: !flip });
-                }}
+      <form className="payment-card-wrapper">
+        <div className="payment-card-wrapper__title">
+          Add a Card
+        </div>
+        <div className="payment-card-wrapper__card-wrapper-inner">
+        <div className="payment-card-wrapper__card">
+          <div className="container preload">
+            <div className="creditcard ">
+              <ReactCardFlip
+                flipSpeedBackToFront={1}
+                flipSpeedFrontToBack={1}
+                isFlipped={this.state.flip}
+                flipDirection="horizontal"
               >
                 <div
-                  id="ccsingle"
-                  dangerouslySetInnerHTML={{ __html: logo }}
-                ></div>
+                  className="front"
+                  key="front"
+                  onClick={() => {
+                    this.setState({ flip: !flip });
+                  }}
+                >
+                  <div
+                    id="ccsingle"
+                    dangerouslySetInnerHTML={{ __html: logo }}
+                  ></div>
+                  <div
+                    dangerouslySetInnerHTML={{ __html: this.svgFrant() }}
+                  ></div>
+                </div>
                 <div
-                  dangerouslySetInnerHTML={{ __html: this.svgFrant() }}
+                  className="back"
+                  key="back"
+                  onClick={() => {
+                    this.setState({ flip: !flip });
+                  }}
+                  dangerouslySetInnerHTML={{ __html: this.svgBack() }}
                 ></div>
-              </div>
-              <div
-                className="back"
-                key="back"
-                onClick={() => {
-                  this.setState({ flip: !flip });
-                }}
-                dangerouslySetInnerHTML={{ __html: this.svgBack() }}
-              ></div>
-            </ReactCardFlip>
+              </ReactCardFlip>
+            </div>
           </div>
+        </div>
         </div>
         <div className="form-container-payment">
           <div className="field-container">
@@ -181,7 +192,7 @@ export default class PaymentCard extends Component {
               mask={maskKey}
               id="cardnumber"
               type="text"
-              pattern="[0-9]*"
+              // pattern="[0-9]*"
               inputmode="numeric"
               value={cardNumber}
               name="cardNumber"
@@ -217,7 +228,19 @@ export default class PaymentCard extends Component {
             ></InputMask>
           </div>
         </div>
-      </div>
+        <div className="field-container btn-container">
+            <button className="back-btn">
+              {backBtnText}
+            </button>
+            <button className="submit-btn" type="submit">
+              {submitText}
+            </button>
+          </div>
+      </form>
     );
   }
+}
+PaymentCard.defaultProps = {
+  submitText: "Save",
+  backBtnText: "back"
 }

@@ -1,23 +1,23 @@
 import React, { Component } from "react";
 // import Timelines from "../../objects/timeline/Timelines";
-import { Row, Col, Button } from "antd";
+import { Row, Col, Button, Icon } from "antd";
 import InfoCard from "../../objects/card/InfoCard";
 import ShortCalender from "../../objects/calenders/shortCalender/ShortCalender";
 import Timeline_drovar from "../../objects/timeline/Timeline_drovar";
 import Tour from "react-user-tour";
-import './ddemo.css'
+import "./ddemo.css";
 export default class Dashboard extends Component {
   constructor(props) {
     super(props);
     this.state = {
       visible: false,
       isTourActive: false,
-			tourStep: 1
+      tourStep: 1
     };
   }
   componentDidMount() {
     this.setState({
-      isTourActive: true
+      // isTourActive: true
     });
   }
   showDrawer = () => {
@@ -51,27 +51,35 @@ export default class Dashboard extends Component {
     return (
       <div>
         <Row>
-          <Col span={16}
+          <Col
+            span={15}
+            offset={1 }
             // class="stop-1"
           >
             {/* <Timelines /> */}
-           
-            <InfoCard className="stop-3"/>
+            <span style={{paddingTop: 50, display: "block"}}></span>
+            <Row>
+              <Col>
+                <span className="dashboard-heading">Appointments</span>
+              </Col>
+            </Row>
+            <span style={{paddingTop: 30, display: "block"}}></span>
+            <InfoCard className="stop-3" />
             <InfoCard />
             <InfoCard />
-            <InfoCard />
-           
           </Col>
-          <Col span={8}
-          // class="stop-2"
+          <Col
+            span={8}
+            // class="stop-2"
           >
             <div
               style={{
                 paddingLeft: 50
               }}
-              
             >
-              <Button onClick={this.showDrawer} className="fr" type="primary">Timeline</Button>
+              <Button onClick={this.showDrawer} className="fr timeline-toggle" type="primary">
+                <Icon style={{fontSize: 20}} type="schedule" />
+              </Button>
               <Timeline_drovar
                 visible={visible}
                 onClose={() => {
@@ -83,78 +91,78 @@ export default class Dashboard extends Component {
             </div>
           </Col>
         </Row>
-        <Row>
-        <Col span={2}
-        className="stop-1"
-        >
-        Demo content
-        </Col>
-        </Row>
-        <Row>
-        <Col span={4}
-        className="stop-2"
-        >
-       Demo content 2
-        </Col>
-        </Row>
-        <Row>
-        <Col span={2}
-        className="stop-3"
-        >
-       Demo content 3
-        </Col>
-        </Row>  
-
-       
-       
-        <div style={{position: "absolute", top: 0}}>
-					<Tour
-						active={this.state.isTourActive}
-						step={this.state.tourStep}
-						onNext={(step) => this.setState({tourStep: step})}
-						onBack={(step) => this.setState({tourStep: step})}
-						onCancel={() => this.setState({isTourActive: false})}
-						steps={[
-							{
-								step: 1,
-								selector: ".stop-1",
-								title: <div style={tourTitleStyle}>React User Tour</div>,
-								body: <div style={tourMessageStyle}>Provide a simple guided tour around a website utilizing css selectors.</div>,
-								position: "bottom"
-							},
-							{
-								step: 2,
-								selector: ".stop-2",
-								title: <div style={tourTitleStyle}>Simply</div>,
-								body: <div style={tourMessageStyle}>pass in a class class prefixe with `.` or id prefixed with `#`</div>
-							},
-							{
-								step: 3,
-								selector: ".stop-3",
-								title: <div style={tourTitleStyle}>And</div>,
-								body: <div style={tourMessageStyle}>React User Tour will figure out where to position the element.</div>
-							},
-							{
-								step: 4,
-								selector: ".stop-4",
-								title: <div style={tourTitleStyle}>Wow</div>,
-								body: <div style={tourMessageStyle}>That sounds amazing, can it be true?</div>
-							},
-							{
-								step: 5,
-								selector: ".stop-5",
-								title: <div style={tourTitleStyle}>Yes</div>,
-								body: <div style={tourMessageStyle}>and guess what?</div>
-							},
-							{
-								step: 6,
-								selector: ".stop-6",
-								title: <div style={tourTitleStyle}>What?</div>,
-								body: <div style={tourMessageStyle}>we'll even take care of scrolling to elements outside of the viewbox. Enjoy!</div>
-							}
-						]}
-					/>
-				</div>
+        <div style={{ position: "absolute", top: 0 }}>
+          <Tour
+            active={this.state.isTourActive}
+            step={this.state.tourStep}
+            onNext={step => this.setState({ tourStep: step })}
+            onBack={step => this.setState({ tourStep: step })}
+            onCancel={() => this.setState({ isTourActive: false })}
+            steps={[
+              {
+                step: 1,
+                selector: ".stop-1",
+                title: <div style={tourTitleStyle}>React User Tour</div>,
+                body: (
+                  <div style={tourMessageStyle}>
+                    Provide a simple guided tour around a website utilizing css
+                    selectors.
+                  </div>
+                ),
+                position: "bottom"
+              },
+              {
+                step: 2,
+                selector: ".stop-2",
+                title: <div style={tourTitleStyle}>Simply</div>,
+                body: (
+                  <div style={tourMessageStyle}>
+                    pass in a class class prefixe with `.` or id prefixed with
+                    `#`
+                  </div>
+                )
+              },
+              {
+                step: 3,
+                selector: ".stop-3",
+                title: <div style={tourTitleStyle}>And</div>,
+                body: (
+                  <div style={tourMessageStyle}>
+                    React User Tour will figure out where to position the
+                    element.
+                  </div>
+                )
+              },
+              {
+                step: 4,
+                selector: ".stop-4",
+                title: <div style={tourTitleStyle}>Wow</div>,
+                body: (
+                  <div style={tourMessageStyle}>
+                    That sounds amazing, can it be true?
+                  </div>
+                )
+              },
+              {
+                step: 5,
+                selector: ".stop-5",
+                title: <div style={tourTitleStyle}>Yes</div>,
+                body: <div style={tourMessageStyle}>and guess what?</div>
+              },
+              {
+                step: 6,
+                selector: ".stop-6",
+                title: <div style={tourTitleStyle}>What?</div>,
+                body: (
+                  <div style={tourMessageStyle}>
+                    we'll even take care of scrolling to elements outside of the
+                    viewbox. Enjoy!
+                  </div>
+                )
+              }
+            ]}
+          />
+        </div>
       </div>
     );
   }

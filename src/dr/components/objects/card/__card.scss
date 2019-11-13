@@ -7,7 +7,7 @@
     }
 }
 .c-info-card{
-    @include box-shadow;
+    // @include box-shadow;
     border-radius: 5px;
     padding: 3px 10px;
     position: relative;
@@ -16,16 +16,16 @@
     &:hover{
         transform: translateY(-10px);
     }
-    &:before{
-        content: "";
-        display: block;
-        width: 5px;
-        position: absolute;
-        top: 0;
-        left: 0;
-        bottom: 0;
-        background-color: $main-color-1;
-    }
+    // &:before{
+    //     content: "";
+    //     display: block;
+    //     width: 5px;
+    //     position: absolute;
+    //     top: 0;
+    //     left: 0;
+    //     bottom: 0;
+    //     background-color: $main-color-1;
+    // }
     .ant-col{
         padding-right: 20px;
         padding-left: 20px;
@@ -41,7 +41,6 @@
             bottom: 0;
             margin: auto;
         }
-
     }
     &__user-info{
         display: flex;
@@ -88,7 +87,7 @@
         justify-content: center;
     }
     &__status{
-        font-size: 14px;
+        font-size: 12px;
         position: relative;
         padding-left: 15px;
         padding-right: 15px;

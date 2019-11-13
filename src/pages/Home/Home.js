@@ -3,6 +3,7 @@ import { Select, DatePicker, Spin, Icon, Divider, Row, Col, Button, Steps, List 
 import debounce from 'lodash/debounce';
 import axios from 'axios';
 import Search from "./Search";
+import PaymentCardForm from '../../components/PaymentCardPopup/PaymentCardPopup';
 const { Option, OptGroup } = Select;
 export default class Home extends Component {
 	constructor(props) {
@@ -17,6 +18,7 @@ export default class Home extends Component {
 				</header>
 				<div className="search_box">
 					Home
+					<PaymentCardForm />
 				</div>
 			</div>
 			

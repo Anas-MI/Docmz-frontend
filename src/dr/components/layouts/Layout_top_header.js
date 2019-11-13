@@ -11,14 +11,13 @@ export default class Layout_header extends Component {
   }
   componentDidMount(){
     const {docInfo}=this.state
-    if(!docInfo._id){
+    if( !docInfo){
       this.props.history.push("/login")
       }
-      this.toggleWelcom();
+       this.toggleWelcom();
     }
     toggleWelcom = ()=>{
       const { docInfo , visible } = this.state;
-    console.log("xxxx",{docInfo})
     const drName=docInfo && docInfo.basic && docInfo.basic.name ? 'Welcome to dr. ' + docInfo.basic.name+  ' ('+docInfo.basic.credential+')' :''
       notification.open({
         message: 'Welcome Notification',
@@ -37,12 +36,12 @@ export default class Layout_header extends Component {
     return (
       <div className="c-layout-header">
        
-        <Row className="c-layout-header__wrapper">
-          <Col span={4} className="c-layout-header__col-time">
-            <h3>Tuesday , 10.17 AM</h3>
+        <Row type="flex" align="middle" justify="space-between" className="c-layout-header__wrapper">
+          <Col className="c-layout-header__col-time">
+            <h3 className="c-layout-header__time-text">Tuesday , 10.17 AM</h3>
           </Col>
-          <Col span={6} offset={14} className="c-layout-header__col-user">
-            <a>Dr. {drName} </a>
+          <Col className="c-layout-header__col-user">
+            <a className="c-layout-header__user-test">Dr. {drName.toLowerCase()} </a>
             {"  "}
             <img src="../../../images/dr-demo-5.jpg" />
           </Col>

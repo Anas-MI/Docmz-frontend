@@ -2,12 +2,12 @@ import React from "react";
 import { Form, Field } from "formik";
 import {
   InputField,
-  SelectField
+  
 } from "../Fields/FormFields";
 import {
   validateEmail,
   isRequired,
-  validatePassword
+  
 } from "../Fields/ValidateFields";
 import { Icon} from 'antd';
 import "./login.css"
@@ -28,7 +28,7 @@ export default ({ handleSubmit, values, submitCount }) => (
       name="password"
       type="password"
       label="Password"
-      validate={validatePassword}
+      validate={isRequired}
       submitCount={submitCount}
       hasFeedback
       password
