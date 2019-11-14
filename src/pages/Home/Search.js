@@ -28,6 +28,8 @@ export default class Search extends Component {
       carrierPlan: [],
       isOpen: false
     };
+
+
   }
 
 
@@ -46,18 +48,31 @@ export default class Search extends Component {
 
 
   async componentDidMount() {
-    this.setState({ loading: true });
-    const Specialty = await axios(`http://localhost:3001/doctors/get/specialties`);
-    let doctors = await Specialty.data.data;
-    this.setState({ doctors, loading: false });
-
+    console.log('cariershere',carriers)
+    // console.log('carriersmap',carriers.map((carrier)))
     const data = carriers.carriers.map((carrier) => ({
       text: `${carrier.name}`,
       value: carrier.carrierId,
       plan: carrier.plans
     }));
     this.setState({ carriers: data, isCarrierFetched: true });
+    console.log('datahere',data)
+    this.setState({ loading: true });
+    const Specialty = await axios.get(`http://localhost:3001/doctors/get/specialties`)
+    // .then(response => {
+    //   console.log('response here', response)
+    // });
+    console.log('speciality',Specialty)
+    let doctors = await Specialty.data.data;
+    this.setState({ doctors, loading: false });
 
+    // const data = carriers.carriers.map((carrier) => ({
+    //   text: `${carrier.name}`,
+    //   value: carrier.carrierId,
+    //   plan: carrier.plans
+    // }));
+    // this.setState({ carriers: data, isCarrierFetched: true });
+    
   }
 
   carrierChange = (car_plan) => {
@@ -123,7 +138,7 @@ export default class Search extends Component {
           value={value}
           open={isOpen}
           onDropdownVisibleChange={this.toggleSelect}
-          className="ant-search-select "
+          className="ant-search-select dropdown-placeholder-selection"
           dropdownRender={menu => (
             <div className="col-12">
 
@@ -177,9 +192,11 @@ export default class Search extends Component {
 
         </Select>
 
-        <Button type="primary" icon="search" className="search_button custom-home-search-btn">
-          <Link to="/search">Search</Link>
+        <Link to="/search"><Button type="primary" icon="search" className="search_button custom-home-search-btn">
+         Search
         </Button>
+        </Link>
+       
 
         {/* <MultiStepSelect 
 					placeholder="placeholder"

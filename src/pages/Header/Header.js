@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import {Link} from 'react-router-dom'
 import { Select, DatePicker, Spin, Icon, Divider, Row, Col, Button, Steps, List, Breadcrumb, Layout, Menu, Dropdown } from 'antd';
 import './customheader.css'
 const { Header, Content, Footer } = Layout;
@@ -6,12 +7,16 @@ const menu = (
   <Menu>
     <Menu.Item>
       <a target="_blank" rel="noopener noreferrer" href="http://www.alipay.com/">
-        1st menu item
+        <Link to="/Patient">
+       Settings
+        </Link>
       </a>
     </Menu.Item>
     <Menu.Item>
       <a target="_blank" rel="noopener noreferrer" href="http://www.taobao.com/">
-        2nd menu item
+      <Link to="/Appointments">
+      Appointments
+        </Link>
       </a>
     </Menu.Item>
     <Menu.Item>

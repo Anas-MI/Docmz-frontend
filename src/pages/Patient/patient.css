@@ -1,3 +1,7 @@
 .personal-content-border {
     border-left: solid 1px #e1e1e1;
 }
+.patient-profile-content .static-header {
+    font-size: 18px;
+    margin-bottom: 1rem;
+}

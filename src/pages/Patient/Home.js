@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import {
     Select, DatePicker, Spin, Icon, Divider, Row, Col, Button, Steps, List, Breadcrumb, Layout, Menu, Typography, Form,
     Input,
@@ -14,7 +14,9 @@ import axios from 'axios';
 import Search from "../Home/Search";
 import Navbar from '../Header/Header';
 import './patient.css'
-import Sidebar from './Sidebar';
+import Sidebar from './Settings/Sidebar/Sidebar';
+import Uppermsg from './Uppermsg';
+import Buttonspatient from './Settings/Button/Buttonspatient';
 const { Option, OptGroup } = Select;
 const { Content, Footer, Header, Sider } = Layout;
 const { SubMenu } = Menu;
@@ -99,7 +101,7 @@ class Patienthome extends Component {
         })(
             <Select style={{ width: 70 }}>
                 <Option value="86">+86</Option>
-                <Option value="87">+87</Option>
+                <Option value="91">+91</Option>
             </Select>,
         );
 
@@ -108,97 +110,101 @@ class Patienthome extends Component {
         ));
         return (
             <div>
-                <Layout>
+                <Layout className="layout">
                     <Navbar />
 
                     <Content style={{ padding: '0 50px', marginTop: 64 }}>
 
                         <div style={{ background: '#fff', padding: 24, minHeight: 380 }} className="doctor-header">
-                            <center><h4>Hello, User</h4><p>Let's help you stay on top of your health</p></center>
+                            <Uppermsg />
                             <header className="App-header">
                                 <Search />
                             </header>
                             <Content style={{ padding: '0 50px' }}>
                                 <Layout style={{ padding: '24px 0', background: '#fff' }}>
-                                   
+
                                     <Sidebar />
                                     <Content style={{ padding: '0 24px', minHeight: 280 }}>
 
                                         <Layout>
-                                            <Sider>Personal Informaion</Sider>
-                                            <Content className="personal-content-border">
-                                                <Form {...formItemLayout} onSubmit={this.handleSubmit} >
-                                                    <Form.Item label="Username">
-                                                        {getFieldDecorator('username', {
-                                                            initialValue: ['zhejiang'],
-                                                            rules: [{ required: true, message: 'Please input your username!' }],
-                                                        })(
-                                                            // <Input
-                                                            //     prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                                                            //     placeholder="Username"
-                                                            //     setFieldsValue="Username"
-                                                            // />,
-                                                            <Input placeholder="Basic usage" />,
-                                                        )}
-                                                    </Form.Item>
-                                                    <Form.Item label="E-mail">
-                                                        {getFieldDecorator('email', {
-                                                            initialValue: ['username@gmail.com'],
-                                                            rules: [
-                                                                {
-                                                                    type: 'email',
-                                                                    message: 'The input is not valid E-mail!',
-                                                                },
-                                                                {
-                                                                    required: true,
-                                                                    message: 'Please input your E-mail!',
-                                                                },
-                                                            ],
-                                                        })(<Input />)}
-                                                    </Form.Item>
-                                                  
-                                                    <Form.Item label="Birthday">
-                                                        {getFieldDecorator('birthday', {
-                                                            initialValue: ['06'],
-                                                            rules: [{ required: true, message: 'Please input your Birthdate!' }],
-                                                        })(
-                                                            // <Input
-                                                            //     prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                                                            //     placeholder="Username"
-                                                            //     setFieldsValue="Username"
-                                                            // />,
-                                                            <Input placeholder="Basic usage" />,
-                                                        )}
-                                                    </Form.Item>
 
-                                                    <Form.Item label="Month">
-                                                        {getFieldDecorator('Month', {
-                                                            initialValue: ['December'],
-                                                            rules: [{ required: true, message: 'Please input your Birthdate Month!' }],
-                                                        })(
-                                                            // <Input
-                                                            //     prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                                                            //     placeholder="Username"
-                                                            //     setFieldsValue="Username"
-                                                            // />,
-                                                            <Input placeholder="Basic usage" />,
-                                                        )}
-                                                    </Form.Item>
+                                            <Content className="patient-profile-content">
+                                                <p>Profile</p>
+                                                <Divider />
+                                                <p className="static-header"><strong>Name</strong></p>
+                                                <p>Anas M.i. - Please call us at (855) 962-3621 to change your name.</p>
+                                                <Divider dashed />
+                                                <p className="static-header"><strong>Email</strong></p>
+                                                <Form.Item>
+                                                    {getFieldDecorator('email', {
+                                                        initialValue: ['username@gmail.com'],
+                                                        rules: [
+                                                            {
+                                                                type: 'email',
+                                                                message: 'The input is not valid E-mail!',
+                                                            },
+                                                            {
+                                                                required: true,
+                                                                message: 'Please input your E-mail!',
+                                                            },
+                                                        ],
+                                                    })(<Input />)}
+                                                </Form.Item>
+                                                <Divider dashed />
 
-                                                    <Form.Item label="Year">
-                                                        {getFieldDecorator('Year', {
-                                                            initialValue: ['2019'],
-                                                            rules: [{ required: true, message: 'Please input your Birthdate Year!' }],
-                                                        })(
-                                                            // <Input
-                                                            //     prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                                                            //     placeholder="Username"
-                                                            //     setFieldsValue="Username"
-                                                            // />,
-                                                            <Input placeholder="Basic usage" />,
-                                                        )}
-                                                    </Form.Item>
-                                                </Form>
+                                                <p className="static-header"><strong>Phone Number</strong></p>
+                                                <Form.Item>
+                                                    {getFieldDecorator('phone', {
+                                                        initialValue: ['9765058596'],
+                                                        rules: [{ required: true, message: 'Please input your phone number!' }],
+                                                    })(<Input addonBefore={prefixSelector} style={{ width: '100%' }} />)}
+                                                </Form.Item>
+                                                <Divider dashed />
+                                                <p className="static-header"><strong>Address</strong></p>
+                                                <Form.Item>
+                                                    {getFieldDecorator('address', {
+                                                        initialValue: ['Demo Address Here'],
+                                                        rules: [{ required: true, message: 'Please input your address!' }],
+                                                    })(
+
+                                                        <Input placeholder="Basic usage" />,
+                                                    )}
+                                                </Form.Item>
+                                                <Divider dashed />
+                                                <p className="static-header"><strong>Gender</strong></p>
+                                                <Form.Item>
+                                                    {getFieldDecorator('address', {
+                                                        initialValue: ['Male'],
+                                                        rules: [{ required: true, message: 'Please input your address!' }],
+                                                    })(
+
+                                                        <Input placeholder="Basic usage" />,
+                                                    )}
+                                                </Form.Item>
+                                                <Divider dashed />
+                                                <p className="static-header"><strong>Date of Birth</strong></p>
+                                                <Form.Item>
+                                                    {/* {getFieldDecorator('date-picker')(<DatePicker />)} */}
+                                                    {getFieldDecorator('dateofbirth', {
+                                                        initialValue: ['2019-11-13'],
+                                                        rules: [{ required: true, message: 'Please input your address!' }],
+                                                    })(
+
+                                                        <Input placeholder="Basic usage" />,
+                                                    )}
+                                                </Form.Item>
+                                                <Divider />
+                                                <Row>
+                                                    <Col span={18}>
+                                                   <Buttonspatient />
+                                                    </Col>
+                                                    <Col span={6}>
+                                                    <p><a href='#'>Deactivate</a> my account</p>
+                                                    </Col>
+                                                </Row>
+                                               
+                                                
+
                                             </Content>
                                         </Layout>
                                     </Content>
@@ -208,25 +214,7 @@ class Patienthome extends Component {
                     </Content>
                     <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
                 </Layout>,
-				{/* <Content style={{ padding: '0 50px' }}>
 
-					<div style={{ background: '#fff', padding: 24, minHeight: 280 }}>
-						<h1>Find doctors in your network</h1>
-						<header className="App-header">
-							<Search />
-						</header>
-						<div className="search_box">
-							Home
-				</div>
-					</div>
-				</Content> */}
-                {/* <h1>Find doctors in your network</h1>
-				<header className="App-header">
-				<Search />
-				</header>
-				<div className="search_box">
-					Home
-				</div> */}
             </div>
 
         );

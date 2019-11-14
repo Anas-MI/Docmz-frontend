@@ -14,8 +14,9 @@ import axios from 'axios';
 import Search from "../Home/Search";
 import Navbar from '../Header/Header';
 import './patient.css'
-import Sidebar from './Sidebar';
+import Sidebar from './Settings/Sidebar/Sidebar';
 import Patientfooter from './Patientfooter';
+import Uppermsg from './Uppermsg';
 const { Option, OptGroup } = Select;
 const { Content, Footer, Header, Sider } = Layout;
 const { SubMenu } = Menu;
@@ -115,7 +116,7 @@ class Patientcard extends Component {
                     <Content style={{ padding: '0 50px', marginTop: 64 }}>
 
                         <div style={{ background: '#fff', padding: 24, minHeight: 380 }} className="doctor-header">
-                            <center><h4>Hello, User</h4><p>Let's help you stay on top of your health</p></center>
+                           <Uppermsg />
                             <header className="App-header">
                                 <Search />
                             </header>

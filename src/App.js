@@ -17,7 +17,12 @@ import Newtour from './dr/components/objects/drProfileForm/Newtour';
 import Demotour from './dr/components/pages/dashboard/Demotour';
 import Patienthome from './pages/Patient/Home';
 import Patientcard from './pages/Patient/Patientcard';
-
+import Appointments from './pages/Patient/Appointments/Appointments'
+import Password from './pages/Patient/Settings/Password/Password';
+import Notification from './pages/Patient/Settings/Notification/Notification';
+import Demographic from './pages/Patient/Settings/Demographic/Demographic';
+import Authorization from './pages/Patient/Settings/Authorization/Authorization';
+import Insurance from './pages/Patient/Settings/Insurance/Insurance';
 
 
 
@@ -70,6 +75,13 @@ function App() {
              <Route path="/Demotour" exact = {true} component = {Demotour} />
              <Route path="/Patient" exact = {true} component = {Patienthome} />
              <Route path="/Patientcard" exact = {true} component = {Patientcard} />
+             <Route path="/Appointments" exact = {true} component = {Appointments} />
+             <Route path="/Password" exact = {true} component = {Password} />
+             <Route path="/Notification" exact = {true} component = {Notification} />
+             <Route path="/Demographic" exact = {true} component = {Demographic} />
+             <Route path="/Authorization" exact = {true} component = {Authorization} />
+             <Route path="/Insurance" exact = {true} component = {Insurance} />
+             
       </Switch>
     </div>
   );

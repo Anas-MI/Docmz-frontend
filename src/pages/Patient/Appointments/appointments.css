@@ -1,0 +1,110 @@
+.prof-para {
+    font-family: sharp-sans-semibold, Arial, sans-serif;
+    font-size: 15px;
+    font-weight: bold;
+    margin-bottom: 0!important;
+}
+.card-btn-patient-appointments Button   {
+    margin : 20px 20px 0 0px;
+    border-radius: 0;
+}
+.card-btn-patient-appointments .primarybtn {
+    /* background: rgb(255, 240, 75);
+    color: rgb(0, 35, 75);
+    border-color: rgb(255, 240, 75); */
+    width: 30%;
+}
+.card-btn-patient-appointments .dashedbtn {
+    border-right: none;
+    border-top: none;
+    border-left: none;
+}
+.left-card .ant-card-meta-title {
+    font-family: sharp-sans-bold, Arial, sans-serif;
+    font-size: 20px;
+    line-height: 0.95;
+    color: rgb(0, 35, 75);
+}
+.right-card {
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: solid 4px #e8e8e8;
+    border-radius: 10px;
+}
+.right-card Button {
+    border-color: rgb(0, 35, 75);
+    border-radius: 0;
+}
+.right-card .right-search {
+    border-right: none;
+    border-top: none;
+    border-left: none;
+}
+.right-card .right-close-icon {
+    font-size: 18px;
+}
+.right-bottom-div {
+    padding-top: 20px;
+    padding-left: 10px;
+}
+.right-bottom-div .right-calendar {
+    padding-right: 10px;
+}
+.upcoming-appointments-div {
+    /* box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.12); */
+}
+.upcoming-appointments-div h5 {
+    margin-bottom: 0!important;
+}
+.upcoming-appointments-div .ant-card-meta-title {
+    font-family: sharp-sans-bold, Arial, sans-serif;
+    font-size: 20px;
+    line-height: 0.95;
+    color: rgb(0, 35, 75);
+}
+.upcoming-appointments-div .upper-div-card {
+    border-radius: 5px;
+    overflow: hidden;
+}
+.upcoming-appointments-div .upper-div-card::before{
+    content: "";
+    display: block;
+    width: 5px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    background-color: #1890ff;
+}
+.bottom-card-div {
+    margin-top: 40px;
+    
+}
+.bottom-card-div .left-card {
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.12);
+    transition: all 0.3s;
+    /* border-radius: 5px;
+    overflow: hidden; */
+}
+.bottom-card-div .left-card:hover {
+    transform: translateY(-10px);
+}
+.appointment-cancel-btn {
+    transition: all 0.1s;
+}
+.appointment-cancel-btn:hover {
+background: #ff4d4f;
+border-color: #ff4d4f;
+}
+
+/* .bottom-card-div .left-card::before {
+    content: "";
+    display: block;
+    width: 5px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    background-color: #1890ff;
+} */
