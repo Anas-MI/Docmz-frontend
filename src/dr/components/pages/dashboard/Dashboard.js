@@ -68,7 +68,7 @@ export default class Dashboard extends Component {
       fontSize: 12,
       paddingLeft: 10
     };
-    if(this.state.isTourActive == false){
+    if(this.state.isTourActive !== false){
       this.setState({
         visible : false
       })
@@ -112,14 +112,6 @@ export default class Dashboard extends Component {
                 }}
                 class="stop-2"
 
-              />
-                <Button onClick={this.showDrawer} className="fr" type="primary">Timeline</Button>
-                <Timeline_drovar
-                  visible={visible}
-                  onClose={() => {
-                    this.onClose();
-                  }}
-                // className="stop-1"
               />
               {/* <ShortCalender /> */}
             </div>

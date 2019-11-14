@@ -34,8 +34,13 @@ export default class LoginForm extends PureComponent {
           isLoading:false
         },()=>{
           const userInfo=JSON.stringify(res.data.user) ;
-          window.localStorage.setItem("user",userInfo)
-          this.props.history.push("dr/dashbord");
+          window.localStorage.setItem("user",userInfo);
+          const step = res.data.user.steps;
+          if(step.includes(0)){
+            this.props.history.push("/dr-profile-stap")
+          }else{
+            this.props.history.push("dr/dashbord")
+          }
         })
       }else{
         this.setState({

@@ -157,6 +157,7 @@ export default class Availability_drower extends Component {
         document.body.removeChild(a);
       }
     }
+    const doctor = JSON.parse(localStorage.getItem("user"));  
     // scheduler({
     //   duration,
     //   gap,
@@ -164,19 +165,33 @@ export default class Availability_drower extends Component {
     //   weekdays,
     //   weekdaysArr,
     // });
-    download({
-        duration,
-        gap,
-        customGap,
-        weekdays,
-        weekdaysArr,
-      });
+    console.log({
+      doctor
+    })
+    const modifiedWeekArr = weekdaysArr.map(el => {
+      return ({
+        ...el,
+        startTime: moment(el.startTime).format("HH:mm:ss"),
+        endTime: moment(el.endTime).format("HH:mm:ss"),
+        lunchStart: moment(el.lunchStart).format("HH:mm:ss"),
+        lunchEnd: moment(el.lunchEnd).format("HH:mm:ss"),
+      })
+    })
+    console.log({modifiedWeekArr})
+    // download({
+    //     duration,
+    //     // gap,
+    //     // customGap,
+    //     weekdays,
+    //     weekdaysArr,
+    //   });
     saveTimeSlots({
       duration,
-      gap,
-      customGap,
-      weekdays,
-      weekdaysArr,
+      id: doctor._id,
+      // gap,
+      // customGap,
+      // weekdays,
+      weekdaysArr: modifiedWeekArr,
     })
     .then(res => {
       console.log({res})
@@ -189,11 +204,11 @@ export default class Availability_drower extends Component {
     const { visible } = this.props;
     const {
       formLayout,
-      startTime,
-      endTime,
+      // startTime,
+      // endTime,
       duration,
-      gap,
-      weekdays,
+      // gap,
+      // weekdays,
       weekdaysArr
     } = this.state;
    
@@ -238,7 +253,7 @@ export default class Availability_drower extends Component {
             <br />
             <Row>
               <Col span={24}>
-                <label className="d-block">Time Between Appointments</label>
+                {/* <label className="d-block">Time Between Appointments</label>
                 <Tooltip
                   title="Differnt time between two Calls"
                   className="fr form-tolltip"
@@ -257,7 +272,7 @@ export default class Availability_drower extends Component {
                   <Radio.Button value="custom">Custom</Radio.Button>
                 </Radio.Group>
               {gap === "custom" && 
-              <InputNumber min={1} max={60} defaultValue={10} onChange={customGap => this.setState({customGap})} />}
+              <InputNumber min={1} max={60} defaultValue={10} onChange={customGap => this.setState({customGap})} />} */}
               </Col>
             </Row>
             <br />
