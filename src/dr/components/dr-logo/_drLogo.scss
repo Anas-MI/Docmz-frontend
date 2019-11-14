@@ -4,4 +4,10 @@
     font-size: 25px;
     padding-top: 10px;
     text-align: center;
+    transition: all .3s;
+    font-weight: normal;
+    &--small{
+        font-weight: 500;
+        font-size: 18px;
+    }
 }

@@ -3,15 +3,53 @@ import React, { Component } from 'react'
 import Section from '../components/Sections/Section'
 import AppointmentCard from '../components/appointment/AppointmentCard/AppointmentCard';
 import DoctorInfo from '../components/drList/DoctorInfo';
+import { getDoctorById } from '../services/api';
+import getDatesFromArray from '../services/scheduler/getDatesFromArray';
 export default class DoctorsProfile extends Component {
+    constructor(props){
+        super(props)
+        this.state = {
+            docId: null
+        }
+    }
+    componentDidMount(){
+        const doctor = JSON.parse(localStorage.getItem("user"))
+        const {
+            _id: docId
+        } = doctor
+        this.setState({docId})
+        if(docId){
+            getDoctorById(docId)
+            .then(res => {
+                if(res.data && res.data.status){
+                    const {
+                        data
+                    } = res.data
+                    console.log({data})
+                    this.setState({
+                        appointments: data.appointments
+                    })
+                    // getDatesFromArray(data.appointments, new Date())
+                }
+            })
+            .catch(err => console.log({err}))
+        }
+    }
     render() {
+        const {
+            appointments
+        } = this.state
+        console.clear()
+        console.log({
+            appointments
+        })
         return (
             <div className="p-doctors-profile">
                 {/* <Banner parentClass="p-doctors" image="//via.placeholder.com/1920x1080/fff" /> */}
                 <Section className="p-doctors-profile__section" bgImg={"https://www.thehealthy.com/wp-content/uploads/2017/09/02_doctor_Insider-Tips-to-Choosing-the-Best-Primary-Care-Doctor_519507367_Stokkete.jpg"} type={[, "bg-black-alpha", "shadow"]}>
                     <div className="c-container p-doctors-profile__container">
                         <DoctorInfo />
-                        <AppointmentCard type="shadow" title="Make Your Next Appointment" />
+                        <AppointmentCard appointments={appointments} type="shadow" title="Make Your Next Appointment" />
                     </div>
                 </Section>
                 <div style={{textAlign: "left"}} className="c-container">

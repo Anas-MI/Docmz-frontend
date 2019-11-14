@@ -21,15 +21,15 @@ export default class Login_type extends PureComponent {
       <div>
         <Row>
           <Col span="24">
-            <Icon type={icon} style={{ fontSize: "24px" }} />
+            <Icon type={icon} style={{ fontSize: "35px" }} />
           </Col>
         </Row>
         <Row>
           <Col xs={24} sm={24} md={12} lg={8} xl={12}>
-            <h3 onClick={()=>this.toggleDown()}>{title}</h3>
+            <h3 onClick={()=>this.toggleDown()} className="login-title">{title}</h3>
             <p>{details}</p>
           </Col>
-          <Col xs={24} sm={24} md={12} lg={12} xl={12}>
+          <Col xs={24} sm={24} md={12} lg={12} xl={12} className="login-icon">
            {toggle ? 
             <Icon type="arrow-up" onClick={()=>this.toggleDown()} style={{ fontSize: "24px" }} />
              :

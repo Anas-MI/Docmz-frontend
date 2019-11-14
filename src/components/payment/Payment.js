@@ -22,19 +22,19 @@ export default class Payment extends Component {
   render() {
     const {cardDetails} = this.state;
     return (
-      <div>
+      <div style={{width: '100%'}} >
         <PaymentCard 
         cvvOnCard={cardDetails.cvvNo} 
         expDateOnCard={cardDetails.expDate} 
         numberOnCard={cardDetails.cardNumber} 
         nameOnCard={cardDetails.name} 
         cardResponse={(response)=>this.cardResponse(response)}/>
-        <ShowOnCard 
+        {/* <ShowOnCard 
          cvvOnCard={cardDetails.cvvNo} 
          expDateOnCard={cardDetails.expDate} 
          numberOnCard={cardDetails.cardNumber} 
          nameOnCard={cardDetails.name} 
-          />
+          /> */}
       </div>
     );
   }

@@ -54,41 +54,28 @@ export default class Login_drawer extends Component {
                     closable={true}
 
                     >
-                   <Row >
+                   <Row type="flex" justify="space-around" align="middle" className="login-wrapper">
                       <Col xs={24} sm={24} md={12} lg={8} xl={12}>
                          <Login_type 
                          icon="user" 
                          title="Patient Login"
-                         
-                         details="Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+                          details="Lorem Ipsum is simply dummy text of the printing and typesetting industry."
                           >
                              <LoginForm type="Patient" history={this.props.history} />
                          </Login_type>
                       </Col>
                       <Col xs={24} sm={24} md={12} lg={12} xl={12}>
                          <Login_type 
-                         icon="plus" 
-                         title="Doctor Login"
-                        
-                         details="Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+                          icon="plus" 
+                          title="Doctor Login"
+                          details="Lorem Ipsum is simply dummy text of the printing and typesetting industry."
                           >
                             <LoginForm type="Doctor" history={this.props.history} />
                             </Login_type>
                       </Col>
                      
                     </Row>
-                    {/* <Button type="primary" onClick={this.showChildrenDrawer}>
-            Two-level drawer
-          </Button>
-          <Drawer
-            title="Two-level Drawer"
-            closable={false}
-            placement={this.state.placement}
-            onClose={this.onChildrenDrawerClose}
-            visible={this.state.childrenDrawer}
-          >
-            This is two-level drawer
-          </Drawer> */}
+                 
                     </Drawer>
                 </div>
 		

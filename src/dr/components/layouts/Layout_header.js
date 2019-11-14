@@ -29,8 +29,8 @@ export default class Layout_header extends Component {
     const { visible } = this.state;
     return (
       <div>
-        <DrLogo />
-        <Menu theme="light" defaultSelectedKeys={["1"]} mode="inline">
+        <DrLogo small={this.props.isOpen} />
+        <Menu className="doctor-nav" theme="light" defaultSelectedKeys={["1"]} mode="inline">
           <Menu.Item key="1">
             <Icon type="pie-chart" />
             <span>

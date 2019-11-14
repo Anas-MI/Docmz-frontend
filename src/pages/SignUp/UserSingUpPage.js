@@ -6,7 +6,7 @@ export default class UserSingUpPage extends Component {
     render() {
        return (
             <div className={pageClass}>
-                <UserSignUp />
+                <UserSignUp history={this.props.history} /> 
             </div>
         )
     }

@@ -31,6 +31,22 @@ export default class Alternate extends Component {
       onStartTimeChange(time)
     }
   }
+  onLunchStartChange = time => {
+    const {
+      onLunchStartChange
+    } = this.props
+    if(typeof onLunchStartChange === "function"){
+      onLunchStartChange(time)
+    }
+  }
+  onLunchEndChange = time => {
+    const {
+      onLunchEndChange
+    } = this.props
+    if(typeof onLunchEndChange === "function"){
+      onLunchEndChange(time)
+    }
+  }
   onEndTimeChange = time => {
     const {
       onEndTimeChange
@@ -64,18 +80,37 @@ export default class Alternate extends Component {
       weekdays,
       hideRemove,
       hideAdd,
+      lunchStart,
+      lunchEnd
     } = this.props;
  
     
     return (
       <div><Row>
-              <Col span={12}>
-                  <label>Start Time</label> 
-                  <TimePicker value={startTime} onChange={this.onStartTimeChange} />
+              <Col span={24} style={{paddingBottom: 6}} >
+                <b>Working Hours</b><br />
               </Col>
               <Col span={12}>
-                  <label>End Time</label> 
-                  <TimePicker value={endTime} onChange={this.onEndTimeChange} />
+                  <label className="d-block" >Start Time</label> 
+                  <TimePicker value={startTime} allowClear={false} onChange={this.onStartTimeChange} />
+              </Col>
+              <Col span={12}>
+                  <label className="d-block" >End Time</label> 
+                  <TimePicker value={endTime} allowClear={false} onChange={this.onEndTimeChange} />
+              </Col>
+            </Row>
+            <br />
+            <Row>
+              <Col span={24} style={{paddingBottom: 6}} >
+                <b>Break Hours</b><br />
+              </Col>
+              <Col span={12}>
+                  <label className="d-block" >Start Time</label> 
+                  <TimePicker value={lunchStart} allowClear={false} onChange={this.onLunchStartChange} />
+              </Col>
+              <Col span={12}>
+                  <label className="d-block" >End Time</label> 
+                  <TimePicker value={lunchEnd} allowClear={false} onChange={this.onLunchEndChange} />
               </Col>
             </Row>
             <br />

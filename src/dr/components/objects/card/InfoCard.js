@@ -27,7 +27,7 @@ export default class InfoCard extends Component {
                         <Avatar size={50} icon="user" className={this.componentClass("avatar")} />
                         <div className={this.componentClass("user-content")}>
                             <p className={this.componentClass("user-name")}>
-                                Patitent name
+                                Patient name
                             </p>
                             <p className={this.componentClass("user-number")}>
                                 7885544556

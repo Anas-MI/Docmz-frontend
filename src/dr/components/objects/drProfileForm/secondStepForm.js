@@ -8,9 +8,10 @@ import {
   UploadField
 } from "../../../../components/Fields/FormFields";
 import { isRequired } from "../../../../components/Fields/ValidateFields";
-export default ({ handleSubmit, values, submitCount }) => (
-  <Form className="form-container second-step-form" onSubmit={handleSubmit}>
-    <Row>
+
+export default ({ handleSubmit, values, submitCount,backButton, handleReset }) => (
+  <Form className="form-container " onSubmit={handleSubmit} onReset={backButton}>
+    <Row className="form-field-group-fixed">
       <Col span={24}>
         <Field
           component={InputField}
@@ -35,12 +36,12 @@ export default ({ handleSubmit, values, submitCount }) => (
       </Col>
     </Row>
     <Row 
-    // style={{display:"none"}}
+    className="form-field-group-button"
     >
       <Col xs={24} className="button_wrapper" type="flex" align="bottom" >
-        {/* <Button type="primary">
+        <Button onClick={handleReset} type="primary" id="backButton" form->
            <Icon type="arrow-left" /> Back 
-        </Button> */}
+        </Button>
         <button className="ant-btn ant-btn-primary btn-right" type="submit">
           Next <Icon type="arrow-right" />
         </button>

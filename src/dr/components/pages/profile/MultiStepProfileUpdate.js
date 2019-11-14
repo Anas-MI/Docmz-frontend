@@ -117,14 +117,27 @@ export default class MultiStepProfileUpdate extends Component {
                       initialValues={this.state}
                       onSubmit={this.handleSubmit2}
                       render={SecondStepForm}
+                      onReset={()=>{
+                        this.setState({
+                          activeIndex:activeIndex-1
+                        })
+                      }}
                     />
                   </Col>
                 </Row>
                 <Row className={componentClass}>
                   <Col span={24}>
                     <Formik
+                      backButton={()=>{this.setState({
+                        activeIndex:activeIndex-1
+                      })}}
                       initialValues={this.state}
                       onSubmit={this.handleSubmit3}
+                      onReset={()=>{
+                        this.setState({
+                          activeIndex:activeIndex-1
+                        })
+                      }}
                       render={ThirdStepForm}
                     />
                   </Col>
@@ -132,14 +145,22 @@ export default class MultiStepProfileUpdate extends Component {
                 <Row className={componentClass} >
                   <Col span={24}>
                     <Formik
+                    backButton={()=>{this.setState({
+                      activeIndex:activeIndex-1
+                    })}}
                       initialValues={this.state}
                       onSubmit={this.handleSubmit4}
+                      onReset={()=>{
+                        this.setState({
+                          activeIndex:activeIndex-1
+                        })
+                      }}
                       render={FourStepForm}
                     />
                   </Col>
                 </Row>
               </MultiStepProfileForm>
-              <Row>
+              {/* <Row>
                 <Col xs={24} className="button_wrapper" type="flex" align="bottom" >
                 {activeIndex > 0 ?
                   <Button type="primary" 
@@ -151,11 +172,10 @@ export default class MultiStepProfileUpdate extends Component {
                   // onClick={()=>{this.setState({activeIndex:activeIndex+1})}}
                    onClick={()=>this.submitForm()} 
                     type="primary">
-                    {/* Next <Icon type="arrow-right" /> */}
                     Submit
                   </Button>
                 </Col>
-              </Row>
+              </Row> */}
             </div>
           </div>
         </div>

@@ -11,11 +11,13 @@ import {
   Button,
   Radio,
   TimePicker,
-  Divider
+  Divider,
+  InputNumber
 } from "antd";
 import Alternate from "./Alternate";
-import { weekdays } from "moment";
+import moment from "moment";
 import { scheduler } from "../../../../services/scheduler/scheduler";
+import { saveTimeSlots } from "../../../../services/api/saveTimeSlots";
 const { Option } = Select;
 export default class Availability_drower extends Component {
   constructor(props) {
@@ -26,12 +28,15 @@ export default class Availability_drower extends Component {
       endTime: null,
       duration: "15",
       gap: "none",
+      customGap: "",
       weekdays: [],
       weekdaysArr: [
         {
-          days: [],
-          startTime: null,
-          endTime: null
+          days: ["monday","tuesday","wednesday","thursday","friday"],
+          startTime: moment('08:00:00', 'HH:mm:ss'),
+          endTime: moment('17:00:00', 'HH:mm:ss'),
+          lunchStart: moment('12:00:00', 'HH:mm:ss'),
+          lunchEnd: moment('13:00:00', 'HH:mm:ss'),
         }
       ]
     };
@@ -108,32 +113,18 @@ export default class Availability_drower extends Component {
       })
     }
   }
-  onWeekTimeChange(time, index, isStart){
-    if(isStart){
-      this.setState(prevState => ({
-        weekdaysArr: prevState.weekdaysArr.map((el, i)=> {
-          if(index === i){
-            return {
-              ...el,
-              startTime: time
-            }
+  onWeekTimeChange(time, index, key = "startTime"){
+    this.setState(prevState => ({
+      weekdaysArr: prevState.weekdaysArr.map((el, i)=> {
+        if(index === i){
+          return {
+            ...el,
+            [key]: time
           }
-          return el
-        })
-      }))
-    }else{
-      this.setState( prevState => ({
-        weekdaysArr:prevState.weekdaysArr.map((el, i)=> {
-          if(index === i){
-            return {
-              ...el,
-              endTime: time
-            }
-          }
-          return el
-        })
-      }))
-    }
+        }
+        return el
+      })
+    }))
   }
   timeonChange(time, timeString) {
     console.log(time, timeString);
@@ -149,25 +140,75 @@ export default class Availability_drower extends Component {
     });
   };
   onSubmit = () => {
-    const { startTime, endTime, duration, gap, weekdays, weekdaysArr } = this.state;
-    scheduler({
-      startTime,
-      endTime,
+    const { duration, gap, customGap, weekdays, weekdaysArr } = this.state;
+    const download = (objectData) => {
+      let filename = "export.json";
+      let contentType = "application/json;charset=utf-8;";
+      if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+        var blob = new Blob([decodeURIComponent(encodeURI(JSON.stringify(objectData)))], { type: contentType });
+        navigator.msSaveOrOpenBlob(blob, filename);
+      } else {
+        var a = document.createElement('a');
+        a.download = filename;
+        a.href = 'data:' + contentType + ',' + encodeURIComponent(JSON.stringify(objectData));
+        a.target = '_blank';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+      }
+    }
+    const doctor = JSON.parse(localStorage.getItem("user"));  
+    // scheduler({
+    //   duration,
+    //   gap,
+    //   customGap,
+    //   weekdays,
+    //   weekdaysArr,
+    // });
+    console.log({
+      doctor
+    })
+    const modifiedWeekArr = weekdaysArr.map(el => {
+      return ({
+        ...el,
+        startTime: moment(el.startTime).format("HH:mm:ss"),
+        endTime: moment(el.endTime).format("HH:mm:ss"),
+        lunchStart: moment(el.lunchStart).format("HH:mm:ss"),
+        lunchEnd: moment(el.lunchEnd).format("HH:mm:ss"),
+      })
+    })
+    console.log({modifiedWeekArr})
+    // download({
+    //     duration,
+    //     // gap,
+    //     // customGap,
+    //     weekdays,
+    //     weekdaysArr,
+    //   });
+    saveTimeSlots({
       duration,
-      gap,
-      weekdays,
-      weekdaysArr,
-    });
+      id: doctor._id,
+      // gap,
+      // customGap,
+      // weekdays,
+      weekdaysArr: modifiedWeekArr,
+    })
+    .then(res => {
+      console.log({res})
+    })
+    .catch(err => {
+      console.log({err})
+    })
   };
   render() {
     const { visible } = this.props;
     const {
       formLayout,
-      startTime,
-      endTime,
+      // startTime,
+      // endTime,
       duration,
-      gap,
-      weekdays,
+      // gap,
+      // weekdays,
       weekdaysArr
     } = this.state;
    
@@ -185,13 +226,13 @@ export default class Availability_drower extends Component {
           closable={false}
           onClose={() => this.onCloseTo()}
           visible={visible}
-          width={350}
+          width={480 < (window.outerWidth - 100) ? 480 : window.outerWidth - 100}
         >
           <Form onSubmit={this.onSubmit} layout={"vertical"}>
             
             <Row>
               <Col span={24}>
-                <label>Appointment Duration</label>
+                <label className="d-block" >Appointment Duration</label>
 
                 <Tooltip title="Max Calling Time" className="fr form-tolltip">
                   <Icon type="exclamation-circle" />
@@ -212,7 +253,7 @@ export default class Availability_drower extends Component {
             <br />
             <Row>
               <Col span={24}>
-                <label>Time Between Appointments</label>
+                {/* <label className="d-block">Time Between Appointments</label>
                 <Tooltip
                   title="Differnt time between two Calls"
                   className="fr form-tolltip"
@@ -230,11 +271,13 @@ export default class Availability_drower extends Component {
                   <Radio.Button value="10">10M</Radio.Button>
                   <Radio.Button value="custom">Custom</Radio.Button>
                 </Radio.Group>
+              {gap === "custom" && 
+              <InputNumber min={1} max={60} defaultValue={10} onChange={customGap => this.setState({customGap})} />} */}
               </Col>
             </Row>
             <br />
          
-            <p>Choose any day to the weel to repeat this availabilty</p>
+            <p>Choose any day to the week to repeat this availabilty</p>
 
            
             {
@@ -245,19 +288,29 @@ export default class Availability_drower extends Component {
                     this.onWeekDayChange(e, index)
                   }}
                   onStartTimeChange={(e)=> {
-                    this.onWeekTimeChange(e, index, true)
+                    this.onWeekTimeChange(e, index, "startTime")
                   }}
                   onEndTimeChange={(e)=> {
-                    this.onWeekTimeChange(e, index, false)
+                    this.onWeekTimeChange(e, index, "endTime")
+                  }}
+                  onLunchStartChange={(e)=> {
+                    this.onWeekTimeChange(e, index, "lunchStart")
+                  }}
+                  onLunchEndChange={(e)=> {
+                    this.onWeekTimeChange(e, index, "lunchEnd")
                   }}
                   startTime={week.startTime}
                   endTime={week.endTime}
+                  lunchStart={week.lunchStart}
+                  lunchEnd={week.lunchEnd}
                   onAdd={()=> {
                     this.setState({
                       weekdaysArr: [...weekdaysArr, {
                         days: [],
-                        startTime: null,
-                        endTime: null
+                        startTime: moment('08:00:00', 'HH:mm:ss'),
+                        endTime: moment('17:00:00', 'HH:mm:ss'),
+                        lunchStart: moment('12:00:00', 'HH:mm:ss'),
+                        lunchEnd: moment('13:00:00', 'HH:mm:ss'),
                       }]
                     })
                   }}
