@@ -2,7 +2,16 @@
 import moment from 'moment'
 const getDatesFromArray = (array = [], date) => {
     if(date){
-        const filtered = array.filter(el => moment(el.bookedFor).isSame(moment(date), "day"))
+        const filtered = array.filter(el => {
+            const elDate = moment(el.bookedFor)
+            if(elDate.isSame(moment(date), "day")){
+                if(elDate.isSame(moment(), "day")){
+                    return elDate.valueOf() > moment().valueOf()  ? true : false
+                }
+                return true
+            }
+            return false
+        })
         return filtered.map(el => {
             const {
                 available, booked, bookedFor

@@ -2,32 +2,71 @@ import React, { Component } from 'react'
 import classNames from 'classnames'
 import  Card from '../../Card/Card'
 import { getVersions } from '../../../services/extra/bem'
-import { Row, Col } from 'antd';
+import { Row, Col, Spin, Icon } from 'antd';
 import AppointmentSlider from '../AppointmentSlider';
 import getDatesFromArray from '../../../services/scheduler/getDatesFromArray';
 import CustomScroll from 'react-custom-scroll';
 import 'react-custom-scroll/dist/customScroll.css'
+import { getAppointments } from '../../../services/api';
 export default class AppointmentCard extends Component {
     constructor(props){
         super(props)
         this.state = {
             dates: [],
+            appointments: [],
+            isLoading: true
         }
     }
-    onDateChange = dates => this.setState({dates})
+    onDateChange = dates => {
+        const doctorObj = JSON.parse(localStorage.getItem("user"))
+        const {
+            _id: doctor
+        } = doctorObj
+        const limit = 5
+        const date = new Date(dates[0])
+        this.setState({
+            isLoading: true,
+            dates
+        }, ()=> {
+            getAppointments({doctor, limit, date })
+            .then(res => {
+                if(res.data && res.data.data){
+                    const {
+                        data
+                    } = res.data
+                    this.setState({
+                        appointments: data,
+                        isLoading: false
+                    })
+                }else{
+                    this.setState({
+                        isLoading: false
+                    })
+                }
+            })
+            .catch(err => {
+                this.setState({
+                    isLoading: false
+                })
+                console.log({err})
+            })
+        })
+    }
+    
     render() {
         const {
             title,
             className,
             parentClass,
             type,
-            appointments
         } = this.props
         
+        const { dates, appointments, isLoading } = this.state
+        
+        
         console.log({
-            aaaaaaaaaaa: appointments
+            appointments
         })
-        const { dates } = this.state
         const typeClass =  getVersions(type, "c-appointment-card")
         const parent    = `${parentClass}__appointment-card`
         return (
@@ -40,8 +79,11 @@ export default class AppointmentCard extends Component {
                     <AppointmentSlider onDateChange={this.onDateChange} />
                     <div  className="c-appointment-card__scroll-wrapper">
                         <CustomScroll heightRelativeToParent="100%">
-                            <Row type="flex" className="c-appointment-card__scroll-row">
-                                <Dates appointments={appointments} dates={dates} />
+                            <Row type="flex" className={classNames("c-appointment-card__scroll-row", {
+                                "c-appointment-card__scroll-row--loading": isLoading
+                            })}>
+                                {!isLoading && <Dates appointments={appointments} dates={dates} />}
+                                {isLoading && <Spin indicator={<Icon type="loading" style={{ fontSize: 50 }} spin />} />}
                             </Row>
                         </CustomScroll>
                     </div>

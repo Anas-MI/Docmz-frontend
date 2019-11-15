@@ -5,11 +5,13 @@ import AppointmentCard from '../components/appointment/AppointmentCard/Appointme
 import DoctorInfo from '../components/drList/DoctorInfo';
 import { getDoctorById } from '../services/api';
 import getDatesFromArray from '../services/scheduler/getDatesFromArray';
+import RatingCard from '../components/RatingCard/RatingCard';
 export default class DoctorsProfile extends Component {
     constructor(props){
         super(props)
         this.state = {
-            docId: null
+            docId: null,
+            isLoading: true
         }
     }
     componentDidMount(){
@@ -27,29 +29,28 @@ export default class DoctorsProfile extends Component {
                     } = res.data
                     console.log({data})
                     this.setState({
-                        appointments: data.appointments
+                        appointments: data.appointments,
+                        isLoading: false
                     })
                     // getDatesFromArray(data.appointments, new Date())
                 }
             })
-            .catch(err => console.log({err}))
+            .catch(err => {
+                console.log({err})
+                this.setState({
+                    isLoading: false
+                })
+            })
         }
     }
     render() {
-        const {
-            appointments
-        } = this.state
-        console.clear()
-        console.log({
-            appointments
-        })
         return (
             <div className="p-doctors-profile">
                 {/* <Banner parentClass="p-doctors" image="//via.placeholder.com/1920x1080/fff" /> */}
                 <Section className="p-doctors-profile__section" bgImg={"https://www.thehealthy.com/wp-content/uploads/2017/09/02_doctor_Insider-Tips-to-Choosing-the-Best-Primary-Care-Doctor_519507367_Stokkete.jpg"} type={[, "bg-black-alpha", "shadow"]}>
                     <div className="c-container p-doctors-profile__container">
                         <DoctorInfo />
-                        <AppointmentCard appointments={appointments} type="shadow" title="Make Your Next Appointment" />
+                        <AppointmentCard type="shadow" title="Make Your Next Appointment" />
                     </div>
                 </Section>
                 <div style={{textAlign: "left"}} className="c-container">
@@ -61,6 +62,7 @@ export default class DoctorsProfile extends Component {
                             Providing general medical care in the heart of SOHO. Dr. Fagelman provides a full range our services include sick visits, routine physicals, treatment of chronic medical conditions to travel counseling for that upcoming trip.
                             <br/>The office accepts most insurance plans</p>
                     </div>
+                    <RatingCard />
                     <div>
                         <h3 className="c-title p-doctors-profile__title">In-network insurances</h3>
                         <p>1199SEIUAetnaAmerican Republic Insurance Company</p>

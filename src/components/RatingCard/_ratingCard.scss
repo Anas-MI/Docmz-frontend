@@ -1,0 +1,36 @@
+.c-rating-card{
+    display: block;
+    padding: 5px;
+    width: 800px;
+    max-width: 100%;
+    &__overall-col{
+        text-align: center;
+        border-right: 1px solid rgba(black, .3);
+    }
+    &__overall-title{
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 0;
+    }
+    &__overall-rating{
+        font-size: 40px;
+        display: block;
+        font-weight: 500;
+        @media (min-width: 1200px){
+            font-size: 50px;
+        }
+        @media (min-width: 1600px){
+            font-size: 56px;
+        }
+    }
+    &__reviews-wrapper{
+        padding-left: 20px;
+    }
+    &__reviews-card{
+        height: 100%;
+    }
+}
+
+.c-bar-label{
+
+}
