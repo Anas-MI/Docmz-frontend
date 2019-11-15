@@ -3,6 +3,8 @@ import { Layout, Menu, Icon, Breadcrumb } from "antd";
 import Availability_drower from "../objects/availability/Availability_drower";
 import { Link } from "react-router-dom";
 import DrLogo from "../dr-logo/DrLogo";
+import { isRequired } from "../../../components/Fields/ValidateFields";
+import './newlayoutap.css'
 export default class Layout_header extends Component {
   constructor(props) {
     super(props);
@@ -28,16 +30,17 @@ export default class Layout_header extends Component {
     const { SubMenu } = Menu;
     const { visible } = this.state;
     return (
-      <div>
+      <div className="custom-sidebar-icon-ap">
         <DrLogo small={this.props.isOpen} />
         <Menu className="doctor-nav" theme="light" defaultSelectedKeys={["1"]} mode="inline">
           <Menu.Item key="1">
-            <Icon type="pie-chart" />
+            {/* <Icon type="pie-chart" /> */}
+            <img src={require('./time.png')} />
             <span>
-              <Link to="/dr">Dashboard</Link>
+              <Link to="/dr">Appointments</Link>
             </span>
           </Menu.Item>
-          <SubMenu
+          {/* <SubMenu
             key="2"
             title={
               <span>
@@ -52,14 +55,39 @@ export default class Layout_header extends Component {
             <Menu.Item key="4">
               <Link to="/dr/calendar">Availability Calendar</Link>
             </Menu.Item>
-          </SubMenu>
+          </SubMenu> */}
           <Menu.Item key="5">
-            <Icon type="pie-chart" />
+            {/* <Icon type="pie-chart" /> */}
+            <img src={require('./dropper.png')} />
             <span>
               <Link to="/dr/patients/single">Patients</Link>
             </span>
           </Menu.Item>
-          <SubMenu
+          <Menu.Item key="6">
+            {/* <Icon type="pie-chart" /> */}
+            <img src={require('./payment-method.png')} />
+            <span>
+              <Link to="/dr/patients/single">Payments</Link>
+            </span>
+          </Menu.Item>
+          <Menu.Item key="3" onClick={this.showDrawer}>
+          {/* <Icon type="pie-chart" /> */}
+          <img src={require('./available.png')} />
+              Availability
+            </Menu.Item>
+            <Menu.Item key="4">
+            {/* <Icon type="pie-chart" /> */}
+            <img src={require('./agenda.png')} />
+            <span>
+              <Link to="/dr/calendar">Calendar</Link>
+              </span>
+            </Menu.Item>
+            <Menu.Item key="10">
+            {/* <Icon type="history" /> */}
+            <img src={require('./folder.png')} />
+            <span><Link to="/dr/history">History</Link></span>
+          </Menu.Item>
+          {/* <SubMenu
             key="6"
             title={
               <span>
@@ -70,15 +98,12 @@ export default class Layout_header extends Component {
           >
             <Menu.Item key="7">Team 1</Menu.Item>
             <Menu.Item key="8">Team 2</Menu.Item>
-          </SubMenu>
-          <Menu.Item key="9">
+          </SubMenu> */}
+          {/* <Menu.Item key="9">
             <Icon type="file" />
             <span>File</span>
-          </Menu.Item>
-          <Menu.Item key="10">
-            <Icon type="history" />
-            <span><Link to="/dr/history">History</Link></span>
-          </Menu.Item>
+          </Menu.Item> */}
+         
         </Menu>
         <Availability_drower
           visible={visible}
