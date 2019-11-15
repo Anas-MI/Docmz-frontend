@@ -87,6 +87,16 @@ export default class Layout_header extends Component {
             <img src={require('./folder.png')} />
             <span><Link to="/dr/history">History</Link></span>
           </Menu.Item>
+          <Menu.Item key="11" className="custom-footer-icon-ap">
+            {/* <Icon type="history" /> */}
+            <img src={require('./folderpref.png')} />
+            <span>Preferences</span>
+          </Menu.Item>
+          <Menu.Item key="12" className="custom-footer-icon-ap2">
+            {/* <Icon type="history" /> */}
+            <img src={require('./social-care.png')} />
+            <span>Help & Support</span>
+          </Menu.Item>
           {/* <SubMenu
             key="6"
             title={
