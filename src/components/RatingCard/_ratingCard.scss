@@ -28,7 +28,7 @@
     }
     &__reviews-card{
         height: 100%;
-        padding: 10px;
+        padding: 0px;
         border-radius: 15px;
         box-shadow: 0px 0px  15px rgba(black, .05);
     }
@@ -37,7 +37,7 @@
 .c-bar-label{
     display: flex;
     justify-content: space-between;
-    font-size: 16px;
+    font-size: 15px;
     padding: 10px;
     &__bar{
         display: flex;

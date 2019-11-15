@@ -7,29 +7,33 @@ export default class RatingCard extends Component {
         return (
             <div className="c-rating-card">
                 <Row type="flex" align="middle" className="c-rating-card__row">
-                    <Col span={8} className="c-rating-card__overall-col">
+                    <Col span={6} className="c-rating-card__overall-col">
                         <p className="c-rating-card__overall-title">Overall rating</p>
                         <span className="c-rating-card__overall-rating">4.5</span>
                         <Rate disabled className="c-rating-card__stars" allowHalf defaultValue={4.5} />
                     </Col>
-                    <Col span={16} className="c-rating-card__reviews-wrapper">
+                    <Col span={18} className="c-rating-card__reviews-wrapper">
                         <Card className="c-rating-card__reviews-card">
                             <Row type="flex">
-                                <Col span={12}>
+                                <Col span={11}>
                                     <BarLabel label="Overall" value={4} />
                                 </Col>
-                                <Col span={12}>
+                                <Col span={2} />
+                                <Col span={11}>
                                     <BarLabel label="Communication" value={4} />
                                 </Col>
-                                <Col span={12}>
+                                <Col span={11}>
                                     <BarLabel label="Wait time" value={4} />
                                 </Col>
-                                <Col span={12}>
-                                    <BarLabel label="Bedside manner
-" value={4} />
+                                <Col span={2} />
+                                <Col span={11}>
+                                    <BarLabel label="Bedside manner" value={4} />
                                 </Col>
                                 <Divider />
-                                <Col span={12}>
+                                <Col span={11}>
+                                    <BarLabel label="Check-in" icon={<ReactSvg src={"/images/icon.svg"} />} isWhole={true} value={4} />
+                                </Col>
+                                {/* <Col span={12}>
                                     <BarLabel label="Check-in" icon={<ReactSvg src={"/images/icon.svg"} />} isWhole={true} value={4} />
                                 </Col>
                                 <Col span={12}>
@@ -37,10 +41,7 @@ export default class RatingCard extends Component {
                                 </Col>
                                 <Col span={12}>
                                     <BarLabel label="Check-in" icon={<ReactSvg src={"/images/icon.svg"} />} isWhole={true} value={4} />
-                                </Col>
-                                <Col span={12}>
-                                    <BarLabel label="Check-in" icon={<ReactSvg src={"/images/icon.svg"} />} isWhole={true} value={4} />
-                                </Col>
+                                </Col> */}
                             </Row>
                         </Card>
                     </Col>

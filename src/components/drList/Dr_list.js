@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {
-  Col, Row,
+  Col, Row, Affix
 } from 'antd';
 // import debounce from 'lodash/debounce';
 // import axios from 'axios';
@@ -33,16 +33,25 @@ class Dr_list extends Component {
 				  <Search />
 				</div>
 
-        <div style={{ padding: '30px 8px'  }}>
-          <Row >
-            <Col span={8} offset={10}>
-              <AppointmentSlider onDateChange={(e)=> {
-                this.setState({
-                  dateArr: e
-                })
-              }} />
-            </Col>
-          </Row>
+        <div>
+          <Affix offsetTop={0}>
+            <Row style={
+              { 
+                paddingTop: '30px',
+                paddingBottom: '30px',
+                backgroundColor: '#fff',
+                borderBottom: `1px solid #ccc`
+              }
+            } >
+              <Col span={8} offset={10}>
+                <AppointmentSlider onDateChange={(e)=> {
+                  this.setState({
+                    dateArr: e
+                  })
+                }} />
+              </Col>
+            </Row>
+          </Affix>
           <Row gutter={16} style={{marginTop : "30px"}}>
              <Col span={18}>
               {

@@ -6,7 +6,8 @@ import DoctorInfo from '../components/drList/DoctorInfo';
 import { getDoctorById } from '../services/api';
 import getDatesFromArray from '../services/scheduler/getDatesFromArray';
 import RatingCard from '../components/RatingCard/RatingCard';
-import { Row, Col } from 'antd';
+import { Row, Col, Divider } from 'antd';
+import ReviewCard from '../components/ReviewCard/ReviewCard';
 export default class DoctorsProfile extends Component {
 	constructor(props) {
 		super(props);
@@ -74,7 +75,45 @@ export default class DoctorsProfile extends Component {
 									<br />The office accepts most insurance plans
 								</p>
 							</div>
+                            <br />
+                            <br />
 							<RatingCard />
+                            <Divider />
+                            <ReviewCard 
+                                name="John doe" 
+                                overall={5} 
+                                bedsideManner={4.5} 
+                                waitTime={3.5} 
+                                communication={3} 
+                                review="I saw Ellen, the Nurse Practitioner. Let me tell you, she was AMAZING. I have had extremely unusual symptoms for 4 months. I’ve seen specialist after specialist at major hospitals. All have agreed that something is wrong with my body, but no one has cared to dig deeper because it’s not immediately diagnosable. She cares! She wants to figure it out! For the first time in a long time, I have hope. I HIGHLY recommend her. Take it from someone who’s had bad experiences with doctors who don’t care, she does."
+                                img="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+                            />
+                            <ReviewCard 
+                                name="John doe" 
+                                overall={5} 
+                                bedsideManner={4.5} 
+                                waitTime={3.5} 
+                                communication={3} 
+                                review="I saw Ellen, the Nurse Practitioner. Let me tell you, she was AMAZING. I have had extremely unusual symptoms for 4 months. I’ve seen specialist after specialist at major hospitals. All have agreed that something is wrong with my body, but no one has cared to dig deeper because it’s not immediately diagnosable. She cares! She wants to figure it out! For the first time in a long time, I have hope. I HIGHLY recommend her. Take it from someone who’s had bad experiences with doctors who don’t care, she does."
+                            />
+                            <ReviewCard 
+                                name="John doe" 
+                                overall={5} 
+                                bedsideManner={4.5} 
+                                waitTime={3.5} 
+                                communication={3} 
+                                review="I saw Ellen, the Nurse Practitioner. Let me tell you, she was AMAZING. I have had extremely unusual symptoms for 4 months. I’ve seen specialist after specialist at major hospitals. All have agreed that something is wrong with my body, but no one has cared to dig deeper because it’s not immediately diagnosable. She cares! She wants to figure it out! For the first time in a long time, I have hope. I HIGHLY recommend her. Take it from someone who’s had bad experiences with doctors who don’t care, she does."
+                                img="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+                            />
+                            <ReviewCard 
+                                name="John doe" 
+                                overall={5} 
+                                bedsideManner={4.5} 
+                                waitTime={3.5} 
+                                communication={3} 
+                                review="I saw Ellen, the Nurse Practitioner. Let me tell you, she was AMAZING. I have had extremely unusual symptoms for 4 months. I’ve seen specialist after specialist at major hospitals. All have agreed that something is wrong with my body, but no one has cared to dig deeper because it’s not immediately diagnosable. She cares! She wants to figure it out! For the first time in a long time, I have hope. I HIGHLY recommend her. Take it from someone who’s had bad experiences with doctors who don’t care, she does."
+                                img="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+                            />
 						</Col>
 						<Col span={8}>
 							<div>
