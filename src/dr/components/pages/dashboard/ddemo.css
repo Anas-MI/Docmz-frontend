@@ -1,0 +1,26 @@
+.accordion__panel {
+    padding: 20px;
+    animation: fadein 0.35s ease-in;
+    background: #fff!important;
+    position: relative!important;
+    /* top: -25px; */
+    bottom: 42px!important;
+    width: 96%;
+    margin-left: 20px
+}
+.accordion__heading {
+    cursor: pointer;
+}
+/* .accordion__button {
+    display: none!important;
+} */
+.accordion {
+    border: none!important;
+    border-radius: 2px;
+}
+.accordion__button:before {
+    display: none!important;
+}
+.accordion__item + .accordion__item {
+    border-top: none!important;
+}

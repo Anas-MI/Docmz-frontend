@@ -6,6 +6,14 @@ import ShortCalender from "../../objects/calenders/shortCalender/ShortCalender";
 import Timeline_drovar from "../../objects/timeline/Timeline_drovar";
 import Tour from "react-user-tour";
 import "./ddemo.css";
+import {
+  Accordion,
+  AccordionItem,
+  AccordionItemHeading,
+  AccordionItemButton,
+  AccordionItemPanel,
+} from 'react-accessible-accordion';
+import 'react-accessible-accordion/dist/fancy-example.css';
 export default class Dashboard extends Component {
   constructor(props) {
     super(props);
@@ -89,10 +97,67 @@ export default class Dashboard extends Component {
               </Col>
             </Row>
             <span style={{paddingTop: 30, display: "block"}}></span>
-            <InfoCard className="stop-3" />
+            {/* <InfoCard className="stop-3" />
             <InfoCard />
+            <InfoCard /> */}
+            <Accordion>
+            <AccordionItem>
+                <AccordionItemHeading>
+                    <AccordionItemButton>
+                   
             <InfoCard />
+          
+                    </AccordionItemButton>
+                </AccordionItemHeading>
+                <AccordionItemPanel>
+                    <p>
+                        Exercitation in fugiat est ut ad ea cupidatat ut in
+                        cupidatat occaecat ut occaecat consequat est minim minim
+                        esse tempor laborum consequat esse adipisicing eu
+                        reprehenderit enim.
+                    </p>
+                </AccordionItemPanel>
+            </AccordionItem>
+
+            <AccordionItem>
+                <AccordionItemHeading>
+                    <AccordionItemButton>
+                   
+            <InfoCard />
+          
+                    </AccordionItemButton>
+                </AccordionItemHeading>
+                <AccordionItemPanel>
+                    <p>
+                        Exercitation in fugiat est ut ad ea cupidatat ut in
+                        cupidatat occaecat ut occaecat consequat est minim minim
+                        esse tempor laborum consequat esse adipisicing eu
+                        reprehenderit enim.
+                    </p>
+                </AccordionItemPanel>
+            </AccordionItem>
+
+            <AccordionItem>
+                <AccordionItemHeading>
+                    <AccordionItemButton>
+                   
+            <InfoCard />
+          
+                    </AccordionItemButton>
+                </AccordionItemHeading>
+                <AccordionItemPanel>
+                    <p>
+                        Exercitation in fugiat est ut ad ea cupidatat ut in
+                        cupidatat occaecat ut occaecat consequat est minim minim
+                        esse tempor laborum consequat esse adipisicing eu
+                        reprehenderit enim.
+                    </p>
+                </AccordionItemPanel>
+            </AccordionItem>
+            </Accordion>
+           
           </Col>
+         
           <Col
             span={8}
             // class="stop-2"
@@ -117,6 +182,67 @@ export default class Dashboard extends Component {
             </div>
           </Col>
         </Row>
+        {/* <Row>
+        
+          <Col span={24}>
+          <Accordion>
+            <AccordionItem>
+                <AccordionItemHeading>
+                    <AccordionItemButton>
+                   
+            <InfoCard />
+          
+                    </AccordionItemButton>
+                </AccordionItemHeading>
+                <AccordionItemPanel>
+                    <p>
+                        Exercitation in fugiat est ut ad ea cupidatat ut in
+                        cupidatat occaecat ut occaecat consequat est minim minim
+                        esse tempor laborum consequat esse adipisicing eu
+                        reprehenderit enim.
+                    </p>
+                </AccordionItemPanel>
+            </AccordionItem>
+
+            <AccordionItem>
+                <AccordionItemHeading>
+                    <AccordionItemButton>
+                   
+            <InfoCard />
+          
+                    </AccordionItemButton>
+                </AccordionItemHeading>
+                <AccordionItemPanel>
+                    <p>
+                        Exercitation in fugiat est ut ad ea cupidatat ut in
+                        cupidatat occaecat ut occaecat consequat est minim minim
+                        esse tempor laborum consequat esse adipisicing eu
+                        reprehenderit enim.
+                    </p>
+                </AccordionItemPanel>
+            </AccordionItem>
+
+            <AccordionItem>
+                <AccordionItemHeading>
+                    <AccordionItemButton>
+                   
+            <InfoCard />
+          
+                    </AccordionItemButton>
+                </AccordionItemHeading>
+                <AccordionItemPanel>
+                    <p>
+                        Exercitation in fugiat est ut ad ea cupidatat ut in
+                        cupidatat occaecat ut occaecat consequat est minim minim
+                        esse tempor laborum consequat esse adipisicing eu
+                        reprehenderit enim.
+                    </p>
+                </AccordionItemPanel>
+            </AccordionItem>
+            </Accordion>
+          </Col>
+         
+        </Row> */}
         <div style={{ position: "absolute", top: 0 }}>
           <Tour
             active={this.state.isTourActive}
