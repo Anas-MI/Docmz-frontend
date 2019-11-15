@@ -21,6 +21,7 @@
     "react-redux": "^7.1.3",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.2.0",
+    "react-svg": "^10.0.23",
     "react-ui-tour": "^0.9.9",
     "react-user-tour": "^3.0.0",
     "redux": "^4.0.4",
