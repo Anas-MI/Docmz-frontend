@@ -50,11 +50,13 @@ export default class Dr_layout extends Component {
         <Layout
           style={{ minHeight: "100vh", backgroundColor: "#f0f2f5" }}
           theme="light"
+          className="custom-dashboard-sider-aakash"
         >
           <Sider
             collapsible
             collapsed={this.state.collapsed}
             onCollapse={this.onCollapse}
+           
           >
             <Layout_header isOpen={this.state.collapsed} />
           </Sider>

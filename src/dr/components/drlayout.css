@@ -1,0 +1,19 @@
+.custom-dashboard-sider-aakash aside{
+    min-width: 250px!important;
+    flex: 0 0 250px!important;
+    max-width: 250px!important;
+    width: 250px!important;
+}
+.custom-dashboard-sider-aakash .ant-layout-sider-trigger {
+    width: 250px!important;
+    
+}
+.custom-dashboard-sider-aakash .ant-layout-sider-collapsed .ant-layout-sider-trigger {
+width: 80px!important;
+}
+.custom-dashboard-sider-aakash .ant-layout-sider-collapsed {
+    min-width: 80px!important;
+    flex: 0 0 80px!important;
+    max-width: 80px!important;
+    width: 80px!important;
+}
