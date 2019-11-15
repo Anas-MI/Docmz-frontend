@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Row, Col, Divider, Drawer, Alert } from "antd";
 import ShortCalender from "../calenders/shortCalender/ShortCalender";
-
+import './customtimeline.css'
 export default class Timeline_drovar extends Component {
   constructor(props) {
     super(props);
@@ -34,6 +34,7 @@ export default class Timeline_drovar extends Component {
           visible={visible}
           width={350}
           mask={false}
+          className="custom-timeline-drover-style-aakash"
         >
           <ShortCalender />
           <div className="c-timeline-drower__row">
