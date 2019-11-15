@@ -1,0 +1,11 @@
+.custom-infocard-btn-ap {
+    height: 75px!important;
+/* margin-left: 26px; */
+position: relative;
+left: 30px;
+}
+.c-info-card .custom-infocard-btn-ap:hover{
+    background: #ff4d4f;
+    border-color: #ff4d4f;
+    transition: all 0.3s;
+}

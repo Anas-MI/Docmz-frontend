@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import {
-    Card, Row, Col, Avatar, Icon
+    Card, Row, Col, Avatar, Icon, Button
 } from 'antd'
 import classNames from 'classnames'
+import './custominfocrd.css'
 
 export default class InfoCard extends Component {
     componentClass = name => {
@@ -51,7 +52,9 @@ export default class InfoCard extends Component {
                             Approved
                         </div>
                         <div className={classNames(this.componentClass("more"))} >
-                            <Icon type="down" className={classNames(this.componentClass("icon"), this.componentClass("icon--more"))} />
+                            {/* <Icon type="down" className={classNames(this.componentClass("icon"), this.componentClass("icon--more"))} /> */}
+                            {/* <Icon type="close" /> */}
+                            <Button type="primary" className="custom-infocard-btn-ap">Cancel</Button>
                         </div>
                     </Col>
                 </Row>
