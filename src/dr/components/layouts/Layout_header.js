@@ -35,10 +35,13 @@ export default class Layout_header extends Component {
         <Menu className="doctor-nav" theme="light" defaultSelectedKeys={["1"]} mode="inline">
           <Menu.Item key="1">
             {/* <Icon type="pie-chart" /> */}
+            <Link to="/dr">
             <img src={require('./time.png')} />
             <span>
-              <Link to="/dr">Appointments</Link>
+              
+                Appointments
             </span>
+            </Link>
           </Menu.Item>
           {/* <SubMenu
             key="2"
@@ -58,17 +61,22 @@ export default class Layout_header extends Component {
           </SubMenu> */}
           <Menu.Item key="5">
             {/* <Icon type="pie-chart" /> */}
+            <Link to="/dr/patients/single">
             <img src={require('./dropper.png')} />
             <span>
-              <Link to="/dr/patients/single">Patients</Link>
+            Patients
             </span>
+            </Link>
           </Menu.Item>
           <Menu.Item key="6">
             {/* <Icon type="pie-chart" /> */}
+            <Link to="/dr/patients/single">
             <img src={require('./payment-method.png')} />
+
             <span>
-              <Link to="/dr/patients/single">Payments</Link>
+             Payments
             </span>
+            </Link>
           </Menu.Item>
           <Menu.Item key="3" onClick={this.showDrawer}>
           {/* <Icon type="pie-chart" /> */}
@@ -77,15 +85,18 @@ export default class Layout_header extends Component {
             </Menu.Item>
             <Menu.Item key="4">
             {/* <Icon type="pie-chart" /> */}
+            <Link to="/dr/calendar">
             <img src={require('./agenda.png')} />
             <span>
-              <Link to="/dr/calendar">Calendar</Link>
+             Calendar
               </span>
+              </Link>
             </Menu.Item>
             <Menu.Item key="10">
             {/* <Icon type="history" /> */}
+            <Link to="/dr/history">
             <img src={require('./folder.png')} />
-            <span><Link to="/dr/history">History</Link></span>
+            <span>History</span></Link>
           </Menu.Item>
           <Menu.Item key="11" className="custom-footer-icon-ap">
             {/* <Icon type="history" /> */}
