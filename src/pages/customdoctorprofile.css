@@ -18,3 +18,8 @@
   .left-side-content-doctor-profile-ap Form {
       padding: 20px;
   }
+  .left-side-content-review-ap {
+      text-align: left;
+      margin-left: 10px;
+  }
+  .left-side-content-review-ap h3 {text-align: center;}

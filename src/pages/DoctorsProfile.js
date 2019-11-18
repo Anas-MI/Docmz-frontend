@@ -12,6 +12,7 @@ import ReviewCard from '../components/ReviewCard/ReviewCard';
 import { Modal, Button, Steps, message, Form, Icon, Input } from 'antd';
 import Firstcontentcustom from './Firstcontentcustom'
 import Cardcustomcontent from './Cardcustomcontent'
+import Reviewcustomcontent from './Reviewcustomcontent'
 const { Step } = Steps;
 const steps = [
 	{
@@ -24,7 +25,7 @@ const steps = [
 	},
 	{
 		title: 'Last',
-		content: 'Last-content',
+		content: <Reviewcustomcontent />,
 	},
 ];
 function hasErrors(fieldsError) {
