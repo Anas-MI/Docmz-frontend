@@ -4,6 +4,9 @@
 .custom-ant-search-select-home .ant-select-selection--single {
     height: 38px;
 }
+.ant-input {
+    height: 38px!important;
+}
 .custom-ant-search-select-home .ant-select-selection__placeholder, .ant-select-search__field__placeholder{
     top: 60%!important;
 }
@@ -62,4 +65,13 @@ height: 38px!important;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
     
    
+}
+.upper-input-width-newsearch Input {
+    width: 300px;
+    height: 38px;
+    border-radius: 0;
+}
+.upper-value-render-search Input {
+    border-radius: 0;
+    width: 300px;
 }

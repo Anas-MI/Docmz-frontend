@@ -316,7 +316,7 @@ class Newsearch extends Component {
                 <Row type="flex">
 
                     <Col span={24} className="select-carriers custom-ant-selection-single-home">
-                        <div className="planvalue-render">
+                        <div className="planvalue-render upper-value-render-search">
                             <Input defaultValue={this.state.planvalue}
                                 suffix={<Icon type="edit" onClick={() => this.suffixiconhandler()} />}
                             >
