@@ -96,3 +96,9 @@
     bottom: 22px;
     width: 98%;
 }
+.ant-collapse > .ant-collapse-item > .ant-collapse-header:hover .ant-collapse-arrow {
+    transform: translateY(-15px);
+}
+.ant-collapse-arrow {
+    transition: all 0.3s;
+}

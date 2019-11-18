@@ -106,16 +106,16 @@ export default class Dashboard extends Component {
               <Panel header={<InfoCard />}
            key="1">
                 {/* <p>{text1} + {text2}</p> */}
-                <p>Reason for your visit - <strong>Toothache</strong></p>
-                <p>description - <strong>Description</strong></p>
+                <p>Reason for visit :  </p>
+                <p>Description : Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,</p>
               </Panel>
               <Panel header={<InfoCard />} key="2">
-              <p>Reason for your visit - <strong>Toothache</strong></p>
-                <p>description - <strong>Description</strong></p>
+              <p>Reason for visit :  </p>
+                <p>Description : Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,</p>
               </Panel>
               <Panel header={<InfoCard />} key="3">
-              <p>Reason for your visit - <strong>Toothache</strong></p>
-                <p>description - <strong>Description</strong></p>
+              <p>Reason for visit :  </p>
+                <p>Description : Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,</p>
               </Panel>
             </Collapse>
             {/* <Accordion>
