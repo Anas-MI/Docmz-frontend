@@ -6,12 +6,14 @@ import {
 const { Content, Footer, Header, Sider } = Layout;
 class Sidebar extends Component {
   render() {
+    const {active}=this.props
+    const activeLink=active && active > 0 ? active : 1
     return (
       <>
           <Sider width={200} style={{ background: '#fff' }} className="custom-sider-patient">
                                         <Menu
                                             mode="inline"
-                                            defaultSelectedKeys={['1']}
+                                            defaultSelectedKeys={[activeLink]}
                                             defaultOpenKeys={['sub1']}
                                             style={{ height: '100%' }}
                                         >
@@ -43,6 +45,10 @@ class Sidebar extends Component {
                                             <Menu.Item key="5">
                                                 {/* <Icon type="file" /> */}
                                                <Link to="/Authorization"> <span>Authorizations</span></Link>
+                                            </Menu.Item>
+                                            <Menu.Item key="6">
+                                                {/* <Icon type="file" /> */}
+                                               <Link to="/Payment"> <span>Payment</span></Link>
                                             </Menu.Item>
                                         </Menu>
                                     </Sider>

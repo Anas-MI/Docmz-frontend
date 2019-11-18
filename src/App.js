@@ -23,6 +23,7 @@ import Notification from './pages/Patient/Settings/Notification/Notification';
 import Demographic from './pages/Patient/Settings/Demographic/Demographic';
 import Authorization from './pages/Patient/Settings/Authorization/Authorization';
 import Insurance from './pages/Patient/Settings/Insurance/Insurance';
+import PaymentList from "./pages/Patient/Settings/payment/PaymentList"
 
 
 
@@ -52,10 +53,10 @@ function App() {
             path="/search"
             component={props => <Dr_list {...props} />}
           />
-          <Route
+          {/* <Route
             path="/payment"
             component={props => <Payment {...props} />}
-          />
+          /> */}
      
           <Route
             path="/dr"
@@ -81,6 +82,8 @@ function App() {
              <Route path="/Demographic" exact = {true} component = {Demographic} />
              <Route path="/Authorization" exact = {true} component = {Authorization} />
              <Route path="/Insurance" exact = {true} component = {Insurance} />
+             <Route path="/payment" component={props => <PaymentList {...props} />}
+          />
              
       </Switch>
     </div>
