@@ -1,32 +1,34 @@
 //paymentCard.js
 import React, { Component } from "react";
 import "./Paymnet.scss";
+import InputMask from "react-input-mask";
+import ReactCardFlip from "react-card-flip";
 import { cardNameRegex, getCardDetails } from "./cardRegex";
-import { formatCreditCardNumber, frantSvg } from "./paymentFun";
+import { formatCreditCardNumber, frantSvg, backSvg } from "./paymentFun";
 
 export default class ShowOnCard extends Component {
   constructor(props) {
     super(props);
-    const { nameOnCard, numberOnCard, expDateOnCard, cvvOnCard } = this.props;
     this.state = {
-      cardNumber: numberOnCard,
-      cardName: nameOnCard,
-      cardDate: expDateOnCard,
-      cardCV: cvvOnCard,
+      cardNumber: props.cardNumber,
+      cardName: props.name,
+      cardDate: props.expDate,
+      cardCV: props.cvvNo,
+      flip: false,
+      cardtype: "",
       maskKey: "9999 9999 9999 9999",
       cardDesingInfo: {
-        color: "grey",
-        logo :''
+        color: "grey"
       }
     };
   }
   componentDidMount() {
-    const { cardNumber } = this.state;
-    const formatObjectWithType = formatCreditCardNumber(cardNumber);
+    const { nameOnCard, numberOnCard, expDateOnCard, cvvOnCard } = this.props;
+    const formatObjectWithType = formatCreditCardNumber(numberOnCard);
     const nValue =
       formatObjectWithType && formatObjectWithType.val
         ? formatObjectWithType.val
-        : cardNumber;
+        : numberOnCard;
     const nCardtype =
       formatObjectWithType && formatObjectWithType.type
         ? formatObjectWithType.type
@@ -37,12 +39,75 @@ export default class ShowOnCard extends Component {
     const cardDesingInfo = getCardDetails(nCardtype);
     this.setState({
       maskKey: mask,
-      cardNumber: nValue,
+      cardNumber: numberOnCard,
+      cardName: nameOnCard,
+      cardDate: expDateOnCard,
+      cardCV: cvvOnCard,
       cardDesingInfo
     });
   }
+  onChangeVlaue(e) {
+    const { name, value } = e.target;
+    const { cardtype } = this.state;
+    if (name === "cardNumber") {
+      const formatObjectWithType = formatCreditCardNumber(value);
+      const nValue =
+        formatObjectWithType && formatObjectWithType.val
+          ? formatObjectWithType.val
+          : value;
+      const nCardtype =
+        formatObjectWithType && formatObjectWithType.type
+          ? formatObjectWithType.type
+          : cardtype;
+      const ncardName = cardNameRegex.find(e => e.cardtype === nCardtype);
+      const mask =
+        ncardName && ncardName.mask ? ncardName.mask : "9999 9999 9999 9999";
+      const cardDesingInfo = getCardDetails(nCardtype);
+      this.setState({
+        [name]: nValue,
+        cardtype: nCardtype,
+        flip: false,
+        maskKey: mask,
+        cardDesingInfo
+      });
+      this.props.cardResponse({
+        cardNumber: this.state.cardNumber,
+        cardName: this.state.cardName,
+        cardDate: this.state.cardDate,
+        cardCV: this.state.cardCV
+      });
+      return;
+    }
 
-  svgfront = () => {
+    this.setState({
+      [name]: value,
+      cardtype
+    });
+
+    if (name === "cardCV") {
+      this.setState({
+        flip: true
+      });
+    } else {
+      this.setState({
+        flip: false
+      });
+    }
+
+    this.props.cardResponse({
+      cardNumber: this.state.cardNumber,
+      cardName: this.state.cardName,
+      cardDate: this.state.cardDate,
+      cardCV: this.state.cardCV
+    });
+  }
+  svgBack = () => {
+    const { cardName, cardCV, cardDesingInfo } = this.state;
+    const color =
+      cardDesingInfo && cardDesingInfo.color ? cardDesingInfo.color : "gray";
+    return backSvg(color, cardCV, cardName);
+  };
+  svgFrant = () => {
     const { cardNumber, cardName, cardDate, cardDesingInfo } = this.state;
     const color =
       cardDesingInfo && cardDesingInfo.color ? cardDesingInfo.color : "gray";
@@ -50,22 +115,66 @@ export default class ShowOnCard extends Component {
   };
 
   render() {
-    const { cardDesingInfo } = this.state;
+    const {
+      cardNumber,
+      cardName,
+      cardCV,
+      flip,
+      maskKey,
+      cardDesingInfo,
+      cardDate
+    } = this.state;
     const logo =
       cardDesingInfo && cardDesingInfo.logo ? cardDesingInfo.logo : "";
+    const {
+      submitText,
+      backBtnText,
+    } = this.props
     return (
-      <div>
-          <div className="creditcard ">
-            <div className="front">
-              <div
-                id="ccsingle"
-                dangerouslySetInnerHTML={{ __html: logo }}
-              ></div>
-              <div dangerouslySetInnerHTML={{ __html: this.svgfront() }}></div>
+      <form className="payment-card-wrapper-show">
+        <div className="payment-card-wrapper__card">
+          <div className="container preload">
+            <div className="creditcard ">
+              <ReactCardFlip
+                flipSpeedBackToFront={1}
+                flipSpeedFrontToBack={1}
+                isFlipped={this.state.flip}
+                flipDirection="horizontal"
+              >
+                <div
+                  className="front"
+                  key="front"
+                  onClick={() => {
+                    this.setState({ flip: !flip });
+                  }}
+                >
+                  <div
+                    id="ccsingle"
+                    dangerouslySetInnerHTML={{ __html: logo }}
+                  ></div>
+                  <div
+                    dangerouslySetInnerHTML={{ __html: this.svgFrant() }}
+                  ></div>
+                </div>
+                <div
+                  className="back"
+                  key="back"
+                  onClick={() => {
+                    this.setState({ flip: !flip });
+                  }}
+                  dangerouslySetInnerHTML={{ __html: this.svgBack() }}
+                ></div>
+              </ReactCardFlip>
             </div>
           </div>
         </div>
-      
+        
+       
+      </form>
     );
   }
+}
+ShowOnCard.defaultProps = {
+  submitText: "Save",
+  backBtnText: "back"
 }

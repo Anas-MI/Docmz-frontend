@@ -88,9 +88,7 @@ export default class AppointmentCard extends Component {
         const { dates, appointments, isLoading } = this.state
         
         
-        console.log({
-            appointments
-        })
+        
         const typeClass =  getVersions(type, "c-appointment-card")
         const parent    = `${parentClass}__appointment-card`
         return (
@@ -119,9 +117,6 @@ export default class AppointmentCard extends Component {
 const Dates = ({appointments, dates})=> 
     dates.map((el, i)=> {
         const datesArr = getDatesFromArray(appointments, el);
-        console.log({
-            datesArr, appointments, el
-        })
         return (<Col className="c-appointment-card__date-col" offset={i === 0 && 2} key={i} span={4}>
             {datesArr.map((elx, i) => 
                 <span key={i} 

@@ -12,9 +12,6 @@ export default class MultiStepProfileForm extends Component {
     const { 
       activeIndex
     } = this.state;
-    console.log({
-      activeIndex
-    })
     this.slider.goTo(activeIndex)
   }
   componentWillReceiveProps(nextProps){
@@ -45,7 +42,6 @@ export default class MultiStepProfileForm extends Component {
       activeIndex
     } = this.state;
     const a= this.props.activeIndex;
-    console.log({a});
     return <div className={componentClass}>
       <Carousel 
       dots={false}

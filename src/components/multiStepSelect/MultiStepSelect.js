@@ -38,10 +38,6 @@ class MultiStepSelect extends Component {
       currentStep,
       totalSteps
     } = this.state
-    console.log({
-      currentStep,
-      totalSteps,
-    })
     if(totalSteps === currentStep){
       this.setState({
         value,

@@ -149,12 +149,13 @@ class Insurancesearch extends Component {
     <div style={{ marginTop: 16 }}> */}
                 <Button type="primary" onClick={this.showDrawer}>
                     Open
-      </Button>
+                </Button>
                 {/* </div> */}
                 <Drawer
                     title="Basic Drawer"
                     placement="right"
                     closable={false}
+                    width={350}
                     onClose={this.onClose}
                     visible={this.state.visible}
                     getContainer={false}
@@ -183,17 +184,15 @@ class Insurancesearch extends Component {
                 <List
                     size="small"
                     header={
-                        <p style={{ fontSize: '20px', textAlign: 'left' }}><strong> Choose carrier </strong></p>
+                        <p style={{ fontSize: '20px', textAlign: 'left', margin: "auto" }}><strong> Choose carrier </strong></p>
                     }
                     bordered
                     dataSource={carriers}
                     onMouseDown={e => e.preventDefault()}
                     className="scroll-list"
                     renderItem={
-                        carrier => <List.Item >
-
-                            <p onClick={() => { this.carrierChange(carrier.plan) }}>
-
+                        carrier => <List.Item onClick={() => { this.carrierChange(carrier.plan) }} >
+                            <p>
                                 {carrier.text}
                             </p>
                         </List.Item>
@@ -211,13 +210,14 @@ class Insurancesearch extends Component {
                     onClose={this.onClose}
                     visible={this.state.visible}
                     getContainer={false}
+                    width="100%"
                     style={{ position: 'absolute', padding: '0' }}
                 >
                     <List
                         size="small"
                         header={
-                            <p onClick={() => { this.setState({ carrierSelected: false }) }}
-                                style={{ fontSize: '20px', textAlign: 'left' }}>
+                            <p onClick={() => { this.setState({ carrierSelected: false }, ()=>  this.onClose()) }}
+                                style={{ fontSize: '20px', textAlign: 'left', margin: "auto" }}>
                                 <Icon type="left" onClick={() => this.onClose()} style={{ paddingRight: '10px' }} />
                                 <strong>Choose Plan</strong></p>
                         }
@@ -260,7 +260,7 @@ class Insurancesearch extends Component {
         }
         else {
             planevaluerender = (
-                <Popover content={content} trigger="click" placement="bottom" className="insurance-ant-popover-inner-content-newsearch">
+                <Popover content={content} trigger="click" placement="bottom" overlayClassName="insurance-popover" className="insurance-ant-popover-inner-content-newsearch">
                     {/* <Button>Click to select your plan and carrier</Button> */}
                     <Input placeholder="Click to select your plan and carrier"
                         suffix={<Icon type="bars" />}

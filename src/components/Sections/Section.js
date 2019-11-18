@@ -9,9 +9,6 @@ export default class Section extends Component {
             children,
             bgImg
         } = this.props
-        console.log({
-            type
-        })
         const typeClass =  getVersions(type, "c-section")
         const parent    = `${parentClass}__section`
         return (

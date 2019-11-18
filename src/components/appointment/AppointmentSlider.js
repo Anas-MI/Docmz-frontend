@@ -63,7 +63,6 @@ class AppointmentSlider extends Component {
         })
       } else {
         const sliderPage = this.state.sliderPage - 1;
-        console.log(sliderPage);
         this.setState({
           sliderPage,
           sliderDate: date
@@ -74,7 +73,6 @@ class AppointmentSlider extends Component {
         })
       }
     } else {
-      console.log('out');
       this.setState({
         sliderDate: date
       }, ()=> {
