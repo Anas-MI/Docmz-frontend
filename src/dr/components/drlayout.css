@@ -9,11 +9,14 @@
     
 }
 .custom-dashboard-sider-aakash .ant-layout-sider-collapsed .ant-layout-sider-trigger {
-width: 80px!important;
+width: 66px!important;
 }
 .custom-dashboard-sider-aakash .ant-layout-sider-collapsed {
-    min-width: 80px!important;
-    flex: 0 0 80px!important;
-    max-width: 80px!important;
-    width: 80px!important;
+    min-width: 66px!important;
+    flex: 0 0 66px!important;
+    max-width: 66px!important;
+    width: 66px!important;
+}
+.custom-sidebar-icon-ap .ant-menu-inline-collapsed{
+    width: 66px;
 }
