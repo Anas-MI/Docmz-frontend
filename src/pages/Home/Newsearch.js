@@ -10,7 +10,7 @@ import {
     Drawer,
     Dropdown,
     Popover,
-    Popconfirm, message
+    Popconfirm,      
 
 } from 'antd';
 import './search.css'
@@ -206,7 +206,7 @@ class Newsearch extends Component {
             <div
                 style={{
                     height: 200,
-                    width: '500px',
+                    width: '300px',
                     overflow: 'hidden',
                     position: 'relative',
                     border: '1px solid #ebedf0',
@@ -230,6 +230,7 @@ class Newsearch extends Component {
                     visible={this.state.visible}
                     getContainer={false}
                     style={{ position: 'absolute' }}
+                    className="ap-drawer-css"
                 >
                     <p>Some contents...</p>
                 </Drawer>
@@ -239,7 +240,7 @@ class Newsearch extends Component {
             <div
                 style={{
                     height: '300px',
-                    width: '350px',
+                    width: '300px',
                     overflow: 'hidden',
                     position: 'relative',
                     // border: '1px solid #ebedf0',
@@ -283,6 +284,7 @@ class Newsearch extends Component {
                     visible={this.state.visible}
                     getContainer={false}
                     style={{ position: 'absolute', padding: '0' }}
+                    
                 >
                     <List
                         size="small"
@@ -293,7 +295,7 @@ class Newsearch extends Component {
                                 <strong>Choose Plan</strong></p>
                         }
                         bordered
-                        className="scroll-list"
+                        className="scroll-list custom-ap-list-width"
                         dataSource={carrierPlan}
                         onMouseDown={e => e.preventDefault()}
                         renderItem={
