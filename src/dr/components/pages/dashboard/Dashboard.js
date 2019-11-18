@@ -16,11 +16,9 @@ import {
 } from 'react-accessible-accordion';
 import 'react-accessible-accordion/dist/fancy-example.css';
 const Panel = Collapse.Panel;
-const text = `
-  A dog is a type of domesticated animal.
-  Known for its loyalty and faithfulness,
-  it can be found as a welcome guest in many households across the world.
-`;
+const text1 = `
+ Reason for visit - Toothache`;
+ const text2 = `Description - Notes Available`
 export default class Dashboard extends Component {
   constructor(props) {
     super(props);
@@ -107,13 +105,17 @@ export default class Dashboard extends Component {
             <Collapse accordion>
               <Panel header={<InfoCard />}
            key="1">
-                <p>{text}</p>
+                {/* <p>{text1} + {text2}</p> */}
+                <p>Reason for your visit - <strong>Toothache</strong></p>
+                <p>description - <strong>Description</strong></p>
               </Panel>
               <Panel header={<InfoCard />} key="2">
-                <p>{text}</p>
+              <p>Reason for your visit - <strong>Toothache</strong></p>
+                <p>description - <strong>Description</strong></p>
               </Panel>
               <Panel header={<InfoCard />} key="3">
-                <p>{text}</p>
+              <p>Reason for your visit - <strong>Toothache</strong></p>
+                <p>description - <strong>Description</strong></p>
               </Panel>
             </Collapse>
             {/* <Accordion>
