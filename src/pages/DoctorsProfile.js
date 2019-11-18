@@ -7,16 +7,70 @@ import { getDoctorById } from '../services/api';
 import getDatesFromArray from '../services/scheduler/getDatesFromArray';
 import RatingCard from '../components/RatingCard/RatingCard';
 import { Row, Col, Divider } from 'antd';
+import './customdoctorprofile.css'
 import ReviewCard from '../components/ReviewCard/ReviewCard';
-export default class DoctorsProfile extends Component {
+import { Modal, Button, Steps, message, Form, Icon, Input } from 'antd';
+import Firstcontentcustom from './Firstcontentcustom'
+import Cardcustomcontent from './Cardcustomcontent'
+const { Step } = Steps;
+const steps = [
+	{
+		title: 'First',
+		content: <Firstcontentcustom />,
+	},
+	{
+		title: 'Second',
+		content: <Cardcustomcontent />,
+	},
+	{
+		title: 'Last',
+		content: 'Last-content',
+	},
+];
+function hasErrors(fieldsError) {
+	return Object.keys(fieldsError).some(field => fieldsError[field]);
+  }
+ class DoctorsProfile extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			docId: null,
-			isLoading: true
+			isLoading: true,
+			visible: false,
+			current: 0,
 		};
 	}
+	next() {
+		const current = this.state.current + 1;
+		this.setState({ current });
+	}
+
+	prev() {
+		const current = this.state.current - 1;
+		this.setState({ current });
+	}
+	showModal = () => {
+		this.setState({
+			visible: true,
+		});
+	};
+
+	handleOk = e => {
+		console.log(e);
+		this.setState({
+			visible: false,
+		});
+	};
+
+	handleCancel = e => {
+		console.log(e);
+		this.setState({
+			visible: false,
+		});
+	};
 	componentDidMount() {
+		 // To disabled submit button at the beginning.
+		 this.props.form.validateFields();
 		const doctor = JSON.parse(localStorage.getItem('user'));
 		const { _id: docId } = doctor;
 		this.setState({ docId });
@@ -41,7 +95,20 @@ export default class DoctorsProfile extends Component {
 				});
 		}
 	}
+	handleSubmit = e => {
+		e.preventDefault();
+		this.props.form.validateFields((err, values) => {
+		  if (!err) {
+			console.log('Received values of form: ', values);
+		  }
+		});
+	  };
 	render() {
+		const { current } = this.state;
+		const { getFieldDecorator, getFieldsError, getFieldError, isFieldTouched } = this.props.form;
+		// Only show error after a field is touched.
+		const usernameError = isFieldTouched('username') && getFieldError('username');
+		const passwordError = isFieldTouched('password') && getFieldError('password');
 		return (
 			<div className="p-doctors-profile">
 				{/* <Banner parentClass="p-doctors" image="//via.placeholder.com/1920x1080/fff" /> */}
@@ -50,20 +117,56 @@ export default class DoctorsProfile extends Component {
 					bgImg={
 						'https://www.thehealthy.com/wp-content/uploads/2017/09/02_doctor_Insider-Tips-to-Choosing-the-Best-Primary-Care-Doctor_519507367_Stokkete.jpg'
 					}
-					type={[ , 'bg-black-alpha', 'shadow' ]}
+					type={[, 'bg-black-alpha', 'shadow']}
 				>
 					<div className="c-container p-doctors-profile__container">
 						<DoctorInfo />
 						<AppointmentCard type="shadow" title="Make Your Next Appointment" />
 					</div>
 				</Section>
-				<div  className="c-container p-doctors-profile__container">
+				<div className="c-container p-doctors-profile__container">
 					<Row>
 						<Col span={24}>
 							<div style={{ clear: 'both', marginTop: '160px' }} />
 						</Col>
 						<Col className="p-doctors-profile__left-col" span={16}>
 							<div>
+								<Button type="primary" onClick={this.showModal}>
+									Open Modal
+        </Button>
+								<Modal
+									title="Basic Modal"
+									visible={this.state.visible}
+									onOk={this.handleOk}
+									onCancel={this.handleCancel}
+									width={'1280px'}
+								>
+									<div>
+										<Steps current={current}>
+											{steps.map(item => (
+												<Step key={item.title} title={item.title} />
+											))}
+										</Steps>
+										<div className="steps-content">{steps[current].content}</div>
+										<div className="steps-action">
+											{current < steps.length - 1 && (
+												<Button type="primary" onClick={() => this.next()}>
+													Next
+            </Button>
+											)}
+											{current === steps.length - 1 && (
+												<Button type="primary" onClick={() => message.success('Processing complete!')}>
+													Done
+            </Button>
+											)}
+											{current > 0 && (
+												<Button style={{ marginLeft: 8 }} onClick={() => this.prev()}>
+													Previous
+            </Button>
+											)}
+										</div>
+									</div>
+								</Modal>
 								<h3 className="c-title p-doctors-profile__title">About Dr. Andrew Fagelman</h3>
 								<p className="p-doctors-profile__text">
 									Dr. Andrew Fagelman is board certified with the American Board of Internal Medicine
@@ -75,45 +178,45 @@ export default class DoctorsProfile extends Component {
 									<br />The office accepts most insurance plans
 								</p>
 							</div>
-                            <br />
-                            <br />
+							<br />
+							<br />
 							<RatingCard />
-                            <Divider />
-                            <ReviewCard 
-                                name="John doe" 
-                                overall={5} 
-                                bedsideManner={4.5} 
-                                waitTime={3.5} 
-                                communication={3} 
-                                review="I saw Ellen, the Nurse Practitioner. Let me tell you, she was AMAZING. I have had extremely unusual symptoms for 4 months. I’ve seen specialist after specialist at major hospitals. All have agreed that something is wrong with my body, but no one has cared to dig deeper because it’s not immediately diagnosable. She cares! She wants to figure it out! For the first time in a long time, I have hope. I HIGHLY recommend her. Take it from someone who’s had bad experiences with doctors who don’t care, she does."
-                                img="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-                            />
-                            <ReviewCard 
-                                name="John doe" 
-                                overall={5} 
-                                bedsideManner={4.5} 
-                                waitTime={3.5} 
-                                communication={3} 
-                                review="I saw Ellen, the Nurse Practitioner. Let me tell you, she was AMAZING. I have had extremely unusual symptoms for 4 months. I’ve seen specialist after specialist at major hospitals. All have agreed that something is wrong with my body, but no one has cared to dig deeper because it’s not immediately diagnosable. She cares! She wants to figure it out! For the first time in a long time, I have hope. I HIGHLY recommend her. Take it from someone who’s had bad experiences with doctors who don’t care, she does."
-                            />
-                            <ReviewCard 
-                                name="John doe" 
-                                overall={5} 
-                                bedsideManner={4.5} 
-                                waitTime={3.5} 
-                                communication={3} 
-                                review="I saw Ellen, the Nurse Practitioner. Let me tell you, she was AMAZING. I have had extremely unusual symptoms for 4 months. I’ve seen specialist after specialist at major hospitals. All have agreed that something is wrong with my body, but no one has cared to dig deeper because it’s not immediately diagnosable. She cares! She wants to figure it out! For the first time in a long time, I have hope. I HIGHLY recommend her. Take it from someone who’s had bad experiences with doctors who don’t care, she does."
-                                img="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-                            />
-                            <ReviewCard 
-                                name="John doe" 
-                                overall={5} 
-                                bedsideManner={4.5} 
-                                waitTime={3.5} 
-                                communication={3} 
-                                review="I saw Ellen, the Nurse Practitioner. Let me tell you, she was AMAZING. I have had extremely unusual symptoms for 4 months. I’ve seen specialist after specialist at major hospitals. All have agreed that something is wrong with my body, but no one has cared to dig deeper because it’s not immediately diagnosable. She cares! She wants to figure it out! For the first time in a long time, I have hope. I HIGHLY recommend her. Take it from someone who’s had bad experiences with doctors who don’t care, she does."
-                                img="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-                            />
+							<Divider />
+							<ReviewCard
+								name="John doe"
+								overall={5}
+								bedsideManner={4.5}
+								waitTime={3.5}
+								communication={3}
+								review="I saw Ellen, the Nurse Practitioner. Let me tell you, she was AMAZING. I have had extremely unusual symptoms for 4 months. I’ve seen specialist after specialist at major hospitals. All have agreed that something is wrong with my body, but no one has cared to dig deeper because it’s not immediately diagnosable. She cares! She wants to figure it out! For the first time in a long time, I have hope. I HIGHLY recommend her. Take it from someone who’s had bad experiences with doctors who don’t care, she does."
+								img="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+							/>
+							<ReviewCard
+								name="John doe"
+								overall={5}
+								bedsideManner={4.5}
+								waitTime={3.5}
+								communication={3}
+								review="I saw Ellen, the Nurse Practitioner. Let me tell you, she was AMAZING. I have had extremely unusual symptoms for 4 months. I’ve seen specialist after specialist at major hospitals. All have agreed that something is wrong with my body, but no one has cared to dig deeper because it’s not immediately diagnosable. She cares! She wants to figure it out! For the first time in a long time, I have hope. I HIGHLY recommend her. Take it from someone who’s had bad experiences with doctors who don’t care, she does."
+							/>
+							<ReviewCard
+								name="John doe"
+								overall={5}
+								bedsideManner={4.5}
+								waitTime={3.5}
+								communication={3}
+								review="I saw Ellen, the Nurse Practitioner. Let me tell you, she was AMAZING. I have had extremely unusual symptoms for 4 months. I’ve seen specialist after specialist at major hospitals. All have agreed that something is wrong with my body, but no one has cared to dig deeper because it’s not immediately diagnosable. She cares! She wants to figure it out! For the first time in a long time, I have hope. I HIGHLY recommend her. Take it from someone who’s had bad experiences with doctors who don’t care, she does."
+								img="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+							/>
+							<ReviewCard
+								name="John doe"
+								overall={5}
+								bedsideManner={4.5}
+								waitTime={3.5}
+								communication={3}
+								review="I saw Ellen, the Nurse Practitioner. Let me tell you, she was AMAZING. I have had extremely unusual symptoms for 4 months. I’ve seen specialist after specialist at major hospitals. All have agreed that something is wrong with my body, but no one has cared to dig deeper because it’s not immediately diagnosable. She cares! She wants to figure it out! For the first time in a long time, I have hope. I HIGHLY recommend her. Take it from someone who’s had bad experiences with doctors who don’t care, she does."
+								img="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+							/>
 						</Col>
 						<Col span={8}>
 							<div>
@@ -164,3 +267,5 @@ export default class DoctorsProfile extends Component {
 		);
 	}
 }
+
+export default Form.create()(DoctorsProfile)
