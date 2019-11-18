@@ -130,7 +130,7 @@ export default class Search extends Component {
           </OptGroup>
 
         </Select>
-        <LocationSearchInput className="ant-search-select custom-locatin-search-ap" />
+        <LocationSearchInput className="ant-search-select" />
         <DatePicker onChange={onChange} className="ant-search-select custom-ant-search-select-home-date ant-calendar-home" />
               <Newsearch />
         {/* <Select

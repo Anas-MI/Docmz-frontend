@@ -264,7 +264,7 @@ class Insurancesearch extends Component {
                     {/* <Button>Click to select your plan and carrier</Button> */}
                     <Input placeholder="Click to select your plan and carrier"
                         suffix={<Icon type="bars" />}
-                        // className="upper-input-width-newsearch"
+                        
 
                     />
 

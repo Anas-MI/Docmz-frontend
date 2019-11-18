@@ -10,7 +10,7 @@ import {
     Drawer,
     Dropdown,
     Popover,
-    Popconfirm,      
+    Popconfirm, message
 
 } from 'antd';
 import './search.css'
@@ -206,7 +206,7 @@ class Newsearch extends Component {
             <div
                 style={{
                     height: 200,
-                    width: '300px',
+                    width: '500px',
                     overflow: 'hidden',
                     position: 'relative',
                     border: '1px solid #ebedf0',
@@ -230,7 +230,6 @@ class Newsearch extends Component {
                     visible={this.state.visible}
                     getContainer={false}
                     style={{ position: 'absolute' }}
-                    className="ap-drawer-css"
                 >
                     <p>Some contents...</p>
                 </Drawer>
@@ -240,7 +239,7 @@ class Newsearch extends Component {
             <div
                 style={{
                     height: '300px',
-                    width: '300px',
+                    width: '350px',
                     overflow: 'hidden',
                     position: 'relative',
                     // border: '1px solid #ebedf0',
@@ -284,7 +283,6 @@ class Newsearch extends Component {
                     visible={this.state.visible}
                     getContainer={false}
                     style={{ position: 'absolute', padding: '0' }}
-                    
                 >
                     <List
                         size="small"
@@ -295,7 +293,7 @@ class Newsearch extends Component {
                                 <strong>Choose Plan</strong></p>
                         }
                         bordered
-                        className="scroll-list custom-ap-list-width"
+                        className="scroll-list"
                         dataSource={carrierPlan}
                         onMouseDown={e => e.preventDefault()}
                         renderItem={
@@ -318,7 +316,7 @@ class Newsearch extends Component {
                 <Row type="flex">
 
                     <Col span={24} className="select-carriers custom-ant-selection-single-home">
-                        <div className="planvalue-render upper-value-render-search">
+                        <div className="planvalue-render">
                             <Input defaultValue={this.state.planvalue}
                                 suffix={<Icon type="edit" onClick={() => this.suffixiconhandler()} />}
                             >

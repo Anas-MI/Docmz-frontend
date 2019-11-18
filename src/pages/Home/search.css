@@ -4,9 +4,6 @@
 .custom-ant-search-select-home .ant-select-selection--single {
     height: 38px;
 }
-.ant-input {
-    height: 38px!important;
-}
 .custom-ant-search-select-home .ant-select-selection__placeholder, .ant-select-search__field__placeholder{
     top: 60%!important;
 }
@@ -71,10 +68,9 @@ height: 38px!important;
     height: 38px;
     border-radius: 0;
 }
-.upper-value-render-search Input {
-    border-radius: 0;
+.planvalue-render Input{
     width: 300px;
 }
-.ant-drawer-content-wrapper {
-    width: 300px!important;
+.custom-search-box-width-home Input {
+height: 38px;
 }
