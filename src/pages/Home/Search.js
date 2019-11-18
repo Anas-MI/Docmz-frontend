@@ -5,7 +5,7 @@ import debounce from 'lodash/debounce';
 import axios from 'axios';
 import LocationSearchInput from '../../components/AddressAutoComplete/AddressAutoComplete';
 import carriers from "../../services/extra/Carriers.json";
-
+import Newsearch from './Newsearch'
 import {
   Link
 } from "react-router-dom";
@@ -132,7 +132,8 @@ export default class Search extends Component {
         </Select>
         <LocationSearchInput className="ant-search-select" />
         <DatePicker onChange={onChange} className="ant-search-select custom-ant-search-select-home-date ant-calendar-home" />
-        <Select
+              <Newsearch />
+        {/* <Select
           suffixIcon={<Icon type="bars" />}
           placeholder="custom dropdown render"
           value={value}
@@ -142,15 +143,7 @@ export default class Search extends Component {
           dropdownRender={menu => (
             <div className="col-12">
 
-              {/* <Row type="flex" onMouseDown={e => e.preventDefault()}>
-								<Col span={20}  >
-									<Steps current={0} >
-										<Step title="Choose carrier" />
-										<Step title="Choose plan" />
-									</Steps>
-								</Col>
-							</Row> */}
-              {/* <Divider /> */}
+             
               <Row type="flex">
 
                 <Col span={24} className="select-carriers custom-ant-selection-single-home">
@@ -190,7 +183,7 @@ export default class Search extends Component {
           )}
         >
 
-        </Select>
+        </Select> */}
 
         <Link to="/search"><Button type="primary" icon="search" className="search_button custom-home-search-btn">
          Search

@@ -165,9 +165,6 @@ export default class Availability_drower extends Component {
     //   weekdays,
     //   weekdaysArr,
     // });
-    console.log({
-      doctor
-    })
     const modifiedWeekArr = weekdaysArr.map(el => {
       return ({
         ...el,
@@ -177,7 +174,6 @@ export default class Availability_drower extends Component {
         lunchEnd: moment(el.lunchEnd).format("HH:mm:ss"),
       })
     })
-    console.log({modifiedWeekArr})
     // download({
     //     duration,
     //     // gap,

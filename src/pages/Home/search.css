@@ -63,3 +63,14 @@ height: 38px!important;
     
    
 }
+.upper-input-width-newsearch Input {
+    width: 300px;
+    height: 38px;
+    border-radius: 0;
+}
+.planvalue-render Input{
+    width: 300px;
+}
+.custom-search-box-width-home Input {
+height: 38px;
+}

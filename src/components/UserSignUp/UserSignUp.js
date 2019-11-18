@@ -21,7 +21,6 @@ export default class UserSignUp extends PureComponent {
   handleSubmit = formProps => {
     const { email, password, phone, firstname, lastname } = formProps;
     const { type } = this.props;
-    console.log({ formProps });
     patientRegistration({
       firstName: firstname,
       lastName: lastname,
@@ -52,8 +51,6 @@ export default class UserSignUp extends PureComponent {
       }
     })
       .catch(err => {
-        console.log('error',{ err });
-
         const msg={
           error: false,
           msg:err.response && err.response.data && err.response.data.error

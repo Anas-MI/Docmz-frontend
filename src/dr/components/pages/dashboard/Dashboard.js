@@ -4,6 +4,7 @@ import { Row, Col, Button, Icon } from "antd";
 import InfoCard from "../../objects/card/InfoCard";
 import ShortCalender from "../../objects/calenders/shortCalender/ShortCalender";
 import Timeline_drovar from "../../objects/timeline/Timeline_drovar";
+import { Collapse } from 'antd';
 import Tour from "react-user-tour";
 import "./ddemo.css";
 import {
@@ -14,6 +15,10 @@ import {
   AccordionItemPanel,
 } from 'react-accessible-accordion';
 import 'react-accessible-accordion/dist/fancy-example.css';
+const Panel = Collapse.Panel;
+const text1 = `
+ Reason for visit - Toothache`;
+ const text2 = `Description - Notes Available`
 export default class Dashboard extends Component {
   constructor(props) {
     super(props);
@@ -29,29 +34,25 @@ export default class Dashboard extends Component {
     });
   }
   showDrawer = () => {
-    console.log("drower show");
     this.setState({
       visible: true
     });
   };
 
   manualnext = (step) => {
-    this.setState({ 
-      tourStep: step ,
-      visible : true
+    this.setState({
+      tourStep: step,
+      visible: true
     })
-    console.log(this.state.tourStep)
-
   }
 
   manualprev = (step) => {
-    this.setState({ 
+    this.setState({
       tourStep: step
-     })
-     this.setState({
+    })
+    this.setState({
       visible: false
     });
-     console.log('prevstep',this.state.tourStep)
   }
 
   onClose = () => {
@@ -62,7 +63,7 @@ export default class Dashboard extends Component {
     }
   };
   render() {
-    
+
     const { visible } = this.state;
     const tourTitleStyle = {
       fontWeight: 700,
@@ -76,9 +77,9 @@ export default class Dashboard extends Component {
       fontSize: 12,
       paddingLeft: 10
     };
-    if(this.state.isTourActive !== false){
+    if (this.state.isTourActive !== false) {
       this.setState({
-        visible : false
+        visible: false
       })
     }
     return (
@@ -86,81 +87,94 @@ export default class Dashboard extends Component {
         <Row>
           <Col
             span={15}
-            offset={1 }
-            // class="stop-1"
+            offset={1}
+          // class="stop-1"
           >
             {/* <Timelines /> */}
-            <span style={{paddingTop: 50, display: "block"}}></span>
+            <span style={{ paddingTop: 50, display: "block" }}></span>
             <Row>
               <Col>
                 <span className="dashboard-heading">Appointments</span>
               </Col>
             </Row>
-            <span style={{paddingTop: 30, display: "block"}}></span>
-            {/* <InfoCard className="stop-3" />
-            <InfoCard />
-            <InfoCard /> */}
-            <Accordion>
-            <AccordionItem>
+            <span style={{ paddingTop: 30, display: "block" }}></span>
+            <Collapse className="info-style-collapse" accordion>
+              <Panel header={<InfoCard />}
+           key="1">
+                {/* <p>{text1} + {text2}</p> */}
+                <p>Reason for visit :  </p>
+                <p>Description : Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,</p>
+              </Panel>
+              <Panel header={<InfoCard />} key="2">
+              <p>Reason for visit :  </p>
+                <p>Description : Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,</p>
+              </Panel>
+              <Panel header={<InfoCard />} key="3">
+              <p>Reason for visit :  </p>
+                <p>Description : Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,</p>
+              </Panel>
+            </Collapse>
+            {/* <Accordion>
+              <AccordionItem>
                 <AccordionItemHeading>
-                    <AccordionItemButton>
-                   
-            <InfoCard />
-          
-                    </AccordionItemButton>
-                </AccordionItemHeading>
-                <AccordionItemPanel>
-                    <p>
-                        Exercitation in fugiat est ut ad ea cupidatat ut in
-                        cupidatat occaecat ut occaecat consequat est minim minim
-                        esse tempor laborum consequat esse adipisicing eu
-                        reprehenderit enim.
-                    </p>
-                </AccordionItemPanel>
-            </AccordionItem>
+                  <AccordionItemButton>
 
-            <AccordionItem>
-                <AccordionItemHeading>
-                    <AccordionItemButton>
-                   
-            <InfoCard />
-          
-                    </AccordionItemButton>
-                </AccordionItemHeading>
-                <AccordionItemPanel>
-                    <p>
-                        Exercitation in fugiat est ut ad ea cupidatat ut in
-                        cupidatat occaecat ut occaecat consequat est minim minim
-                        esse tempor laborum consequat esse adipisicing eu
-                        reprehenderit enim.
-                    </p>
-                </AccordionItemPanel>
-            </AccordionItem>
+                    <InfoCard />
 
-            <AccordionItem>
-                <AccordionItemHeading>
-                    <AccordionItemButton>
-                   
-            <InfoCard />
-          
-                    </AccordionItemButton>
+                  </AccordionItemButton>
                 </AccordionItemHeading>
                 <AccordionItemPanel>
-                    <p>
-                        Exercitation in fugiat est ut ad ea cupidatat ut in
-                        cupidatat occaecat ut occaecat consequat est minim minim
-                        esse tempor laborum consequat esse adipisicing eu
-                        reprehenderit enim.
+                  <p>
+                    Exercitation in fugiat est ut ad ea cupidatat ut in
+                    cupidatat occaecat ut occaecat consequat est minim minim
+                    esse tempor laborum consequat esse adipisicing eu
+                    reprehenderit enim.
                     </p>
                 </AccordionItemPanel>
-            </AccordionItem>
-            </Accordion>
-           
+              </AccordionItem>
+
+              <AccordionItem>
+                <AccordionItemHeading>
+                  <AccordionItemButton>
+
+                    <InfoCard />
+
+                  </AccordionItemButton>
+                </AccordionItemHeading>
+                <AccordionItemPanel>
+                  <p>
+                    Exercitation in fugiat est ut ad ea cupidatat ut in
+                    cupidatat occaecat ut occaecat consequat est minim minim
+                    esse tempor laborum consequat esse adipisicing eu
+                    reprehenderit enim.
+                    </p>
+                </AccordionItemPanel>
+              </AccordionItem>
+
+              <AccordionItem>
+                <AccordionItemHeading>
+                  <AccordionItemButton>
+
+                    <InfoCard />
+
+                  </AccordionItemButton>
+                </AccordionItemHeading>
+                <AccordionItemPanel>
+                  <p>
+                    Exercitation in fugiat est ut ad ea cupidatat ut in
+                    cupidatat occaecat ut occaecat consequat est minim minim
+                    esse tempor laborum consequat esse adipisicing eu
+                    reprehenderit enim.
+                    </p>
+                </AccordionItemPanel>
+              </AccordionItem>
+            </Accordion> */}
+
           </Col>
-         
+
           <Col
             span={8}
-            // class="stop-2"
+          // class="stop-2"
           >
             <div
               style={{
@@ -168,7 +182,7 @@ export default class Dashboard extends Component {
               }}
             >
               <Button onClick={this.showDrawer} className="fr timeline-toggle" type="primary">
-                <Icon style={{fontSize: 20}} type="schedule" />
+                <Icon style={{ fontSize: 20 }} type="schedule" />
               </Button>
               <Timeline_drovar
                 visible={visible}
@@ -182,6 +196,22 @@ export default class Dashboard extends Component {
             </div>
           </Col>
         </Row>
+        {/* <Row>
+          <Col span={24}>
+            <Collapse accordion>
+              <Panel header={<InfoCard />}
+           key="1">
+                <p>{text}</p>
+              </Panel>
+              <Panel header={<InfoCard />} key="2">
+                <p>{text}</p>
+              </Panel>
+              <Panel header={<InfoCard />} key="3">
+                <p>{text}</p>
+              </Panel>
+            </Collapse>
+          </Col>
+        </Row> */}
         {/* <Row>
         
           <Col span={24}>

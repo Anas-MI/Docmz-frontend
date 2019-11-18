@@ -45,7 +45,6 @@ export class StepOne extends React.Component {
         console.log('Received values of form: ', values);
       }
     });
-    console.log(this.state)
   };
 
   render () {

@@ -13,7 +13,6 @@ export default class Layout_header extends Component {
     };
   }
   showDrawer = () => {
-    console.log("drower show");
     this.setState({
       visible: true
     });
@@ -98,7 +97,7 @@ export default class Layout_header extends Component {
             <img src={require('./folder.png')} />
             <span>History</span></Link>
           </Menu.Item>
-          <Menu.Item key="11" className="custom-footer-icon-ap">
+          <Menu.Item key="11" className="custom-footer-down-frm">
             {/* <Icon type="history" /> */}
             <img src={require('./folderpref.png')} />
             <span>Preferences</span>

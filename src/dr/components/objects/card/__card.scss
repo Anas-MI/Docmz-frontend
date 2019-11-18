@@ -14,7 +14,7 @@
     overflow: hidden;
     margin-bottom: 25px;
     &:hover{
-        transform: translateY(-10px);
+        // transform: translateY(-10px);
     }
     // &:before{
     //     content: "";
@@ -185,4 +185,27 @@
 .fr {
     float: right;
 
+}
+
+.info-style-collapse{
+    .ant-collapse-item{
+        margin-bottom: 20px;
+        transition: all .3s;
+        &-active{
+            .c-info-card{
+                border-bottom-left-radius: 0px;
+                border-bottom-right-radius: 0px;
+            }
+        }
+        &:hover{
+            transform: translateY(-10px);
+        }
+    }
+    &.ant-collapse > .ant-collapse-item > .ant-collapse-header{
+        padding: 0;
+    }
+    .ant-collapse-content{
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+    }
 }

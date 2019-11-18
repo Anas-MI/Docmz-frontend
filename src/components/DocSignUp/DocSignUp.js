@@ -57,7 +57,6 @@ export default class DocSignUp extends Component {
       } else {
         gender = "Male";
       }
-      console.log(data);
       if (data.data.doctorInfo.result_count >= 1) {
         this.setState({
           isValid: true,
@@ -73,7 +72,6 @@ export default class DocSignUp extends Component {
           identifiers: doctorInfo.identifiers,
          
         });
-        console.log(this.state);
       }
     });
     setTimeout(() => {
