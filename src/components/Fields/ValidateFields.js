@@ -1,5 +1,4 @@
 export const validateEmail = (value) => {
-	console.log(value);
 	let errors;
 
 	if (!value) {

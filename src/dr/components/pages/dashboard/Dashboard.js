@@ -34,7 +34,6 @@ export default class Dashboard extends Component {
     });
   }
   showDrawer = () => {
-    console.log("drower show");
     this.setState({
       visible: true
     });
@@ -45,8 +44,6 @@ export default class Dashboard extends Component {
       tourStep: step,
       visible: true
     })
-    console.log(this.state.tourStep)
-
   }
 
   manualprev = (step) => {
@@ -56,7 +53,6 @@ export default class Dashboard extends Component {
     this.setState({
       visible: false
     });
-    console.log('prevstep', this.state.tourStep)
   }
 
   onClose = () => {
@@ -102,7 +98,7 @@ export default class Dashboard extends Component {
               </Col>
             </Row>
             <span style={{ paddingTop: 30, display: "block" }}></span>
-            <Collapse accordion>
+            <Collapse className="info-style-collapse" accordion>
               <Panel header={<InfoCard />}
            key="1">
                 {/* <p>{text1} + {text2}</p> */}
