@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { Modal, Layout, Button } from "antd";
+import { Modal, Layout, Button, Divider } from "antd";
 import PaymentCard from "../../../../components/payment/PaymentCard";
 import ShowOnCard from "../../../../components/payment/ShowOnCard";
 import Search from "../../../Home/Search";
@@ -94,21 +94,23 @@ export default class PaymentList extends Component {
         <Layout className="layout">
           <Navbar />
 
-          <Content style={{ padding: "0 50px", marginTop: 64 }}>
-            <div
-              style={{ background: "#fff", padding: 24, minHeight: 380 }}
-              className="doctor-header"
-            >
-              <Uppermsg />
-              <header className="App-header">
-                <Search />
-              </header>
-              <Content style={{ padding: "0 50px" }}>
-                <Layout style={{ padding: "24px 0", background: "#fff" }}>
+          <Content style={{ padding: '0 50px', marginTop: 64 }} className="custom-home-content-ap">
+
+                        <div style={{ background: 'transparent', padding: 24, minHeight: 380 }} className="doctor-header">
+                            <Uppermsg />
+                            <header className="App-header">
+                                <Search />
+                            </header>
+                            <Content style={{ padding: '0', marginTop : '30px' }}>
+                                <Layout style={{ padding: '24px 0'
+                                //  background: '#fff'
+                                  }}>
                   <Sidebar active={"6"} />
-                  <Content style={{ padding: "0 24px", minHeight: 280 }}>
+                  <Content style={{  minHeight: 280 }} className="custom-home-content-inner-ap-patient">
                     <Layout>
                       <Content className="patient-profile-content">
+                      <p className="profile-header-custom-patient-ap"><strong>Payment</strong></p>
+                                                <Divider />
                         <Button onClick={() => this.showModal()}>
                           Add Card
                         </Button>

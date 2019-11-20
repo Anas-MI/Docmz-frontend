@@ -47,4 +47,14 @@
         border-left: solid 3px #1890ff;
         transition: all 0.3s;
     }
+    .custom-sider-patient {
+        height: fit-content!important;
+    }
+    .custom-sider-patient .ant-layout-sider-children ul {
+        border-right: none;
+        
+    }
+    /* .custom-sider-patient ul li {
+        padding-left: 0px!important;
+    } */
    
