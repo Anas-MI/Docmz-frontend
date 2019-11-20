@@ -361,52 +361,52 @@
             min-height: 80vh;
         }
     }
-    button{
-        width: 120px;
-        padding: 10px;
-        background: #47525d;
-        color: #fff;
-        border: none;
-        cursor: pointer;
-    }
-    .submit-btn{
-        background: #47525d;
-        color: #fff;
-        position: relative;
-        &:after{
-            content: "";
-            display: block;
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            right: 0;
-            left: 100%;
-            background-color: transparent;
-            border: 20px solid transparent;
-            border-left-color: #47525d;
-        }
-    }
-    .back-btn{
-        background: #5f6870;
-        color: #fff;
-    }
-    .btn-container{
-        text-align: center;
-        @media(min-width: 1024px){
-            order: 1;
-            padding-bottom: 0;
-            padding-top: 20px;
-            margin-left: -20px;
-            text-align: left;
-            width: calc(50% + 20px);
-            position: absolute;
-            left: 0;
-            bottom: 0;
-            button{
-                width: 50%;
-            }
-        }
-    }
+    // button{
+    //     width: 120px;
+    //     padding: 10px;
+    //     background: #47525d;
+    //     color: #fff;
+    //     border: none;
+    //     cursor: pointer;
+    // }
+    // .submit-btn{
+    //     background: #47525d;
+    //     color: #fff;
+    //     position: relative;
+    //     &:after{
+    //         content: "";
+    //         display: block;
+    //         position: absolute;
+    //         top: 0;
+    //         bottom: 0;
+    //         right: 0;
+    //         left: 100%;
+    //         background-color: transparent;
+    //         border: 20px solid transparent;
+    //         border-left-color: #47525d;
+    //     }
+    // }
+    // .back-btn{
+    //     background: #5f6870;
+    //     color: #fff;
+    // }
+    // .btn-container{
+    //     text-align: center;
+    //     @media(min-width: 1024px){
+    //         order: 1;
+    //         padding-bottom: 0;
+    //         padding-top: 20px;
+    //         margin-left: -20px;
+    //         text-align: left;
+    //         width: calc(50% + 20px);
+    //         position: absolute;
+    //         left: 0;
+    //         bottom: 0;
+    //         button{
+    //             width: 50%;
+    //         }
+    //     }
+    // }
     &__title{
         width: 100%;
         
@@ -795,34 +795,37 @@
             min-height: 80vh;
         }
     }
-    button{
-        width: 120px;
-        padding: 10px;
-        background: #47525d;
-        color: #fff;
-        border: none;
-        cursor: pointer;
-    }
-    .submit-btn{
-        background: #47525d;
-        color: #fff;
-        position: relative;
-        &:after{
-            content: "";
-            display: block;
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            right: 0;
-            left: 100%;
-            background-color: transparent;
-            border: 20px solid transparent;
-            border-left-color: #47525d;
-        }
-    }
-    .back-btn{
-        background: #5f6870;
-        color: #fff;
+    // button{
+    //     width: 120px;
+    //     padding: 10px;
+    //     background: #47525d;
+    //     color: #fff;
+    //     border: none;
+    //     cursor: pointer;
+    // }
+    // .submit-btn{
+    //     background: #47525d;
+    //     color: #fff;
+    //     position: relative;
+    //     &:after{
+    //         content: "";
+    //         display: block;
+    //         position: absolute;
+    //         top: 0;
+    //         bottom: 0;
+    //         right: 0;
+    //         left: 100%;
+    //         background-color: transparent;
+    //         border: 20px solid transparent;
+    //         border-left-color: #47525d;
+    //     }
+    // }
+    // .back-btn{
+    //     background: #5f6870;
+    //     color: #fff;
+    // }
+    .switch-custom-button{
+        width: 50px;
     }
     .btn-container{
         text-align: center;
