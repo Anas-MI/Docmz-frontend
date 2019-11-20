@@ -6,7 +6,8 @@ import {
     Tooltip,
     Cascader,
     Checkbox,
-    AutoComplete
+    AutoComplete,
+    
 } from 'antd';
 
 import debounce from 'lodash/debounce';
@@ -21,21 +22,109 @@ const { Option, OptGroup } = Select;
 const { Content, Footer, Header, Sider } = Layout;
 const { SubMenu } = Menu;
 const AutoCompleteOption = AutoComplete.Option;
+
 class Notification extends Component {
     constructor(props) {
         super(props);
         this.state = {
             confirmDirty: false,
+            // checked: true,
+            disabled: false,
+            wellnessReminder: false,
+            appointmentReminderText: false,
+            notify: false
         };
     }
-    handleSubmit = e => {
-        e.preventDefault();
-        this.props.form.validateFieldsAndScroll((err, values) => {
-            if (!err) {
-                console.log('Received values of form: ', values);
-            }
+    onchange = e => {
+        this.setState({
+            wellnessReminder: e.target.checked,
+            appointmentReminderText: e.target.checked,
+            notify: e.target.checked
         });
-    };
+
+    }
+    appointmentchange = e => {
+        this.setState({
+            appointmentReminderText: e.target.checked,
+        });
+
+    }
+    notifychange = e => {
+        this.setState({
+            notify: e.target.checked
+        });
+
+    }
+    // toggleChecked = () => {
+    //     this.setState({ wellnessReminder: !this.state.checked });
+    // };
+
+    // toggleDisable = () => {
+    //     this.setState({ disabled: !this.state.disabled });
+    // };
+    getNotificationdetail = async (e) => {
+        try {
+            let response = await axios.get("http://localhost:3001/patient/getinfo/5dcba17a2c9ed62528346794");
+            console.log('patientdetail', response.data.data)
+            this.setState({
+                wellnessReminder: response.data.data.wellnessReminder,
+                appointmentReminderText: response.data.data.appointmentReminderText,
+                notify: response.data.data.notify
+            })
+            console.log(this.state.wellnessReminder)
+        }
+        catch (e) {
+            console.log(e)
+        }
+    }
+
+    componentDidMount() {
+        this.getNotificationdetail();
+
+
+    }
+
+
+    notificationsubmit = e => {
+        e.preventDefault();
+        let body = {
+            wellnessReminder: this.state.wellnessReminder,
+            appointmentReminderText: this.state.appointmentReminderText,
+            notify: this.state.notify
+        }
+        console.log('notibody', body)
+        axios
+            .post(
+                'http://localhost:3001/patient/update', body
+
+            )
+            .then(response => {
+                console.log('dr detail', response);
+                    if(response.data.status == true){
+                        alert(response.data.message)
+                    }
+                // this.state.prodbatch = response.data.data.items
+
+                // this.forceUpdate();
+                // if (response.data.data.description == "Item deleted successfully") {
+                //     alert("Product deleted successfully");
+                //     this.forceUpdate();
+                //     this.handleClick();
+                // }
+            })
+            .catch(e => {
+                console.log('error', e);
+            });
+    }
+
+    // handleSubmit = e => {
+    //     e.preventDefault();
+    //     this.props.form.validateFieldsAndScroll((err, values) => {
+    //         if (!err) {
+    //             console.log('Received values of form: ', values);
+    //         }
+    //     });
+    // };
 
     handleConfirmBlur = e => {
         const { value } = e.target;
@@ -84,43 +173,79 @@ class Notification extends Component {
                                                 <p>Notification Settings</p>
                                                 <Divider />
 
-                                                <Form onSubmit={this.handleSubmit}>
+                                                <Form
+                                                //  onSubmit={e => this.notificationsubmit(e)}
+                                                >
                                                     <p className="static-header"><strong>Emails</strong></p>
                                                     <Form.Item>
-                                                        {getFieldDecorator('wellness', {
-                                                            valuePropName: 'checked',
+                                                        {getFieldDecorator('wellnessReminder', {
+                                                            valuePropName: 'wellnessReminder',
                                                         })(
-                                                            <Checkbox value="Wellness Reminders">
-                                                               Wellness Reminders
-                                                            </Checkbox>
+                                                            // <Checkbox value="wellnessReminder">
+                                                            //    Wellness Reminders
+                                                            // </Checkbox>
+                                                            <Checkbox
+                                                                checked={this.state.wellnessReminder}
+                                                                // setFieldsValue={this.state.wellnessReminder}
+                                                                disabled={this.state.disabled}
+                                                                onChange={this.onchange}
+                                                            >
+                                                                Wellness Reminders
+                                                          </Checkbox>
                                                         )}
                                                     </Form.Item>
                                                     <Divider dashed />
-                                                   
+
                                                     <p className="static-header"><strong>Text Messages</strong></p>
                                                     <Form.Item>
-                                                        {getFieldDecorator('appointmentreminder', {
-                                                            valuePropName: 'checked',
+                                                        {getFieldDecorator('appointmentReminderText', {
+                                                            valuePropName: 'appointmentReminderText',
                                                         })(
-                                                            <Checkbox value="appointmentreminder">
-                                                               Appointment reminders
-                                                            </Checkbox>
+                                                            // <Checkbox value="wellnessReminder">
+                                                            //    Wellness Reminders
+                                                            // </Checkbox>
+                                                            <Checkbox
+                                                                checked={this.state.appointmentReminderText}
+                                                                // setFieldsValue={this.state.wellnessReminder}
+                                                                disabled={this.state.disabled}
+                                                                onChange={this.appointmentchange}
+                                                            >
+                                                                Appointment reminders
+                                                          </Checkbox>
                                                         )}
                                                     </Form.Item>
-                                                   
+
                                                     <Form.Item>
-                                                        {getFieldDecorator('appointmentchangereminder', {
-                                                            valuePropName: 'checked',
+                                                        {getFieldDecorator('notify', {
+                                                            valuePropName: 'notify',
                                                         })(
-                                                            <Checkbox value="appointmentchangereminder">
-                                                               Notify if appointment is rescheduled or cancelled
-                                                            </Checkbox>
+                                                            // <Checkbox value="wellnessReminder">
+                                                            //    Wellness Reminders
+                                                            // </Checkbox>
+                                                            <Checkbox
+                                                                checked={this.state.notify}
+                                                                // setFieldsValue={this.state.wellnessReminder}
+                                                                disabled={this.state.disabled}
+                                                                onChange={this.notifychange}
+                                                            >
+                                                                Notify if appointment is rescheduled or cancelled
+                                                          </Checkbox>
                                                         )}
                                                     </Form.Item>
+
+
                                                 </Form>
 
                                                 <Divider />
-                                               <Buttonspatient />
+                                                {/* <Buttonspatient /> */}
+                                                <div className="patient-profie-setting-pass">
+                                                    <Button type="primary" htmlType="submit" onClick={e => this.notificationsubmit(e)}>
+                                                        Save
+                                                    </Button>
+                                                    <Button htmlType="submit">
+                                                        Cancel
+                                                    </Button>
+                                                </div>
 
 
                                             </Content>
@@ -132,7 +257,7 @@ class Notification extends Component {
                     </Content>
                     <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
                 </Layout>,
-        
+
 </div>
         )
     }

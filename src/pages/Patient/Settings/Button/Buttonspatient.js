@@ -12,7 +12,7 @@ class Buttonspatient extends Component {
     return (
       <>
          <div className="patient-profie-setting-pass">
-                                                <Button type="primary" htmlType="submit">
+                                                <Button type="primary" >
                                                     Save
                                                     </Button>
                                                     <Button  htmlType="submit">
