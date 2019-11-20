@@ -22,7 +22,7 @@ export default class FormStep1 extends React.Component {
       const { getFieldDecorator } = this.props.form;
       return (
         <Form onSubmit={this.handleSubmit} className="login-form">
-          <Form.Item>
+          <Form.Item label="Reason" >
             {getFieldDecorator('reason', {
               rules: [{ required: true, message: 'Please tell us a reason.' }],
             })(
@@ -31,7 +31,7 @@ export default class FormStep1 extends React.Component {
               />,
             )}
           </Form.Item>
-          <Form.Item>
+          <Form.Item label="Duration" >
             {getFieldDecorator('duration', {
             //   rules: [{ required: true, message: 'Please tell us a reason.' }],
             })(
@@ -40,7 +40,7 @@ export default class FormStep1 extends React.Component {
               />,
             )}
           </Form.Item>
-          <Form.Item>
+          <Form.Item label="Notes" >
             {getFieldDecorator('notes', {
             //   rules: [{ required: true, message: 'Please tell us a reason.' }],
             })(
@@ -49,11 +49,11 @@ export default class FormStep1 extends React.Component {
               />,
             )}
           </Form.Item>
-          <Form.Item>
+          {/* <Form.Item>
             <Button type="primary" htmlType="submit" className="login-form-button">
               Log in
             </Button>
-          </Form.Item>
+          </Form.Item> */}
         </Form>
       );
     }

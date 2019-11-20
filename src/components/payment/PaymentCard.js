@@ -6,8 +6,8 @@ import ReactCardFlip from "react-card-flip";
 import { cardNameRegex, getCardDetails } from "./cardRegex";
 import { formatCreditCardNumber, frantSvg, backSvg } from "./paymentFun";
 
-import { Alert } from "antd";
-import { patientCardSave } from "../../services/api/patient";
+import { Alert, Switch , Icon } from "antd";
+import { patientCardSave , patientCardStripeCharge,patientCardTestDetails } from "../../services/api/patient";
 export default class PaymentCard extends Component {
   constructor(props) {
     super(props);
@@ -28,6 +28,7 @@ export default class PaymentCard extends Component {
         msg: "",
         status: ""
       },
+      saveOptionalValue:false,
       userDetails: JSON.parse(localStorage.getItem("patient"))
     };
   }
@@ -114,7 +115,8 @@ export default class PaymentCard extends Component {
     this.props.backButton();
   }
   sendToParent() {
-    const { cardNumber, cardName, cardDate, cardCV, userDetails } = this.state;
+    const { cardNumber, saveOptionalValue,cardName, cardDate, cardCV, userDetails } = this.state;
+    const {saveOptional}=this.props;
     if (cardName.length <= 0) {
       const msg = {
         type: "error",
@@ -139,7 +141,7 @@ export default class PaymentCard extends Component {
       });
       return false;
     }
-   
+
     if (cardDate.length <= 0) {
       const msg = {
         type: "error",
@@ -164,18 +166,21 @@ export default class PaymentCard extends Component {
       });
       return false;
     }
-   
+
     const newDateArray = cardDate.split("/");
 
-    const data = {
-      number: cardNumber,
-      exp_month: newDateArray && newDateArray[0] ? newDateArray[0] : 0,
-      exp_year: newDateArray && newDateArray[1] ? newDateArray[1] : 0,
-      cvc: cardCV,
-      customer: userDetails.customerProfile,
-      name: cardName
-    };
-    patientCardSave(data)
+    
+
+    if( saveOptionalValue || !saveOptional){
+      const data = {
+        number: cardNumber,
+        exp_month: newDateArray && newDateArray[0] ? newDateArray[0] : 0,
+        exp_year: newDateArray && newDateArray[1] ? newDateArray[1] : 0,
+        cvc: cardCV,
+        customer: userDetails.customerProfile,
+        name: cardName
+      };
+      patientCardSave(data)
       .then(res => {
         const { message, status } = res.data;
         if (status) {
@@ -188,6 +193,7 @@ export default class PaymentCard extends Component {
             alertMsg: msg,
             alterToggle: true
           });
+          this.props.transactionData(data)
         } else {
           const msg = {
             type: "error",
@@ -212,16 +218,65 @@ export default class PaymentCard extends Component {
           alterToggle: true
         });
       });
-    console.log({ data: this.state });
+    }
+    if(!saveOptionalValue){
+        const dataSubmit = {
+        number: cardNumber,
+        exp_month: newDateArray && newDateArray[0] ? newDateArray[0] : 0,
+        exp_year: newDateArray && newDateArray[1] ? newDateArray[1] : 0,
+        cvc: cardCV,
+        name:cardName
+     };
 
+      patientCardTestDetails(dataSubmit)
+      .then(res=>{
+          const {status}=res.data
+          if(status){
+            const msg = {
+              type: "success",
+              msg: "Card is valid",
+              status: "Success"
+            };
+            this.setState({
+              alertMsg: msg,
+              alterToggle: true
+            });
+            this.props.transactionData(dataSubmit);
+          }else{
+            const msg = {
+              type: "error",
+              msg: "Something Was Wrong Please try again",
+              status: "Error"
+            };
+            this.setState({
+              alertMsg: msg,
+              alterToggle: true
+            });
+          }
+      })
+      .catch(err=>{
+        const { status, error, message } = err.response.data;
+        const msg = {
+          type: "error",
+          msg: error,
+          status: "Error"
+        };
+        this.setState({
+          alertMsg: msg,
+          alterToggle: true
+        });
+      })
+    }
+   
+  
     //this.validateCard() ? console.log("yes") : console.log("no");
 
-    // this.props.cardResponse({
-    //   cardNumber: this.state.cardNumber,
-    //   cardName: this.state.cardName,
-    //   cardDate: this.state.cardDate,
-    //   cardCV: this.state.cardCV
-    // })
+    this.props.cardResponse({
+      cardNumber: this.state.cardNumber,
+      cardName: this.state.cardName,
+      cardDate: this.state.cardDate,
+      cardCV: this.state.cardCV
+    })
   }
   validateCard() {
     const { cardNumber, cardName, cardDate, cardCV } = this.state;
@@ -300,11 +355,12 @@ export default class PaymentCard extends Component {
       cardDesingInfo,
       cardDate,
       alterToggle,
-      alertMsg
+      alertMsg,
+      saveOptionalValue
     } = this.state;
     const logo =
       cardDesingInfo && cardDesingInfo.logo ? cardDesingInfo.logo : "";
-    const { submitText, backBtnText } = this.props;
+    const { submitText, backBtnText , saveOptional } = this.props;
     return (
       <form className="payment-card-wrapper">
         <div className="payment-card-wrapper__title">Add a Card</div>
@@ -411,6 +467,23 @@ export default class PaymentCard extends Component {
               onChange={e => this.onChangeVlaue(e)}
             ></InputMask>
           </div>
+          {saveOptional && (
+            <div>
+                <label>Save this card</label>
+                <br/>
+                 <Switch
+                  className="switch-custom-button"
+                  checkedChildren={<Icon type="check" />}
+                  unCheckedChildren={<Icon type="close" />}
+                  onChange={()=>{this.setState({
+                    saveOptionalValue:!saveOptionalValue
+                  })}}
+                  defaultChecked={saveOptionalValue}
+                />
+             </div>
+               
+            
+          )}
         </div>
         <div className="field-container btn-container">
           <button
