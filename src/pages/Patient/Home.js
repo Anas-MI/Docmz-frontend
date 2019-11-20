@@ -27,9 +27,76 @@ class Patienthome extends Component {
         this.state = {
             confirmDirty: false,
             autoCompleteResult: [],
+            name : 'Anas',
+            email : '',
+            phone : ''
+
         };
 
     }
+
+    getPatientdetail = async (e) => {
+        try {
+        let response = await axios.get("http://localhost:3001/patient/getinfo/5dcbaf03d38fe310805000f8");
+       console.log('patientdetail',response.data.data)
+       this.setState({
+           email : response.data.data.email,
+           phone : response.data.data.phone 
+       })
+        }
+        catch(e) {
+            console.log(e)
+        }
+    }
+
+    componentDidMount() {
+        this.getPatientdetail();
+        // axios
+        // .get(
+        //   'https://localhost:3001/patient/getinfo/5dcbab54d38fe310805000f7',
+          
+        // )
+        // .then(response => {
+        //   console.log('patientdetail', response);
+          
+        //   // this.state.prodbatch = response.data.data.items
+        
+        //   // this.forceUpdate();
+        //   // if (response.data.data.description == "Item deleted successfully") {
+        //   //     alert("Product deleted successfully");
+        //   //     this.forceUpdate();
+        //   //     this.handleClick();
+        //   // }
+        // })
+        // .catch(error => {
+        //   console.log('error',error);
+        // });
+
+    }
+
+    manualsubmit = e => {
+        axios
+        .post(
+          'https://localhost:3001/patient/update',
+          
+        )
+        .then(response => {
+          console.log('dr detail', response);
+          
+          // this.state.prodbatch = response.data.data.items
+        
+          // this.forceUpdate();
+          // if (response.data.data.description == "Item deleted successfully") {
+          //     alert("Product deleted successfully");
+          //     this.forceUpdate();
+          //     this.handleClick();
+          // }
+        })
+        .catch(error => {
+          console.log('error',error);
+        });
+    }
+
     handleSubmit = e => {
         e.preventDefault();
         this.props.form.validateFieldsAndScroll((err, values) => {
@@ -71,6 +138,7 @@ class Patienthome extends Component {
         this.setState({ autoCompleteResult });
     };
     render() {
+        const {name, email, phone} = this.state
         const { getFieldDecorator } = this.props.form;
         const { autoCompleteResult } = this.state;
 
@@ -132,38 +200,36 @@ class Patienthome extends Component {
                                                 <p>Profile</p>
                                                 <Divider />
                                                 <p className="static-header"><strong>Name</strong></p>
-                                                <p>Anas M.i. - Please call us at (855) 962-3621 to change your name.</p>
+                                                {/* <p>Anas M.i. - Please call us at (855) 962-3621 to change your name.</p> */}
+                                                <Form.Item>
+                                                    {getFieldDecorator('name', {
+                                                        initialValue: `${name}`,
+                                                        
+                                                       
+                                                    })(<Input placeholder={this.state.name}/>)}
+                                                </Form.Item>
                                                 <Divider dashed />
                                                 <p className="static-header"><strong>Email</strong></p>
                                                 <Form.Item>
                                                     {getFieldDecorator('email', {
-                                                        initialValue: ['username@gmail.com'],
-                                                        rules: [
-                                                            {
-                                                                type: 'email',
-                                                                message: 'The input is not valid E-mail!',
-                                                            },
-                                                            {
-                                                                required: true,
-                                                                message: 'Please input your E-mail!',
-                                                            },
-                                                        ],
-                                                    })(<Input />)}
+                                                        initialValue: `${email}`,
+                                                        
+                                                    })(<Input disabled/>)}
                                                 </Form.Item>
                                                 <Divider dashed />
 
                                                 <p className="static-header"><strong>Phone Number</strong></p>
                                                 <Form.Item>
                                                     {getFieldDecorator('phone', {
-                                                        initialValue: ['9765058596'],
-                                                        rules: [{ required: true, message: 'Please input your phone number!' }],
+                                                        initialValue: `${phone}`,
+                                                        
                                                     })(<Input addonBefore={prefixSelector} style={{ width: '100%' }} />)}
                                                 </Form.Item>
                                                 <Divider dashed />
                                                 <p className="static-header"><strong>Address</strong></p>
                                                 <Form.Item>
                                                     {getFieldDecorator('address', {
-                                                        initialValue: ['Demo Address Here'],
+                                                        initialValue: ['No Data Here'],
                                                         rules: [{ required: true, message: 'Please input your address!' }],
                                                     })(
 
@@ -186,7 +252,7 @@ class Patienthome extends Component {
                                                 <Form.Item>
                                                     {/* {getFieldDecorator('date-picker')(<DatePicker />)} */}
                                                     {getFieldDecorator('dateofbirth', {
-                                                        initialValue: ['2019-11-13'],
+                                                        initialValue: ['No data Here'],
                                                         rules: [{ required: true, message: 'Please input your address!' }],
                                                     })(
 
@@ -196,7 +262,15 @@ class Patienthome extends Component {
                                                 <Divider />
                                                 <Row>
                                                     <Col span={18}>
-                                                   <Buttonspatient />
+                                                   {/* <Buttonspatient /> */}
+                                                   <div className="patient-profie-setting-pass">
+                                                <Button type="primary" htmlType="submit" onClick={e => this.manualsubmit(e)}>
+                                                    Save
+                                                    </Button>
+                                                    <Button  htmlType="submit">
+                                                    Cancel
+                                                    </Button>
+                                                    </div>
                                                     </Col>
                                                     <Col span={6}>
                                                     <p><a href='#'>Deactivate</a> my account</p>
