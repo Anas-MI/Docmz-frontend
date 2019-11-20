@@ -8,7 +8,7 @@ import {
     Cascader,
     Checkbox,
     AutoComplete,
-    Radio 
+    Radio
 } from 'antd';
 
 import debounce from 'lodash/debounce';
@@ -28,16 +28,99 @@ class Demographic extends Component {
         super(props);
         this.state = {
             confirmDirty: false,
+            race: [],
+            ethnicity: '',
+            zip: ''
         };
     }
-    handleSubmit = e => {
+    getZipDetail = async (e) => {
+        try {
+            let response = await axios.get("http://localhost:3001/patient/getinfo/5dcba17a2c9ed62528346794");
+            console.log('patientdetail', response.data.data)
+            this.setState({
+                zip: response.data.data.zip
+            })
+        }
+        catch (e) {
+            console.log(e)
+        }
+    }
+    componentDidMount() {
+        this.getZipDetail()
+    }
+    raceclick = e => {
+        console.log('racebvalue', e.target.value)
+        const { value } = e.target
+        // functional setState because we're building off of the previous state
+        this.setState(prevState => ({
+            // copy over any other values from state
+            ...prevState,
+            race: [
+                ...prevState.race,
+                value
+            ]
+        }))
+        //     let newracearr = []
+        //     if (this.state.racearr.indexOf(e.target.value) < 1) {
+        //         newracearr.push(e.target.value)
+        //     }
+
+        //   await this.setState({
+        //        racearr: newracearr
+        //     })
+        //     console.log(this.state.racearr)
+        //    let newarr = []
+        //    newarr.push({e.target.value})
+
+        console.log(this.state.race)
+    }
+    ethnicityhandler = e => {
+
+        this.setState({
+            ethnicity: e.target.value
+        })
+        console.log('ethinicity', this.state.ethnicity)
+    }
+    demographicsubmit = e => {
         e.preventDefault();
-        this.props.form.validateFieldsAndScroll((err, values) => {
-            if (!err) {
-                console.log('Received values of form: ', values);
-            }
-        });
-    };
+        let body = {
+            race: this.state.race,
+            ethnicity: this.state.ethnicity,
+            zip: this.state.zip,
+            id : '5dcba17a2c9ed62528346794'
+        }
+        console.log('notibody', body)
+        axios
+            .post(
+                'http://localhost:3001/patient/update',body
+
+            )
+            .then(response => {
+                console.log('dr detail', response);
+                    if(response.data.status == true){
+                        alert(response.data.message)
+                    }
+                // this.state.prodbatch = response.data.data.items
+
+                // this.forceUpdate();
+                // if (response.data.data.description == "Item deleted successfully") {
+                //     alert("Product deleted successfully");
+                //     this.forceUpdate();
+                //     this.handleClick();
+                // }
+            })
+            .catch(e => {
+                console.log('error', e);
+            });
+    }
+    // handleSubmit = e => {
+    //     e.preventDefault();
+    //     this.props.form.validateFieldsAndScroll((err, values) => {
+    //         if (!err) {
+    //             console.log('Received values of form: ', values);
+    //         }
+    //     });
+    // };
 
     handleConfirmBlur = e => {
         const { value } = e.target;
@@ -61,28 +144,31 @@ class Demographic extends Component {
     };
     render() {
         const { getFieldDecorator } = this.props.form;
+        const {zip} = this.state
         return (
             <div>
                 <Layout className="layout">
                     <Navbar />
 
-                    <Content style={{ padding: '0 50px', marginTop: 64 }}>
+                    <Content style={{ padding: '0 50px', marginTop: 64 }} className="custom-home-content-ap">
 
-                        <div style={{ background: '#fff', padding: 24, minHeight: 380 }} className="doctor-header">
-                            <Uppermsg />
-                            <header className="App-header">
-                                <Search />
-                            </header>
-                            <Content style={{ padding: '0 50px' }}>
-                                <Layout style={{ padding: '24px 0', background: '#fff' }}>
+<div style={{ background: 'transparent', padding: 24, minHeight: 380 }} className="doctor-header">
+    <Uppermsg />
+    <header className="App-header">
+        <Search />
+    </header>
+    <Content style={{ padding: '0', marginTop : '30px' }}>
+        <Layout style={{ padding: '24px 0'
+        //  background: '#fff'
+          }}>
 
                                     <Sidebar />
-                                    <Content style={{ padding: '0 24px', minHeight: 280 }}>
+                                    <Content style={{  minHeight: 280 }} className="custom-home-content-inner-ap-patient">
 
                                         <Layout>
 
                                             <Content className="patient-profile-content">
-                                                <p>Demographic Info (optional)</p>
+                                                <p className="profile-header-custom-patient-ap"><strong>Demographic Info (optional)</strong></p>
                                                 <Divider />
 
                                                 <Form onSubmit={this.handleSubmit}>
@@ -91,7 +177,7 @@ class Demographic extends Component {
                                                         {getFieldDecorator('AIAN', {
                                                             valuePropName: 'checked',
                                                         })(
-                                                            <Checkbox value="American Indian or Alaska Native">
+                                                            <Checkbox value="American Indian or Alaska Native" onClick={e => this.raceclick(e)}>
                                                                 American Indian or Alaska Native
                                                     </Checkbox>
                                                         )}
@@ -100,7 +186,7 @@ class Demographic extends Component {
                                                         {getFieldDecorator('asian', {
                                                             valuePropName: 'checked',
                                                         })(
-                                                            <Checkbox value="Asian">
+                                                            <Checkbox value="Asian" onClick={e => this.raceclick(e)}>
                                                                 Asian
                                                     </Checkbox>
                                                         )}
@@ -109,7 +195,7 @@ class Demographic extends Component {
                                                         {getFieldDecorator('BAA', {
                                                             valuePropName: 'checked',
                                                         })(
-                                                            <Checkbox value="Black or African American">
+                                                            <Checkbox value="Black or African American" onClick={e => this.raceclick(e)}>
                                                                 Black or African American
                                                     </Checkbox>
                                                         )}
@@ -118,7 +204,7 @@ class Demographic extends Component {
                                                         {getFieldDecorator('NH', {
                                                             valuePropName: 'checked',
                                                         })(
-                                                            <Checkbox value="Native Hawaiian">
+                                                            <Checkbox value="Native Hawaiian" onClick={e => this.raceclick(e)}>
                                                                 Native Hawaiian
                                                     </Checkbox>
                                                         )}
@@ -127,7 +213,7 @@ class Demographic extends Component {
                                                         {getFieldDecorator('OPI', {
                                                             valuePropName: 'checked',
                                                         })(
-                                                            <Checkbox value="Other Pacific Islander">
+                                                            <Checkbox value="Other Pacific Islander" onClick={e => this.raceclick(e)}>
                                                                 Other Pacific Islander
                                                     </Checkbox>
                                                         )}
@@ -136,7 +222,7 @@ class Demographic extends Component {
                                                         {getFieldDecorator('White', {
                                                             valuePropName: 'checked',
                                                         })(
-                                                            <Checkbox value="White">
+                                                            <Checkbox value="White" onClick={e => this.raceclick(e)}>
                                                                 White
                                                     </Checkbox>
                                                         )}
@@ -145,7 +231,7 @@ class Demographic extends Component {
                                                         {getFieldDecorator('Other', {
                                                             valuePropName: 'checked',
                                                         })(
-                                                            <Checkbox value="Other">
+                                                            <Checkbox value="Other" onClick={e => this.raceclick(e)}>
                                                                 Other
                                                     </Checkbox>
                                                         )}
@@ -154,7 +240,7 @@ class Demographic extends Component {
                                                         {getFieldDecorator('DeclinetoAnswer', {
                                                             valuePropName: 'checked',
                                                         })(
-                                                            <Checkbox value="WhDecline to Answerite">
+                                                            <Checkbox value="WhDecline to Answerite" onClick={e => this.raceclick(e)}>
                                                                 Decline to Answer
                                                     </Checkbox>
                                                         )}
@@ -165,28 +251,36 @@ class Demographic extends Component {
                                                     <Form.Item>
                                                         {getFieldDecorator('radio-group')(
                                                             <Radio.Group>
-                                                                <Radio value="HispanicorLatino">Hispanic or Latino</Radio>
-                                                                <Radio value="NotHispanicorLatino">Not Hispanic or Latino</Radio>
-                                                                <Radio value="DeclinetoAnswer">Decline to Answer</Radio>
+                                                                <Radio value="Hispanic or Latino" onClick={e => this.ethnicityhandler(e)}>Hispanic or Latino</Radio>
+                                                                <Radio value="Not Hispanic or Latino" onClick={e => this.ethnicityhandler(e)}>Not Hispanic or Latino</Radio>
+                                                                <Radio value="Decline to Answer" onClick={e => this.ethnicityhandler(e)}>Decline to Answer</Radio>
                                                             </Radio.Group>,
                                                         )}
                                                     </Form.Item>
-                                                
-                                                <Divider dashed />
-                                                <p className="static-header"><strong>Zip <small>(Optional)</small></strong></p>
-                                                <Form.Item>
-                                                    {getFieldDecorator('zip', {
-                                                        initialValue: ['205123'],
-                                                        rules: [{ required: true, message: 'Please input your zipcode!' }],
-                                                    })(
 
-                                                        <Input placeholder="Basic usage" />,
-                                                    )}
-                                                </Form.Item>
+                                                    <Divider dashed />
+                                                    <p className="static-header"><strong>Zip <small>(Optional)</small></strong></p>
+                                                    <Form.Item>
+                                                        {getFieldDecorator('zip', {
+                                                            initialValue: `${zip}`,
+                                                            
+                                                        })(
+
+                                                            <Input placeholder="Basic usage" onChange={(e) => this.setState({zip : e.target.value})} />,
+                                                        )}
+                                                    </Form.Item>
                                                 </Form>
 
                                                 <Divider />
-                                               <Buttonspatient />
+                                                {/* <Buttonspatient /> */}
+                                                <div className="patient-profie-setting-pass">
+                                                <Button type="primary" onClick={e => this.demographicsubmit(e)}>
+                                                    Save
+                                                    </Button>
+                                                    <Button  htmlType="submit">
+                                                    Cancel
+                                                    </Button>
+                                                    </div>
 
 
                                             </Content>

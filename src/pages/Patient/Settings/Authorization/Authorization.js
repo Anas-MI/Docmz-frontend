@@ -24,9 +24,24 @@ class Authorization extends Component {
     constructor(props) {
         super(props);
         this.state = {
-
+            name : ''
         };
 
+    }
+    getUserDetail = async (e) => {
+        try {
+            let response = await axios.get("http://localhost:3001/patient/getinfo/5dcba17a2c9ed62528346794");
+            console.log('patientdetail', response.data.data)
+            this.setState({
+                name : response.data.data.name
+            })
+        }
+        catch (e) {
+            console.log(e)
+        }
+    }
+    componentDidMount() {
+        this.getUserDetail()
     }
 
     render() {
@@ -36,26 +51,28 @@ class Authorization extends Component {
                 <Layout className="layout">
                     <Navbar />
 
-                    <Content style={{ padding: '0 50px', marginTop: 64 }}>
+                    <Content style={{ padding: '0 50px', marginTop: 64 }} className="custom-home-content-ap">
 
-                        <div style={{ background: '#fff', padding: 24, minHeight: 380 }} className="doctor-header">
+                        <div style={{ background: 'transparent', padding: 24, minHeight: 380 }} className="doctor-header">
                             <Uppermsg />
                             <header className="App-header">
                                 <Search />
                             </header>
-                            <Content style={{ padding: '0 50px' }}>
-                                <Layout style={{ padding: '24px 0', background: '#fff' }}>
+                            <Content style={{ padding: '0', marginTop : '30px' }}>
+                                <Layout style={{ padding: '24px 0'
+                                //  background: '#fff'
+                                  }}>
 
                                     <Sidebar />
-                                    <Content style={{ padding: '0 24px', minHeight: 280 }}>
+                                    <Content style={{  minHeight: 280 }} className="custom-home-content-inner-ap-patient">
 
                                         <Layout>
 
                                             <Content className="patient-profile-content">
-                                                <p>Authorization Setting</p>
+                                                <p className="profile-header-custom-patient-ap"><strong>Authorization Setting</strong></p>
                                                 <Divider />
 
-                                                <p style={{ float: 'left' }}>Anas M.i.(Me) – Authorized</p>
+                                                <p style={{ float: 'left' }}>{this.state.name} – Authorized</p>
                                                 <p style={{ float: 'right' }}><a href="#">Revoke</a></p>
 
                                                 <Divider />

@@ -8,6 +8,7 @@ import {
     Checkbox,
     AutoComplete
 } from 'antd';
+import moment from 'moment';
 
 import debounce from 'lodash/debounce';
 import axios from 'axios';
@@ -21,15 +22,72 @@ const { Option, OptGroup } = Select;
 const { Content, Footer, Header, Sider } = Layout;
 const { SubMenu } = Menu;
 const AutoCompleteOption = AutoComplete.Option;
+
 class Patienthome extends Component {
     constructor(props) {
         super(props);
         this.state = {
             confirmDirty: false,
             autoCompleteResult: [],
+            name: '',
+            email: '',
+            phone: '',
+            street: '',
+            sex : '',
+            dob : ''
+
         };
 
     }
+
+    getPatientdetail = async (e) => {
+        try {
+            let response = await axios.get("http://localhost:3001/patient/getinfo/5dcba17a2c9ed62528346794");
+            console.log('patientdetail', response.data.data)
+            this.setState({
+                name: response.data.data.name,
+                email: response.data.data.email,
+                phone: response.data.data.phone,
+                street: response.data.data.Address.street,
+                sex : response.data.data.sex,
+                dob : response.data.data.dob
+            })
+        }
+        catch (e) {
+            console.log(e)
+        }
+    }
+
+    componentDidMount() {
+        this.getPatientdetail();
+
+
+    }
+
+    manualsubmit = (e) => {
+        e.preventDefault();
+        axios
+            .post(
+                'http://localhost:3001/patient/update/5dcba17a2c9ed62528346794', this.state
+
+            )
+            .then(response => {
+                console.log('dr detail', response);
+
+                // this.state.prodbatch = response.data.data.items
+
+                // this.forceUpdate();
+                // if (response.data.data.description == "Item deleted successfully") {
+                //     alert("Product deleted successfully");
+                //     this.forceUpdate();
+                //     this.handleClick();
+                // }
+            })
+            .catch(e => {
+                console.log('error', e);
+            });
+    }
+
     handleSubmit = e => {
         e.preventDefault();
         this.props.form.validateFieldsAndScroll((err, values) => {
@@ -71,6 +129,7 @@ class Patienthome extends Component {
         this.setState({ autoCompleteResult });
     };
     render() {
+        const { name, email, phone, street, sex, dob} = this.state
         const { getFieldDecorator } = this.props.form;
         const { autoCompleteResult } = this.state;
 
@@ -108,71 +167,95 @@ class Patienthome extends Component {
         const websiteOptions = autoCompleteResult.map(website => (
             <AutoCompleteOption key={website}>{website}</AutoCompleteOption>
         ));
+        const { MonthPicker, RangePicker } = DatePicker;
+
+const dateFormat = 'YYYY/MM/DD';
+const monthFormat = 'YYYY/MM';
+
+const dateFormatList = ['DD/MM/YYYY', 'DD/MM/YY'];
         return (
             <div>
                 <Layout className="layout">
                     <Navbar />
 
-                    <Content style={{ padding: '0 50px', marginTop: 64 }}>
+                    <Content style={{ padding: '0 50px', marginTop: 64 }} className="custom-home-content-ap">
 
-                        <div style={{ background: '#fff', padding: 24, minHeight: 380 }} className="doctor-header">
+                        <div style={{ background: 'transparent', padding: 24, minHeight: 380 }} className="doctor-header">
                             <Uppermsg />
                             <header className="App-header">
                                 <Search />
                             </header>
-                            <Content style={{ padding: '0 50px' }}>
-                                <Layout style={{ padding: '24px 0', background: '#fff' }}>
+                            <Content style={{ padding: '0', marginTop : '30px' }}>
+                                <Layout style={{ padding: '24px 0'
+                                //  background: '#fff'
+                                  }}>
 
                                     <Sidebar />
-                                    <Content style={{ padding: '0 24px', minHeight: 280 }}>
+                                    <Content style={{  minHeight: 280 }} className="custom-home-content-inner-ap-patient">
 
                                         <Layout>
 
                                             <Content className="patient-profile-content">
-                                                <p>Profile</p>
+                                                <p className="profile-header-custom-patient-ap"><strong>Profile</strong></p>
                                                 <Divider />
                                                 <p className="static-header"><strong>Name</strong></p>
-                                                <p>Anas M.i. - Please call us at (855) 962-3621 to change your name.</p>
+                                                {/* <p>Anas M.i. - Please call us at (855) 962-3621 to change your name.</p> */}
+                                                <Form.Item>
+                                                    {getFieldDecorator('name', {
+                                                        initialValue: `${name}`,
+
+
+                                                    })(<Input placeholder={this.state.name} onChange={(e) => this.setState({ name: e.target.value })} />)}
+                                                </Form.Item>
                                                 <Divider dashed />
                                                 <p className="static-header"><strong>Email</strong></p>
                                                 <Form.Item>
                                                     {getFieldDecorator('email', {
-                                                        initialValue: ['username@gmail.com'],
-                                                        rules: [
-                                                            {
-                                                                type: 'email',
-                                                                message: 'The input is not valid E-mail!',
-                                                            },
-                                                            {
-                                                                required: true,
-                                                                message: 'Please input your E-mail!',
-                                                            },
-                                                        ],
-                                                    })(<Input />)}
+                                                        initialValue: `${email}`,
+
+                                                    })(<Input disabled />)}
                                                 </Form.Item>
                                                 <Divider dashed />
 
                                                 <p className="static-header"><strong>Phone Number</strong></p>
                                                 <Form.Item>
                                                     {getFieldDecorator('phone', {
-                                                        initialValue: ['9765058596'],
-                                                        rules: [{ required: true, message: 'Please input your phone number!' }],
-                                                    })(<Input addonBefore={prefixSelector} style={{ width: '100%' }} />)}
+                                                        initialValue: `${phone}`,
+
+                                                    })(<Input addonBefore={prefixSelector} style={{ width: '100%' }} onChange={(e) => this.setState({ phone: e.target.value })} />)}
                                                 </Form.Item>
                                                 <Divider dashed />
                                                 <p className="static-header"><strong>Address</strong></p>
                                                 <Form.Item>
                                                     {getFieldDecorator('address', {
-                                                        initialValue: ['Demo Address Here'],
-                                                        rules: [{ required: true, message: 'Please input your address!' }],
+                                                        initialValue: `${street}`,
+
                                                     })(
 
-                                                        <Input placeholder="Basic usage" />,
+                                                        <Input placeholder="Basic usage" onChange={(e) => this.setState({ street: e.target.value })} />,
                                                     )}
                                                 </Form.Item>
                                                 <Divider dashed />
                                                 <p className="static-header"><strong>Gender</strong></p>
-                                                <Form.Item>
+                                                {getFieldDecorator('sex', {
+                                                    validateTrigger: ["onChange", "onBlur"],
+                                                    initialValue: `${sex}`,
+                                                    rules: [
+                                                        {
+                                                            required: true,
+                                                            whitespace: true,
+                                                            message: "Please input passenger's name or delete this field."
+                                                        }
+                                                    ]
+                                                })(
+                                                    <Select style={{width:'100%'}} onChange={(e) => this.setState({ sex: e.target.value })}>
+                                                        <Option value="None">Choose....</Option>
+                                                        <Option value="male">Male</Option>
+                                                        <Option value="female">Female</Option>
+                                                        
+                                                    </Select>
+                                                )}
+                                                {/* <Form.Item>
                                                     {getFieldDecorator('address', {
                                                         initialValue: ['Male'],
                                                         rules: [{ required: true, message: 'Please input your address!' }],
@@ -180,30 +263,41 @@ class Patienthome extends Component {
 
                                                         <Input placeholder="Basic usage" />,
                                                     )}
-                                                </Form.Item>
+                                                </Form.Item> */}
                                                 <Divider dashed />
                                                 <p className="static-header"><strong>Date of Birth</strong></p>
                                                 <Form.Item>
                                                     {/* {getFieldDecorator('date-picker')(<DatePicker />)} */}
-                                                    {getFieldDecorator('dateofbirth', {
-                                                        initialValue: ['2019-11-13'],
-                                                        rules: [{ required: true, message: 'Please input your address!' }],
+                                                    {getFieldDecorator('dob', {
+                                                        initialValue: moment(`${dob}`)
+                                                        
                                                     })(
+                                                        // <DatePicker />
 
-                                                        <Input placeholder="Basic usage" />,
+                                                        // <Input placeholder="Basic usage" onChange={(e) => this.setState({ dob: e.target.value })}/>,
+                                                        // <DatePicker format="YYYY-MM-DD" onChange={(e) => this.setState({ dob: e.target.value })} />
+                                                        <DatePicker defaultValue={moment(`${dob}`, dateFormatList[0])} format={dateFormatList} style={{width :'100%'}}/>
                                                     )}
                                                 </Form.Item>
                                                 <Divider />
                                                 <Row>
                                                     <Col span={18}>
-                                                   <Buttonspatient />
+                                                        {/* <Buttonspatient /> */}
+                                                        <div className="patient-profie-setting-pass">
+                                                            <Button type="primary" htmlType="submit" onClick={e => this.manualsubmit(e)}>
+                                                                Save
+                                                    </Button>
+                                                            <Button htmlType="submit">
+                                                                Cancel
+                                                    </Button>
+                                                        </div>
                                                     </Col>
                                                     <Col span={6}>
-                                                    <p><a href='#'>Deactivate</a> my account</p>
+                                                        <p><a href='#'>Deactivate</a> my account</p>
                                                     </Col>
                                                 </Row>
-                                               
-                                                
+
+
 
                                             </Content>
                                         </Layout>
