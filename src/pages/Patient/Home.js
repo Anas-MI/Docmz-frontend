@@ -41,6 +41,7 @@ class Patienthome extends Component {
     }
 
     getPatientdetail = async (e) => {
+        // console.log(('patienthomeid',axios.defaults.headers.common["x-auth-token"]))
         try {
             let response = await axios.get("http://localhost:3001/patient/getinfo/5dcba17a2c9ed62528346794");
             console.log('patientdetail', response.data.data)

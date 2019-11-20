@@ -102,7 +102,14 @@ export default class LoginForm extends PureComponent {
         },()=>{
           const userInfo=JSON.stringify(res.data.user) ;
           window.localStorage.setItem("patient",userInfo)
-          this.props.history.push("search");
+        
+          console.log('userinfohere',userInfo)
+          console.log(res.data.user._id.length)
+          if(res.data.user._id.length > 0) {
+            axios.defaults.headers.common['x-auth-token'] = res.data.user._id;
+            console.log(axios.defaults.headers.common['x-auth-token'])
+          }
+          // this.props.history.push("search");
         })
       }else{
         this.setState({
