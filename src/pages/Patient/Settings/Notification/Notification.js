@@ -95,7 +95,7 @@ class Notification extends Component {
         console.log('notibody', body)
         axios
             .post(
-                'http://localhost:3001/patient/update', body
+                'http://localhost:3001/patient/update/5dcba17a2c9ed62528346794', body
 
             )
             .then(response => {

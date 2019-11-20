@@ -68,7 +68,7 @@ class Patienthome extends Component {
         e.preventDefault();
         axios
             .post(
-                'http://localhost:3001/patient/update', this.state
+                'http://localhost:3001/patient/update/5dcba17a2c9ed62528346794', this.state
 
             )
             .then(response => {
