@@ -8,6 +8,7 @@ import {
     Checkbox,
     AutoComplete
 } from 'antd';
+import moment from 'moment';
 
 import debounce from 'lodash/debounce';
 import axios from 'axios';
@@ -21,6 +22,7 @@ const { Option, OptGroup } = Select;
 const { Content, Footer, Header, Sider } = Layout;
 const { SubMenu } = Menu;
 const AutoCompleteOption = AutoComplete.Option;
+
 class Patienthome extends Component {
     constructor(props) {
         super(props);
@@ -30,7 +32,9 @@ class Patienthome extends Component {
             name: '',
             email: '',
             phone: '',
-            street : ''
+            street: '',
+            sex : '',
+            dob : ''
 
         };
 
@@ -41,10 +45,12 @@ class Patienthome extends Component {
             let response = await axios.get("http://localhost:3001/patient/getinfo/5dcba17a2c9ed62528346794");
             console.log('patientdetail', response.data.data)
             this.setState({
-                name : response.data.data.name,
+                name: response.data.data.name,
                 email: response.data.data.email,
                 phone: response.data.data.phone,
-                street : response.data.data.Address.street
+                street: response.data.data.Address.street,
+                sex : response.data.data.sex,
+                dob : response.data.data.dob
             })
         }
         catch (e) {
@@ -123,7 +129,7 @@ class Patienthome extends Component {
         this.setState({ autoCompleteResult });
     };
     render() {
-        const { name, email, phone, street } = this.state
+        const { name, email, phone, street, sex, dob} = this.state
         const { getFieldDecorator } = this.props.form;
         const { autoCompleteResult } = this.state;
 
@@ -161,6 +167,12 @@ class Patienthome extends Component {
         const websiteOptions = autoCompleteResult.map(website => (
             <AutoCompleteOption key={website}>{website}</AutoCompleteOption>
         ));
+        const { MonthPicker, RangePicker } = DatePicker;
+
+const dateFormat = 'YYYY/MM/DD';
+const monthFormat = 'YYYY/MM';
+
+const dateFormatList = ['DD/MM/YYYY', 'DD/MM/YY'];
         return (
             <div>
                 <Layout className="layout">
@@ -191,7 +203,7 @@ class Patienthome extends Component {
                                                         initialValue: `${name}`,
 
 
-                                                    })(<Input placeholder={this.state.name} onChange={(e) => this.setState({name : e.target.value})}/>)}
+                                                    })(<Input placeholder={this.state.name} onChange={(e) => this.setState({ name: e.target.value })} />)}
                                                 </Form.Item>
                                                 <Divider dashed />
                                                 <p className="static-header"><strong>Email</strong></p>
@@ -208,22 +220,40 @@ class Patienthome extends Component {
                                                     {getFieldDecorator('phone', {
                                                         initialValue: `${phone}`,
 
-                                                    })(<Input addonBefore={prefixSelector} style={{ width: '100%' }} onChange={(e) => this.setState({phone : e.target.value})}/>)}
+                                                    })(<Input addonBefore={prefixSelector} style={{ width: '100%' }} onChange={(e) => this.setState({ phone: e.target.value })} />)}
                                                 </Form.Item>
                                                 <Divider dashed />
                                                 <p className="static-header"><strong>Address</strong></p>
                                                 <Form.Item>
                                                     {getFieldDecorator('address', {
                                                         initialValue: `${street}`,
-                                                        
+
                                                     })(
 
-                                                        <Input placeholder="Basic usage" onChange={(e) => this.setState({street : e.target.value})}/>,
+                                                        <Input placeholder="Basic usage" onChange={(e) => this.setState({ street: e.target.value })} />,
                                                     )}
                                                 </Form.Item>
                                                 <Divider dashed />
                                                 <p className="static-header"><strong>Gender</strong></p>
-                                                <Form.Item>
+                                                {getFieldDecorator('sex', {
+                                                    validateTrigger: ["onChange", "onBlur"],
+                                                    initialValue: `${sex}`,
+                                                    rules: [
+                                                        {
+                                                            required: true,
+                                                            whitespace: true,
+                                                            message: "Please input passenger's name or delete this field."
+                                                        }
+                                                    ]
+                                                })(
+                                                    <Select style={{width:'100%'}} onChange={(e) => this.setState({ sex: e.target.value })}>
+                                                        <Option value="None">Choose....</Option>
+                                                        <Option value="male">Male</Option>
+                                                        <Option value="female">Female</Option>
+                                                        
+                                                    </Select>
+                                                )}
+                                                {/* <Form.Item>
                                                     {getFieldDecorator('address', {
                                                         initialValue: ['Male'],
                                                         rules: [{ required: true, message: 'Please input your address!' }],
@@ -231,17 +261,20 @@ class Patienthome extends Component {
 
                                                         <Input placeholder="Basic usage" />,
                                                     )}
-                                                </Form.Item>
+                                                </Form.Item> */}
                                                 <Divider dashed />
                                                 <p className="static-header"><strong>Date of Birth</strong></p>
                                                 <Form.Item>
                                                     {/* {getFieldDecorator('date-picker')(<DatePicker />)} */}
-                                                    {getFieldDecorator('dateofbirth', {
-                                                        initialValue: ['No data Here'],
-                                                        rules: [{ required: true, message: 'Please input your address!' }],
+                                                    {getFieldDecorator('dob', {
+                                                        initialValue: moment(`${dob}`)
+                                                        
                                                     })(
+                                                        // <DatePicker />
 
-                                                        <Input placeholder="Basic usage" />,
+                                                        // <Input placeholder="Basic usage" onChange={(e) => this.setState({ dob: e.target.value })}/>,
+                                                        // <DatePicker format="YYYY-MM-DD" onChange={(e) => this.setState({ dob: e.target.value })} />
+                                                        <DatePicker defaultValue={moment(`${dob}`, dateFormatList[0])} format={dateFormatList} style={{width :'100%'}}/>
                                                     )}
                                                 </Form.Item>
                                                 <Divider />
