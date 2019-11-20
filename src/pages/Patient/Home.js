@@ -27,9 +27,9 @@ class Patienthome extends Component {
         this.state = {
             confirmDirty: false,
             autoCompleteResult: [],
-            name : 'Anas',
-            email : '',
-            phone : ''
+            name: 'Anas',
+            email: '',
+            phone: ''
 
         };
 
@@ -37,64 +37,46 @@ class Patienthome extends Component {
 
     getPatientdetail = async (e) => {
         try {
-        let response = await axios.get("http://localhost:3001/patient/getinfo/5dcbaf03d38fe310805000f8");
-       console.log('patientdetail',response.data.data)
-       this.setState({
-           email : response.data.data.email,
-           phone : response.data.data.phone 
-       })
+            let response = await axios.get("http://localhost:3001/patient/getinfo/5dcbaf03d38fe310805000f8");
+            console.log('patientdetail', response.data.data)
+            this.setState({
+                email: response.data.data.email,
+                phone: response.data.data.phone
+            })
         }
-        catch(e) {
+        catch (e) {
             console.log(e)
         }
     }
 
     componentDidMount() {
         this.getPatientdetail();
-        // axios
-        // .get(
-        //   'https://localhost:3001/patient/getinfo/5dcbab54d38fe310805000f7',
-          
-        // )
-        // .then(response => {
-        //   console.log('patientdetail', response);
-          
-        //   // this.state.prodbatch = response.data.data.items
-        
-        //   // this.forceUpdate();
-        //   // if (response.data.data.description == "Item deleted successfully") {
-        //   //     alert("Product deleted successfully");
-        //   //     this.forceUpdate();
-        //   //     this.handleClick();
-        //   // }
-        // })
-        // .catch(error => {
-        //   console.log('error',error);
-        // });
+
 
     }
 
-    manualsubmit = e => {
+    manualsubmit = (e) => {
+        e.preventDefault();
         axios
-        .post(
-          'https://localhost:3001/patient/update',
-          
-        )
-        .then(response => {
-          console.log('dr detail', response);
-          
-          // this.state.prodbatch = response.data.data.items
-        
-          // this.forceUpdate();
-          // if (response.data.data.description == "Item deleted successfully") {
-          //     alert("Product deleted successfully");
-          //     this.forceUpdate();
-          //     this.handleClick();
-          // }
-        })
-        .catch(error => {
-          console.log('error',error);
-        });
+            .post(
+                'http://localhost:3001/patient/update', this.state
+
+            )
+            .then(response => {
+                console.log('dr detail', response);
+
+                // this.state.prodbatch = response.data.data.items
+
+                // this.forceUpdate();
+                // if (response.data.data.description == "Item deleted successfully") {
+                //     alert("Product deleted successfully");
+                //     this.forceUpdate();
+                //     this.handleClick();
+                // }
+            })
+            .catch(e => {
+                console.log('error', e);
+            });
     }
 
     handleSubmit = e => {
@@ -138,7 +120,7 @@ class Patienthome extends Component {
         this.setState({ autoCompleteResult });
     };
     render() {
-        const {name, email, phone} = this.state
+        const { name, email, phone } = this.state
         const { getFieldDecorator } = this.props.form;
         const { autoCompleteResult } = this.state;
 
@@ -204,17 +186,17 @@ class Patienthome extends Component {
                                                 <Form.Item>
                                                     {getFieldDecorator('name', {
                                                         initialValue: `${name}`,
-                                                        
-                                                       
-                                                    })(<Input placeholder={this.state.name}/>)}
+
+
+                                                    })(<Input placeholder={this.state.name} onChange={(e) => this.setState({name : e.target.value})}/>)}
                                                 </Form.Item>
                                                 <Divider dashed />
                                                 <p className="static-header"><strong>Email</strong></p>
                                                 <Form.Item>
                                                     {getFieldDecorator('email', {
                                                         initialValue: `${email}`,
-                                                        
-                                                    })(<Input disabled/>)}
+
+                                                    })(<Input disabled />)}
                                                 </Form.Item>
                                                 <Divider dashed />
 
@@ -222,8 +204,8 @@ class Patienthome extends Component {
                                                 <Form.Item>
                                                     {getFieldDecorator('phone', {
                                                         initialValue: `${phone}`,
-                                                        
-                                                    })(<Input addonBefore={prefixSelector} style={{ width: '100%' }} />)}
+
+                                                    })(<Input addonBefore={prefixSelector} style={{ width: '100%' }} onChange={(e) => this.setState({phone : e.target.value})}/>)}
                                                 </Form.Item>
                                                 <Divider dashed />
                                                 <p className="static-header"><strong>Address</strong></p>
@@ -262,22 +244,22 @@ class Patienthome extends Component {
                                                 <Divider />
                                                 <Row>
                                                     <Col span={18}>
-                                                   {/* <Buttonspatient /> */}
-                                                   <div className="patient-profie-setting-pass">
-                                                <Button type="primary" htmlType="submit" onClick={e => this.manualsubmit(e)}>
-                                                    Save
+                                                        {/* <Buttonspatient /> */}
+                                                        <div className="patient-profie-setting-pass">
+                                                            <Button type="primary" htmlType="submit" onClick={e => this.manualsubmit(e)}>
+                                                                Save
                                                     </Button>
-                                                    <Button  htmlType="submit">
-                                                    Cancel
+                                                            <Button htmlType="submit">
+                                                                Cancel
                                                     </Button>
-                                                    </div>
+                                                        </div>
                                                     </Col>
                                                     <Col span={6}>
-                                                    <p><a href='#'>Deactivate</a> my account</p>
+                                                        <p><a href='#'>Deactivate</a> my account</p>
                                                     </Col>
                                                 </Row>
-                                               
-                                                
+
+
 
                                             </Content>
                                         </Layout>
