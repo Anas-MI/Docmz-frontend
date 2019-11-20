@@ -30,10 +30,15 @@ export default class PaymentList extends Component {
     this.getSaveCards();
   }
   getSaveCards() {
-    const { customerProfile } = this.state.userDetails;
-    patientCardList(customerProfile)
+    const {
+      userDetails
+    } = this.state
+    if(!userDetails){
+      this.props.history.push("/login")
+      return 
+    }
+    patientCardList(userDetails.customerProfile)
       .then(res => {
-        
         const { data } = res.data.data;
         console.log({ data });
         this.setState({

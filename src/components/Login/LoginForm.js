@@ -17,14 +17,47 @@ export default class LoginForm extends PureComponent {
     const {  email, password } = formProps;
     const {type}=this.props;
     if(type=="Doctor"){
-      const requestData={
-        "email":email,
-        "password":password
-      }
-      let url = baseUrl+`/doctors/authenticate`;
-      axios.post(url,requestData)
-     .then(res => {
-      const msg={
+    //   const requestData={
+    //     "email":email,
+    //     "password":password
+    //   }
+    //   let url = baseUrl+`/doctors/authenticate`;
+    //   axios.post(url,requestData)
+    //  .then(res => {
+    //   const msg={
+    //     error:res.data.status,
+    //     msg:res.data.error
+    //   }
+    //   if(res.data.status){
+    //     this.setState({
+    //       notification:msg,
+    //       isLoading:false
+    //     },()=>{
+    //       const userInfo=JSON.stringify(res.data.user) ;
+    //       window.localStorage.setItem("user",userInfo);
+    //       const step = res.data.user.steps;
+    //       if(step.includes(0)){
+    //         this.props.history.push("/dr-profile-stap")
+    //       }else{
+    //         this.props.history.push("dr/dashbord")
+    //       }
+    //     })
+    //   }else{
+    //     this.setState({
+    //       notification:msg,
+    //       notificationToggle:true,
+    //       isLoading:false
+    //     })
+    //   }
+    // });
+    const requestData={
+      "email":email,
+      "password":password
+    }
+    let url = baseUrl+`/doctors/authenticate`;
+    axios.post(url,requestData)
+   .then(res => {
+        const msg={
         error:res.data.status,
         msg:res.data.error
       }
@@ -49,7 +82,7 @@ export default class LoginForm extends PureComponent {
           isLoading:false
         })
       }
-    });
+  });
     }else{
       const requestData={
         "email":email,
