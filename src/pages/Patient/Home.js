@@ -178,7 +178,7 @@ const dateFormatList = ['DD/MM/YYYY', 'DD/MM/YY'];
                 <Layout className="layout">
                     <Navbar />
 
-                    <Content style={{ padding: '0 50px', marginTop: 64 }}>
+                    <Content style={{ padding: '0 50px', marginTop: 64 }} className="custom-home-content-ap">
 
                         <div style={{ background: '#fff', padding: 24, minHeight: 380 }} className="doctor-header">
                             <Uppermsg />
