@@ -21,6 +21,26 @@
         color: black;
         border-bottom: 1px solid rgb(243, 243, 244);
     } */
-    .custom-sider-patient .ant-menu-vertical .ant-menu-item::after, .ant-menu-vertical-left .ant-menu-item::after, .ant-menu-vertical-right .ant-menu-item::after, .ant-menu-inline .ant-menu-item::after{
+    /* .custom-sider-patient .ant-menu-vertical .ant-menu-item::after, .ant-menu-vertical-left .ant-menu-item::after, .ant-menu-vertical-right .ant-menu-item::after, .ant-menu-inline .ant-menu-item::after{
         border-right: none!important;
+    } */
+    .selected {
+        /* background-color: rgba(255, 236, 241); */
+        cursor: pointer;
+        text-align: left;
+        padding: 4;
+        /* padding-left: 10px; */
+        font-size: 1rem;
+        color: black;
+        /* border-bottom: 1px solid rgb(243, 243, 244); */
+        border-right: solid 3px #1890ff;
+        /* position: relative;
+        left : 16px; */
+     
+        transform: translateX(16px);
+    }
+   
+    .custom-sider-patient ul li:hover {
+        border-right: solid 3px #1890ff;
+        transition: all 0.3s;
     }
