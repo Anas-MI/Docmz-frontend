@@ -1,6 +1,9 @@
 .personal-content-border {
     border-left: solid 1px #e1e1e1;
 }
+.patient-profile-content .profile-header-custom-patient-ap {
+    font-size: 25px;
+}
 .patient-profile-content .static-header {
     font-size: 18px;
     margin-bottom: 1rem;
@@ -14,4 +17,12 @@
 .custom-home-content-ap {
     background: #f4f6f8;
     padding : 30px!important;
+}
+.custom-home-content-inner-ap-patient {
+    background: #fff;
+    padding : 24px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.12);
+    margin-left: 20px;
+    /* border: 1px solid #e8e8e8; */
+    border-radius: 5px;
 }
