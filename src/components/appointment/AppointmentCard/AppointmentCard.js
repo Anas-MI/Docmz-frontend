@@ -2,13 +2,14 @@ import React, { Component } from 'react'
 import classNames from 'classnames'
 import  Card from '../../Card/Card'
 import { getVersions } from '../../../services/extra/bem'
-import { Row, Col, Spin, Icon } from 'antd';
+import { Row, Col, Spin, Icon, Modal, Button } from 'antd';
 import AppointmentSlider from '../AppointmentSlider';
 import getDatesFromArray from '../../../services/scheduler/getDatesFromArray';
 import CustomScroll from 'react-custom-scroll';
 import 'react-custom-scroll/dist/customScroll.css'
 import { getAppointments } from '../../../services/api';
-import { Modal, Button } from 'antd';
+import RoundedPopup from '../../RoundedPopup/RoundedPopup';
+import AppointmentForm from "../AppointmentForm"
 export default class AppointmentCard extends Component {
     constructor(props){
         super(props)
@@ -109,6 +110,9 @@ export default class AppointmentCard extends Component {
                             </Row>
                         </CustomScroll>
                     </div>
+                    <RoundedPopup width={900} visible={true} >
+                        <AppointmentForm  />
+                    </RoundedPopup>
                 </Card>
             </div>
         )
