@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import classNames from 'classnames'
 import  Card from '../../Card/Card'
 import { getVersions } from '../../../services/extra/bem'
-import { Row, Col, Spin, Icon } from 'antd';
+import { Row, Col, Spin, Icon, Modal, Button } from 'antd';
 import AppointmentSlider from '../AppointmentSlider';
 import getDatesFromArray from '../../../services/scheduler/getDatesFromArray';
 import CustomScroll from 'react-custom-scroll';
@@ -16,9 +16,30 @@ export default class AppointmentCard extends Component {
         this.state = {
             dates: [],
             appointments: [],
-            isLoading: true
+            isLoading: true,
+            visible: false
         }
+        this.tap = this.tap.bind(this)
     }
+    showModal = () => {
+		this.setState({
+		  visible: true,
+		});
+	  };
+	
+	  handleOk = e => {
+		console.log(e);
+		this.setState({
+		  visible: false,
+		});
+	  };
+	
+	  handleCancel = e => {
+		console.log(e);
+		this.setState({
+		  visible: false,
+		});
+	  };
     onDateChange = dates => {
         const doctorObj = JSON.parse(localStorage.getItem("user"))
         const {
@@ -54,7 +75,9 @@ export default class AppointmentCard extends Component {
             })
         })
     }
-    
+    tap () {
+        console.log('something')
+    }
     render() {
         const {
             title,
@@ -105,10 +128,9 @@ const Dates = ({appointments, dates})=>
                         "c-appointment-card__date-btn--disabled": !elx
                     })}
                     onClick={()=> {
-                        if(elx){
-                            alert(`${elx}`)
-                            // alert(`${el}|${elx}`)
-                        }
+                       console.log('something')
+                    //    this.showModal()
+                   this.tap.bind(this)
                     }}
                 >
                     {elx ? elx : ""}
