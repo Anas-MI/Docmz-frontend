@@ -27,9 +27,10 @@ class Patienthome extends Component {
         this.state = {
             confirmDirty: false,
             autoCompleteResult: [],
-            name: 'Anas',
+            name: '',
             email: '',
-            phone: ''
+            phone: '',
+            street : ''
 
         };
 
@@ -37,11 +38,13 @@ class Patienthome extends Component {
 
     getPatientdetail = async (e) => {
         try {
-            let response = await axios.get("http://localhost:3001/patient/getinfo/5dcbaf03d38fe310805000f8");
+            let response = await axios.get("http://localhost:3001/patient/getinfo/5dcba17a2c9ed62528346794");
             console.log('patientdetail', response.data.data)
             this.setState({
+                name : response.data.data.name,
                 email: response.data.data.email,
-                phone: response.data.data.phone
+                phone: response.data.data.phone,
+                street : response.data.data.Address.street
             })
         }
         catch (e) {
@@ -120,7 +123,7 @@ class Patienthome extends Component {
         this.setState({ autoCompleteResult });
     };
     render() {
-        const { name, email, phone } = this.state
+        const { name, email, phone, street } = this.state
         const { getFieldDecorator } = this.props.form;
         const { autoCompleteResult } = this.state;
 
@@ -211,11 +214,11 @@ class Patienthome extends Component {
                                                 <p className="static-header"><strong>Address</strong></p>
                                                 <Form.Item>
                                                     {getFieldDecorator('address', {
-                                                        initialValue: ['No Data Here'],
-                                                        rules: [{ required: true, message: 'Please input your address!' }],
+                                                        initialValue: `${street}`,
+                                                        
                                                     })(
 
-                                                        <Input placeholder="Basic usage" />,
+                                                        <Input placeholder="Basic usage" onChange={(e) => this.setState({street : e.target.value})}/>,
                                                     )}
                                                 </Form.Item>
                                                 <Divider dashed />
