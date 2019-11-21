@@ -9,7 +9,7 @@ export default class Login_drawer extends Component {
 	constructor(props) {
 		super(props);
 	    this.state={ 
-            visible: false, 
+            visible: true, 
             placement: 'top',
             childrenDrawer:false
         }
@@ -25,16 +25,7 @@ export default class Login_drawer extends Component {
           visible: false,
         });
       };
-      showChildrenDrawer = () => {
-        this.setState({
-          childrenDrawer: true,
-        });
-      };
-      onChildrenDrawerClose = () => {
-        this.setState({
-          childrenDrawer: false,
-        });
-      };
+     
     
     render() {
 		return (
