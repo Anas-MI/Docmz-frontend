@@ -6,8 +6,9 @@ import ReactCardFlip from "react-card-flip";
 import { cardNameRegex, getCardDetails } from "./cardRegex";
 import { formatCreditCardNumber, frantSvg, backSvg } from "./paymentFun";
 
-import { Alert, Switch , Icon } from "antd";
-import { patientCardSave , patientCardStripeCharge,patientCardTestDetails } from "../../services/api/patient";
+import { Alert, Switch, Icon, Button, message } from "antd";
+import { patientCardSave, patientCardStripeCharge, patientCardTestDetails } from "../../services/api/patient";
+import './custom-ap-payment.css'
 export default class PaymentCard extends Component {
   constructor(props) {
     super(props);
@@ -28,7 +29,7 @@ export default class PaymentCard extends Component {
         msg: "",
         status: ""
       },
-      saveOptionalValue:false,
+      saveOptionalValue: false,
       userDetails: JSON.parse(localStorage.getItem("patient"))
     };
   }
@@ -115,8 +116,8 @@ export default class PaymentCard extends Component {
     this.props.backButton();
   }
   sendToParent() {
-    const { cardNumber, saveOptionalValue,cardName, cardDate, cardCV, userDetails } = this.state;
-    const {saveOptional}=this.props;
+    const { cardNumber, saveOptionalValue, cardName, cardDate, cardCV, userDetails } = this.state;
+    const { saveOptional } = this.props;
     if (cardName.length <= 0) {
       const msg = {
         type: "error",
@@ -169,9 +170,9 @@ export default class PaymentCard extends Component {
 
     const newDateArray = cardDate.split("/");
 
-    
 
-    if( saveOptionalValue || !saveOptional){
+
+    if (saveOptionalValue || !saveOptional) {
       const data = {
         number: cardNumber,
         exp_month: newDateArray && newDateArray[0] ? newDateArray[0] : 0,
@@ -181,57 +182,57 @@ export default class PaymentCard extends Component {
         name: cardName
       };
       patientCardSave(data)
-      .then(res => {
-        const { message, status } = res.data;
-        if (status) {
-          const msg = {
-            type: "success",
-            msg: message,
-            status: "Card Save"
-          };
-          this.setState({
-            alertMsg: msg,
-            alterToggle: true
-          });
-          this.props.transactionData(data)
-        } else {
+        .then(res => {
+          const { message, status } = res.data;
+          if (status) {
+            const msg = {
+              type: "success",
+              msg: message,
+              status: "Card Save"
+            };
+            this.setState({
+              alertMsg: msg,
+              alterToggle: true
+            });
+            this.props.transactionData(data)
+          } else {
+            const msg = {
+              type: "error",
+              msg: message,
+              status: "Card Save Error"
+            };
+            this.setState({
+              alertMsg: msg,
+              alterToggle: true
+            });
+          }
+        })
+        .catch(err => {
+          const { status, error, message } = err.response.data;
           const msg = {
             type: "error",
-            msg: message,
-            status: "Card Save Error"
+            msg: error,
+            status: "Error"
           };
           this.setState({
             alertMsg: msg,
             alterToggle: true
           });
-        }
-      })
-      .catch(err => {
-        const { status, error, message } = err.response.data;
-        const msg = {
-          type: "error",
-          msg: error,
-          status: "Error"
-        };
-        this.setState({
-          alertMsg: msg,
-          alterToggle: true
         });
-      });
     }
-    if(!saveOptionalValue){
-        const dataSubmit = {
+    if (!saveOptionalValue) {
+      const dataSubmit = {
         number: cardNumber,
         exp_month: newDateArray && newDateArray[0] ? newDateArray[0] : 0,
         exp_year: newDateArray && newDateArray[1] ? newDateArray[1] : 0,
         cvc: cardCV,
-        name:cardName
-     };
+        name: cardName
+      };
 
       patientCardTestDetails(dataSubmit)
-      .then(res=>{
-          const {status}=res.data
-          if(status){
+        .then(res => {
+          const { status } = res.data
+          if (status) {
             const msg = {
               type: "success",
               msg: "Card is valid",
@@ -242,7 +243,7 @@ export default class PaymentCard extends Component {
               alterToggle: true
             });
             this.props.transactionData(dataSubmit);
-          }else{
+          } else {
             const msg = {
               type: "error",
               msg: "Something Was Wrong Please try again",
@@ -253,22 +254,22 @@ export default class PaymentCard extends Component {
               alterToggle: true
             });
           }
-      })
-      .catch(err=>{
-        const { status, error, message } = err.response.data;
-        const msg = {
-          type: "error",
-          msg: error,
-          status: "Error"
-        };
-        this.setState({
-          alertMsg: msg,
-          alterToggle: true
-        });
-      })
+        })
+        .catch(err => {
+          const { status, error, message } = err.response.data;
+          const msg = {
+            type: "error",
+            msg: error,
+            status: "Error"
+          };
+          this.setState({
+            alertMsg: msg,
+            alterToggle: true
+          });
+        })
     }
-   
-  
+
+
     //this.validateCard() ? console.log("yes") : console.log("no");
 
     this.props.cardResponse({
@@ -290,46 +291,46 @@ export default class PaymentCard extends Component {
     if (type === "cardNumber") {
       cardNumber.length >= 13
         ? this.setState({
-            cardNumberError: true,
-            cardNumberErrorText: "Please enter valid card Number"
-          })
+          cardNumberError: true,
+          cardNumberErrorText: "Please enter valid card Number"
+        })
         : this.setState({
-            cardNumberError: false,
-            cardNumberErrorText: ""
-          });
+          cardNumberError: false,
+          cardNumberErrorText: ""
+        });
     }
     if (type === "required") {
       cardName.length >= 1
         ? this.setState({
-            cardNameError: true,
-            cardNameErrorText: "Card Name is required"
-          })
+          cardNameError: true,
+          cardNameErrorText: "Card Name is required"
+        })
         : this.setState({
-            cardNameError: false,
-            cardNameErrorText: ""
-          });
+          cardNameError: false,
+          cardNameErrorText: ""
+        });
     }
     if (type === "cardCV") {
       cardCV.length >= 1
         ? this.setState({
-            cardCVError: true,
-            cardCVErrorText: "Security Code is required"
-          })
+          cardCVError: true,
+          cardCVErrorText: "Security Code is required"
+        })
         : this.setState({
-            cardCVError: false,
-            cardCVErrorText: ""
-          });
+          cardCVError: false,
+          cardCVErrorText: ""
+        });
     }
     if (type === "cardCV") {
       cardCV.length >= 1
         ? this.setState({
-            cardCVError: true,
-            cardCVErrorText: "Security Code is required"
-          })
+          cardCVError: true,
+          cardCVErrorText: "Security Code is required"
+        })
         : this.setState({
-            cardCVError: false,
-            cardCVErrorText: ""
-          });
+          cardCVError: false,
+          cardCVErrorText: ""
+        });
     }
   }
   svgBack = () => {
@@ -360,12 +361,37 @@ export default class PaymentCard extends Component {
     } = this.state;
     const logo =
       cardDesingInfo && cardDesingInfo.logo ? cardDesingInfo.logo : "";
-    const { submitText, backBtnText , saveOptional } = this.props;
-    return (
-      <form className="payment-card-wrapper">
-        <div className="payment-card-wrapper__title">Add a Card</div>
+    const { submitText, backBtnText, saveOptional } = this.props;
+    const info = () => {
+      message.info('This is a normal message');
+    };
+    let alerttooglemsg;
+    if (this.state.alterToggle) {
+      alerttooglemsg = (
 
-        <div className="payment-card-wrapper__card-wrapper-inner">
+        // <Alert
+        //   message={alertMsg.status}
+        //   description={alertMsg.msg}
+        //   type={alertMsg.type}
+        //   showIcon
+        // />
+        // `${
+        //   message.info('This is a normal message')
+        // }`
+        // 'there is an error'
+        `${ message.error(alertMsg.msg)}`
+        
+
+      )
+    }
+    return (
+<div>
+      <form className="payment-card-wrapper">
+
+        {/* <div className="payment-card-wrapper__title">Add a Card</div> */}
+        {/* <div className="payment-card-wrapper__title custom-ap-card-wrapper-title">{alerttooglemsg}</div> */}
+
+        <div className="payment-card-wrapper__card-wrapper-inner custom-payment-card-ap-wrapper">
           <div className="payment-card-wrapper__card">
             <div className="container preload">
               <div className="creditcard ">
@@ -402,17 +428,21 @@ export default class PaymentCard extends Component {
               </div>
             </div>
           </div>
+          {/* <div 
+      className="custom-ap-card-wrapper-title"
+      >{alerttooglemsg}</div> */}
         </div>
+       
 
-        <div className="form-container-payment">
-          {alterToggle && (
+        <div className="form-container-payment custom-ap-card-payment">
+          {/* {alterToggle && (
             <Alert
               message={alertMsg.status}
               description={alertMsg.msg}
               type={alertMsg.type}
               showIcon
             />
-          )}
+          )} */}
 
           <div className="field-container">
             <label for="name">Name</label>
@@ -423,7 +453,9 @@ export default class PaymentCard extends Component {
               value={cardName}
               name="cardName"
               onChange={e => this.onChangeVlaue(e)}
+             
             />
+            {/* {`${alertMsg.msg}`} */}
           </div>
           <div className="field-container">
             <label for="cardnumber">Card Number</label>
@@ -440,7 +472,7 @@ export default class PaymentCard extends Component {
               onChange={e => this.onChangeVlaue(e)}
             ></InputMask>
           </div>
-          <div className="field-container">
+          <div className="field-container expiration-field-container" style={{ width: '80%' }}>
             <label for="expirationdate">Expiration (mm/yy)</label>
             <InputMask
               mask="99/99"
@@ -468,40 +500,57 @@ export default class PaymentCard extends Component {
             ></InputMask>
           </div>
           {saveOptional && (
-            <div>
-                <label>Save this card</label>
-                <br/>
-                 <Switch
-                  className="switch-custom-button"
-                  checkedChildren={<Icon type="check" />}
-                  unCheckedChildren={<Icon type="close" />}
-                  onChange={()=>{this.setState({
-                    saveOptionalValue:!saveOptionalValue
-                  })}}
-                  defaultChecked={saveOptionalValue}
-                />
-             </div>
-               
-            
+
+            <div className="custom-switch-ap-btn ">
+              <label>Save this card</label>
+              {/* <br/> */}
+              <Switch
+                className="switch-custom-button "
+                checkedChildren={<Icon type="check" />}
+                unCheckedChildren={<Icon type="close" />}
+                onChange={() => {
+                  this.setState({
+                    saveOptionalValue: !saveOptionalValue
+                  })
+                }}
+                defaultChecked={saveOptionalValue}
+              />
+            </div>
+
+
+
           )}
         </div>
-        <div className="field-container btn-container">
-          <button
+        <div className="field-container btn-container custom-ap-btn-containers-payment">
+          <Button
             className="back-btn"
-            type="button"
+            type="default"
             onClick={() => this.sendToBack()}
           >
             {backBtnText}
-          </button>
-          <button
-            className="submit-btn"
-            type="button"
+          </Button>
+          <Button
+            className="submit-btn custom-ap-back-btn"
+            type="primary"
             onClick={() => this.sendToParent()}
           >
             {submitText}
-          </button>
+          </Button>
+          {/* <div 
+      className="custom-ap-card-wrapper-title"
+      >{alerttooglemsg}</div> */}
         </div>
+       
+    
+       
       </form>
+     
+      {/* <Alert message={"Error Text"} type="error" /> */}
+      {/* <div 
+      className="custom-ap-card-wrapper-title"
+      >{alerttooglemsg}</div>
+       */}
+       </div>
     );
   }
 }
