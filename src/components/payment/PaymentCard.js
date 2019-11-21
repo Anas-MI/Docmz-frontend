@@ -29,6 +29,11 @@ export default class PaymentCard extends Component {
         msg: "",
         status: ""
       },
+      nameerrmsg : '',
+      cardnumbererrmsg : '',
+      cvverrmsg : '',
+      carddateerrmsg : '',
+      cardfailuretoggle : false,
       saveOptionalValue: false,
       userDetails: JSON.parse(localStorage.getItem("patient"))
     };
@@ -126,7 +131,8 @@ export default class PaymentCard extends Component {
       };
       this.setState({
         alertMsg: msg,
-        alterToggle: true
+        alterToggle: true,
+        nameerrmsg : "Name is required"
       });
       return false;
     }
@@ -138,7 +144,9 @@ export default class PaymentCard extends Component {
       };
       this.setState({
         alertMsg: msg,
-        alterToggle: true
+        alterToggle: true,
+        cardnumbererrmsg : "Card Number is required"
+
       });
       return false;
     }
@@ -151,7 +159,8 @@ export default class PaymentCard extends Component {
       };
       this.setState({
         alertMsg: msg,
-        alterToggle: true
+        alterToggle: true,
+        carddateerrmsg : "Card Date is required"
       });
       return false;
     }
@@ -163,7 +172,8 @@ export default class PaymentCard extends Component {
       };
       this.setState({
         alertMsg: msg,
-        alterToggle: true
+        alterToggle: true,
+        cvverrmsg : "Security Code is required"
       });
       return false;
     }
@@ -203,8 +213,10 @@ export default class PaymentCard extends Component {
             };
             this.setState({
               alertMsg: msg,
-              alterToggle: true
+              alterToggle: true,
+              cardfailuretoggle : true
             });
+            console.log('cardfailms',this.state.alertMsg)
           }
         })
         .catch(err => {
@@ -256,6 +268,7 @@ export default class PaymentCard extends Component {
           }
         })
         .catch(err => {
+          console.log('error',err)
           const { status, error, message } = err.response.data;
           const msg = {
             type: "error",
@@ -264,8 +277,10 @@ export default class PaymentCard extends Component {
           };
           this.setState({
             alertMsg: msg,
-            alterToggle: true
+            alterToggle: true,
+            cardfailuretoggle : true
           });
+          console.log('cardfailms',this.state.alertMsg.msg)
         })
     }
 
@@ -366,7 +381,7 @@ export default class PaymentCard extends Component {
       message.info('This is a normal message');
     };
     let alerttooglemsg;
-    if (this.state.alterToggle) {
+    if (this.state.cardfailuretoggle) {
       alerttooglemsg = (
 
         // <Alert
@@ -456,6 +471,7 @@ export default class PaymentCard extends Component {
              
             />
             {/* {`${alertMsg.msg}`} */}
+            {this.state.nameerrmsg}
           </div>
           <div className="field-container">
             <label for="cardnumber">Card Number</label>
@@ -471,6 +487,7 @@ export default class PaymentCard extends Component {
               maskChar=" "
               onChange={e => this.onChangeVlaue(e)}
             ></InputMask>
+            {this.state.cardnumbererrmsg}
           </div>
           <div className="field-container expiration-field-container" style={{ width: '80%' }}>
             <label for="expirationdate">Expiration (mm/yy)</label>
@@ -484,6 +501,7 @@ export default class PaymentCard extends Component {
               value={cardDate}
               onChange={e => this.onChangeVlaue(e)}
             ></InputMask>
+            {this.state.carddateerrmsg}
           </div>
           <div className="field-container">
             <label for="securitycode">Security Code</label>
@@ -498,6 +516,7 @@ export default class PaymentCard extends Component {
               maskChar=" "
               onChange={e => this.onChangeVlaue(e)}
             ></InputMask>
+            {this.state.cvverrmsg}
           </div>
           {saveOptional && (
 
