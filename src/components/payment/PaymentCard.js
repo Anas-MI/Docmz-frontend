@@ -453,7 +453,9 @@ export default class PaymentCard extends Component {
               value={cardName}
               name="cardName"
               onChange={e => this.onChangeVlaue(e)}
+             
             />
+            {/* {`${alertMsg.msg}`} */}
           </div>
           <div className="field-container">
             <label for="cardnumber">Card Number</label>
