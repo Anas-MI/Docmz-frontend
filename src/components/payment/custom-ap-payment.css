@@ -84,11 +84,11 @@
         width: 50%;
         margin-left: 45px;
     }
-    /* .custom-payment-card-ap-wrapper .custom-ap-btn-containers-payment {
+    .custom-payment-uppercard-ap-wrapper .custom-ap-btn-containers-payment {
       
-        width: auto;
+       padding-bottom: inherit;
       
-    } */
+    }
 }
 
 

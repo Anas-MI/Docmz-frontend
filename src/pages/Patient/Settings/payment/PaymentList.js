@@ -122,6 +122,7 @@ export default class PaymentList extends Component {
                                 expDateOnCard={item.exp_month +'/'+item.exp_year}
                                 numberOnCard={"xxxx xxxx xxxx "+item.last4}
                                 nameOnCard={item.name}
+                                transactionData=''
                               />
                               )
                             
@@ -155,6 +156,8 @@ export default class PaymentList extends Component {
             nameOnCard={""}
             cardResponse={response => this.cardResponse(response)}
             backButton={() => this.showModal()}
+            transactionData={()=>{}}
+            
           />
         </Modal>
       </div>

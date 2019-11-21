@@ -34,6 +34,7 @@ export default class PaymentCard extends Component {
       cvverrmsg : '',
       carddateerrmsg : '',
       cardfailuretoggle : false,
+      cardsuccesstoggle : false,
       saveOptionalValue: false,
       userDetails: JSON.parse(localStorage.getItem("patient"))
     };
@@ -220,19 +221,20 @@ export default class PaymentCard extends Component {
           }
         })
         .catch(err => {
-          const { status, error, message } = err.response.data;
-          const msg = {
-            type: "error",
-            msg: error,
-            status: "Error"
-          };
-          this.setState({
-            alertMsg: msg,
-            alterToggle: true
-          });
+          console.log(err)
+          // const { status, error, message } = err.data;
+          // const msg = {
+          //   type: "error",
+          //   msg: error,
+          //   status: "Error"
+          // };
+          // this.setState({
+          //   alertMsg: msg,
+          //   alterToggle: true
+          // });
         });
     }
-    if (!saveOptionalValue) {
+    if (!saveOptional && saveOptionalValue) {
       const dataSubmit = {
         number: cardNumber,
         exp_month: newDateArray && newDateArray[0] ? newDateArray[0] : 0,
@@ -252,7 +254,8 @@ export default class PaymentCard extends Component {
             };
             this.setState({
               alertMsg: msg,
-              alterToggle: true
+              alterToggle: true,
+              cardsuccesstoggle : true
             });
             this.props.transactionData(dataSubmit);
           } else {
@@ -269,7 +272,7 @@ export default class PaymentCard extends Component {
         })
         .catch(err => {
           console.log('error',err)
-          const { status, error, message } = err.response.data;
+          const { status, error, message } = err.data;
           const msg = {
             type: "error",
             msg: error,
@@ -380,7 +383,7 @@ export default class PaymentCard extends Component {
     const info = () => {
       message.info('This is a normal message');
     };
-    let alerttooglemsg;
+    let alerttooglemsg, cardsuccessmsg;
     if (this.state.cardfailuretoggle) {
       alerttooglemsg = (
 
@@ -399,9 +402,14 @@ export default class PaymentCard extends Component {
 
       )
     }
+    if(this.state.cardsuccesstoggle) {
+      cardsuccessmsg = (
+        `${ message.success(alertMsg.msg)}`
+      )
+    }
     return (
 <div>
-      <form className="payment-card-wrapper">
+      <form className="payment-card-wrapper custom-payment-uppercard-ap-wrapper">
 
         {/* <div className="payment-card-wrapper__title">Add a Card</div> */}
         {/* <div className="payment-card-wrapper__title custom-ap-card-wrapper-title">{alerttooglemsg}</div> */}
