@@ -6,8 +6,9 @@ import ReactCardFlip from "react-card-flip";
 import { cardNameRegex, getCardDetails } from "./cardRegex";
 import { formatCreditCardNumber, frantSvg, backSvg } from "./paymentFun";
 
-import { Alert, Switch , Icon } from "antd";
+import { Alert, Switch , Icon, Button } from "antd";
 import { patientCardSave , patientCardStripeCharge,patientCardTestDetails } from "../../services/api/patient";
+import './custom-ap-payment.css'
 export default class PaymentCard extends Component {
   constructor(props) {
     super(props);
@@ -363,9 +364,9 @@ export default class PaymentCard extends Component {
     const { submitText, backBtnText , saveOptional } = this.props;
     return (
       <form className="payment-card-wrapper">
-        <div className="payment-card-wrapper__title">Add a Card</div>
+        {/* <div className="payment-card-wrapper__title">Add a Card</div> */}
 
-        <div className="payment-card-wrapper__card-wrapper-inner">
+        <div className="payment-card-wrapper__card-wrapper-inner custom-payment-card-ap-wrapper">
           <div className="payment-card-wrapper__card">
             <div className="container preload">
               <div className="creditcard ">
@@ -404,7 +405,7 @@ export default class PaymentCard extends Component {
           </div>
         </div>
 
-        <div className="form-container-payment">
+        <div className="form-container-payment custom-ap-card-payment">
           {alterToggle && (
             <Alert
               message={alertMsg.status}
@@ -440,7 +441,7 @@ export default class PaymentCard extends Component {
               onChange={e => this.onChangeVlaue(e)}
             ></InputMask>
           </div>
-          <div className="field-container">
+          <div className="field-container expiration-field-container" style={{width : '80%'}}>
             <label for="expirationdate">Expiration (mm/yy)</label>
             <InputMask
               mask="99/99"
@@ -468,11 +469,12 @@ export default class PaymentCard extends Component {
             ></InputMask>
           </div>
           {saveOptional && (
-            <div>
+            
+                <div className="custom-switch-ap-btn ">
                 <label>Save this card</label>
-                <br/>
+                {/* <br/> */}
                  <Switch
-                  className="switch-custom-button"
+                  className="switch-custom-button "
                   checkedChildren={<Icon type="check" />}
                   unCheckedChildren={<Icon type="close" />}
                   onChange={()=>{this.setState({
@@ -481,25 +483,26 @@ export default class PaymentCard extends Component {
                   defaultChecked={saveOptionalValue}
                 />
              </div>
-               
+            
+        
             
           )}
         </div>
-        <div className="field-container btn-container">
-          <button
-            className="back-btn"
-            type="button"
+        <div className="field-container btn-container custom-ap-btn-containers-payment">
+          <Button
+            className="back-btn custom-ap-back-btn"
+            type="primary"
             onClick={() => this.sendToBack()}
           >
             {backBtnText}
-          </button>
-          <button
-            className="submit-btn"
-            type="button"
+          </Button>
+          <Button
+            className="submit-btn   "
+            type="default"
             onClick={() => this.sendToParent()}
           >
             {submitText}
-          </button>
+          </Button>
         </div>
       </form>
     );

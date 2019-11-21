@@ -1,0 +1,85 @@
+.ap-appointment-form-custom .ant-steps-item::before{
+    background-color: #f34b8c!important;
+
+}
+.ap-appointment-form-custom  .ant-steps-item-icon {
+    border-color: #f34b8c!important;
+    /* background: #f34b8c!important; */
+    /* color: #fff!important; */
+   
+}
+.ap-appointment-form-custom .ant-steps-item-active  {
+    border-color: #f34b8c!important;
+    /* background: #f34b8c!important; */
+    /* color: #fff!important; */
+   
+}
+.ap-appointment-form-custom .ant-steps-item-process .ant-steps-item-icon {
+    background: #f34b8c;
+}
+.ap-appointment-form-custom .ant-steps-item-process .ant-steps-item-icon .ant-steps-icon {
+    color: #fff!important;
+}
+.ap-appointment-form-custom .ant-steps-icon {
+    color: #f34b8c!important;
+   
+}
+
+.ap-appointment-details-btn {
+    background-color: #f34b8c!important;
+    border-color: #f34b8c!important;
+    width: 30%!important;
+}
+.custom-ap-details-form-label .ant-form label {
+    font-size: 18px;
+    font-weight: bold;
+    color: #874285;
+}
+.custom-ap-details-form-label .ant-form Input {
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    border-radius: 0;
+    width: 85%;
+}
+.custom-ap-details-form-label .ant-form Input:hover {
+    border-color : #874285;
+}
+.custom-ap-details-form-label .ant-form Input:focus {
+    border-color : #874285;
+    outline: none;
+    box-shadow: none;
+}
+.custom-ap-details-form-label .ant-form Textarea {
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    border-radius: 0;
+    width: 85%;
+}
+.custom-ap-details-form-label .ant-form Textarea:hover {
+    border-color : #874285;
+}
+.custom-ap-details-form-label .ant-form Textarea:focus {
+    border-color : #874285;
+    outline: none;
+    box-shadow: none;
+}
+.below-para-steps-custom-ap p{
+    text-align: center;
+    color: #9298ad;
+    font-size: 18px;
+}
+.c-appointment-form__doctor-title {
+    font-size : 22px;
+    color: rgb(0, 35, 75);
+}
+.c-appointment-form__doctor-time p {
+    color: rgb(0, 35, 75);
+    font-weight: 500;
+    margin-bottom: 0;
+    font-size: 15px;
+}
+/* .c-appointment-form__doctor-time .custom-doctor-time-span-ap {
+    padding-bottom: 10px;
+} */

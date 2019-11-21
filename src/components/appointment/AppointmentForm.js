@@ -10,16 +10,17 @@ import {
   Avatar,
   Steps,
   List,
-  Typography
+  Typography,
+  Divider
 } from "antd";
 import FormStep1 from "./FormStep1";
 import { patientCardList } from "../../services/api/patient";
 import PaymentCard from "../../components/payment/PaymentCard";
 import AppointmentPayReview from "./AppointmentPayReview";
 import AppointmentDoctor from "./AppointmentDoctor";
-
+import './newappointmentap.css'
 const stepStyle = {
-  marginBottom: 60,
+  marginBottom: 37,
   boxShadow: "0px -1px 0 0 #e8e8e8 inset"
 };
 let cards = [];
@@ -77,7 +78,7 @@ export default function AppointmentForm() {
 
   return (
     <div className="c-appointment-form">
-      <div className="c-appointment-form__header">
+      <div className="c-appointment-form__header ap-appointment-form-custom">
         <Steps
           type="navigation"
           size="small"
@@ -99,15 +100,21 @@ export default function AppointmentForm() {
           />
         </Steps>
       </div>
+
+      <div className="below-para-steps-custom-ap">
+        <p>We just need a few details to make your appointment smooth</p>
+        <Divider />
+      </div>
       {currentStep === 0 && (
         <Row type="flex">
           <Col span={12}>
             <div className="c-appointment-form__steps">
-              <div className="c-appointment-form__step">
+              <div className="c-appointment-form__step custom-ap-details-form-label">
                 <FormOne ref={formOne} />
               </div>
               <Button
-               type="primary"
+                type="primary"
+                className="ap-appointment-details-btn"
                 onClick={() => {
                   if (typeof formOne.current.submit === "function") {
                     formOne.current.submit(handleSubmit);
@@ -120,7 +127,7 @@ export default function AppointmentForm() {
           </Col>
           <Col span={12}>
             <div className="c-appointment-form__doctor-wrapper">
-              <AppointmentDoctor doctor={{name: "doctor name"}} time="1040 - 1240" />
+              <AppointmentDoctor doctor={      { name: "doctor name" }} time="1040 - 1240" />
             </div>
           </Col>
         </Row>
@@ -149,32 +156,32 @@ export default function AppointmentForm() {
                       }}
                     />
                   ) : (
-                    <div>
-                      <List
-                        bordered
-                        dataSource={cards}
-                        renderItem={item => (
-                          <List.Item onClick={() => setSavedCardData(item)}>
-                            <p className="c-appointment-form__card-number">
-                              xxxx xxxx xxxx {item.last4}
-                              
-                              <span className="c-appointment-form__card-icon">
-                                <Icon type="credit-card" />
-                              </span>
-                            </p>
-                          </List.Item>
-                        )}
-                      />
-                      <Button 
-                        className="c-appointment-form__card-tgl-btn"
-                        onClick={() => {
-                          toggleCard();
-                        }}
-                      >
-                        Add New <Icon type="plus" />
-                      </Button>
-                    </div>
-                  )}
+                      <div>
+                        <List
+                          bordered
+                          dataSource={cards}
+                          renderItem={item => (
+                            <List.Item onClick={() => setSavedCardData(item)}>
+                              <p className="c-appointment-form__card-number">
+                                xxxx xxxx xxxx {item.last4}
+
+                                <span className="c-appointment-form__card-icon">
+                                  <Icon type="credit-card" />
+                                </span>
+                              </p>
+                            </List.Item>
+                          )}
+                        />
+                        <Button
+                          className="c-appointment-form__card-tgl-btn"
+                          onClick={() => {
+                            toggleCard();
+                          }}
+                        >
+                          Add New <Icon type="plus" />
+                        </Button>
+                      </div>
+                    )}
                 </div>
               </div>
             </div>
