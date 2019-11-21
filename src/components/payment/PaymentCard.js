@@ -195,7 +195,7 @@ export default class PaymentCard extends Component {
       patientCardSave(data)
         .then(res => {
           const { message, status } = res.data;
-          if (status) {
+          if (res.status) {
             const msg = {
               type: "success",
               msg: message,
@@ -203,7 +203,8 @@ export default class PaymentCard extends Component {
             };
             this.setState({
               alertMsg: msg,
-              alterToggle: true
+              alterToggle: true,
+              cardsuccesstoggle : true
             });
             this.props.transactionData(data)
           } else {
