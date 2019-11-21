@@ -7,8 +7,7 @@ export default class Login_type extends PureComponent {
         super(props);
         this.state={
             toggle:false,
-            
-        }
+         }
     }
     toggleDown(){
         this.setState({
@@ -31,23 +30,28 @@ export default class Login_type extends PureComponent {
             <p>{details}</p>
           </Col>
           <Col xs={24} sm={24} md={12} lg={12} xl={12} className="login-icon">
+          <AnimateOnChange
+               animationIn="fadeIn" animationOut="fadeOut"
+               durationOut="600"
+               style={{width:"100%"}}
+            >
            {toggle ? 
             <Icon type="arrow-up" onClick={()=>this.toggleDown()} style={{ fontSize: "24px" }} />
              :
              <Icon type="arrow-right" onClick={()=>this.toggleDown()} style={{ fontSize: "24px" }} />}
-            
+            </AnimateOnChange>
           </Col>
         </Row>
         <Row>
           <Col span="20">
           <AnimateOnChange
-              animationIn="fadeIn" animationOut="fadeOut"
-              durationOut="500"
-              style={{width:"100%"}}
+               animationIn="popIn" animationOut="fadeOut"
+               durationOut="600"
+               style={{width:"100%"}}
             >
             {toggle ? 
            
-               {children}  :''}
+               children  :''}
                </AnimateOnChange>
            </Col>
         </Row>
