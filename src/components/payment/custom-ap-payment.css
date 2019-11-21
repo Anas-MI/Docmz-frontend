@@ -34,6 +34,12 @@
     .custom-ap-btn-containers-payment .custom-ap-back-btn {
         background: #f34b8c;
         border-color: #f34b8c;
+        color: #fff;
+    }
+    .custom-ap-btn-containers-payment .custom-ap-back-btn:hover {
+        background: #f34b8c;
+        border-color: #f34b8c;
+        color: #fff;
     }
     .custom-ap-btn-containers-payment Button{ 
         width: 25%!important;

@@ -490,15 +490,15 @@ export default class PaymentCard extends Component {
         </div>
         <div className="field-container btn-container custom-ap-btn-containers-payment">
           <Button
-            className="back-btn custom-ap-back-btn"
-            type="primary"
+            className="back-btn"
+            type="default"
             onClick={() => this.sendToBack()}
           >
             {backBtnText}
           </Button>
           <Button
-            className="submit-btn   "
-            type="default"
+            className="submit-btn custom-ap-back-btn"
+            type="primary"
             onClick={() => this.sendToParent()}
           >
             {submitText}
