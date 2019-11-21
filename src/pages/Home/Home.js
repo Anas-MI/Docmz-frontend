@@ -17,7 +17,7 @@ export default class Home extends Component {
 		return (
 			<div>
 				<Layout>
-					<Navbar />
+					<Navbar history={this.props.history} />
 					<Content style={{ padding: '0 50px', marginTop: 64 }}>
 
 						<div style={{ background: '#fff', padding: 24, minHeight: 380 }} className="doctor-header">

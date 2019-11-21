@@ -1,6 +1,7 @@
 import React, { PureComponent } from "react";
 import { Icon, Row, Col } from "antd";
-
+// import { fadeIn } from 'react-animations'
+import { AnimateOnChange } from 'react-animation'
 export default class Login_type extends PureComponent {
     constructor(props){
         super(props);
@@ -39,7 +40,15 @@ export default class Login_type extends PureComponent {
         </Row>
         <Row>
           <Col span="20">
-            {toggle ? children :''}
+          <AnimateOnChange
+              animationIn="fadeIn" animationOut="fadeOut"
+              durationOut="500"
+              style={{width:"100%"}}
+            >
+            {toggle ? 
+           
+               {children}  :''}
+               </AnimateOnChange>
            </Col>
         </Row>
       </div>
