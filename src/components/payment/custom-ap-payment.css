@@ -1,5 +1,15 @@
+/* @media (min-width: 1024px){
+.custom-ap-card-wrapper-title {
+  
+    top: -35px;
+
+   
+}    
+} */
+   
     .custom-ap-card-payment {
         margin-bottom: 20px;
+        /* margin-top: 65px; */
     }
     .custom-ap-card-payment .field-container {
         padding-bottom: 25px;
