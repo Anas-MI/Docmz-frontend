@@ -18,6 +18,7 @@ import {
   Select,
   Checkbox,
   AutoComplete,
+  Carousel
    
 } from "antd";
 import {  Field } from "formik";
@@ -64,7 +65,9 @@ export default function AppointmentForm() {
     });
   };
 
-
+  const onChange = (a, b, c) => {
+    console.log(a, b, c);
+  }
 
   const cardDetailsWithNextStep = data => {
     setCardDetails(data);
@@ -337,8 +340,31 @@ export default function AppointmentForm() {
                     ) : (
                         <div className="custom-card-list-ap">
 
-                          {/* </Radio.Group> */}
-                          <List
+<Carousel afterChange={onChange}>
+    <div>
+      <h3>1</h3>
+    </div>
+    <div>
+      <h3>2</h3>
+    </div>
+    <div>
+      <h3>3</h3>
+    </div>
+    <div>
+      <h3>4</h3>
+      </div>
+      <div>
+      <h3>5</h3>
+    </div>
+  </Carousel>,
+  {/* <ShowOnCard
+                                cvvOnCard={''}
+                                expDateOnCard={item.exp_month +'/'+item.exp_year}
+                                numberOnCard={"xxxx xxxx xxxx "+item.last4}
+                                nameOnCard={item.name}
+                                transactionData=''
+                              /> */}
+                          {/* <List
                             className="custom-card-list-data-ap"
                             bordered
                             dataSource={cards}
@@ -348,23 +374,7 @@ export default function AppointmentForm() {
 
 
                               <List.Item onClick={() => setSavedCardData(item)}>
-                                {/* <Radio.Group 
-                               
-                                 >
-                                    <Radio value={item.id}>
-                                    <span>
-                                      xxxx xxxx xxxx {item.last4} 
-                                      
-                                       </span>
-                                       <span>
-                                       {item.exp_month}/{item.exp_year} 
-                                      
-                                       </span>
-                                       <span>
-                                       {item.brand} - <Icon type="credit-card" />
-                                      
-                                       </span> */}
-                                {/* <Radio value={item.id}> */}
+                            
                                 <p className="c-appointment-form__card-number">
 
                                   xxxx xxxx xxxx {item.last4}
@@ -374,14 +384,10 @@ export default function AppointmentForm() {
                                   </span>
 
                                 </p>
-                                {/* </Radio> */}
-
-                                {/* </Radio> */}
-
-                                {/* </Radio.Group> */}
+                             
                               </List.Item>
                             )}
-                          />
+                          /> */}
                           <Button
                             className="c-appointment-form__card-tgl-btn"
                             onClick={() => {

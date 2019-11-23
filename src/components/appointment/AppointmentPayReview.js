@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, Icon, Input, Button, Row, Col, Divider, Checkbox,Modal } from "antd";
+import { Form, Icon, Input, Button, Row, Col, Divider, Checkbox,Modal, Carousel  } from "antd";
 import Firstmodel from "./Firstmodel";
 import Secondmodal from "./SecondModal";
 export default class AppointmentPayReview extends React.Component {
@@ -9,6 +9,10 @@ export default class AppointmentPayReview extends React.Component {
       visible: false,
       secondvisible : false
     }
+    this.onChange = this.onChange.bind(this)
+  }
+  onChange(a, b, c) {
+    console.log(a, b, c);
   }
   showModal2 = () => {
     this.setState({
@@ -121,7 +125,23 @@ export default class AppointmentPayReview extends React.Component {
             </Checkbox>,
           )}
         </Form.Item>
-
+        <Carousel afterChange={this.onChange}>
+    <div>
+      <h3>1</h3>
+    </div>
+    <div>
+      <h3>2</h3>
+    </div>
+    <div>
+      <h3>3</h3>
+    </div>
+    <div>
+      <h3>4</h3>
+      </div>
+      <div>
+      <h3>5</h3>
+    </div>
+  </Carousel>,
         <Modal
           title="Informed Consent for DocMz"
           width={1024}
