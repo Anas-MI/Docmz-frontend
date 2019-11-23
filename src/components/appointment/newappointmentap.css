@@ -94,13 +94,7 @@ transition: all 0.3s;
 transition: border 0.3s, left 0.3s
 }
 .second-step-custom-ap .anticon {
-    text-align : center;
-    font-size: 40px;
-    border: solid 1px #e5e5e5;
-    border-radius: 50%;
-    background: #e5e5e5;
-    padding: 30px;
-    color: #959595;
+   
 }
 /* .second-step-custom-ap .icon-custom-classess:hover .anticon {
     color : red!important;
@@ -116,6 +110,20 @@ transition: border 0.3s, left 0.3s
     transition: all 0.3s;
     cursor: pointer;
 } */
+.second-step-custom-ap__icons {
+    text-align : center;
+    font-size: 40px;
+    border: solid 1px #e5e5e5;
+    border-radius: 50%;
+    background: #e5e5e5;
+    padding: 30px;
+    color: #959595;
+}
+.second-step-custom-ap__iconhelp {
+    margin-left: 5px;
+    font-size: 20px;
+    margin-top: 2px;
+}
 .second-step-custom-ap__icons:hover  {
     background:#874285;
     color: #fff;
@@ -128,6 +136,10 @@ transition: border 0.3s, left 0.3s
 .second-step-custom-ap h2 {
     text-align: center;
     font-size: 30px;
+}
+.second-step-custom-ap__phone {
+    float: right;
+    font-size: 17px;
 }
 .second-step-custom-ap .video-phone-para {
     padding-top: 40px;

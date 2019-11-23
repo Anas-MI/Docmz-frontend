@@ -18,6 +18,7 @@ import {
   Select,
   Checkbox,
   AutoComplete,
+   
 } from "antd";
 import {  Field } from "formik";
 import FormStep1 from "./FormStep1";
@@ -213,12 +214,15 @@ export default function AppointmentForm() {
               <p className="visit-type-para-ap">What's the best number to reach you during your visit?</p>
             </Col>
             <Col span={12} >
-              <p>8562025363</p>
+              <p className="second-step-custom-ap__phone">8562025363</p>
              
               
             </Col>
             <Col span={12}>
-              <p className="second-step-custom-ap_why-para_ap">Why do we need this?</p>
+              {/* <p className="second-step-custom-ap_why-para_ap">Why do we need this?</p> */}
+              <Tooltip title="We may reach out if there are changes to your visit.">
+              <Icon type="question-circle" className="second-step-custom-ap__iconhelp" />
+  </Tooltip>,
             </Col>
 
           </Row>
