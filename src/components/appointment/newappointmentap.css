@@ -1,3 +1,5 @@
+/* @import url('https://cdn.lineicons.com/1.0.1/LineIcons.min.css'); */
+
 .ap-appointment-form-custom .ant-steps-item::before{
     background-color: #f34b8c!important;
 
@@ -65,7 +67,7 @@
     outline: none;
     box-shadow: none;
 }
-.below-para-steps-custom-ap p{
+.below-para-steps-custom-ap {
     text-align: center;
     color: #9298ad;
     font-size: 18px;
@@ -80,6 +82,81 @@
     margin-bottom: 0;
     font-size: 15px;
 }
+.middle-content-date {
+    margin-left: auto;
+}
+.custom-card-list-ap .custom-card-list-data-ap{
+border: none;
+}
+.custom-card-list-data-ap ul li:hover {
+border-bottom: solid 1px #874285;
+transition: all 0.3s;
+transition: border 0.3s, left 0.3s
+}
+.second-step-custom-ap .anticon {
+    text-align : center;
+    font-size: 40px;
+    border: solid 1px #e5e5e5;
+    border-radius: 50%;
+    background: #e5e5e5;
+    padding: 30px;
+    color: #959595;
+}
+/* .second-step-custom-ap .icon-custom-classess:hover .anticon {
+    color : red!important;
+} */
+/* .ant-col .anticon:hover{
+    text-align : center;
+    font-size: 40px;
+    border: solid 1px #874285;
+    border-radius: 50%;
+    background:#874285;
+    padding: 30px;
+    color: #fff;
+    transition: all 0.3s;
+    cursor: pointer;
+} */
+.second-step-custom-ap__icons:hover  {
+    background:#874285;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+/* .icon-custom-classess .ant-col .anticon {
+    color: #fff!important; */
+/* } */
+.second-step-custom-ap h2 {
+    text-align: center;
+    font-size: 30px;
+}
+.second-step-custom-ap .video-phone-para {
+    padding-top: 40px;
+    font-size: 16px;
+}
+.second-step-custom-ap .second-step-custom-ap_why-para_ap {
+    padding-left: 20px;
+}
+.visit-type-para-ap {
+    font-size : 18px;
+}
+.review-custom-section-ap h2 {
+    color: #874285;
+    margin-bottom: 1rem;
+}
+.review-custom-section-ap p {
+    margin-bottom: 1em;
+    font-weight: 500;
+}
+.review-custom-section-ap__checkbox-ap .ant-form-item label{
+    color : #000!important;
+}
+.firstmodal-form-list-ap ul {padding-left: 0;}
+.firstmodal-form-list-ap ul li {
+    list-style: none;
+}
+/* .review-custom-section-ap .review-custom-section-ap__visit-col{
+    float: right;
+} */
 /* .c-appointment-form__doctor-time .custom-doctor-time-span-ap {
     padding-bottom: 10px;
 } */
