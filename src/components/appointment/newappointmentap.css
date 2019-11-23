@@ -142,10 +142,12 @@ transition: border 0.3s, left 0.3s
 .review-custom-section-ap h2 {
     color: #874285;
     margin-bottom: 1rem;
+    font-size: 25px;
 }
 .review-custom-section-ap p {
     margin-bottom: 1em;
     font-weight: 500;
+    line-height: 1;
 }
 .review-custom-section-ap__checkbox-ap .ant-form-item label{
     color : #000!important;
