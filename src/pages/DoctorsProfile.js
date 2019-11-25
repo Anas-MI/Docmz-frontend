@@ -132,44 +132,10 @@ function hasErrors(fieldsError) {
 						</Col>
 						<Col className="p-doctors-profile__left-col" span={16}>
 							<div>
-								<Button type="primary" onClick={this.showModal}>
-									Open Modal
-        </Button>
-								<Modal
-									title="Basic Modal"
-									visible={this.state.visible}
-									onOk={this.handleOk}
-									onCancel={this.handleCancel}
-									width={'1280px'}
-								>
-									<div>
-										<Steps current={current}>
-											{steps.map(item => (
-												<Step key={item.title} title={item.title} />
-											))}
-										</Steps>
-										<div className="steps-content">{steps[current].content}</div>
-										<div className="steps-action">
-											{current < steps.length - 1 && (
-												<Button type="primary" onClick={() => this.next()}>
-													Next
-            </Button>
-											)}
-											{current === steps.length - 1 && (
-												<Button type="primary" onClick={() => message.success('Processing complete!')}>
-													Done
-            </Button>
-											)}
-											{current > 0 && (
-												<Button style={{ marginLeft: 8 }} onClick={() => this.prev()}>
-													Previous
-            </Button>
-											)}
-										</div>
-									</div>
-								</Modal>
-								<h3 className="c-title p-doctors-profile__title">About Dr. Andrew Fagelman</h3>
-								<p className="p-doctors-profile__text">
+							
+							
+								<h3 className="c-title p-doctors-profile__title p-doctors-profile__title__ap">About Dr. Andrew Fagelman</h3>
+								<p className="p-doctors-profile__text__ap">
 									Dr. Andrew Fagelman is board certified with the American Board of Internal Medicine
 									and current physician at SOHO Health NY.
 									{/* <br /> */}
@@ -221,33 +187,33 @@ function hasErrors(fieldsError) {
 						</Col>
 						<Col span={8}>
 							<div>
-								<h3 className="c-title p-doctors-profile__title">In-network insurances</h3>
-								<p>1199SEIUAetnaAmerican Republic Insurance Company</p>
+								<h3 className="c-title p-doctors-profile__title p-doctors-profile__title__ap">In-network insurances</h3>
+								<p className="c-title__ap">1199SEIUAetnaAmerican Republic Insurance Company</p>
 							</div>
 
 							<div>
-								<h3 className="c-title p-doctors-profile__title">Specialties</h3>
-								<p>Primary Care Doctor</p>
+								<h3 className="c-title p-doctors-profile__title p-doctors-profile__title__ap">Specialties</h3>
+								<p className="c-title__ap">Primary Care Doctor</p>
 							</div>
 							<br />
 							<div>
-								<h3 className="c-title p-doctors-profile__title">Practice names</h3>
-								<p>Soho Health NY</p>
+								<h3 className="c-title p-doctors-profile__title p-doctors-profile__title__ap">Practice names</h3>
+								<p className="c-title__ap">Soho Health NY</p>
 							</div>
 							<br />
 							<div>
-								<h3 className="c-title p-doctors-profile__title">Hospital affiliations</h3>
-								<p>Beth Israel Medical Center - Petrie Division</p>
+								<h3 className="c-title p-doctors-profile__title p-doctors-profile__title__ap">Hospital affiliations</h3>
+								<p className="c-title__ap">Beth Israel Medical Center - Petrie Division</p>
 							</div>
 							<br />
 							<div>
-								<h3 className="c-title p-doctors-profile__title">Board certifications</h3>
-								<p>American Board of Internal Medicine</p>
+								<h3 className="c-title p-doctors-profile__title p-doctors-profile__title__ap">Board certifications</h3>
+								<p className="c-title__ap">American Board of Internal Medicine</p>
 							</div>
 							<br />
 							<div>
-								<h3 className="c-title p-doctors-profile__title">Education and training</h3>
-								<p>
+								<h3 className="c-title p-doctors-profile__title p-doctors-profile__title__ap">Education and training</h3>
+								<p className="c-title__ap">
 									Medical School - State University of New York, Buffalo, Doctor of Medicine Saint
 									Vincent Catholic Medical Center, Residency in Internal Medicine Maimonides Medical
 									Center, Internship in General Surgery
@@ -255,8 +221,8 @@ function hasErrors(fieldsError) {
 							</div>
 							<br />
 							<div>
-								<h3 className="c-title p-doctors-profile__title">Awards and publications</h3>
-								<p>
+								<h3 className="c-title p-doctors-profile__title p-doctors-profile__title__ap">Awards and publications</h3>
+								<p className="c-title__ap">
 									Journal of Urology - "Efficacy, Safety, and Use of Viagra in Clinical
 									Practice."Critical Care Resident of the Year - 2003
 								</p>

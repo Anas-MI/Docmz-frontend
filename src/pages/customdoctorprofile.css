@@ -25,3 +25,8 @@
   .left-side-content-review-ap h3 {text-align: center;}
   .left-side-content-review-ap h3 span{color: black;}
   .left-side-content-review-ap p {text-align: center;}
+  .p-doctors-profile__title__ap {
+      color: #874285;
+  }
+  .p-doctors-profile__text__ap {font-size: 20px!important;}
+  .c-title__ap {font-size: 18px;}

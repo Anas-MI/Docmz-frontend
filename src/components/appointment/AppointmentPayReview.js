@@ -65,15 +65,7 @@ this.setState({
   };
   handleSubmit = e => {
     e.preventDefault();
-    this.props.form.validateFields((err, values) => {
-      if (!err) {
-        console.log("Received values of form: ", values);
-        const { onSubmit } = this.props;
-        if (typeof onSubmit === "function") {
-          onSubmit(values);
-        }
-      }
-    });
+   console.log('form submit')
   };
 
   render() {
@@ -81,7 +73,7 @@ this.setState({
     if(this.state.informedconsent && this.state.privacypolicy){
       confirmbtn = (
         <div>
-           <Button type="primary" className="ap-appointment-details-btn">Confirm</Button>
+           <Button type="primary" className="ap-appointment-details-btn" onClick={(e) => this.handleSubmit(e)}>Confirm</Button>
         </div>
       )
     }
