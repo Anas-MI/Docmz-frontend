@@ -73,8 +73,9 @@
     font-size: 18px;
 }
 .c-appointment-form__doctor-title {
-    font-size : 22px;
+    font-size : 20px;
     color: rgb(0, 35, 75);
+    text-transform: capitalize;
 }
 .c-appointment-form__doctor-time p {
     color: rgb(0, 35, 75);

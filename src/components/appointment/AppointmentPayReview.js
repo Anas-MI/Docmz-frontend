@@ -115,6 +115,8 @@ this.setState({
               <p><strong>Reason for visit :</strong> Toothache</p>
               <p><strong>Duration : </strong>6 Months</p>
               <p><strong>Consultation Cost : </strong>$40.00</p>
+              <p><strong>Appointment Time : </strong>8 : 00 A.M</p>
+              <p><strong>Specialty : </strong>Primary Care Doctor</p>
             </div>
           </Col>
 
@@ -128,7 +130,7 @@ this.setState({
 
 
             <p>No Insurance Addedd</p>
-            <h2>Primary Care Physician</h2>
+            {/* <h2>Primary Care Physician</h2> */}
 
 
             {/* <p>No Data Yet.</p> */}

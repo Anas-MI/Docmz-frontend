@@ -107,7 +107,7 @@ export default class AppointmentCard extends Component {
                                 "c-appointment-card__scroll-row--loading": isLoading
                             })}>
                                 {!isLoading && <Dates appointments={appointments} onClick={(e,a)=> {
-                                    console.log({
+                                    console.log('datedataher',{
                                         e,a
                                     })
                                     this.setState({isPopup: true})
@@ -126,6 +126,8 @@ export default class AppointmentCard extends Component {
 }
 const Dates = ({appointments, dates, onClick})=> 
     dates.map((el, i)=> {
+        console.log('date',el)
+        localStorage.setItem('manualdate',el)
         const datesArr = getDatesFromArray(appointments, el);
         return (<Col className="c-appointment-card__date-col" offset={i === 0 && 2} key={i} span={4}>
             {datesArr.map((elx, i) => 
@@ -135,7 +137,10 @@ const Dates = ({appointments, dates, onClick})=>
                     })}
                     onClick={(e)=> {
                         onClick(e, elx )
-                       console.log('something')
+                       console.log('something', elx)
+                            localStorage.setItem('manualtime',elx)
+
+                       
                     //    this.showModal()
                 //    this.tap.bind(this)
                     }}
