@@ -54,9 +54,7 @@ class FormStep2 extends Component {
         console.log(this.state.value)
         localStorage.setItem('type',this.state.value)
       };
-    phonesubmit  = (e) => {
-        console.log('valuehere',e.target.name)
-    }
+   
     render() {
         // const { getFieldDecorator } = this.props.form;
         return (
@@ -134,17 +132,7 @@ class FormStep2 extends Component {
             </Col>
 
           </Row>
-          <Row>
-            <Col span={24}>
-              <Button
-                type="primary"
-                className="ap-appointment-details-btn"
-                onClick={(e) => this.phonesubmit(e)}
-              >
-                Next
-              </Button>
-            </Col>
-          </Row>
+         
           {/* <Row type="flex">
           <Col span={24}>
             <div className="c-appointment-form__steps">

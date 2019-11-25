@@ -101,20 +101,17 @@ export default function AppointmentForm() {
   const setSavedCardData = data => {
     setCardDetails(data);
     setCurrentStep(3);
-    console.log('currentstep', data.id)
+    console.log('currentstep',data) 
+    localStorage.setItem('patientcardid',data.id)
+    localStorage.setItem('last4',data.last4)
 
   };
   const phonesubmit = e => {
     // setCardDetails(data);
-    formTwo.current.validateFields((err, values) => {
-      console.log("ccc", { values });
-      if (!err) {
-        setSecondStapForm(values);
-        console.log("Received values of form: ", values);
-    
-        // setCurrentStep(2);
-      }
-    });
+  
+        setCurrentStep(2);
+      
+ 
    
 
   };
@@ -204,7 +201,18 @@ export default function AppointmentForm() {
         </div>
       )}
       {currentStep === 1 && (
+        <div>
        <FormStep2 />
+      
+       <Button
+       type="primary"
+       className="ap-appointment-details-btn"
+       onClick={(e) => phonesubmit(e)}
+      
+     >
+       Next
+   </Button>
+   </div>
       )}
       {currentStep === 2 && (
         <div>
@@ -242,7 +250,7 @@ export default function AppointmentForm() {
                           <Carousel >
                           {
                             cards.map( (el, i) => (
-                              <div onClick={() => setSavedCardData(i)}>
+                              <div onClick={() => setSavedCardData(el)}>
                               <ShowOnCard
                                 key={i}
                                 cvvOnCard={''}

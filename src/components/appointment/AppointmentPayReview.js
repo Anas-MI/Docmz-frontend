@@ -111,11 +111,11 @@ this.setState({
             <h2>Appointment Details</h2>
 
             <div classame="review-custom-section-ap__visit-details">
-              <p><strong>Consultation Method : </strong>Video</p>
-              <p><strong>Reason for visit :</strong> Toothache</p>
-              <p><strong>Duration : </strong>6 Months</p>
+              <p><strong>Consultation Method : </strong>{localStorage.getItem('type') || 'NO DATA'} </p>
+              <p><strong>Reason for visit :</strong> {localStorage.getItem('reason') || 'NO DATA'}</p>
+              <p><strong>Duration : </strong>{localStorage.getItem('duration') || 'NO DATA'}</p>
               <p><strong>Consultation Cost : </strong>$40.00</p>
-              <p><strong>Appointment Time : </strong>8 : 00 A.M</p>
+              <p><strong>Appointment Time : </strong>{localStorage.getItem('manualtime') || 'NO DATA'}</p>
               <p><strong>Specialty : </strong>Primary Care Doctor</p>
             </div>
           </Col>
@@ -124,7 +124,7 @@ this.setState({
             <h2>Payment Method</h2>
 
 
-            <p>Visa ending in : 4242</p>
+            <p>Visa ending in : {localStorage.getItem('last4')}</p>
 
             <h2>Insurance</h2>
 
