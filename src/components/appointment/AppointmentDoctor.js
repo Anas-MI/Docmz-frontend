@@ -6,7 +6,6 @@ import { getName, getAddress } from '../../services/extra/DoctorHelpers';
 import { connect } from 'react-redux'
 import getDatesFromArray from '../../services/scheduler/getDatesFromArray';
 import Moment from 'react-moment';
-import 'moment-timezone';
 class AppointmentDoctor extends Component {
   constructor(props){
     super(props)
@@ -46,7 +45,9 @@ componentDidMount(){
         {/* <strong>{time}</strong> */}
         <p className="custom-doctor-time-span-ap">  {localStorage.getItem('manualtime')}</p>
         <p className="custom-doctor-date-span-ap">
+        <Moment format="LLLL">
       {localStorage.getItem('manualdate')}
+      </Moment>
           {/* 12<sup>th</sup> December, 2019 */}
           {/* <getDatesFromArray /> */}
         
