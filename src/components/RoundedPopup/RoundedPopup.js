@@ -1,9 +1,9 @@
 import React from 'react'
 import { Modal } from 'antd'
 
-export default function RoundedPopup({children, ...props}) {
+export default function RoundedPopup({children, onCancel, ...props}) {
     return (
-        <Modal {...props} className="c-rounded-popup">
+        <Modal closable={true} onCancel={onCancel} {...props} className="c-rounded-popup">
             {children}
         </Modal>
     )

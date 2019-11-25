@@ -168,17 +168,24 @@ transition: border 0.3s, left 0.3s
 .firstmodal-form-list-ap ul li {
     list-style: none;
 }
-.ant-carousel .slick-slide {
+.custom-card-list-ap .ant-carousel .slick-slide {
     text-align: center;
-    height: 160px;
+    height: 250px;
     line-height: 160px;
     background: #364d79;
     overflow: hidden;
+    cursor: pointer;
   }
   
-  .ant-carousel .slick-slide h3 {
+  .custom-card-list-ap .ant-carousel .slick-slide h3 {
     color: #fff;
   }
+  .review-custom-section-ap__checkbox-ap .ant-checkbox-wrapper {
+      margin : 10px 0;
+  }
+  .review-custom-section-ap__checkbox-ap .ant-checkbox-wrapper + .ant-checkbox-wrapper {
+    margin-left: 0px;
+}
 /* .review-custom-section-ap .review-custom-section-ap__visit-col{
     float: right;
 } */

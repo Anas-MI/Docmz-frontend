@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, Icon, Input, Button, Row, Col, Divider, Checkbox,Modal, Carousel  } from "antd";
+import { Form, Icon, Input, Button, Row, Col, Divider, Checkbox, Modal } from "antd";
 import Firstmodel from "./Firstmodel";
 import Secondmodal from "./SecondModal";
 export default class AppointmentPayReview extends React.Component {
@@ -7,23 +7,43 @@ export default class AppointmentPayReview extends React.Component {
     super()
     this.state = {
       visible: false,
-      secondvisible : false
+      secondvisible: false,
+
+      checked: true,
+      disabled: false,
+      informedconsent  :false,
+      privacypolicy : false
+
     }
-    this.onChange = this.onChange.bind(this)
+
   }
-  onChange(a, b, c) {
-    console.log(a, b, c);
+  onChange = e => {
+    console.log('checked = ', e.target.checked);
+    this.setState({
+      checked: e.target.checked,
+    });
+  };
+  informedchange = () => {
+this.setState({
+  informedconsent: !this.state.informedconsent
+})
+  }
+
+  policychange = () => {
+    this.setState({
+      privacypolicy : !this.state.privacypolicy
+    })
   }
   showModal2 = () => {
     this.setState({
       secondvisible: true,
-     
+
     });
   }
   showModal = () => {
     this.setState({
       visible: true,
-     
+
     });
   };
 
@@ -31,8 +51,8 @@ export default class AppointmentPayReview extends React.Component {
     console.log(e);
     this.setState({
       visible: false,
-      secondvisible : false
-      
+      secondvisible: false
+
     });
   };
 
@@ -40,7 +60,7 @@ export default class AppointmentPayReview extends React.Component {
     console.log(e);
     this.setState({
       visible: false,
-      secondvisible : false
+      secondvisible: false
     });
   };
   handleSubmit = e => {
@@ -57,6 +77,19 @@ export default class AppointmentPayReview extends React.Component {
   };
 
   render() {
+    let confirmbtn;
+    if(this.state.informedconsent && this.state.privacypolicy){
+      confirmbtn = (
+        <div>
+           <Button type="primary" className="ap-appointment-details-btn">Confirm</Button>
+        </div>
+      )
+    }
+    else {
+      confirmbtn = (
+        <div> <Button type="primary"  disabled>Confirm</Button></div>
+      )
+    }
     const { getFieldDecorator } = this.props.form;
     const tailFormItemLayout = {
       wrapperCol: {
@@ -76,94 +109,87 @@ export default class AppointmentPayReview extends React.Component {
         <Row>
           <Col span={12}>
             <h2>Appointment Details</h2>
-            
+
             <div classame="review-custom-section-ap__visit-details">
-            <p><strong>Consultation Method : </strong>Video</p>
-                <p><strong>Reason for visit :</strong> Toothache</p>
-                 <p><strong>Duration : </strong>6 Months</p> 
-                <p><strong>Consultation Cost : </strong>$40.00</p>
-              </div>
+              <p><strong>Consultation Method : </strong>Video</p>
+              <p><strong>Reason for visit :</strong> Toothache</p>
+              <p><strong>Duration : </strong>6 Months</p>
+              <p><strong>Consultation Cost : </strong>$40.00</p>
+            </div>
           </Col>
 
           <Col span={12}>
-          <h2>Payment Method</h2>
-            
-           
+            <h2>Payment Method</h2>
+
+
             <p>Visa ending in : 4242</p>
 
             <h2>Insurance</h2>
-            
-           
+
+
             <p>No Insurance Addedd</p>
             <h2>Primary Care Physician</h2>
-            
-           
+
+
             {/* <p>No Data Yet.</p> */}
-                
-             
+
+
           </Col>
         </Row>
         <Divider />
         <Row>
           <div className="review-custom-section-ap__checkbox-ap">
-          <Col span={24}>
-          <Form.Item>
-          {getFieldDecorator('agreement', {
-            valuePropName: 'checked',
-          })(
-            <Checkbox>
-             I certify that I have read and accept the terms of <span onClick={this.showModal} style={{color : '#82bbe9'}}>Doc Mz's Informed Consent</span>.
-            </Checkbox>,
-          )}
-        </Form.Item>
-        <Form.Item>
-          {getFieldDecorator('policy', {
-            valuePropName: 'checked',
-          })(
-            <Checkbox>
-            I have read <span onClick={this.showModal2} style={{color : '#82bbe9'}}>Doc Mz's Informed Consent</span> and I acknowledge that I have the ability to print a hard copy of Privacy Policy for my records.
-            </Checkbox>,
-          )}
-        </Form.Item>
-        <Carousel afterChange={this.onChange}>
-    <div>
-      <h3>1</h3>
-    </div>
-    <div>
-      <h3>2</h3>
-    </div>
-    <div>
-      <h3>3</h3>
-    </div>
-    <div>
-      <h3>4</h3>
-      </div>
-      <div>
-      <h3>5</h3>
-    </div>
-  </Carousel>,
-        <Modal
-          title="Informed Consent for DocMz"
-          width={1024}
-          visible={this.state.visible}
-          onOk={this.handleOk}
-          onCancel={this.handleCancel}
-        >
-         <Firstmodel />
-        </Modal>
+            <Col span={24}>
 
-        <Modal
-          title="Privacy and policy terms of DocMz"
-          width={1024}
-          visible={this.state.secondvisible}
-          onOk={this.handleOk}
-          onCancel={this.handleCancel}
-        >
-         <Secondmodal />
-        </Modal>
+              <Checkbox
+                checked={this.state.informedconsent}
+                onChange={() => this.informedchange()}
+
+              >
+                I certify that I have read and accept the terms of <span onClick={this.showModal} style={{ color: '#82bbe9' }}>Doc Mz's Informed Consent</span>.
+            </Checkbox>
+
+              <Checkbox
+               checked={this.state.privacypolicy}
+               onChange={() => this.policychange()}
+              >
+                I have read <span onClick={this.showModal2} style={{ color: '#82bbe9' }}>Doc Mz's Informed Consent</span> and I acknowledge that I have the ability to print a hard copy of Privacy Policy for my records.
+            </Checkbox>
+
             </Col>
-            </div>
+
+            <Col span={24}>
+              <center> 
+                 {/* <Button type="primary">Primary</Button> */}
+                 {confirmbtn}
+
+                 </center>
+            </Col>
+          </div>
         </Row>
+        <Row>
+          <Modal
+            title="Informed Consent for DocMz"
+            width={1024}
+            visible={this.state.visible}
+            onOk={this.handleOk}
+            onCancel={this.handleCancel}
+          >
+            <Firstmodel />
+          </Modal>
+
+          <Modal
+            title="Privacy and policy terms of DocMz"
+            width={1024}
+            visible={this.state.secondvisible}
+            onOk={this.handleOk}
+            onCancel={this.handleCancel}
+          >
+            <Secondmodal />
+          </Modal>
+        </Row>
+
+
       </div>
       // <Row type="flex" justify="space-around" align="middle">
       //   <Col span={24} className="left-side-content-review-ap">
@@ -173,11 +199,11 @@ export default class AppointmentPayReview extends React.Component {
       //    <center>
       //    <Button type="info">Confirm Booking</Button>
       //    </center> 
-          
-            
+
+
       //   </Col>
 
-       
+
       // </Row>
     );
   }

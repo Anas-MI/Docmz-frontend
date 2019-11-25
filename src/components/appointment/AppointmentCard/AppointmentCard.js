@@ -17,7 +17,8 @@ export default class AppointmentCard extends Component {
             dates: [],
             appointments: [],
             isLoading: true,
-            visible: false
+            visible: false,
+            isPopup: false
         }
         this.tap = this.tap.bind(this)
     }
@@ -105,12 +106,17 @@ export default class AppointmentCard extends Component {
                             <Row type="flex" className={classNames("c-appointment-card__scroll-row", {
                                 "c-appointment-card__scroll-row--loading": isLoading
                             })}>
-                                {!isLoading && <Dates appointments={appointments} dates={dates} />}
+                                {!isLoading && <Dates appointments={appointments} onClick={(e,a)=> {
+                                    console.log({
+                                        e,a
+                                    })
+                                    this.setState({isPopup: true})
+                                }} dates={dates} />}
                                 {isLoading && <Spin indicator={<Icon type="loading" style={{ fontSize: 50 }} spin />} />}
                             </Row>
                         </CustomScroll>
                     </div>
-                    <RoundedPopup width={900} visible={true} >
+                    <RoundedPopup width={900} onCancel={()=> this.setState({isPopup: false})} visible={this.state.isPopup} >
                         <AppointmentForm  />
                     </RoundedPopup>
                 </Card>
@@ -118,7 +124,7 @@ export default class AppointmentCard extends Component {
         )
     }
 }
-const Dates = ({appointments, dates})=> 
+const Dates = ({appointments, dates, onClick})=> 
     dates.map((el, i)=> {
         const datesArr = getDatesFromArray(appointments, el);
         return (<Col className="c-appointment-card__date-col" offset={i === 0 && 2} key={i} span={4}>
@@ -127,10 +133,11 @@ const Dates = ({appointments, dates})=>
                     className={classNames("c-appointment-card__date-btn", {
                         "c-appointment-card__date-btn--disabled": !elx
                     })}
-                    onClick={()=> {
+                    onClick={(e)=> {
+                        onClick(e, elx )
                        console.log('something')
                     //    this.showModal()
-                   this.tap.bind(this)
+                //    this.tap.bind(this)
                     }}
                 >
                     {elx ? elx : ""}

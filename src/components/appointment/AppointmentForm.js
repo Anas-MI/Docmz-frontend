@@ -19,16 +19,17 @@ import {
   Checkbox,
   AutoComplete,
   Carousel
-   
+
 } from "antd";
-import {  Field } from "formik";
+import { Field } from "formik";
 import FormStep1 from "./FormStep1";
 import { patientCardList } from "../../services/api/patient";
 import PaymentCard from "../../components/payment/PaymentCard";
 import AppointmentPayReview from "./AppointmentPayReview";
 import AppointmentDoctor from "./AppointmentDoctor";
+import ShowOnCard from "../../components/payment/ShowOnCard";
 import './newappointmentap.css'
-
+import Fade from 'react-reveal/Fade';
 const stepStyle = {
   marginBottom: 37,
   boxShadow: "0px -1px 0 0 #e8e8e8 inset"
@@ -203,29 +204,29 @@ export default function AppointmentForm() {
 
             </Col >
             <Col xs={{ span: 11, offset: 1 }} lg={{ span: 10, offset: 2 }}>
-              <Icon type="mobile" className="second-step-custom-ap__icons"/>
+              <Icon type="mobile" className="second-step-custom-ap__icons" />
             </Col>
             <Col span={24} align="middle">
               <p className="video-phone-para"><a href="#">Video vs Phone visits. Learn how they work</a></p>
             </Col>
-           </Row>
-           <Row >
-           
-           
+          </Row>
+          <Row >
+
+
             <Divider />
             <Col span={24} style={{ textAlign: 'center' }}>
               <p className="visit-type-para-ap">What's the best number to reach you during your visit?</p>
             </Col>
             <Col span={12} >
               <p className="second-step-custom-ap__phone">8562025363</p>
-             
-              
+
+
             </Col>
             <Col span={12}>
               {/* <p className="second-step-custom-ap_why-para_ap">Why do we need this?</p> */}
               <Tooltip title="We may reach out if there are changes to your visit.">
-              <Icon type="question-circle" className="second-step-custom-ap__iconhelp" />
-  </Tooltip>,
+                <Icon type="question-circle" className="second-step-custom-ap__iconhelp" />
+              </Tooltip>,
             </Col>
 
           </Row>
@@ -339,42 +340,31 @@ export default function AppointmentForm() {
                       />
                     ) : (
                         <div className="custom-card-list-ap">
-
-<Carousel afterChange={onChange}>
-    <div>
-      <h3>1</h3>
-    </div>
-    <div>
-      <h3>2</h3>
-    </div>
-    <div>
-      <h3>3</h3>
-    </div>
-    <div>
-      <h3>4</h3>
-      </div>
-      <div>
-      <h3>5</h3>
-    </div>
-  </Carousel>,
-  {/* <ShowOnCard
+                          
+                          <Carousel >
+                          {
+                            cards.map( (el, i) => (
+                              <div onClick={() => setSavedCardData(i)}>
+                              <ShowOnCard
+                                key={i}
                                 cvvOnCard={''}
-                                expDateOnCard={item.exp_month +'/'+item.exp_year}
-                                numberOnCard={"xxxx xxxx xxxx "+item.last4}
-                                nameOnCard={item.name}
+                                
+                                expDateOnCard={el.exp_month + '/' + el.exp_year}
+                                numberOnCard={"xxxx xxxx xxxx " + el.last4}
+                                nameOnCard={"shubham"}
                                 transactionData=''
-                              /> */}
+                              />
+                              </div>
+                            ))
+                          }
+                          </Carousel>
                           {/* <List
                             className="custom-card-list-data-ap"
                             bordered
                             dataSource={cards}
                             renderItem={item => (
-
-
-
-
                               <List.Item onClick={() => setSavedCardData(item)}>
-                            
+
                                 <p className="c-appointment-form__card-number">
 
                                   xxxx xxxx xxxx {item.last4}
@@ -384,7 +374,7 @@ export default function AppointmentForm() {
                                   </span>
 
                                 </p>
-                             
+
                               </List.Item>
                             )}
                           /> */}
@@ -404,21 +394,24 @@ export default function AppointmentForm() {
             </Col>
           </Row>
         </div>
-      )}
-      {currentStep === 3 && (
-        <div>
-        
-          <Row type="flex">
-            <Col span={24}>
-              <FormThree
-                firstFormData={firstStapForm}
-                cardDetails={cardDetails}
-              />
-            </Col>
-          </Row>
-        </div>
-      )}
-    </div>
+      )
+      }
+      {
+        currentStep === 3 && (
+          <div>
+
+            <Row type="flex">
+              <Col span={24}>
+                <FormThree
+                  firstFormData={firstStapForm}
+                  cardDetails={cardDetails}
+                />
+              </Col>
+            </Row>
+          </div>
+        )
+      }
+    </div >
   );
 }
 // }
