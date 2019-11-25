@@ -119,6 +119,7 @@ transition: border 0.3s, left 0.3s
     background: #e5e5e5;
     padding: 30px;
     color: #959595;
+    margin : 0 50px;
 }
 .second-step-custom-ap__iconhelp {
     margin-left: 5px;
@@ -131,6 +132,12 @@ transition: border 0.3s, left 0.3s
     cursor: pointer;
     transition: all 0.3s;
 }
+.second-step-custom-ap__icons:active {
+    background:#874285;
+    color: #fff;
+    cursor: pointer;
+    /* transition: all 0.3s; */
+}
 /* .icon-custom-classess .ant-col .anticon {
     color: #fff!important; */
 /* } */
@@ -138,6 +145,44 @@ transition: border 0.3s, left 0.3s
     text-align: center;
     font-size: 30px;
 }
+/* .second-step-custom-ap .ant-radio-wrapper .ant-radio { 
+    text-align : center;
+    font-size: 40px;
+    border: solid 1px #e5e5e5;
+    border-radius: 50%;
+    background: #e5e5e5;
+    padding: 30px;
+    color: #959595;
+    
+    margin : 0 50px;
+  } 
+  .second-step-custom-ap .ant-radio-inner:after {
+    content: '';
+    background:url('https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSj3XfIpf-OOJRCcWz4iN2CU3qMKVVbj0p0bRvKNGVo1U9pk_8ZIlyR8pWreA');
+    width:20px;
+    height:20px;
+    position:absolute;
+    background-size:cover;
+     background-size:cover;
+        position:absolute;
+    width:20px;
+    height:20px;
+    margin-left:-20px; 
+  } */
+  /* .second-step-custom-ap .ant-radio-wrapper .ant-radio-checked { 
+    text-align : center;
+    font-size: 40px;
+    border: solid 1px #e5e5e5;
+    border-radius: 50%;
+    background: #874285;
+    border-color:solid 1px #874285;
+    padding: 30px;
+    color: #959595;
+    margin : 0 50px;
+  } 
+  [type=radio] + Icon {
+    cursor: pointer;
+  } */
 .second-step-custom-ap__phone {
     float: right;
     font-size: 17px;

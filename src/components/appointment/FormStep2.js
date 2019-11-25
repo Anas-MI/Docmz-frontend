@@ -1,0 +1,219 @@
+import React, { Component } from 'react'
+import {
+    Form,
+    Icon,
+    Input,
+    Button,
+    Container,
+    Row,
+    Col,
+    Avatar,
+    Steps,
+    List,
+    Typography,
+    Divider,
+    Radio,
+    Tooltip,
+    Cascader,
+    Select,
+    Checkbox,
+    AutoComplete,
+    Carousel,
+   
+  
+  } from "antd";
+class FormStep2 extends Component {
+    constructor() {
+        super()
+        this.state = {
+            value: '',
+          };
+        
+        
+
+    }
+    // handleSubmit = e => {
+    //     e.preventDefault();
+    //     this.props.form.validateFields((err, values) => {
+    //         if (!err) {
+    //             console.log('Received values of form: ', values);
+    //             const {
+    //                 onSubmit
+    //             } = this.props
+    //             if (typeof onSubmit === "function") {
+    //                 onSubmit(values)
+    //             }
+    //         }
+    //     });
+    // };
+    onChange = async e => {
+        console.log('radio checked', e.target.value);
+        await this.setState({
+          value: e.target.value,
+        });
+        console.log(this.state.value)
+        localStorage.setItem('type',this.state.value)
+      };
+    phonesubmit  = (e) => {
+        console.log('valuehere',e.target.name)
+    }
+    render() {
+        // const { getFieldDecorator } = this.props.form;
+        return (
+            <>
+                {/* <Form onSubmit={this.handleSubmit} className="login-form">
+                     <Radio.Group name="type" defaultValue='a'>
+                        <Radio value="phone" onClick={(e) => { console.log(e.target.value) }}>
+                            <Icon type="phone" value='phone' className="second-step-custom-ap__icons" />
+                        </Radio>
+                        <Radio value="video" onClick={(e) => { console.log(e.target.value) }}>
+                            <Icon type="mobile" className="second-step-custom-ap__icons" />
+                        </Radio>
+                    </Radio.Group>
+
+
+                </Form> */}
+                 <div className="second-step-custom-ap">
+          <Row>
+            <Col span={24}>
+              <h2 >John, Let's get you taken care of</h2>
+
+            </Col>
+          </Row>
+          <Row >
+            <Col span={24} style={{ textAlign: 'center' }}>
+              <p className="visit-type-para-ap">Which type of visit would you like?</p>
+            </Col>
+
+            <Col span={24}>
+              <center>
+              <Radio.Group  onChange={this.onChange} value={this.state.value}>
+              <Radio value="phone" >
+                <Icon type="phone" value='phone' className="second-step-custom-ap__icons" />
+                </Radio>
+              <Radio value="video"  >
+                <Icon type="mobile" className="second-step-custom-ap__icons" />
+                </Radio>
+              </Radio.Group>
+               {/* <FormTwo ref={formTwo} /> */}
+              </center>
+            </Col>
+
+            {/* <Col xs={{ span: 11, offset: 1 }} lg={{ span: 5, offset: 7 }}>
+             
+              <Icon type="phone" className="second-step-custom-ap__icons" />
+            
+
+            </Col >
+            <Col xs={{ span: 11, offset: 1 }} lg={{ span: 10, offset: 2 }}>
+            
+              <Icon type="mobile" className="second-step-custom-ap__icons" />
+              
+            </Col> */}
+            <Col span={24} align="middle">
+              <p className="video-phone-para"><a href="#">Video vs Phone visits. Learn how they work</a></p>
+            </Col>
+          </Row>
+          <Row >
+
+
+            <Divider />
+            <Col span={24} style={{ textAlign: 'center' }}>
+              <p className="visit-type-para-ap">What's the best number to reach you during your visit?</p>
+            </Col>
+            <Col span={12} >
+              <p className="second-step-custom-ap__phone">8562025363</p>
+
+
+            </Col>
+            <Col span={12}>
+              {/* <p className="second-step-custom-ap_why-para_ap">Why do we need this?</p> */}
+              <Tooltip title="We may reach out if there are changes to your visit.">
+                <Icon type="question-circle" className="second-step-custom-ap__iconhelp" />
+              </Tooltip>,
+            </Col>
+
+          </Row>
+          <Row>
+            <Col span={24}>
+              <Button
+                type="primary"
+                className="ap-appointment-details-btn"
+                onClick={(e) => this.phonesubmit(e)}
+              >
+                Next
+              </Button>
+            </Col>
+          </Row>
+          {/* <Row type="flex">
+          <Col span={24}>
+            <div className="c-appointment-form__steps">
+              <div className="c-appointment-form__step">
+                <div className="">
+                  {addCard ? (
+                    <PaymentCard
+                      cvvOnCard={""}
+                      expDateOnCard={""}
+                      numberOnCard={""}
+                      nameOnCard={""}
+                      cardResponse={response => {
+                        console.log("response", { response });
+                      }}
+                      transactionData={e => {
+                        cardDetailsWithNextStep(e);
+                      }}
+                      saveOptional={true}
+                      backButton={() => {
+                        toggleCard();
+                      }}
+                    />
+                  ) : (
+                      <div className="custom-card-list-ap">
+                      
+                      
+                        <List
+                        className="custom-card-list-data-ap"
+                          bordered
+                          dataSource={cards}
+                          renderItem={item => (
+                       
+                            
+
+                       
+                            <List.Item onClick={() => setSavedCardData(item)}>
+                                
+                               <p className="c-appointment-form__card-number">
+                          
+                                xxxx xxxx xxxx {item.last4}  
+                          <span className="middle-content-date">{item.exp_month}/{item.exp_year}</span>
+                                <span className="c-appointment-form__card-icon">
+                                  <span style={{fontSize : '18px'}}>{item.brand}</span> - <Icon type="credit-card" />
+                                </span>
+                              
+                              </p> 
+                             
+                            </List.Item>
+                          )}
+                        />
+                        <Button
+                          className="c-appointment-form__card-tgl-btn"
+                          onClick={() => {
+                            toggleCard();
+                          }}
+                        >
+                          Add New <Icon type="plus" />
+                        </Button>
+                      </div>
+                    )}
+                </div>
+              </div>
+            </div>
+          </Col>
+        </Row> */}
+        </div>
+            </>
+        )
+    }
+}
+
+export default FormStep2

@@ -18,11 +18,13 @@ import {
   Select,
   Checkbox,
   AutoComplete,
-  Carousel
+  Carousel,
+ 
 
 } from "antd";
 import { Field } from "formik";
 import FormStep1 from "./FormStep1";
+import FormStep2 from "./FormStep2";
 import { patientCardList } from "../../services/api/patient";
 import PaymentCard from "../../components/payment/PaymentCard";
 import AppointmentPayReview from "./AppointmentPayReview";
@@ -50,10 +52,12 @@ const getCardData = () => {
 //   render () {
 export default function AppointmentForm() {
   const FormOne = Form.create({ name: "appointment_form_one" })(FormStep1);
+  const FormTwo = Form.create({ name: "appointment_form_two" })(FormStep2);
   const FormThree = Form.create({ name: "appointment_form_three" })(
     AppointmentPayReview
   );
   let formOne = React.createRef();
+  let formTwo = React.createRef();
   const { Step } = Steps;
   const handleSubmit = () => {
     formOne.current.validateFields((err, values) => {
@@ -61,6 +65,9 @@ export default function AppointmentForm() {
       if (!err) {
         setFirstStapForm(values);
         console.log("Received values of form: ", values);
+        localStorage.setItem('duration',values.duration)
+        localStorage.setItem('notes',values.notes)
+        localStorage.setItem('reason',values.reason)
         setCurrentStep(1);
       }
     });
@@ -80,6 +87,7 @@ export default function AppointmentForm() {
   const [value, setValue] = useState("");
   const [selectedCard, setSelectedCard] = useState(null);
   const [firstStapForm, setFirstStapForm] = useState("");
+  const [secondStapForm, setSecondStapForm] = useState("");
   const [cardDetails, setCardDetails] = useState("");
   const [addCard, addCardToggle] = useState(false);
   const onStepChange = e => {
@@ -98,7 +106,17 @@ export default function AppointmentForm() {
   };
   const phonesubmit = e => {
     // setCardDetails(data);
-    setCurrentStep(2);
+    formTwo.current.validateFields((err, values) => {
+      console.log("ccc", { values });
+      if (!err) {
+        setSecondStapForm(values);
+        console.log("Received values of form: ", values);
+    
+        // setCurrentStep(2);
+      }
+    });
+   
+
   };
   const radioStyle = {
     display: 'block',
@@ -186,127 +204,7 @@ export default function AppointmentForm() {
         </div>
       )}
       {currentStep === 1 && (
-        <div className="second-step-custom-ap">
-          <Row>
-            <Col span={24}>
-              <h2 >John, Let's get you taken care of</h2>
-
-            </Col>
-          </Row>
-          <Row >
-            <Col span={24} style={{ textAlign: 'center' }}>
-              <p className="visit-type-para-ap">Which type of visit would you like?</p>
-            </Col>
-
-            <Col xs={{ span: 11, offset: 1 }} lg={{ span: 5, offset: 7 }}>
-
-              <Icon type="phone" className="second-step-custom-ap__icons" />
-
-            </Col >
-            <Col xs={{ span: 11, offset: 1 }} lg={{ span: 10, offset: 2 }}>
-              <Icon type="mobile" className="second-step-custom-ap__icons" />
-            </Col>
-            <Col span={24} align="middle">
-              <p className="video-phone-para"><a href="#">Video vs Phone visits. Learn how they work</a></p>
-            </Col>
-          </Row>
-          <Row >
-
-
-            <Divider />
-            <Col span={24} style={{ textAlign: 'center' }}>
-              <p className="visit-type-para-ap">What's the best number to reach you during your visit?</p>
-            </Col>
-            <Col span={12} >
-              <p className="second-step-custom-ap__phone">8562025363</p>
-
-
-            </Col>
-            <Col span={12}>
-              {/* <p className="second-step-custom-ap_why-para_ap">Why do we need this?</p> */}
-              <Tooltip title="We may reach out if there are changes to your visit.">
-                <Icon type="question-circle" className="second-step-custom-ap__iconhelp" />
-              </Tooltip>,
-            </Col>
-
-          </Row>
-          <Row>
-            <Col span={24}>
-              <Button
-                type="primary"
-                className="ap-appointment-details-btn"
-                onClick={() => phonesubmit()}
-              >
-                Next
-              </Button>
-            </Col>
-          </Row>
-          {/* <Row type="flex">
-          <Col span={24}>
-            <div className="c-appointment-form__steps">
-              <div className="c-appointment-form__step">
-                <div className="">
-                  {addCard ? (
-                    <PaymentCard
-                      cvvOnCard={""}
-                      expDateOnCard={""}
-                      numberOnCard={""}
-                      nameOnCard={""}
-                      cardResponse={response => {
-                        console.log("response", { response });
-                      }}
-                      transactionData={e => {
-                        cardDetailsWithNextStep(e);
-                      }}
-                      saveOptional={true}
-                      backButton={() => {
-                        toggleCard();
-                      }}
-                    />
-                  ) : (
-                      <div className="custom-card-list-ap">
-                      
-                      
-                        <List
-                        className="custom-card-list-data-ap"
-                          bordered
-                          dataSource={cards}
-                          renderItem={item => (
-                       
-                            
-
-                       
-                            <List.Item onClick={() => setSavedCardData(item)}>
-                                
-                               <p className="c-appointment-form__card-number">
-                          
-                                xxxx xxxx xxxx {item.last4}  
-                          <span className="middle-content-date">{item.exp_month}/{item.exp_year}</span>
-                                <span className="c-appointment-form__card-icon">
-                                  <span style={{fontSize : '18px'}}>{item.brand}</span> - <Icon type="credit-card" />
-                                </span>
-                              
-                              </p> 
-                             
-                            </List.Item>
-                          )}
-                        />
-                        <Button
-                          className="c-appointment-form__card-tgl-btn"
-                          onClick={() => {
-                            toggleCard();
-                          }}
-                        >
-                          Add New <Icon type="plus" />
-                        </Button>
-                      </div>
-                    )}
-                </div>
-              </div>
-            </div>
-          </Col>
-        </Row> */}
-        </div>
+       <FormStep2 />
       )}
       {currentStep === 2 && (
         <div>
