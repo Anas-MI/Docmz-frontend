@@ -22,6 +22,8 @@ import {
  
 
 } from "antd";
+import AliceCarousel from 'react-alice-carousel'
+
 import { Field } from "formik";
 import FormStep1 from "./FormStep1";
 import FormStep2 from "./FormStep2";
@@ -48,6 +50,7 @@ const getCardData = () => {
       console.log({ err });
     });
 };
+const handleOnDragStart = (e) => e.preventDefault()
 // class AppointmentForm extends React.Component{ 
 //   render () {
 export default function AppointmentForm() {
@@ -58,6 +61,20 @@ export default function AppointmentForm() {
   );
   let formOne = React.createRef();
   let formTwo = React.createRef();
+  let carousel = React.createRef();
+  const next = () => {
+    carousel.next();
+  }
+  const previous = () => {
+    carousel.prev();
+  }
+  const props = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1
+  };
   const { Step } = Steps;
   const handleSubmit = () => {
     formOne.current.validateFields((err, values) => {
@@ -245,12 +262,17 @@ export default function AppointmentForm() {
                         }}
                       />
                     ) : (
-                        <div className="custom-card-list-ap">
-                          
-                          <Carousel >
-                          {
+                      <div className="custom-card-list-ap">
+                      <AliceCarousel mouseTrackingEnabled>
+                      {/* <img src="/img1" onDragStart={handleOnDragStart} className="yours-custom-class" />
+                      <img src="/img2" onDragStart={handleOnDragStart} className="yours-custom-class" />
+                      <img src="/img3" onDragStart={handleOnDragStart} className="yours-custom-class" />
+                      <img src="/img4" onDragStart={handleOnDragStart} className="yours-custom-class" />
+                      <img src="/img5" onDragStart={handleOnDragStart} className="yours-custom-class" /> */}
+                      {
                             cards.map( (el, i) => (
                               <div onClick={() => setSavedCardData(el)}>
+                                
                               <ShowOnCard
                                 key={i}
                                 cvvOnCard={''}
@@ -260,10 +282,34 @@ export default function AppointmentForm() {
                                 nameOnCard={"shubham"}
                                 transactionData=''
                               />
+                               
                               </div>
                             ))
                           }
-                          </Carousel>
+                    </AliceCarousel>
+                  
+                       {/* <div className="custom-card-list-ap">
+                         <Icon type="left-circle" onClick={() => previous()} className='custom-card-list-ap__prevarrow'/>
+                           <Carousel ref={node => (carousel = node)} {...props}>
+                           {
+                             cards.map( (el, i) => (
+                              <div onClick={() => setSavedCardData(el)}>
+                                
+                               <ShowOnCard
+                                key={i}
+                                cvvOnCard={''}
+                                
+                                expDateOnCard={el.exp_month + '/' + el.exp_year}
+                                numberOnCard={"xxxx xxxx xxxx " + el.last4}
+                                nameOnCard={"shubham"}
+                                transactionData=''
+                               />
+                               
+                              </div>
+                             ))
+                           }
+                           </Carousel>
+                           <Icon type="right-circle" onClick={() => next()} className='custom-card-list-ap__nextarrow'/> */}
                           {/* <List
                             className="custom-card-list-data-ap"
                             bordered

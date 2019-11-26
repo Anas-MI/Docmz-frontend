@@ -56,7 +56,7 @@ class FormStep2 extends Component {
       };
    
     render() {
-        // const { getFieldDecorator } = this.props.form;
+        const { getFieldDecorator } = this.props.form;
         return (
             <>
                 {/* <Form onSubmit={this.handleSubmit} className="login-form">
@@ -116,20 +116,37 @@ class FormStep2 extends Component {
 
 
             <Divider />
-            <Col span={24} style={{ textAlign: 'center' }}>
+            <Col span={21} offset={3} style={{ textAlign: 'center' }} className="second-step-custom-ap__numbercolsecondform">
               <p className="visit-type-para-ap">What's the best number to reach you during your visit?</p>
+              <Form.Item>
+          {getFieldDecorator('phone', {
+             initialValue: ['8765058596'],
+          })(
+            <Input/>
+          )}
+        </Form.Item>
+        <Tooltip title="We may reach out if there are changes to your visit." className="second-step-custom-ap__iconhelptooltip">
+                <Icon type="question-circle" className="second-step-custom-ap__iconhelp" />
+              </Tooltip>
             </Col>
-            <Col span={12} >
+            {/* <Col span={12} >
               <p className="second-step-custom-ap__phone">8562025363</p>
+              <Form.Item>
+          {getFieldDecorator('phone', {
+             initialValue: ['8765058596'],
+          })(
+            <Input/>
+          )}
+        </Form.Item>
 
 
             </Col>
             <Col span={12}>
-              {/* <p className="second-step-custom-ap_why-para_ap">Why do we need this?</p> */}
+              <p className="second-step-custom-ap_why-para_ap">Why do we need this?</p>
               <Tooltip title="We may reach out if there are changes to your visit.">
                 <Icon type="question-circle" className="second-step-custom-ap__iconhelp" />
               </Tooltip>,
-            </Col>
+            </Col> */}
 
           </Row>
          
@@ -204,4 +221,4 @@ class FormStep2 extends Component {
     }
 }
 
-export default FormStep2
+export default Form.create()(FormStep2)
