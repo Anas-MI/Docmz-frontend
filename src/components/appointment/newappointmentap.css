@@ -288,9 +288,91 @@
   color: #fff;
 }
 
+
 .custom-card-list-ap .alice-carousel__wrapper ul li {
   width: 440px !important;
 }
+
+.caption {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  padding: 0 10px;
+  box-sizing: border-box;
+  pointer-events: none;
+}
+.caption span {
+  display: inline-block;
+  padding: 10px;
+  color: #fff;
+  background: rgba(0,0,0,0.5);
+  font-family: 'Myriad Pro regular';
+  font-size: 15.31px;
+}
+/* .image_grid {
+  display: inline-block;
+  padding-left: 25px;
+} */
+.image_grid label {
+  position: relative;
+  display: inline-block;
+}
+.image_grid img {
+  display: block;
+}
+
+.image_grid input {
+  display: none;
+}
+.image_grid .ant-radio + .caption {
+  background: rgba(0,0,0,0.5);
+}
+.image_grid .ant-radio + .caption::after {
+  content: '✔';    
+  position: absolute;
+  top: 40%; left: 50%;
+  width: 70px; height: 70px;
+  transform: translate(-50%,-50%);
+  color: #874285;
+  font-size: 40px;
+  line-height: 66px;
+  text-align: center;
+  border: 2px solid white;
+  border-radius: 50%;
+  z-index: 99;
+}
+.custom-card-list-ap .ant-radio-checked {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  padding: 0 10px;
+  box-sizing: border-box;
+  pointer-events: none;
+}
+.custom-card-list-ap .ant-radio-checked:before {
+  content: '✔';    
+  position: absolute;
+  top: 40%; left: 50%;
+  width: 70px; height: 70px;
+  transform: translate(-50%,-50%);
+  color: #874285;
+  font-size: 40px;
+  line-height: 66px;
+  text-align: center;
+  border: 2px solid white;
+  border-radius: 50%;
+  z-index: 99;
+    
+}
+.custom-card-list-ap .ant-radio-inner {
+  display: none;
+}
+
+
 
 .review-custom-section-ap__checkbox-ap .ant-checkbox-wrapper {
   margin: 10px 0;
