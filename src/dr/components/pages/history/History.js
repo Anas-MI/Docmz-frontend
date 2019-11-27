@@ -6,9 +6,7 @@ export default class History extends Component {
     return (
       <div className={componentClass}>
         <HistoryCard />
-        <HistoryCard />
-        <HistoryCard />
-        <HistoryCard />
+        
       </div>
     )
   }

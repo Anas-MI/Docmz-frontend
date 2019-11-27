@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 // import Timelines from "../../objects/timeline/Timelines";
-import { Row, Col, Button, Icon,  Card, Avatar, Badge , Spin} from "antd";
+import { Row, Col, Button, Icon, Card, Avatar, Badge, Spin, Tooltip } from "antd";
 import classNames from 'classnames'
 import InfoCard from "../../objects/card/InfoCard";
 import { getDoctors } from '../../../../services/redux/actions';
@@ -20,67 +20,67 @@ import {
   AccordionItemPanel,
 } from 'react-accessible-accordion';
 import 'react-accessible-accordion/dist/fancy-example.css';
+import moment from "moment";
 const Panel = Collapse.Panel;
 const text1 = `
  Reason for visit - Toothache`;
- const text2 = `Description - Notes Available`
-  class Dashboard extends Component {
+const text2 = `Description - Notes Available`
+class Dashboard extends Component {
   constructor(props) {
     super(props);
     this.state = {
       visible: false,
       isTourActive: false,
       tourStep: 1,
-      counter : '0',
-      filterappointmentarr : []
+      counter: '0',
+      filterappointmentarr: []
     };
   }
- 
 
-  getdocdetail =  () =>  
-  {
-  axios.get(
-    `http://localhost:3001/doctors/getdoc/${localStorage.getItem('doctorid')}`
 
-  )
-  .then(response => {
-    console.log('docdetailsashbaord', response.data.data.appointments);
-   
-    let apparr = response.data.data.appointments
-    let filterapparr =  apparr.filter(function(hero) {
-      return hero.booked == true;
-      // console.log('hero',hero.booked == true)
-    });
-    console.log('filterapparrrdata',filterapparr)
+  getdocdetail = () => {
+    axios.get(
+      `http://localhost:3001/doctors/getdoc/${localStorage.getItem('doctorid')}`
+
+    )
+      .then(response => {
+        console.log('docdetailsashbaord', response.data.data.appointments);
+
+        let apparr = response.data.data.appointments
+        let filterapparr = apparr.filter(function (hero) {
+          return hero.booked == true;
+          // console.log('hero',hero.booked == true)
+        });
+        console.log('filterapparrrdata', filterapparr)
+        this.setState({
+          filterappointmentarr: filterapparr
+        })
+
+        // for(let i=0;i <= apparr.length;++i){
+        //   console.log('bookres',apparr[i].booked)
+        //   if(apparr[i].booked == true){
+        //     console.log(apparr[i])
+        //     // this.state.counter = +this.state.counter + 1
+        //     // console.log(this.state.counter)
+        //   }
+        // }
+
+
+      })
+      .catch(e => {
+        console.log('error', e);
+      });
+  }
+
+  componentDidMount() {
     this.setState({
-      filterappointmentarr : filterapparr
-    })
-  
-    // for(let i=0;i <= apparr.length;++i){
-    //   console.log('bookres',apparr[i].booked)
-    //   if(apparr[i].booked == true){
-    //     console.log(apparr[i])
-    //     // this.state.counter = +this.state.counter + 1
-    //     // console.log(this.state.counter)
-    //   }
-    // }
-   
-
-  })
-  .catch(e => {
-    console.log('error', e);
-  });
-}
-
-componentDidMount() {
-  this.setState({
-    // isTourActive: true
-  });
-  this.props.getDoctors()
-  // console.log('docdetails',localStorage.getItem('user'))
-  // console.log('patientdetail',localStorage.getItem('patient'))
-  this.getdocdetail();
-}
+      // isTourActive: true
+    });
+    this.props.getDoctors()
+    // console.log('docdetails',localStorage.getItem('user'))
+    // console.log('patientdetail',localStorage.getItem('patient'))
+    this.getdocdetail();
+  }
 
   showDrawer = () => {
     this.setState({
@@ -112,19 +112,55 @@ componentDidMount() {
     }
   };
   componentClass = name => {
-    if(typeof name === "string"){
-        if(name.includes(",")){
-            const newName = name.split(",").map(el => el.trim()).filter(el => el)
-            return newName.map(el => `c-info-card__${el}`).join(" ")
-        }
-        return `c-info-card__${name}`
+    if (typeof name === "string") {
+      if (name.includes(",")) {
+        const newName = name.split(",").map(el => el.trim()).filter(el => el)
+        return newName.map(el => `c-info-card__${el}`).join(" ")
+      }
+      return `c-info-card__${name}`
     }
 
-    if(name.constructor() === Array )
-        return name.map(el => `c-info-card__${el}`).join(" ")
+    if (name.constructor() === Array)
+      return name.map(el => `c-info-card__${el}`).join(" ")
 
     return ``
-}
+  }
+  manualapprove = (item) => {
+    console.log('something', item)
+    let approvetime = new Date(item.bookedFor)
+    let body = {
+      patient : 'John Doe',
+      time : approvetime.toLocaleTimeString('en-US'),
+      date : moment(approvetime).format('L'),
+      address : 'NO DATA',
+      timeSlot : item._id,
+      email : 'patienemail@gmail.com',
+      doctor : localStorage.getItem('docname')
+    }
+    console.log('approvebody',body)
+    axios
+    .post(
+      'http://localhost:3001/appointment/approve', body
+
+    )
+    .then(response => {
+      console.log('approveappointmernt', response);
+      if (response.data.status == true) {
+        alert(response.data.message)
+        window.location.reload();
+        // this.setState({
+        //   success : true
+        // })
+        // const success = () => {
+        //   message.success('This is a success message');
+        // };
+      }
+      
+    })
+    .catch(e => {
+      console.log('error', e);
+    });
+  }
   render() {
 
     const { visible } = this.state;
@@ -162,71 +198,73 @@ componentDidMount() {
             </Row>
             <span style={{ paddingTop: 30, display: "block" }}></span>
             <Collapse className="info-style-collapse" accordion>
-            {this.state.filterappointmentarr.length ? (
-            this.state.filterappointmentarr.map(function(item, id) {
-              return (
+              {this.state.filterappointmentarr.length ? (
+                this.state.filterappointmentarr.map(function (item, id) {
+                  return (
 
-              <Panel header={
-              // <InfoCard />
-              <Card bordered={false} className="c-info-card">
-               
-               
-                <Row type="flex" align="middle" >
-                    <Col span={24/3} className={this.componentClass("user-info, border-col")} >
-                        <Avatar size={50} icon="user" className={this.componentClass("avatar")} />
-                        <div className={this.componentClass("user-content")}>
-                            <p className={this.componentClass("user-name")}>
-                              {item.name || 'patient name'}
-                            </p>
-                            <p className={this.componentClass("user-number")}>
-                            {item.number || '1234567892'}
-                            </p>
-                        </div>
-                    </Col>
-                    <Col span={24/3} className={this.componentClass("calander-col, border-col")} >
-                        <div className={this.componentClass("calander-inner")} >
-                            <div className={this.componentClass("calander-date")} >
+                    <Panel header={
+                      // <InfoCard />
+                      <Card bordered={false} className="c-info-card">
+
+
+                        <Row type="flex" align="middle" >
+                          <Col span={24 / 3} className={this.componentClass("user-info, border-col")} >
+                            <Avatar size={50} icon="user" className={this.componentClass("avatar")} />
+                            <div className={this.componentClass("user-content")}>
+                              <p className={this.componentClass("user-name")}>
+                                {item.name || 'patient name'}
+                              </p>
+                              <p className={this.componentClass("user-number")}>
+                                {item.number || '1234567892'}
+                              </p>
+                            </div>
+                          </Col>
+                          <Col span={24 / 3} className={this.componentClass("calander-col, border-col")} >
+                            <div className={this.componentClass("calander-inner")} >
+                              <div className={this.componentClass("calander-date")} >
                                 <Icon type="calendar" className={this.componentClass("icon")} />
                                 {<Moment format="LL">{item.bookedFor}</Moment> || '22 October 2019'}
-                            </div>
-                            <div className={this.componentClass("calander-time")} >
+                              </div>
+                              <div className={this.componentClass("calander-time")} >
                                 <Icon type="clock-circle" className={classNames(this.componentClass("icon"))} />
                                 {<Moment format="LT">{item.bookedFor}</Moment> || '8:30 A.M.'}
+                              </div>
                             </div>
-                        </div>
-                    </Col>
-                    <Col span={24/3} className={this.componentClass("status-col")} >
-                        <div className={classNames(this.componentClass("status"), this.componentClass("status--active"))} >
-                            {item.approved == false ? 'Not Approved' : 'Approved'}
-                        </div>
-                        <div className={classNames(this.componentClass("more"))} >
-                            {/* <Icon type="down" className={classNames(this.componentClass("icon"), this.componentClass("icon--more"))} /> */}
-                            {/* <Icon type="close" /> */}
-                            <Button type="primary" className="custom-infocard-btn-ap">Cancel</Button>
-                        </div>
-                    </Col>
-                    </Row>
-                    
-               
-            </Card>
-            
-            }
-           key={id}>
+                          </Col>
+                          <Col span={24 / 3} className={this.componentClass("status-col")} >
+                            <div className={classNames(this.componentClass("status"), this.componentClass("status--active"))} >
+                              {item.approved == true ? 'Approved' : <Tooltip title="CLick to Approve the Appointment">
+                                <span onClick={this.manualapprove.bind(this, item)}>Approve</span>
+                              </Tooltip>}
+                            </div>
+                            <div className={classNames(this.componentClass("more"))} >
+                              {/* <Icon type="down" className={classNames(this.componentClass("icon"), this.componentClass("icon--more"))} /> */}
+                              {/* <Icon type="close" /> */}
+                              <Button type="primary" className="custom-infocard-btn-ap">Cancel</Button>
+                            </div>
+                          </Col>
+                        </Row>
 
-              
-              
-          {!item.reasonForVisit ? '' : <p>Reason for visit : {item.reasonForVisit || 'NO DATA'}</p>}
-                
-                  {!item.description ? '' : <p>Description : {item.description || 'NO DATA'}</p> }
-                  {!item.duration  ? '' : <p>Duration : {item.duration || 'NO DATA'}</p>}
-              </Panel>
-              );
-            }, this)
-          ) : (
-            <span>
-              <Spin indicator={<Icon type="loading" style={{ fontSize: 50 }} spin />} />
-            </span>
-          )}
+
+                      </Card>
+
+                    }
+                      key={id}>
+
+
+
+                      {!item.reasonForVisit ? '' : <p>Reason for visit : {item.reasonForVisit || 'NO DATA'}</p>}
+
+                      {!item.description ? '' : <p>Description : {item.description || 'NO DATA'}</p>}
+                      {!item.duration ? '' : <p>Duration : {item.duration || 'NO DATA'}</p>}
+                    </Panel>
+                  );
+                }, this)
+              ) : (
+                  <span>
+                    <Spin indicator={<Icon type="loading" style={{ fontSize: 50 }} spin />} />
+                  </span>
+                )}
 
               {/* <Panel header={<InfoCard />} key="2">
               <p>Reason for visit :  </p>
@@ -474,8 +512,8 @@ componentDidMount() {
 }
 
 const mapStateToProps = (state) => ({
-  doctors: state.doctors.all    
+  doctors: state.doctors.all
 })
 export default connect(mapStateToProps, {
   getDoctors
-} )(Dashboard)
+})(Dashboard)
