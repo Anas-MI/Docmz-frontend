@@ -80,7 +80,10 @@ function hasErrors(fieldsError) {
 				.then((res) => {
 					if (res.data && res.data.status) {
 						const { data } = res.data;
-						console.log({ data });
+						console.log('pardoctor',{ data });
+						console.log(res.data.data.fee)
+						localStorage.setItem('doctorid',res.data.data._id)
+						localStorage.setItem('doctorfee',res.data.data.fee)
 						this.setState({
 							appointments: data.appointments,
 							isLoading: false

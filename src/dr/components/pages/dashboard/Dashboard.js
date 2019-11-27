@@ -1,12 +1,17 @@
 import React, { Component } from "react";
 // import Timelines from "../../objects/timeline/Timelines";
-import { Row, Col, Button, Icon } from "antd";
+import { Row, Col, Button, Icon,  Card, Avatar, } from "antd";
+import classNames from 'classnames'
 import InfoCard from "../../objects/card/InfoCard";
+import { getDoctors } from '../../../../services/redux/actions';
+import { connect } from 'react-redux'
 import ShortCalender from "../../objects/calenders/shortCalender/ShortCalender";
 import Timeline_drovar from "../../objects/timeline/Timeline_drovar";
 import { Collapse } from 'antd';
 import Tour from "react-user-tour";
+import Moment from 'react-moment';
 import "./ddemo.css";
+import axios from 'axios'
 import {
   Accordion,
   AccordionItem,
@@ -19,20 +24,64 @@ const Panel = Collapse.Panel;
 const text1 = `
  Reason for visit - Toothache`;
  const text2 = `Description - Notes Available`
-export default class Dashboard extends Component {
+  class Dashboard extends Component {
   constructor(props) {
     super(props);
     this.state = {
       visible: false,
       isTourActive: false,
-      tourStep: 1
+      tourStep: 1,
+      counter : '0',
+      filterappointmentarr : []
     };
   }
-  componentDidMount() {
-    this.setState({
-      // isTourActive: true
+ 
+
+  getdocdetail =  () =>  
+  {
+  axios.get(
+    `http://localhost:3001/doctors/getdoc/${localStorage.getItem('doctorid')}`
+
+  )
+  .then(response => {
+    console.log('docdetailsashbaord', response.data.data.appointments);
+    console.log(response.data.data.appointments.length)
+    let apparr = response.data.data.appointments
+    let filterapparr =  apparr.filter(function(hero) {
+      return hero.booked == true;
+      // console.log('hero',hero.booked == true)
     });
-  }
+    console.log('filterapparrrdata',filterapparr)
+    this.setState({
+      filterappointmentarr : filterapparr
+    })
+  
+    // for(let i=0;i <= apparr.length;++i){
+    //   console.log('bookres',apparr[i].booked)
+    //   if(apparr[i].booked == true){
+    //     console.log(apparr[i])
+    //     // this.state.counter = +this.state.counter + 1
+    //     // console.log(this.state.counter)
+    //   }
+    // }
+   
+
+  })
+  .catch(e => {
+    console.log('error', e);
+  });
+}
+
+componentDidMount() {
+  this.setState({
+    // isTourActive: true
+  });
+  this.props.getDoctors()
+  // console.log('docdetails',localStorage.getItem('user'))
+  // console.log('patientdetail',localStorage.getItem('patient'))
+  this.getdocdetail();
+}
+
   showDrawer = () => {
     this.setState({
       visible: true
@@ -62,6 +111,20 @@ export default class Dashboard extends Component {
       });
     }
   };
+  componentClass = name => {
+    if(typeof name === "string"){
+        if(name.includes(",")){
+            const newName = name.split(",").map(el => el.trim()).filter(el => el)
+            return newName.map(el => `c-info-card__${el}`).join(" ")
+        }
+        return `c-info-card__${name}`
+    }
+
+    if(name.constructor() === Array )
+        return name.map(el => `c-info-card__${el}`).join(" ")
+
+    return ``
+}
   render() {
 
     const { visible } = this.state;
@@ -99,20 +162,74 @@ export default class Dashboard extends Component {
             </Row>
             <span style={{ paddingTop: 30, display: "block" }}></span>
             <Collapse className="info-style-collapse" accordion>
-              <Panel header={<InfoCard />}
-           key="1">
-                {/* <p>{text1} + {text2}</p> */}
-                <p>Reason for visit :  </p>
-                <p>Description : Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,</p>
+            {this.state.filterappointmentarr.length ? (
+            this.state.filterappointmentarr.map(function(item, id) {
+              return (
+
+              <Panel header={
+              // <InfoCard />
+              <Card bordered={false} className="c-info-card">
+               
+               
+                <Row type="flex" align="middle" >
+                    <Col span={24/3} className={this.componentClass("user-info, border-col")} >
+                        <Avatar size={50} icon="user" className={this.componentClass("avatar")} />
+                        <div className={this.componentClass("user-content")}>
+                            <p className={this.componentClass("user-name")}>
+                              {item.name || 'patient name'}
+                            </p>
+                            <p className={this.componentClass("user-number")}>
+                            {item.number || '1234567892'}
+                            </p>
+                        </div>
+                    </Col>
+                    <Col span={24/3} className={this.componentClass("calander-col, border-col")} >
+                        <div className={this.componentClass("calander-inner")} >
+                            <div className={this.componentClass("calander-date")} >
+                                <Icon type="calendar" className={this.componentClass("icon")} />
+                                {<Moment format="LL">{item.bookedFor}</Moment> || '22 October 2019'}
+                            </div>
+                            <div className={this.componentClass("calander-time")} >
+                                <Icon type="clock-circle" className={classNames(this.componentClass("icon"))} />
+                                {<Moment format="LT">{item.bookedFor}</Moment> || '8:30 A.M.'}
+                            </div>
+                        </div>
+                    </Col>
+                    <Col span={24/3} className={this.componentClass("status-col")} >
+                        <div className={classNames(this.componentClass("status"), this.componentClass("status--active"))} >
+                            {item.approved == false ? 'Not Approved' : 'Approved'}
+                        </div>
+                        <div className={classNames(this.componentClass("more"))} >
+                            {/* <Icon type="down" className={classNames(this.componentClass("icon"), this.componentClass("icon--more"))} /> */}
+                            {/* <Icon type="close" /> */}
+                            <Button type="primary" className="custom-infocard-btn-ap">Cancel</Button>
+                        </div>
+                    </Col>
+                    </Row>
+                    
+               
+            </Card>
+            
+            }
+           key={id}>
+              
+                <p>Reason for visit : <strong>{item.reasonForVisit || 'NO DATA'}</strong> </p>
+                <p>Description : <strong>{item.description || 'NO DATA'}</strong></p>
               </Panel>
-              <Panel header={<InfoCard />} key="2">
+              );
+            }, this)
+          ) : (
+            <span>No Data Present</span>
+          )}
+
+              {/* <Panel header={<InfoCard />} key="2">
               <p>Reason for visit :  </p>
                 <p>Description : Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,</p>
               </Panel>
               <Panel header={<InfoCard />} key="3">
               <p>Reason for visit :  </p>
                 <p>Description : Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,</p>
-              </Panel>
+              </Panel> */}
             </Collapse>
             {/* <Accordion>
               <AccordionItem>
@@ -349,3 +466,10 @@ export default class Dashboard extends Component {
     );
   }
 }
+
+const mapStateToProps = (state) => ({
+  doctors: state.doctors.all    
+})
+export default connect(mapStateToProps, {
+  getDoctors
+} )(Dashboard)

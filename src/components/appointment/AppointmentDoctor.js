@@ -13,8 +13,7 @@ class AppointmentDoctor extends Component {
 componentDidMount(){
    
     this.props.getDoctors()
-    console.log(localStorage)
-
+   
 }
   render() {
     const {

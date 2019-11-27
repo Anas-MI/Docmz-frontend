@@ -18,11 +18,18 @@ import {
   Select,
   Checkbox,
   AutoComplete,
-  Carousel,
- 
+  Carousel
+
 
 } from "antd";
+// import Slider from "react-slick";
+// import "~slick-carousel/slick/slick.css"; 
+// import "~slick-carousel/slick/slick-theme.css";
+// import {Carousel as AntCarousel} from 'antd'
 import AliceCarousel from 'react-alice-carousel'
+
+// import "react-responsive-carousel/lib/styles/carousel.min.css";
+// import { Carousel  } from 'react-responsive-carousel';
 
 import { Field } from "formik";
 import FormStep1 from "./FormStep1";
@@ -34,6 +41,7 @@ import AppointmentDoctor from "./AppointmentDoctor";
 import ShowOnCard from "../../components/payment/ShowOnCard";
 import './newappointmentap.css'
 import Fade from 'react-reveal/Fade';
+import AppointmentShowCard from "./AppointmentShowCard";
 const stepStyle = {
   marginBottom: 37,
   boxShadow: "0px -1px 0 0 #e8e8e8 inset"
@@ -43,6 +51,7 @@ const getCardData = () => {
   const userDetails = JSON.parse(localStorage.getItem("patient"));
   patientCardList(userDetails.customerProfile)
     .then(res => {
+      console.log('patient', res)
       const { data } = res.data.data;
       cards = data;
     })
@@ -50,7 +59,11 @@ const getCardData = () => {
       console.log({ err });
     });
 };
-const handleOnDragStart = (e) => e.preventDefault()
+
+function onRadioChange(e) {
+  console.log(`radio checked:${e.target.value}`);
+}
+
 // class AppointmentForm extends React.Component{ 
 //   render () {
 export default function AppointmentForm() {
@@ -75,6 +88,13 @@ export default function AppointmentForm() {
     slidesToShow: 1,
     slidesToScroll: 1
   };
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1
+  };
   const { Step } = Steps;
   const handleSubmit = () => {
     formOne.current.validateFields((err, values) => {
@@ -82,9 +102,9 @@ export default function AppointmentForm() {
       if (!err) {
         setFirstStapForm(values);
         console.log("Received values of form: ", values);
-        localStorage.setItem('duration',values.duration)
-        localStorage.setItem('notes',values.notes)
-        localStorage.setItem('reason',values.reason)
+        localStorage.setItem('duration', values.duration)
+        localStorage.setItem('notes', values.notes)
+        localStorage.setItem('reason', values.reason)
         setCurrentStep(1);
       }
     });
@@ -117,20 +137,41 @@ export default function AppointmentForm() {
   };
   const setSavedCardData = data => {
     setCardDetails(data);
-    setCurrentStep(3);
-    console.log('currentstep',data) 
-    localStorage.setItem('patientcardid',data.id)
-    localStorage.setItem('last4',data.last4)
+    // setCurrentStep(3);
+    console.log('currentstep', data)
+    localStorage.setItem('patientcardid', data.id)
+    localStorage.setItem('last4', data.last4)
 
   };
+  const handleOnDragStart = (e) => {
+    e.preventDefault()
+    setCurrentStep(3);
+  }
   const phonesubmit = e => {
     // setCardDetails(data);
-  
-        setCurrentStep(2);
-      
- 
-   
 
+    setCurrentStep(2);
+
+
+
+
+  };
+  const paymentslidersubmit = e => {
+    // setCardDetails(data);
+
+    setCurrentStep(3);
+
+
+
+
+  };
+  const responsive = {
+    0: {
+      items: 2
+    },
+    1024: {
+      items: 2
+    }
   };
   const radioStyle = {
     display: 'block',
@@ -219,17 +260,17 @@ export default function AppointmentForm() {
       )}
       {currentStep === 1 && (
         <div>
-       <FormStep2 />
-      
-       <Button
-       type="primary"
-       className="ap-appointment-details-btn"
-       onClick={(e) => phonesubmit(e)}
-      
-     >
-       Next
+          <FormStep2 />
+
+          <Button
+            type="primary"
+            className="ap-appointment-details-btn"
+            onClick={(e) => phonesubmit(e)}
+
+          >
+            Next
    </Button>
-   </div>
+        </div>
       )}
       {currentStep === 2 && (
         <div>
@@ -262,34 +303,133 @@ export default function AppointmentForm() {
                         }}
                       />
                     ) : (
-                      <div className="custom-card-list-ap">
-                      <AliceCarousel mouseTrackingEnabled>
-                      {/* <img src="/img1" onDragStart={handleOnDragStart} className="yours-custom-class" />
-                      <img src="/img2" onDragStart={handleOnDragStart} className="yours-custom-class" />
-                      <img src="/img3" onDragStart={handleOnDragStart} className="yours-custom-class" />
-                      <img src="/img4" onDragStart={handleOnDragStart} className="yours-custom-class" />
-                      <img src="/img5" onDragStart={handleOnDragStart} className="yours-custom-class" /> */}
-                      {
-                            cards.map( (el, i) => (
-                              <div onClick={() => setSavedCardData(el)}>
+
+                        <div className="custom-card-list-ap">
+
+                          {/* <Slider {...settings}>
+                              <div>
                                 
+                                {
+                            cards.map( (el, i) => (
+                              <div 
+                              onClick={() => setSavedCardData(el)} >
+                             
+                              
                               <ShowOnCard
                                 key={i}
                                 cvvOnCard={''}
-                                
+                               
+                                onDragStart={handleOnDragStart}
                                 expDateOnCard={el.exp_month + '/' + el.exp_year}
                                 numberOnCard={"xxxx xxxx xxxx " + el.last4}
                                 nameOnCard={"shubham"}
                                 transactionData=''
                               />
-                               
+                           
                               </div>
                             ))
                           }
-                    </AliceCarousel>
-                  
-                       {/* <div className="custom-card-list-ap">
-                         <Icon type="left-circle" onClick={() => previous()} className='custom-card-list-ap__prevarrow'/>
+                              </div>
+                             
+                            </Slider> */}
+
+                          {/* <div className="container">
+                          <Slider {...settings}>
+                            <div>
+                          {
+                            cards.map( (el, i) => (
+                              <div 
+                              onClick={() => setSavedCardData(el)} >
+                             
+                              
+                              <ShowOnCard
+                                key={i}
+                                cvvOnCard={''}
+                               
+                                onDragStart={handleOnDragStart}
+                                expDateOnCard={el.exp_month + '/' + el.exp_year}
+                                numberOnCard={"xxxx xxxx xxxx " + el.last4}
+                                nameOnCard={"shubham"}
+                                transactionData=''
+                              />
+                           
+                              </div>
+                            ))
+                          }
+                          </div>
+                          </Slider>
+                          </div> */}
+                          {/* <Carousel showArrows={false} infiniteLoop emulateTouch>
+              
+                {
+                            cards.map( (el, i) => (
+                              <div 
+                              onClick={() => setSavedCardData(el)} >
+                             
+                              
+                              <ShowOnCard
+                                key={i}
+                                cvvOnCard={''}
+                               
+                                onDragStart={handleOnDragStart}
+                                expDateOnCard={el.exp_month + '/' + el.exp_year}
+                                numberOnCard={"xxxx xxxx xxxx " + el.last4}
+                                nameOnCard={"shubham"}
+                                transactionData=''
+                              />
+                           
+                              </div>
+                            ))
+                          }
+             
+            </Carousel> */}
+                          {/* <Icon type="left-circle" onClick={() => previous()} className='custom-card-list-ap__prevarrow' /> */}
+                          <AliceCarousel mouseTrackingEnabled
+                            infinite={false}
+                            // responsive={responsive}
+                            buttonsDisabled={false}
+                            // keysControlDisabled = {true}
+                          >
+
+                            {
+                              cards.map((el, i) => (
+                                <div
+                                  onClick={() => setSavedCardData(el)}
+                                  onDragStart={handleOnDragStart}
+                                >
+
+
+                                  {/* <ShowOnCard
+                                key={i}
+                                cvvOnCard={''}
+                                flip={false}
+                                onClick={() => setSavedCardData(el)} 
+                               
+                                expDateOnCard={el.exp_month + '/' + el.exp_year}
+                                numberOnCard={"xxxx xxxx xxxx " + el.last4}
+                                nameOnCard={"shubham"}
+                                transactionData=''
+                              /> */}
+                                  <AppointmentShowCard
+                                    key={i}
+                                    cvvOnCard={''}
+                                    flip={false}
+                                    onClick={() => console.log('appointmentformcard')}
+
+                                    expDateOnCard={el.exp_month + '/' + el.exp_year}
+                                    numberOnCard={"xxxx xxxx xxxx " + el.last4}
+                                    nameOnCard={"shubham"}
+                                    transactionData=''
+
+                                  />
+
+                                </div>
+                              ))
+                            }
+                          </AliceCarousel>
+                          {/* <Icon type="right-circle" onClick={() => next()} className='custom-card-list-ap__nextarrow' /> */}
+                          {/* <div className="custom-card-list-ap"> */}
+                          {/* <Icon type="left-circle" onClick={() => previous()} className='custom-card-list-ap__prevarrow'/>
                            <Carousel ref={node => (carousel = node)} {...props}>
                            {
                              cards.map( (el, i) => (
@@ -338,6 +478,15 @@ export default function AppointmentForm() {
                           >
                             Add New <Icon type="plus" />
                           </Button>
+                          <Button
+                            style={{ float: 'right' }}
+                            type="primary"
+                            className="ap-appointment-details-btn"
+                            onClick={(e) => paymentslidersubmit(e)}
+
+                          >
+                            Next
+   </Button>
                         </div>
                       )}
                   </div>

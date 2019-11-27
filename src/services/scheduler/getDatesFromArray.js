@@ -17,7 +17,10 @@ const getDatesFromArray = (array = [], date) => {
                 available, booked, bookedFor
             } = el
             if(available && !booked)
-            return moment(bookedFor).format("hh:mm a")
+            return {
+                ...el,
+                date: moment(bookedFor).format("hh:mm a")
+            }
 
             return null
         })

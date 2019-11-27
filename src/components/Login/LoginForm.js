@@ -36,6 +36,7 @@ export default class LoginForm extends PureComponent {
         },()=>{
           const userInfo=JSON.stringify(res.data.user) ;
           window.localStorage.setItem("user",userInfo);
+         
           const step = res.data.user.steps;
           if(step.includes(0)){
             this.props.history.push("/dr-profile-stap")
@@ -72,9 +73,11 @@ export default class LoginForm extends PureComponent {
           const userInfo=JSON.stringify(res.data.user) ;
           window.localStorage.setItem("patient",userInfo)
         
-          console.log('userinfohere',userInfo)
+          console.log('userinfohere',res.data.user)
           console.log(res.data.user.customerProfile)
           localStorage.setItem('customerProfile',res.data.user.customerProfile)
+          localStorage.setItem('patientid',res.data.user._id)
+          localStorage.setItem('patientphone',res.data.user.phone)
           // if(res.data.user._id.length > 0) {
           //   axios.defaults.headers.common['x-auth-token'] = res.data.user._id;
           //   console.log(axios.defaults.headers.common['x-auth-token'])

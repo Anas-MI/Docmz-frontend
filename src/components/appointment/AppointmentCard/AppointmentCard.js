@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import classNames from 'classnames'
-import  Card from '../../Card/Card'
+import Card from '../../Card/Card'
 import { getVersions } from '../../../services/extra/bem'
 import { Row, Col, Spin, Icon, Modal, Button } from 'antd';
 import AppointmentSlider from '../AppointmentSlider';
@@ -10,8 +10,9 @@ import 'react-custom-scroll/dist/customScroll.css'
 import { getAppointments } from '../../../services/api';
 import RoundedPopup from '../../RoundedPopup/RoundedPopup';
 import AppointmentForm from "../AppointmentForm"
+import Moment from 'react-moment';
 export default class AppointmentCard extends Component {
-    constructor(props){
+    constructor(props) {
         super(props)
         this.state = {
             dates: [],
@@ -22,25 +23,34 @@ export default class AppointmentCard extends Component {
         }
         this.tap = this.tap.bind(this)
     }
+    componentDidMount() {
+        document.removeEventListener('drag', () => {
+            this.isDraging = true
+
+            setTimeout(() => {
+
+            }, 100);
+        })
+    }
     showModal = () => {
-		this.setState({
-		  visible: true,
-		});
-	  };
-	
-	  handleOk = e => {
-		console.log(e);
-		this.setState({
-		  visible: false,
-		});
-	  };
-	
-	  handleCancel = e => {
-		console.log(e);
-		this.setState({
-		  visible: false,
-		});
-	  };
+        this.setState({
+            visible: true,
+        });
+    };
+
+    handleOk = e => {
+        console.log(e);
+        this.setState({
+            visible: false,
+        });
+    };
+
+    handleCancel = e => {
+        console.log(e);
+        this.setState({
+            visible: false,
+        });
+    };
     onDateChange = dates => {
         const doctorObj = JSON.parse(localStorage.getItem("user"))
         const {
@@ -51,32 +61,32 @@ export default class AppointmentCard extends Component {
         this.setState({
             isLoading: true,
             dates
-        }, ()=> {
-            getAppointments({doctor, limit, date })
-            .then(res => {
-                if(res.data && res.data.data){
-                    const {
-                        data
-                    } = res.data
-                    this.setState({
-                        appointments: data,
-                        isLoading: false
-                    })
-                }else{
-                    this.setState({
-                        isLoading: false
-                    })
-                }
-            })
-            .catch(err => {
-                this.setState({
-                    isLoading: false
+        }, () => {
+            getAppointments({ doctor, limit, date })
+                .then(res => {
+                    if (res.data && res.data.data) {
+                        const {
+                            data
+                        } = res.data
+                        this.setState({
+                            appointments: data,
+                            isLoading: false
+                        })
+                    } else {
+                        this.setState({
+                            isLoading: false
+                        })
+                    }
                 })
-                console.log({err})
-            })
+                .catch(err => {
+                    this.setState({
+                        isLoading: false
+                    })
+                    console.log({ err })
+                })
         })
     }
-    tap () {
+    tap() {
         console.log('something')
     }
     render() {
@@ -86,13 +96,13 @@ export default class AppointmentCard extends Component {
             parentClass,
             type,
         } = this.props
-        
+
         const { dates, appointments, isLoading } = this.state
-        
-        
-        
-        const typeClass =  getVersions(type, "c-appointment-card")
-        const parent    = `${parentClass}__appointment-card`
+
+
+
+        const typeClass = getVersions(type, "c-appointment-card")
+        const parent = `${parentClass}__appointment-card`
         return (
             <div className={classNames("c-appointment-card", {
                 [className]: className,
@@ -101,53 +111,63 @@ export default class AppointmentCard extends Component {
             })}>
                 <Card parentClass="" title={title}>
                     <AppointmentSlider onDateChange={this.onDateChange} />
-                    <div  className="c-appointment-card__scroll-wrapper">
+                    <div className="c-appointment-card__scroll-wrapper">
                         <CustomScroll heightRelativeToParent="100%">
                             <Row type="flex" className={classNames("c-appointment-card__scroll-row", {
                                 "c-appointment-card__scroll-row--loading": isLoading
                             })}>
-                                {!isLoading && <Dates appointments={appointments} onClick={(e,a)=> {
-                                    console.log('datedataher',{
-                                        e,a
+                                {!isLoading && <Dates appointments={appointments} onClick={(e, a) => {
+                                    console.log('datedataher', {
+                                        e, a
                                     })
-                                    this.setState({isPopup: true})
+                                    console.log('aid',a._id)
+                                    localStorage.setItem('timeslotid',a._id)
+                                    this.setState({ isPopup: true })
+                                    console.log('a obj', { e })
                                 }} dates={dates} />}
                                 {isLoading && <Spin indicator={<Icon type="loading" style={{ fontSize: 50 }} spin />} />}
                             </Row>
                         </CustomScroll>
                     </div>
-                    <RoundedPopup width={900} onCancel={()=> this.setState({isPopup: false})} visible={this.state.isPopup} >
-                        <AppointmentForm  />
+                    <RoundedPopup width={900} onCancel={() => this.setState({ isPopup: false })} visible={this.state.isPopup} >
+                        <AppointmentForm />
                     </RoundedPopup>
                 </Card>
             </div>
         )
     }
 }
-const Dates = ({appointments, dates, onClick})=> 
-    dates.map((el, i)=> {
-        console.log('date',el)
-        localStorage.setItem('manualdate',el)
+const Dates = ({ appointments, dates, onClick }) =>
+
+    dates.map((el, i) => {
+        localStorage.setItem('manualdate', el)
         const datesArr = getDatesFromArray(appointments, el);
         return (<Col className="c-appointment-card__date-col" offset={i === 0 && 2} key={i} span={4}>
-            {datesArr.map((elx, i) => 
-                <span key={i} 
+            {datesArr.map((elx, i) =>
+                <span key={i}
                     className={classNames("c-appointment-card__date-btn", {
                         "c-appointment-card__date-btn--disabled": !elx
                     })}
-                    onClick={(e)=> {
-                        onClick(e, elx )
-                       console.log('something', elx)
-                            localStorage.setItem('manualtime',elx)
+                    onClick={(e) => {
+                        onClick(e, elx)
+                        console.log('something', elx.date)
+                        console.log(elx.bookedFor)
+                        const moonLanding = new Date(elx.bookedFor);
 
-                       
-                    //    this.showModal()
-                //    this.tap.bind(this)
+                        console.log(moonLanding.getDate());
+                        localStorage.setItem('timeslotid',elx._id)
+                           localStorage.setItem('manualbookedfor',moonLanding)
+
+
+                        localStorage.setItem('manualtime', elx.date)
+
+
+                        //    this.showModal()
+                        //    this.tap.bind(this)
                     }}
                 >
-                    {elx ? elx : ""}
+                    {elx ? elx.date : ""}
                 </span>
             )}
         </Col>)
     })
-     

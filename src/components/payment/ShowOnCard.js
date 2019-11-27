@@ -46,61 +46,61 @@ export default class ShowOnCard extends Component {
       cardDesingInfo
     });
   }
-  onChangeVlaue(e) {
-    const { name, value } = e.target;
-    const { cardtype } = this.state;
-    if (name === "cardNumber") {
-      const formatObjectWithType = formatCreditCardNumber(value);
-      const nValue =
-        formatObjectWithType && formatObjectWithType.val
-          ? formatObjectWithType.val
-          : value;
-      const nCardtype =
-        formatObjectWithType && formatObjectWithType.type
-          ? formatObjectWithType.type
-          : cardtype;
-      const ncardName = cardNameRegex.find(e => e.cardtype === nCardtype);
-      const mask =
-        ncardName && ncardName.mask ? ncardName.mask : "9999 9999 9999 9999";
-      const cardDesingInfo = getCardDetails(nCardtype);
-      this.setState({
-        [name]: nValue,
-        cardtype: nCardtype,
-        flip: false,
-        maskKey: mask,
-        cardDesingInfo
-      });
-      this.props.cardResponse({
-        cardNumber: this.state.cardNumber,
-        cardName: this.state.cardName,
-        cardDate: this.state.cardDate,
-        cardCV: this.state.cardCV
-      });
-      return;
-    }
+  // onChangeVlaue(e) {
+  //   const { name, value } = e.target;
+  //   const { cardtype } = this.state;
+  //   if (name === "cardNumber") {
+  //     const formatObjectWithType = formatCreditCardNumber(value);
+  //     const nValue =
+  //       formatObjectWithType && formatObjectWithType.val
+  //         ? formatObjectWithType.val
+  //         : value;
+  //     const nCardtype =
+  //       formatObjectWithType && formatObjectWithType.type
+  //         ? formatObjectWithType.type
+  //         : cardtype;
+  //     const ncardName = cardNameRegex.find(e => e.cardtype === nCardtype);
+  //     const mask =
+  //       ncardName && ncardName.mask ? ncardName.mask : "9999 9999 9999 9999";
+  //     const cardDesingInfo = getCardDetails(nCardtype);
+  //     this.setStaonChangeVlauete({
+  //       [name]: nValue,
+  //       cardtype: nCardtype,
+  //       flip: false,
+  //       maskKey: mask,
+  //       cardDesingInfo
+  //     });
+  //     this.props.cardResponse({
+  //       cardNumber: this.state.cardNumber,
+  //       cardName: this.state.cardName,
+  //       cardDate: this.state.cardDate,
+  //       cardCV: this.state.cardCV
+  //     });
+  //     return;
+  //   }
 
-    this.setState({
-      [name]: value,
-      cardtype
-    });
+  //   this.setState({
+  //     [name]: value,
+  //     cardtype
+  //   });
 
-    if (name === "cardCV") {
-      this.setState({
-        flip: true
-      });
-    } else {
-      this.setState({
-        flip: false
-      });
-    }
+  //   if (name === "cardCV") {
+  //     this.setState({
+  //       flip: true
+  //     });
+  //   } else {
+  //     this.setState({
+  //       flip: false
+  //     });
+  //   }
 
-    this.props.cardResponse({
-      cardNumber: this.state.cardNumber,
-      cardName: this.state.cardName,
-      cardDate: this.state.cardDate,
-      cardCV: this.state.cardCV
-    });
-  }
+  //   this.props.cardResponse({
+  //     cardNumber: this.state.cardNumber,
+  //     cardName: this.state.cardName,
+  //     cardDate: this.state.cardDate,
+  //     cardCV: this.state.cardCV
+  //   });
+  // }
   svgBack = () => {
     const { cardName, cardCV, cardDesingInfo } = this.state;
     const color =
@@ -138,14 +138,17 @@ export default class ShowOnCard extends Component {
               <ReactCardFlip
                 flipSpeedBackToFront={1}
                 flipSpeedFrontToBack={1}
-                isFlipped={this.state.flip}
+                // isFlipped={this.state.flip}
+                
+                flip = {false}
                 flipDirection="horizontal"
               >
                 <div
                   className="front"
                   key="front"
                   onClick={() => {
-                    this.setState({ flip: !flip });
+                    // this.setState({ flip: !flip });
+                    console.log(this.state)
                   }}
                 >
                   <div

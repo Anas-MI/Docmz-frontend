@@ -1,7 +1,8 @@
 import React from "react";
-import { Form, Icon, Input, Button, Row, Col, Divider, Checkbox, Modal } from "antd";
+import { Form, Icon, Input, Button, Row, Col, Divider, Checkbox, Modal, message } from "antd";
 import Firstmodel from "./Firstmodel";
 import Secondmodal from "./SecondModal";
+import axios from 'axios'
 export default class AppointmentPayReview extends React.Component {
   constructor() {
     super()
@@ -11,12 +12,28 @@ export default class AppointmentPayReview extends React.Component {
 
       checked: true,
       disabled: false,
-      informedconsent  :false,
-      privacypolicy : false
+      informedconsent: false,
+      privacypolicy: false,
+      success: false,
+      today: ''
 
     }
 
   }
+
+  componentDidMount() {
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = today.getFullYear();
+
+    today = mm + '/' + dd + '/' + yyyy;
+    console.log('today', today)
+    this.setState({
+      today: today
+    })
+  }
+
   onChange = e => {
     console.log('checked = ', e.target.checked);
     this.setState({
@@ -24,14 +41,14 @@ export default class AppointmentPayReview extends React.Component {
     });
   };
   informedchange = () => {
-this.setState({
-  informedconsent: !this.state.informedconsent
-})
+    this.setState({
+      informedconsent: !this.state.informedconsent
+    })
   }
 
   policychange = () => {
     this.setState({
-      privacypolicy : !this.state.privacypolicy
+      privacypolicy: !this.state.privacypolicy
     })
   }
   showModal2 = () => {
@@ -64,22 +81,90 @@ this.setState({
     });
   };
   handleSubmit = e => {
+    let notesdata, durationdata;
+    if (localStorage.getItem('notes') == 'undefined') {
+      notesdata = 'NO DATA'
+    }
+    else {
+      notesdata = localStorage.getItem('notes')
+    }
+    if (localStorage.getItem('duration') == 'undefined') {
+      durationdata = 'NO DATA'
+    }
+    else {
+      durationdata = localStorage.getItem('duration')
+    }
     e.preventDefault();
-   console.log('form submit')
+    console.log('form submit')
+    let body = {
+      bookedOn: this.state.today,
+      patient: localStorage.getItem('patientid'),
+      doctor: localStorage.getItem('doctorid'),
+      bookedFor: localStorage.getItem('manualbookedfor'),
+      // bookedFor : '2019-11-27',
+      transactionId: 'test',
+      availabilitySelected: 'speciality',
+      paid: true,
+      // duration : localStorage.getItem('duration'),
+      duration: `${durationdata}`,
+      booked: true,
+      amount: localStorage.getItem('doctorfee'),
+      reasonForVisit: localStorage.getItem('reason'),
+      description: `${notesdata}`,
+      type: localStorage.getItem('type'),
+      timeSlot: localStorage.getItem('timeslotid'),
+      number : localStorage.getItem('patientphone')
+    }
+    console.log(body)
+    axios
+      .post(
+        'http://localhost:3001/appointment/book', body
+
+      )
+      .then(response => {
+        console.log('payreview', response);
+        if (response.data.status == true) {
+          alert(response.data.message)
+          localStorage.removeItem('patientid', 'doctorid', 'manualbookedfor', 'doctorfee', 'reason', 'type', 'timeslotid')
+          // this.setState({
+          //   success : true
+          // })
+          // const success = () => {
+          //   message.success('This is a success message');
+          // };
+        }
+        //  this.state.prodbatch = response.data.data.items
+
+        //  this.forceUpdate();
+        //  if (response.data.data.description == "Item deleted successfully") {
+        //      alert("Product deleted successfully");
+        //      this.forceUpdate();
+        //      this.handleClick();
+        //  }
+      })
+      .catch(e => {
+        console.log('error', e);
+      });
   };
 
   render() {
+    if (this.state.success) {
+      const success = () => {
+        message.success('This is a success message');
+      };
+    }
     let confirmbtn;
-    if(this.state.informedconsent && this.state.privacypolicy){
+    if (this.state.informedconsent && this.state.privacypolicy) {
       confirmbtn = (
         <div>
-           <Button type="primary" className="ap-appointment-details-btn" onClick={(e) => this.handleSubmit(e)}>Confirm</Button>
+          <Button type="primary" className="ap-appointment-details-btn"
+            onClick={(e) => this.handleSubmit(e)}>Confirm</Button>
         </div>
       )
     }
     else {
       confirmbtn = (
-        <div> <Button type="primary"  disabled>Confirm</Button></div>
+        <div> <Button type="primary" disabled>Confirm</Button></div>
       )
     }
     const { getFieldDecorator } = this.props.form;
@@ -106,7 +191,7 @@ this.setState({
               <p><strong>Consultation Method : </strong>{localStorage.getItem('type') || 'NO DATA'} </p>
               <p><strong>Reason for visit :</strong> {localStorage.getItem('reason') || 'NO DATA'}</p>
               <p><strong>Duration : </strong>{localStorage.getItem('duration') || 'NO DATA'}</p>
-              <p><strong>Consultation Cost : </strong>$40.00</p>
+              <p><strong>Consultation Cost : </strong>{localStorage.getItem('doctorfee')}</p>
               <p><strong>Appointment Time : </strong>{localStorage.getItem('manualtime') || 'NO DATA'}</p>
               <p><strong>Specialty : </strong>Primary Care Doctor</p>
             </div>
@@ -117,6 +202,7 @@ this.setState({
 
 
             <p>Visa ending in : {localStorage.getItem('last4')}</p>
+            {/* <p>Visa Number : {localStorage.getItem('patientcardnumber')}</p> */}
 
             <h2>Insurance</h2>
 
@@ -144,8 +230,8 @@ this.setState({
             </Checkbox>
 
               <Checkbox
-               checked={this.state.privacypolicy}
-               onChange={() => this.policychange()}
+                checked={this.state.privacypolicy}
+                onChange={() => this.policychange()}
               >
                 I have read <span onClick={this.showModal2} style={{ color: '#82bbe9' }}>Doc Mz's Informed Consent</span> and I acknowledge that I have the ability to print a hard copy of Privacy Policy for my records.
             </Checkbox>
@@ -153,11 +239,11 @@ this.setState({
             </Col>
 
             <Col span={24}>
-              <center> 
-                 {/* <Button type="primary">Primary</Button> */}
-                 {confirmbtn}
+              <center>
+                {/* <Button type="primary">Primary</Button> */}
+                {confirmbtn}
 
-                 </center>
+              </center>
             </Col>
           </div>
         </Row>

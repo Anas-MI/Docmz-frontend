@@ -27,6 +27,7 @@ class FormStep2 extends Component {
         super()
         this.state = {
             value: '',
+            phone : ''
           };
         
         
@@ -54,9 +55,24 @@ class FormStep2 extends Component {
         console.log(this.state.value)
         localStorage.setItem('type',this.state.value)
       };
+   componentDidMount() {
+     this.setState({
+       phone : localStorage.getItem('patientphone')
+     })
+   }
+   phoneChange =  async (e) => {
+     e.preventDefault();
+     console.log(this.state.phone)
+      await this.setState({
+       phone : e.target.value
+     })
+     console.log(this.state.phone)
+     localStorage.setItem('patientphone',this.state.phone)
+   }
    
     render() {
         const { getFieldDecorator } = this.props.form;
+        const {phone} = this.state
         return (
             <>
                 {/* <Form onSubmit={this.handleSubmit} className="login-form">
@@ -120,9 +136,9 @@ class FormStep2 extends Component {
               <p className="visit-type-para-ap">What's the best number to reach you during your visit?</p>
               <Form.Item>
           {getFieldDecorator('phone', {
-             initialValue: ['8765058596'],
+             initialValue: `${phone}`,
           })(
-            <Input/>
+            <Input onChange={(e) => this.phoneChange(e)}/>
           )}
         </Form.Item>
         <Tooltip title="We may reach out if there are changes to your visit." className="second-step-custom-ap__iconhelptooltip">
