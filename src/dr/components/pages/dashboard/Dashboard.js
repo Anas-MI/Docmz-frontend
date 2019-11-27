@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 // import Timelines from "../../objects/timeline/Timelines";
-import { Row, Col, Button, Icon,  Card, Avatar, } from "antd";
+import { Row, Col, Button, Icon,  Card, Avatar, Badge , Spin} from "antd";
 import classNames from 'classnames'
 import InfoCard from "../../objects/card/InfoCard";
 import { getDoctors } from '../../../../services/redux/actions';
@@ -45,7 +45,7 @@ const text1 = `
   )
   .then(response => {
     console.log('docdetailsashbaord', response.data.data.appointments);
-    console.log(response.data.data.appointments.length)
+   
     let apparr = response.data.data.appointments
     let filterapparr =  apparr.filter(function(hero) {
       return hero.booked == true;
@@ -212,14 +212,20 @@ componentDidMount() {
             
             }
            key={id}>
+
               
-                <p>Reason for visit : <strong>{item.reasonForVisit || 'NO DATA'}</strong> </p>
-                <p>Description : <strong>{item.description || 'NO DATA'}</strong></p>
+              
+          {!item.reasonForVisit ? '' : <p>Reason for visit : {item.reasonForVisit || 'NO DATA'}</p>}
+                
+                  {!item.description ? '' : <p>Description : {item.description || 'NO DATA'}</p> }
+                  {!item.duration  ? '' : <p>Duration : {item.duration || 'NO DATA'}</p>}
               </Panel>
               );
             }, this)
           ) : (
-            <span>No Data Present</span>
+            <span>
+              <Spin indicator={<Icon type="loading" style={{ fontSize: 50 }} spin />} />
+            </span>
           )}
 
               {/* <Panel header={<InfoCard />} key="2">
