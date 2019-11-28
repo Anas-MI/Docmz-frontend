@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Calendar, Col, Row, Icon } from 'antd'
+import { Calendar, Col, Row, Icon, Badge } from 'antd'
 import classNames from 'classnames'
 import moment from 'moment'
 
@@ -51,6 +51,7 @@ export default class ShortCalender extends Component {
   render() {
     return (
       <div className="c-short-calender">
+        {/* <Badge count={5}> */}
         <Calendar
           // className="badge1"
           // data-badge="6"
@@ -58,6 +59,7 @@ export default class ShortCalender extends Component {
           fullscreen={false}
           headerRender={this.renderHeader}
         />
+        {/* </Badge> */}
       </div>
     )
   }

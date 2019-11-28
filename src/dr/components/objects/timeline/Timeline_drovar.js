@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Row, Col, Divider, Drawer, Alert } from "antd";
+import { Row, Col, Divider, Drawer, Alert, Badge } from "antd";
 import ShortCalender from "../calenders/shortCalender/ShortCalender";
 import './customtimeline.css'
 import { getDoctorDetail } from '../../../../services/api/doctors';
@@ -96,6 +96,7 @@ export default class Timeline_drovar extends Component {
           className="custom-timeline-drover-style-aakash"
         
         >
+         
           <ShortCalender 
           className="badge1"
           data-badge="6"
@@ -109,6 +110,7 @@ export default class Timeline_drovar extends Component {
               },this.setState({appointmentlength : this.state.appointments.length}))
             })
           }} />
+         
           <div className="c-timeline-drower__row">
              
             {/* <div data-time="08:00" className="c-timeline-drower__col">
