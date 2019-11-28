@@ -97,8 +97,8 @@ export default class Timeline_drovar extends Component {
         
         >
           <ShortCalender 
-          // className="badge1"
-          // data-badge="6"
+          className="badge1"
+          data-badge="6"
           onSelect={(selectedDate)=> {
             this.setState({
               appointments: getAppointmentsOfDate(appointments, selectedDate),
