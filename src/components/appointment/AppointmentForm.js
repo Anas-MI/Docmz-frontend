@@ -413,7 +413,9 @@ export default function AppointmentForm() {
                                 nameOnCard={"shubham"}
                                 transactionData=''
                               /> */}
-                                <Radio.Group name="radiogroup" 
+                                <Radio.Group   
+                                name="type"
+                                // onChange={(e) => {value = e.target.value }}
                                 // defaultValue={i}
                                 >
                                     <Radio value={i} onChange={() => console.log(i)}>

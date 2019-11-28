@@ -5,6 +5,7 @@ import './customtimeline.css'
 import { getDoctorDetail } from '../../../../services/api/doctors';
 import { getAppointmentsOfDate, getDoctorTimeLine } from '../../../../services/extra/DoctorHelpers';
 import moment from "moment";
+import './customtimeline.css'
 
 export default class Timeline_drovar extends Component {
   constructor(props) {
@@ -93,8 +94,12 @@ export default class Timeline_drovar extends Component {
           width={350}
           mask={false}
           className="custom-timeline-drover-style-aakash"
+        
         >
-          <ShortCalender onSelect={(selectedDate)=> {
+          <ShortCalender 
+          // className="badge1"
+          // data-badge="6"
+          onSelect={(selectedDate)=> {
             this.setState({
               appointments: getAppointmentsOfDate(appointments, selectedDate),
               selectedDate
