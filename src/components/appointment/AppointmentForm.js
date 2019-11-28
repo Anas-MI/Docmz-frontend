@@ -384,7 +384,7 @@ export default function AppointmentForm() {
              
             </Carousel> */}
                           {/* <Icon type="left-circle" onClick={() => previous()} className='custom-card-list-ap__prevarrow' /> */}
-                          {/* <Radio.Group name="radiogroup"> */}
+                          
                             <AliceCarousel mouseTrackingEnabled
                               infinite={false}
                               // responsive={responsive}
@@ -394,7 +394,7 @@ export default function AppointmentForm() {
 
                               {
                                 cards.map((el, i) => (
-                                  <Radio value={i} onChange={() => console.log(i)}>
+                                 
                                   <div
                                     onClick={() => setSavedCardData(el)}
                                     onDragStart={handleOnDragStart}
@@ -413,7 +413,10 @@ export default function AppointmentForm() {
                                 nameOnCard={"shubham"}
                                 transactionData=''
                               /> */}
-                                   
+                                <Radio.Group name="radiogroup" 
+                                // defaultValue={i}
+                                >
+                                    <Radio value={i} onChange={() => console.log(i)}>
                                       <AppointmentShowCard
 
                                         key={i}
@@ -427,18 +430,21 @@ export default function AppointmentForm() {
                                         transactionData=''
 
                                       />
-                                      <span class="caption">
+                                        </Radio>
+                                        </Radio.Group>
+                                      {/* <span class="caption">
                                         <span>Painting</span>
-                                      </span>
+                                      </span> */}
                                    
 
                                   </div>
-                                  </Radio>
+                                
                                 ))
                               }
+                             
                             </AliceCarousel>
 
-                          {/* </Radio.Group> */}
+                      
                           {/* <Icon type="right-circle" onClick={() => next()} className='custom-card-list-ap__nextarrow' /> */}
                           {/* <div className="custom-card-list-ap"> */}
                           {/* <Icon type="left-circle" onClick={() => previous()} className='custom-card-list-ap__prevarrow'/>

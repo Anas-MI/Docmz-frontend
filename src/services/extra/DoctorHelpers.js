@@ -1,3 +1,6 @@
+import Moment from 'moment'
+import * as MomentRange from 'moment-range'
+const moment = MomentRange.extendMoment(Moment);
 export const getValidValue = value => (value && value.trim() !== "" && value.trim() !== "not found") ? value : ""
 
 export const getName = doctor => {
@@ -109,4 +112,40 @@ export const removeDublecatVale = (originalArray,key) =>{
          newArray.push(lookupObject[i]);
      }
       return newArray;
+}
+
+export const getAppointmentsOfDate = (appointments = [], date)=> 
+  appointments.filter(el => moment(el.bookedFor).isSame(date, "day"))
+
+export const getDoctorTimeLine = ({
+  timeSlot,
+  allAppointments,
+  date
+}) => {
+  // console.clear()
+  console.log({
+    timeSlot,
+    allAppointments,
+    date
+  })
+  const appointment = getAppointmentsOfDate(allAppointments, date)
+  if(appointment.length < 1){
+    return {
+      status: false
+    }
+  }
+  const moments = appointment.map(el => moment(el.bookedFor))
+  const max = moment.max(moments).format("HH")
+  const min = moment.min(moments).format("HH")
+  const day_start = moment().startOf('day').hours(parseInt(min))
+  const day_end = moment().startOf('day').hours(parseInt(max))
+  const day = moment.range(day_start, day_end)
+  // console.clear()
+  // console.log({
+  //   day: Array.from(day.by('minutes', {step: timeSlot})).map(el => el.format("HH:mm"))
+  // })
+  return {
+    status: true,
+    dates: Array.from(day.by('minutes', {step: timeSlot}))
+  }
 }

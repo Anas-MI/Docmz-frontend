@@ -16,7 +16,7 @@ export default class Button extends Component {
     return (
       <AntButton onClick={this.onClick} type={type} shape={shape} className={componentClass}>
         {icon && iconPos !== "right" && <Icon type={icon} />}
-        asdf
+        More Details
         {icon && iconPos === "right" && <Icon type={icon} />}
       </AntButton>
     )

@@ -21,6 +21,7 @@ import {
 } from 'react-accessible-accordion';
 import 'react-accessible-accordion/dist/fancy-example.css';
 import moment from "moment";
+import { getDoctorDetail } from "../../../../services/api";
 const Panel = Collapse.Panel;
 const text1 = `
  Reason for visit - Toothache`;
@@ -33,17 +34,15 @@ class Dashboard extends Component {
       isTourActive: false,
       tourStep: 1,
       counter: '0',
-      filterappointmentarr: []
+      filterappointmentarr: [],
+      allAppointments:  []
     };
   }
 
 
-  getdocdetail = () => {
-    axios.get(
-      `http://localhost:3001/doctors/getdoc/${localStorage.getItem('doctorid')}`
-
-    )
-      .then(response => {
+  getdocdetail = (e) => {
+    getDoctorDetail(localStorage.getItem('doctorid'))
+    .then(response => {
         console.log('docdetailsashbaord', response.data.data.appointments);
 
         let apparr = response.data.data.appointments
@@ -51,10 +50,13 @@ class Dashboard extends Component {
           return hero.booked == true;
           // console.log('hero',hero.booked == true)
         });
-        console.log('filterapparrrdata', filterapparr)
-        this.setState({
-          filterappointmentarr: filterapparr
+        console.log('filterapparrrdata', apparr)
+         this.setState({
+          filterappointmentarr: filterapparr,
+          allAppointments: apparr
         })
+        // this.state.allAppointments = apparr
+        console.log('allApp',this.state.allAppointments)
 
         // for(let i=0;i <= apparr.length;++i){
         //   console.log('bookres',apparr[i].booked)
@@ -163,7 +165,11 @@ class Dashboard extends Component {
   }
   render() {
 
-    const { visible } = this.state;
+    const { visible, filterappointmentarr, allAppointments } = this.state;
+    // console.clear()
+    console.log({
+      __allAppointments: allAppointments 
+    })
     const tourTitleStyle = {
       fontWeight: 700,
       fontSize: 16,
@@ -266,14 +272,7 @@ class Dashboard extends Component {
                   </span>
                 )}
 
-              {/* <Panel header={<InfoCard />} key="2">
-              <p>Reason for visit :  </p>
-                <p>Description : Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,</p>
-              </Panel>
-              <Panel header={<InfoCard />} key="3">
-              <p>Reason for visit :  </p>
-                <p>Description : Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,</p>
-              </Panel> */}
+             
             </Collapse>
             {/* <Accordion>
               <AccordionItem>
@@ -351,7 +350,8 @@ class Dashboard extends Component {
                   this.onClose();
                 }}
                 class="stop-2"
-
+                allAppointments={allAppointments}
+                appointments={filterappointmentarr}
               />
               {/* <ShortCalender /> */}
             </div>

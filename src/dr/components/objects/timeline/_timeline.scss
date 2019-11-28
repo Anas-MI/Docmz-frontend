@@ -46,6 +46,7 @@
         top: -1px;
         height: 60px;
         overflow: hidden;
+        padding: 5px 15px !important;
         @for $i from 1 through 24 {
             &--span-#{$i} {
               height: $i * 60px

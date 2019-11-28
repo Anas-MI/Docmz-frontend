@@ -9,3 +9,26 @@ left: 30px;
     border-color: #ff4d4f;
     transition: all 0.3s;
 }
+.info-style-collapse__custom_ap .ant-collapse-header .anticon{
+    /* 
+    font-style: normal;
+    line-height: 0;
+    text-align: center;
+    text-transform: none;
+    vertical-align: -0.125em;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale; */
+    position: absolute;
+    top: 84%!important;
+    left: 96%!important;
+    color: #fff!important;
+    /* display: inline-block;
+    font-size: 12px;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%); */
+}
+.info-style-collapse__custom_ap .ant-btn {
+    padding-right: 30px;
+}

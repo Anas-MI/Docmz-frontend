@@ -4,7 +4,15 @@ import classNames from 'classnames'
 import moment from 'moment'
 
 export default class ShortCalender extends Component {
-    renderHeader = ({ value, type, onChange, onTypeChange }) => {
+    onSelect=(e)=> {
+      const {
+        onSelect
+      } = this.props
+      if(typeof onSelect === "function"){
+        onSelect(e)
+      }
+    }
+    renderHeader = ({ value, type, onChange, onTypeChange, }) => {
       const currentMonth = moment().month()
         return (
           <div className="c-short-calender__header" style={{ padding: 10 }}>
@@ -42,6 +50,7 @@ export default class ShortCalender extends Component {
         return (
             <div className="c-short-calender">
                 <Calendar 
+                    onChange={this.onSelect}
                     fullscreen={false} 
                     headerRender={this.renderHeader}
                 />
