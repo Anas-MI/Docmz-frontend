@@ -120,27 +120,30 @@ export default class HistoryCard extends Component {
                     <Panel header={
 
                       <Card bordered={false} className={componentClass}>
-                        <Row type="flex">
+                        <Row>
                           {/* <Col span={12}>
                           <Row> */}
-                          <Col span={12}>
+                          <Col span={7}>
                             {/* <p className={elementClasses.name}>{this.state.filterhistoryarr[0].patient.customerProfile}</p> */}
                             {this.state.filterhistoryarr[id].patient == null ? 'NO NAME' : <span>{this.state.filterhistoryarr[id].patient.name || 'John Doe'}</span>}
                             <p className={elementClasses.status}>active</p>
                           </Col>
-                          <Col span={12}>
+                          <Col span={8}>
                             <LabelValue parentClass={componentClass} label="Patient ID" >
                               {/* {this.state.filterhistoryarr[0].patient._id} */}
                               {this.state.filterhistoryarr[id].patient == null ? 'No Patient' : <span>{this.state.filterhistoryarr[id].patient._id}</span>}
                             </LabelValue>
                             <LabelValue parentClass={componentClass} label="Email" >  
-                            {this.state.filterhistoryarr[id].patient == null ? 'No Email Found' : <span>{this.state.filterhistoryarr[id].patient.email}</span>}
+                            {this.state.filterhistoryarr[id].patient == null ? 'No Email Found' : <span style={{minWidth : '60%!important'}}>{this.state.filterhistoryarr[id].patient.email}</span>}
                             </LabelValue>
                             <LabelValue parentClass={componentClass} label="Phone" >
                             {this.state.filterhistoryarr[id].patient == null ? 'No Contact Details Found' : <span>{this.state.filterhistoryarr[id].patient.phone}</span>}
                               </LabelValue>
                             <LabelValue parentClass={componentClass} label="Reason For Visit" >{item.reasonForVisit || 'NO DATA'}</LabelValue>
                             <LabelValue parentClass={componentClass} label="Intake Timestamp" ><Moment format="L">{item.bookedFor}</Moment> - <Moment format="LT">{item.bookedFor}</Moment></LabelValue>
+                          </Col>
+                          <Col span={7} offset={2}>
+                          <LabelValue parentClass={componentClass} label="Notes" >{item.description || 'NO DATA'}</LabelValue>
                           </Col>
                           {/* </Row>
                         </Col> */}

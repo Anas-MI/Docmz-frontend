@@ -32,3 +32,9 @@ left: 30px;
 .info-style-collapse__custom_ap .ant-btn {
     padding-right: 30px;
 }
+.info-style-collapse__custom_ap .c-label-value__value {
+    min-width: 60%!important;
+}
+.info-style-collapse__custom_ap .c-label-value__label {
+    min-width: 40%;
+}
