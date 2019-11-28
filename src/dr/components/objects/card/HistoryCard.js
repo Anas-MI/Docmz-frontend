@@ -125,8 +125,15 @@ export default class HistoryCard extends Component {
                           <Row> */}
                           <Col span={7}>
                             {/* <p className={elementClasses.name}>{this.state.filterhistoryarr[0].patient.customerProfile}</p> */}
-                            {this.state.filterhistoryarr[id].patient == null ? 'NO NAME' : <span>{this.state.filterhistoryarr[id].patient.name || 'John Doe'}</span>}
-                            <p className={elementClasses.status}>active</p>
+                            {/* {this.state.filterhistoryarr[id].patient == null ? 'NO NAME' : <span>{this.state.filterhistoryarr[id].patient.name || 'John Doe'}</span>}
+                            <p className={elementClasses.status}>active</p> */}
+                             <LabelValue parentClass={componentClass} label="Patient Name" >
+                              {/* {this.state.filterhistoryarr[0].patient._id} */}
+                              {this.state.filterhistoryarr[id].patient == null ? 'NO NAME' : <span>{this.state.filterhistoryarr[id].patient.name || 'John Doe'}</span>}
+                            </LabelValue>
+                            <LabelValue parentClass={componentClass} label="Status" >  
+                            Active
+                            </LabelValue>
                           </Col>
                           <Col span={8}>
                             <LabelValue parentClass={componentClass} label="Patient ID" >
