@@ -1,17 +1,6 @@
 .custom-sidebar-icon-ap img {
 padding-right: 20px;
 }
-.custom-sidebar-icon-ap  .custom-footer-icon-ap {
-    /* position: fixed!important; */
-    /* top:800px!important; */
-    /* margin-top: 200px!important; */
-    /* position: relative;
-    top: 430px; */
-   
-}
-.custom-sidebar-icon-ap  .custom-footer-icon-ap2 {
-    /* position: fixed!important; */
-    /* top:800px!important; */
-    /* margin-top: 250px!important; */
-   
+.custom-sidebar-icon-ap .ant-menu-item-selected:after {
+    border-right: 3px solid #874285!important;
 }

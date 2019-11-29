@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 // import Timelines from "../../objects/timeline/Timelines";
-import { Row, Col, Button, Icon, Card, Avatar, Badge, Spin, Tooltip, notification } from "antd";
+import { Row, Col, Button, Icon, Card, Avatar, Badge, Spin, Tooltip, notification, Popconfirm, message } from "antd";
 import classNames from 'classnames'
 import InfoCard from "../../objects/card/InfoCard";
 import { getDoctors } from '../../../../services/redux/actions';
@@ -37,8 +37,8 @@ class Dashboard extends Component {
       tourStep: 1,
       counter: '0',
       filterappointmentarr: [],
-      allAppointments:  [],
-      open : true
+      allAppointments: [],
+      open: true
     };
   }
 
@@ -46,7 +46,7 @@ class Dashboard extends Component {
 
   getdocdetail = (e) => {
     getDoctorDetail(localStorage.getItem('doctorid'))
-    .then(response => {
+      .then(response => {
         console.log('docdetailsashbaord', response.data.data.appointments);
 
         let apparr = response.data.data.appointments
@@ -55,12 +55,12 @@ class Dashboard extends Component {
           // console.log('hero',hero.booked == true)
         });
         console.log('filterapparrrdata', apparr)
-         this.setState({
+        this.setState({
           filterappointmentarr: filterapparr,
           allAppointments: apparr
         })
         // this.state.allAppointments = apparr
-        console.log('allApp',this.state.allAppointments)
+        console.log('allApp', this.state.filterappointmentarr)
 
         // for(let i=0;i <= apparr.length;++i){
         //   console.log('bookres',apparr[i].booked)
@@ -78,23 +78,23 @@ class Dashboard extends Component {
       });
   }
 
- 
+
   async componentDidMount() {
     this.setState({
       // isTourActive: true
       // open : true
-      
+
     });
     this.props.getDoctors()
     // if(this.state.open){
-      await this.props.getNotifications()
+    await this.props.getNotifications()
     // }
     // console.log('docdetails',localStorage.getItem('user'))
     // console.log('patientdetail',localStorage.getItem('patient'))
     this.getdocdetail();
-    
+
     //  (console.log('final redmer'))
-   
+
   }
 
   showDrawer = () => {
@@ -126,6 +126,15 @@ class Dashboard extends Component {
       });
     }
   };
+  confirm(e) {
+    console.log(e);
+    message.success('Click on Yes');
+  }
+
+  cancel(e) {
+    console.log(e);
+    message.error('Click on No');
+  }
   componentClass = name => {
     if (typeof name === "string") {
       if (name.includes(",")) {
@@ -144,52 +153,52 @@ class Dashboard extends Component {
     console.log('something', item)
     let approvetime = new Date(item.bookedFor)
     let body = {
-      patient : 'John Doe',
-      time : approvetime.toLocaleTimeString('en-US'),
-      date : moment(approvetime).format('L'),
-      address : 'NO DATA',
-      timeSlot : item._id,
-      email : 'patienemail@gmail.com',
-      doctor : localStorage.getItem('docname')
+      patient: 'John Doe',
+      time: approvetime.toLocaleTimeString('en-US'),
+      date: moment(approvetime).format('L'),
+      address: 'NO DATA',
+      timeSlot: item._id,
+      email: 'patienemail@gmail.com',
+      doctor: localStorage.getItem('docname')
     }
-    console.log('approvebody',body)
+    console.log('approvebody', body)
     axios
-    .post(
-      'http://localhost:3001/appointment/approve', body
+      .post(
+        'http://localhost:3001/appointment/approve', body
 
-    )
-    .then(response => {
-      console.log('approveappointmernt', response);
-      if (response.data.status == true) {
-        alert(response.data.message)
-        window.location.reload();
-        // this.setState({
-        //   success : true
-        // })
-        // const success = () => {
-        //   message.success('This is a success message');
-        // };
-      }
-      
-    })
-    .catch(e => {
-      console.log('error', e);
-    });
+      )
+      .then(response => {
+        console.log('approveappointmernt', response);
+        if (response.data.status == true) {
+          alert(response.data.message)
+          window.location.reload();
+          // this.setState({
+          //   success : true
+          // })
+          // const success = () => {
+          //   message.success('This is a success message');
+          // };
+        }
+
+      })
+      .catch(e => {
+        console.log('error', e);
+      });
   }
   render() {
- 
-   
+
+
     // const args = {
     //   message: 'Notification Title',
     //   description:
     //     'I will never close automatically. I will be close automatically. I will never close automatically.',
     //   duration: 0,
     // };
-  
+
     const { visible, filterappointmentarr, allAppointments } = this.state;
     // console.clear()
     console.log({
-      __allAppointments: allAppointments 
+      __allAppointments: allAppointments
     })
     const tourTitleStyle = {
       fontWeight: 700,
@@ -210,9 +219,9 @@ class Dashboard extends Component {
     }
     return (
       <div>
-       {/* {!this.state.open ? '' : <WelcomeNotification />}    */}
+        {/* {!this.state.open ? '' : <WelcomeNotification />}    */}
         {/* <WelcomeNotification /> */}
-      {/* {notification.open(args)} */}
+        {/* {notification.open(args)} */}
         <Row>
           <Col
             span={15}
@@ -262,15 +271,28 @@ class Dashboard extends Component {
                             </div>
                           </Col>
                           <Col span={24 / 3} className={this.componentClass("status-col")} >
-                            <div className={classNames(this.componentClass("status"), this.componentClass("status--active"))} >
-                              {item.approved == true ? 'Approved' : <Tooltip title="CLick to Approve the Appointment">
-                                <span onClick={this.manualapprove.bind(this, item)}>Approve</span>
-                              </Tooltip>}
-                            </div>
-                            <div className={classNames(this.componentClass("more"))} >
+                            {item.approved == true ?
+                              <div className={classNames(this.componentClass("status"), this.componentClass("status--active"))} >
+                                Approved</div> :
+                              <div className={classNames(this.componentClass("status-notapproved"), this.componentClass("status--active"))} >
+                                <Tooltip title="Approve this Appointment">
+                                  <span onClick={this.manualapprove.bind(this, item)} style={{ color: 'red' }}>Need Approval</span>
+                                </Tooltip>
+                              </div>
+                            }
+                            <div className={classNames(this.componentClass("more"), (this.componentClass('more_ap_custom')))} >
                               {/* <Icon type="down" className={classNames(this.componentClass("icon"), this.componentClass("icon--more"))} /> */}
                               {/* <Icon type="close" /> */}
-                              <Button type="primary" className="custom-infocard-btn-ap">Cancel</Button>
+                              {/* <Button type="primary" className="custom-infocard-btn-ap">Cancel</Button> */}
+                              <Popconfirm
+                                title="Are you sure Cancel this Appointment?"
+                                onConfirm={this.confirm}
+                                onCancel={this.cancel}
+                                okText="Yes"
+                                cancelText="No"
+                              >
+                               <Icon type="ellipsis" />
+                              </Popconfirm>
                             </div>
                           </Col>
                         </Row>
@@ -296,7 +318,7 @@ class Dashboard extends Component {
                   </span>
                 )}
 
-             
+
             </Collapse>
             {/* <Accordion>
               <AccordionItem>
@@ -539,7 +561,7 @@ class Dashboard extends Component {
 
 const mapStateToProps = (state) => ({
   doctors: state.doctors.all,
-  notifications : state.notifications.all
+  notifications: state.notifications.all
 })
 export default connect(mapStateToProps, {
   getDoctors, getNotifications

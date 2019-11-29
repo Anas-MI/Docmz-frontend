@@ -24,7 +24,9 @@ export default class FormStep1 extends React.Component {
         <Form onSubmit={this.handleSubmit} className="login-form">
           <Form.Item label="Reason" >
             {getFieldDecorator('reason', {
-              rules: [{ required: true, message: 'Please tell us a reason.' }],
+              rules: [{ required: true, message: 'Please tell us a reason.' },
+              // { min: 5, message: 'Reason must be minimum 5 characters.' }
+            ],
             })(
               <Input
                 placeholder="Whats the reason for your appointment?"
@@ -33,19 +35,19 @@ export default class FormStep1 extends React.Component {
           </Form.Item>
           <Form.Item label="Duration" >
             {getFieldDecorator('duration', {
-            //   rules: [{ required: true, message: 'Please tell us a reason.' }],
+              rules: [{ min: 5, message: 'Duration must be minimum 5 characters.' }],
             })(
               <Input
-                placeholder="For how long are you suffering?"
+                placeholder="When did your problem start?"
               />,
             )}
           </Form.Item>
           <Form.Item label="Notes" >
             {getFieldDecorator('notes', {
-            //   rules: [{ required: true, message: 'Please tell us a reason.' }],
+              rules: [{ min: 10, message: 'Notes must be minimum 10 characters.' }],
             })(
               <Input.TextArea
-                placeholder="For how long are you suffering?"
+                placeholder="Is there any other information you would like to share with the doctor?"
               />,
             )}
           </Form.Item>

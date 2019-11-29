@@ -103,3 +103,38 @@
 .ant-collapse-arrow {
     transition: all 0.3s;
 }
+/* .c-info-card__ap_approved_custom {
+    color : #874285;
+} */
+.c-info-card__status {
+    color: #874285!important;
+    font-weight: 500;
+    font-size: 13px;
+}
+.c-info-card__status-notapproved {
+    font-size: 12px;
+    position: relative;
+    padding-left: 15px;
+    padding-right: 15px;
+    font-weight: 500;
+    font-size: 13px;
+}
+.c-info-card__status-notapproved:before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    left: 5px;
+    width: 5px;
+    height: 5px;
+    border-radius: 100%;
+    background-color: red;
+}
+.c-info-card__more_ap_custom .anticon{
+    font-size : 25px;
+    position: relative;
+    top : -15px;
+    left: 15px;
+}
