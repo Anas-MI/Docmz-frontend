@@ -60,7 +60,7 @@ export default class ShortCalender extends Component {
   render() {
     // dateCellRender(m)
     return (
-      <div className="c-short-calender">
+      <div className="c-short-calender c-short-calendar__ap_custom">
         {/* <Badge count={5}> */}
         <Calendar
           // className="badge1"
