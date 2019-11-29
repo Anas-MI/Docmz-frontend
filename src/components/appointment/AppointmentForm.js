@@ -388,8 +388,9 @@ export default function AppointmentForm() {
                             <AliceCarousel mouseTrackingEnabled
                               infinite={false}
                               // responsive={responsive}
-                              buttonsDisabled={false}
-                            // keysControlDisabled = {true}
+                              buttonsDisabled={true}
+                              dotsDisabled = {true}
+                            keysControlDisabled = {true}
                             >
 
                               {

@@ -35,7 +35,7 @@ export default class FormStep1 extends React.Component {
           </Form.Item>
           <Form.Item label="Duration" >
             {getFieldDecorator('duration', {
-              rules: [{ min: 5, message: 'Duration must be minimum 5 characters.' }],
+              rules: [{ max: 20, message: 'Duration must be minimum 20 characters.' }],
             })(
               <Input
                 placeholder="When did your problem start?"
@@ -44,7 +44,7 @@ export default class FormStep1 extends React.Component {
           </Form.Item>
           <Form.Item label="Notes" >
             {getFieldDecorator('notes', {
-              rules: [{ min: 10, message: 'Notes must be minimum 10 characters.' }],
+              rules: [{ min: 20, message: 'Notes must be minimum 20 characters.' }],
             })(
               <Input.TextArea
                 placeholder="Is there any other information you would like to share with the doctor?"

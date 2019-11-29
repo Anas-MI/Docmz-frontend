@@ -409,7 +409,14 @@
   box-shadow: none;
 
 }
-
+.appointment_booked_ap .anticon {
+  font-size: 40px;
+  color: #874285;
+}
+.appointment_booked_ap h3 {
+  padding-top: 30px;
+  color: rgb(0, 35, 75);
+}
 /* .review-custom-section-ap .review-custom-section-ap__visit-col{
     float: right;
 } */

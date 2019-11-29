@@ -3,6 +3,8 @@ import { Form, Icon, Input, Button, Row, Col, Divider, Checkbox, Modal, message 
 import Firstmodel from "./Firstmodel";
 import Secondmodal from "./SecondModal";
 import axios from 'axios'
+import Moment from 'react-moment';
+import moment from 'moment'
 export default class AppointmentPayReview extends React.Component {
   constructor() {
     super()
@@ -15,7 +17,11 @@ export default class AppointmentPayReview extends React.Component {
       informedconsent: false,
       privacypolicy: false,
       success: false,
-      today: ''
+      today: '',
+      durationdata: '',
+      appointmentbookstatus: false,
+      formatnewdatestate : '',
+      formattimestate : ''
 
     }
 
@@ -81,6 +87,13 @@ export default class AppointmentPayReview extends React.Component {
     });
   };
   handleSubmit = e => {
+    console.log('durationtype', localStorage.getItem('duration'))
+    if (localStorage.getItem('duration') == 'undefined') {
+      console.log(true)
+    }
+    else {
+      console.log(false)
+    }
     let notesdata, durationdata;
     if (localStorage.getItem('notes') == 'undefined') {
       notesdata = 'NO DATA'
@@ -88,14 +101,31 @@ export default class AppointmentPayReview extends React.Component {
     else {
       notesdata = localStorage.getItem('notes')
     }
-    if (localStorage.getItem('duration') == 'undefined') {
-      durationdata = 'NO DATA'
+    if (localStorage.getItem('duration') != 'undefined') {
+      durationdata = localStorage.getItem('duration')
+      this.setState({
+        durationdata: localStorage.getItem('duration')
+      })
+      // durationdata = 'NO DATA'
     }
     else {
-      durationdata = localStorage.getItem('duration')
+      durationdata = 'NO DATA'
+      this.setState({
+        durationdata: 'NO DATA'
+      })
     }
+
     e.preventDefault();
     console.log('form submit')
+    let newformatdate = new Date(localStorage.getItem('manualbookedfor'))
+    let formatdate = moment(newformatdate).format('LL')
+    let formattime = moment(newformatdate).format('LT');
+  this.setState({
+    formattimestate : formattime
+  })
+    this.setState({
+      formatnewdatestate : formatdate
+    })
     let body = {
       bookedOn: this.state.today,
       patient: localStorage.getItem('patientid'),
@@ -107,15 +137,18 @@ export default class AppointmentPayReview extends React.Component {
       paid: true,
       // duration : localStorage.getItem('duration'),
       duration: `${durationdata}`,
+      // duration : this.state.durationdata || 'NO DATA',
+
       booked: true,
       amount: localStorage.getItem('doctorfee'),
       reasonForVisit: localStorage.getItem('reason'),
       description: `${notesdata}`,
       type: localStorage.getItem('type'),
       timeSlot: localStorage.getItem('timeslotid'),
-      number : localStorage.getItem('patientphone')
+      number: localStorage.getItem('patientphone')
     }
     console.log(body)
+    console.log('Congratulations, Your Appointment Has Been Booked for ', this.state.formatnewdatestate, ' at ' ,this.state.formattimestate)
     axios
       .post(
         'http://localhost:3001/appointment/book', body
@@ -124,8 +157,12 @@ export default class AppointmentPayReview extends React.Component {
       .then(response => {
         console.log('payreview', response);
         if (response.data.status == true) {
-          alert(response.data.message)
-          localStorage.removeItem('patientid', 'doctorid', 'manualbookedfor', 'doctorfee', 'reason', 'type', 'timeslotid')
+
+          // alert(response.data.message)
+          this.setState({
+            appointmentbookstatus: true
+          })
+          // localStorage.removeItem('patientid', 'doctorid', 'manualbookedfor', 'doctorfee', 'reason', 'type', 'timeslotid')
           // this.setState({
           //   success : true
           // })
@@ -167,6 +204,7 @@ export default class AppointmentPayReview extends React.Component {
         <div> <Button type="primary" disabled>Confirm</Button></div>
       )
     }
+
     const { getFieldDecorator } = this.props.form;
     const tailFormItemLayout = {
       wrapperCol: {
@@ -181,93 +219,118 @@ export default class AppointmentPayReview extends React.Component {
       },
     };
     const { firstFormData, cardDetails } = this.props;
-    return (
-      <div className="review-custom-section-ap">
-        <Row>
-          <Col span={12}>
-            <h2>Appointment Details</h2>
-
-            <div classame="review-custom-section-ap__visit-details">
-              <p><strong>Consultation Method : </strong>{localStorage.getItem('type') || 'NO DATA'} </p>
-              <p><strong>Reason for visit :</strong> {localStorage.getItem('reason') || 'NO DATA'}</p>
-              <p><strong>Duration : </strong>{localStorage.getItem('duration') || 'NO DATA'}</p>
-              <p><strong>Consultation Cost : </strong>{localStorage.getItem('doctorfee')}</p>
-              <p><strong>Appointment Time : </strong>{localStorage.getItem('manualtime') || 'NO DATA'}</p>
-              <p><strong>Specialty : </strong>Primary Care Doctor</p>
-            </div>
-          </Col>
-
-          <Col span={12}>
-            <h2>Payment Method</h2>
-
-
-            <p>Visa ending in : {localStorage.getItem('last4')}</p>
-            {/* <p>Visa Number : {localStorage.getItem('patientcardnumber')}</p> */}
-
-            <h2>Insurance</h2>
-
-
-            <p>No Insurance Addedd</p>
-            {/* <h2>Primary Care Physician</h2> */}
-
-
-            {/* <p>No Data Yet.</p> */}
-
-
-          </Col>
-        </Row>
-        <Divider />
-        <Row>
-          <div className="review-custom-section-ap__checkbox-ap">
-            <Col span={24}>
-
-              <Checkbox
-                checked={this.state.informedconsent}
-                onChange={() => this.informedchange()}
-
-              >
-                I certify that I have read and accept the terms of <span onClick={this.showModal} style={{ color: '#82bbe9' }}>Doc Mz's Informed Consent</span>.
-            </Checkbox>
-
-              <Checkbox
-                checked={this.state.privacypolicy}
-                onChange={() => this.policychange()}
-              >
-                I have read <span onClick={this.showModal2} style={{ color: '#82bbe9' }}>Doc Mz's Informed Consent</span> and I acknowledge that I have the ability to print a hard copy of Privacy Policy for my records.
-            </Checkbox>
-
-            </Col>
-
+    let appointmentdataholder;
+    if (this.state.appointmentbookstatus) {
+      appointmentdataholder = (
+        <div className="appointment_booked_ap">
+          <Row>
             <Col span={24}>
               <center>
-                {/* <Button type="primary">Primary</Button> */}
-                {confirmbtn}
-
+              <Icon type="check-circle" />
+      <h3> Congratulations, Your Appointment Has Been Booked for <strong>{this.state.formatnewdatestate}</strong> at <strong>{this.state.formattimestate}</strong> </h3>
+             
               </center>
             </Col>
-          </div>
-        </Row>
-        <Row>
-          <Modal
-            title="Informed Consent for DocMz"
-            width={1024}
-            visible={this.state.visible}
-            onOk={this.handleOk}
-            onCancel={this.handleCancel}
-          >
-            <Firstmodel />
-          </Modal>
+          </Row>
 
-          <Modal
-            title="Privacy and policy terms of DocMz"
-            width={1024}
-            visible={this.state.secondvisible}
-            onOk={this.handleOk}
-            onCancel={this.handleCancel}
-          >
-            <Secondmodal />
-          </Modal>
-        </Row>
+        </div>
+      )
+    }
+    else {
+      appointmentdataholder = (
+        <div>
+          <Row>
+            <Col span={12}>
+              <h2>Appointment Details</h2>
+
+              <div classame="review-custom-section-ap__visit-details">
+                <p><strong>Consultation Method : </strong>{localStorage.getItem('type') || 'NO DATA'} </p>
+                <p><strong>Reason for visit :</strong> {localStorage.getItem('reason') || 'NO DATA'}</p>
+                <p><strong>Duration : </strong>{this.state.durationdata || 'No Duration Data Given'}</p>
+                <p><strong>Consultation Cost : </strong>{localStorage.getItem('doctorfee')}</p>
+                <p><strong>Appointment Time : </strong>{localStorage.getItem('manualtime') || 'NO DATA'}</p>
+                <p><strong>Specialty : </strong>Primary Care Doctor</p>
+              </div>
+            </Col>
+
+            <Col span={12}>
+              <h2>Payment Method</h2>
+
+
+              <p>Visa ending in : {localStorage.getItem('last4')}</p>
+              {/* <p>Visa Number : {localStorage.getItem('patientcardnumber')}</p> */}
+
+              <h2>Insurance</h2>
+
+
+              <p>No Insurance Addedd</p>
+              {/* <h2>Primary Care Physician</h2> */}
+
+
+              {/* <p>No Data Yet.</p> */}
+
+
+            </Col>
+          </Row>
+          <Divider />
+          <Row>
+            <div className="review-custom-section-ap__checkbox-ap">
+              <Col span={24}>
+
+                <Checkbox
+                  checked={this.state.informedconsent}
+                  onChange={() => this.informedchange()}
+
+                >
+                  I certify that I have read and accept the terms of <span onClick={this.showModal} style={{ color: '#82bbe9' }}>Doc Mz's Informed Consent</span>.
+            </Checkbox>
+
+                <Checkbox
+                  checked={this.state.privacypolicy}
+                  onChange={() => this.policychange()}
+                >
+                  I have read <span onClick={this.showModal2} style={{ color: '#82bbe9' }}>Doc Mz's Informed Consent</span> and I acknowledge that I have the ability to print a hard copy of Privacy Policy for my records.
+            </Checkbox>
+
+              </Col>
+
+              <Col span={24}>
+                <center>
+                  {/* <Button type="primary">Primary</Button> */}
+                  {confirmbtn}
+
+                </center>
+              </Col>
+            </div>
+          </Row>
+          <Row>
+            <Modal
+              title="Informed Consent for DocMz"
+              width={1024}
+              visible={this.state.visible}
+              onOk={this.handleOk}
+              onCancel={this.handleCancel}
+            >
+              <Firstmodel />
+            </Modal>
+
+            <Modal
+              title="Privacy and policy terms of DocMz"
+              width={1024}
+              visible={this.state.secondvisible}
+              onOk={this.handleOk}
+              onCancel={this.handleCancel}
+            >
+              <Secondmodal />
+            </Modal>
+          </Row>
+        </div>
+      )
+    }
+
+    return (
+      <div className="review-custom-section-ap">
+        {appointmentdataholder}
 
 
       </div>
