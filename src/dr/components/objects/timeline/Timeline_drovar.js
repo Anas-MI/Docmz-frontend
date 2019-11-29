@@ -12,17 +12,17 @@ export default class Timeline_drovar extends Component {
     super(props);
     this.state = {
       formLayout: "vertical",
-      appointments: getAppointmentsOfDate(props.appointments,new Date()),
+      appointments: getAppointmentsOfDate(props.appointments, new Date()),
       selectedDate: moment(),
-      appointmentlength : ''
+      appointmentlength: ''
     };
   }
-  componentDidMount(){
+  componentDidMount() {
   }
   onCloseTo = () => {
     this.props.onClose();
   };
-  
+
   handleFormLayoutChange = e => {
     this.setState({ formLayout: e.target.value });
   };
@@ -30,11 +30,12 @@ export default class Timeline_drovar extends Component {
   timeonChange(time, timeString) {
     console.log(time, timeString);
   }
+
   render() {
     const title = `Appointment Availability - ${this.state.appointmentlength || 0}`
     const { visible, appointments } = this.props;
     const { formLayout, appointments: stateAppointment, selectedDate } = this.state;
-    console.log({__props__: this.props})
+    console.log({ __props__: this.props })
     const timeLineArr = getDoctorTimeLine({
       timeSlot: 15,
       allAppointments: this.props.allAppointments,
@@ -44,36 +45,35 @@ export default class Timeline_drovar extends Component {
       timeLineArr
     })
     let appointmentdata;
-    if(this.state.appointmentlength > 0)
-    {
+    if (this.state.appointmentlength > 0) {
       appointmentdata = (
         <div>
-           Time
+          Time
         {
-          timeLineArr.dates && timeLineArr.dates.map((elx, i) => {
-            console.log("tttt", {
-              elx: elx.milliseconds(), 
-              stateAppointment: stateAppointment.map(el => moment(el.bookedFor).milliseconds())
-            })
-            const el = stateAppointment.find(el => {
-              if(! el.booked ) return false
-              const bookedMom = moment(el.bookedFor)
-              return bookedMom.format("HH:mm") === elx.format("HH:mm")
-            })
-            return (
-              <div key={i} data-time={moment(elx).format("HH:mm")} className="c-timeline-drower__col">
-                {el && <Alert
+            timeLineArr.dates && timeLineArr.dates.map((elx, i) => {
+              console.log("tttt", {
+                elx: elx.milliseconds(),
+                stateAppointment: stateAppointment.map(el => moment(el.bookedFor).milliseconds())
+              })
+              const el = stateAppointment.find(el => {
+                if (!el.booked) return false
+                const bookedMom = moment(el.bookedFor)
+                return bookedMom.format("HH:mm") === elx.format("HH:mm")
+              })
+              return (
+                <div key={i} data-time={moment(elx).format("HH:mm")} className="c-timeline-drower__col">
+                  {el && <Alert
                     className="c-timeline-drower__msg c-timeline-drower__msg--span-1"
                     // message="Info Text"
-                    message = {el.reasonForVisit || 'Reason For Visit Not Available'}
+                    message={el.reasonForVisit || 'Reason For Visit Not Available'}
                     // description="Info Description Info Description Info Description Info Description"
                     description={moment(el.bookedFor).format("HH:mm")}
                     type="info"
-                />}
-              </div>
-            )
-          })
-        }
+                  />}
+                </div>
+              )
+            })
+          }
         </div>
       )
     }
@@ -85,7 +85,7 @@ export default class Timeline_drovar extends Component {
     return (
       <div className="c-timeline-drower">
         <Drawer
-          title= {title}
+          title={title}
           // title = "Availability Timeline"
           placement="right"
           closable={true}
@@ -94,25 +94,29 @@ export default class Timeline_drovar extends Component {
           width={350}
           mask={false}
           className="custom-timeline-drover-style-aakash"
-        
+
         >
-         
-          <ShortCalender 
-          className="badge1"
-          data-badge="6"
-          onSelect={(selectedDate)=> {
-            this.setState({
-              appointments: getAppointmentsOfDate(appointments, selectedDate),
-              selectedDate
-            }, ()=> {
-              console.log({
-                appointments: this.state.appointments
-              },this.setState({appointmentlength : this.state.appointments.length}))
-            })
-          }} />
-         
+
+          <ShortCalender
+            className="badge1"
+            data-badge="6"
+            onSelect={(selectedDate) => {
+              this.setState({
+                appointments: getAppointmentsOfDate(appointments, selectedDate),
+                selectedDate
+              }, () => {
+                console.log({
+                  appointments: this.state.appointments
+                },
+                  this.setState({ appointmentlength: this.state.appointments.length }),
+                  localStorage.setItem('appointmentlength', this.state.appointmentlength))
+              })
+            }}
+            appointments={this.props.allAppointments.filter(el => el.booked).map(el => ({bookedFor: el.bookedFor}))}
+          />
+
           <div className="c-timeline-drower__row">
-             
+
             {/* <div data-time="08:00" className="c-timeline-drower__col">
                 <Alert
                     className="c-timeline-drower__msg c-timeline-drower__msg--span-2"
@@ -199,7 +203,7 @@ export default class Timeline_drovar extends Component {
             
             </div> */}
           </div>
-         
+
         </Drawer>
       </div>
     );

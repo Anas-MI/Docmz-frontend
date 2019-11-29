@@ -6,7 +6,7 @@ export default class Layout_header extends Component {
     super(props);
     this.state={
       docInfo:JSON.parse(localStorage.getItem("user")),
-      visible:true
+      visible:false
     }
   }
   componentDidMount(){
@@ -14,26 +14,35 @@ export default class Layout_header extends Component {
     if( !docInfo){
       this.props.history.push("/login")
       }
-       this.toggleWelcom();
+      
     }
-    toggleWelcom = ()=>{
-      const { docInfo , visible } = this.state;
-    const drName=docInfo && docInfo.basic && docInfo.basic.name ? 'Welcome to dr. ' + docInfo.basic.name+  ' ('+docInfo.basic.credential+')' :''
-      notification.open({
-        message: 'Welcome Notification',
-        description:drName
-          ,
-        onClick: () => {
-          // console.log('Notification Clicked!');
-        },
-      });
-    }
+    // toggleWelcom = ()=>{
+    //   const { docInfo , visible } = this.state;
+    // const drName=docInfo && docInfo.basic && docInfo.basic.name ? 'Welcome Dr. ' + docInfo.basic.name+  ' ('+docInfo.basic.credential+')' :''
+    //   notification.open({
+    //     message: 'Welcome Notification',
+    //     description:drName
+    //       ,
+    //     onClick: () => {
+    //       // console.log('Notification Clicked!');
+    //       this.setState({
+    //         visible : false
+    //       })
+    //     },
+    //   });
+    // }
   render() {
+    // if(this.state.visible) {
+    //   this.toggleWelcom();
+    // }
+    
+
     const { docInfo , visible } = this.state;
     
     const drName=docInfo && docInfo.basic && docInfo.basic.name ? docInfo.basic.name :''
     
     return (
+     
       <div className="c-layout-header">
        
         <Row type="flex" align="middle" justify="space-between" className="c-layout-header__wrapper">

@@ -67,7 +67,7 @@ export default class Dr_layout extends Component {
             <Content style={{ margin: "25px 16px" }}>
               <Switch>
                 <Route
-                  // style={{width: 200, height: 100, left: "60%", top: 0, position: "absolute", backgroundColor: "red"}}
+                  
                   className="stop-1"
                   path="/dr/dashbord"
                   exact

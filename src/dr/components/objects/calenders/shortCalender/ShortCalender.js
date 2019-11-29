@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { Calendar, Col, Row, Icon, Badge } from 'antd'
 import classNames from 'classnames'
 import moment from 'moment'
+import { getAppointmentsOfDate } from '../../../../../services/extra/DoctorHelpers'
+import './customshortcalendar.css'
 
 export default class ShortCalender extends Component {
   onSelect = (e, value, mode) => {
@@ -13,6 +15,13 @@ export default class ShortCalender extends Component {
     }
 
 
+  }
+  dateCellRender = (date) => {
+    const appointments = getAppointmentsOfDate(this.props.appointments, date)
+    
+    if (appointments.length) {
+      return <Badge count={appointments.length} className="c-short-calendar__ap_badge" />
+    }
   }
   renderHeader = ({ value, type, onChange, onTypeChange, }) => {
     const currentMonth = moment().month()
@@ -49,6 +58,7 @@ export default class ShortCalender extends Component {
   }
 
   render() {
+    // dateCellRender(m)
     return (
       <div className="c-short-calender">
         {/* <Badge count={5}> */}
@@ -58,6 +68,7 @@ export default class ShortCalender extends Component {
           onChange={this.onSelect}
           fullscreen={false}
           headerRender={this.renderHeader}
+          dateCellRender={this.dateCellRender}
         />
         {/* </Badge> */}
       </div>

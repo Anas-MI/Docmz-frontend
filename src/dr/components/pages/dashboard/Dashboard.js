@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 // import Timelines from "../../objects/timeline/Timelines";
-import { Row, Col, Button, Icon, Card, Avatar, Badge, Spin, Tooltip } from "antd";
+import { Row, Col, Button, Icon, Card, Avatar, Badge, Spin, Tooltip, notification } from "antd";
 import classNames from 'classnames'
 import InfoCard from "../../objects/card/InfoCard";
 import { getDoctors } from '../../../../services/redux/actions';
+import { getNotifications } from '../../../../services/redux/actions';
 import { connect } from 'react-redux'
 import ShortCalender from "../../objects/calenders/shortCalender/ShortCalender";
 import Timeline_drovar from "../../objects/timeline/Timeline_drovar";
@@ -22,6 +23,7 @@ import {
 import 'react-accessible-accordion/dist/fancy-example.css';
 import moment from "moment";
 import { getDoctorDetail } from "../../../../services/api";
+import WelcomeNotification from "./WelcomeNotification";
 const Panel = Collapse.Panel;
 const text1 = `
  Reason for visit - Toothache`;
@@ -35,9 +37,11 @@ class Dashboard extends Component {
       tourStep: 1,
       counter: '0',
       filterappointmentarr: [],
-      allAppointments:  []
+      allAppointments:  [],
+      open : true
     };
   }
+
 
 
   getdocdetail = (e) => {
@@ -74,14 +78,23 @@ class Dashboard extends Component {
       });
   }
 
-  componentDidMount() {
+ 
+  async componentDidMount() {
     this.setState({
       // isTourActive: true
+      // open : true
+      
     });
     this.props.getDoctors()
+    // if(this.state.open){
+      await this.props.getNotifications()
+    // }
     // console.log('docdetails',localStorage.getItem('user'))
     // console.log('patientdetail',localStorage.getItem('patient'))
     this.getdocdetail();
+    
+    //  (console.log('final redmer'))
+   
   }
 
   showDrawer = () => {
@@ -164,7 +177,15 @@ class Dashboard extends Component {
     });
   }
   render() {
-
+ 
+   
+    // const args = {
+    //   message: 'Notification Title',
+    //   description:
+    //     'I will never close automatically. I will be close automatically. I will never close automatically.',
+    //   duration: 0,
+    // };
+  
     const { visible, filterappointmentarr, allAppointments } = this.state;
     // console.clear()
     console.log({
@@ -189,6 +210,9 @@ class Dashboard extends Component {
     }
     return (
       <div>
+       {/* {!this.state.open ? '' : <WelcomeNotification />}    */}
+        {/* <WelcomeNotification /> */}
+      {/* {notification.open(args)} */}
         <Row>
           <Col
             span={15}
@@ -511,9 +535,12 @@ class Dashboard extends Component {
   }
 }
 
+
+
 const mapStateToProps = (state) => ({
-  doctors: state.doctors.all
+  doctors: state.doctors.all,
+  notifications : state.notifications.all
 })
 export default connect(mapStateToProps, {
-  getDoctors
+  getDoctors, getNotifications
 })(Dashboard)

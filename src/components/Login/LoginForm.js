@@ -36,7 +36,8 @@ export default class LoginForm extends PureComponent {
         },()=>{
           const userInfo=JSON.stringify(res.data.user) ;
           window.localStorage.setItem("user",userInfo);
-         
+          
+          localStorage.setItem('doctorid',res.data.user._id)
           const step = res.data.user.steps;
           if(step.includes(0)){
             this.props.history.push("/dr-profile-stap")

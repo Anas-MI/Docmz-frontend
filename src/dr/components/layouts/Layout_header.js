@@ -34,7 +34,7 @@ export default class Layout_header extends Component {
         <Menu className="doctor-nav" theme="light" defaultSelectedKeys={["1"]} mode="inline">
           <Menu.Item key="1">
             {/* <Icon type="pie-chart" /> */}
-            <Link to="/dr">
+            <Link to="/dr/dashbord">
             <img src={require('./time.png')} />
             <span>
               
