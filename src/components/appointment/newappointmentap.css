@@ -144,7 +144,8 @@
 
 .second-step-custom-ap__iconhelp {
   /* margin-left: 20px; */
-  margin-left: -20px;
+  position: relative;
+  right : 20px;
   font-size: 20px;
   margin-top: 2px;
 }
