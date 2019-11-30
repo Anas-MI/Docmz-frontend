@@ -37,7 +37,8 @@ class Appointments extends Component {
             dob: '',
             newbookedFor: [],
             lastencounter: '',
-            futureappointmentarr: []
+            futureappointmentarr: [],
+            size: 'large',
         };
 
     }
@@ -138,7 +139,7 @@ class Appointments extends Component {
                         <div style={{ padding: 24, minHeight: 380 }} className="doctor-header">
 
                             {/* <Uppermsg /> */}
-                            <h3 style={{paddingBottom : '20px', fontSize : '20px'}}>Let's help you stay on top of your health</h3>
+                            <h3 style={{ paddingBottom: '20px', fontSize: '20px' }}>Let's help you stay on top of your health</h3>
 
                             <header className="App-header">
                                 <Search />
@@ -184,6 +185,35 @@ class Appointments extends Component {
 
                                 </Row>
                                 <Row>
+                                    <Col span={14}>
+                                      
+                                          <div className="tab_custom_btn_ap">
+                                          <Link to="/Appointments">  <Button type="primary" shape="round" active>
+                                            Dashboard
+                                            </Button></Link>
+                                            
+                                            <Button type="primary" shape="round"  disabled>
+                                            CCD
+                                            </Button>
+                                            
+                                            <Button type="primary" shape="round" disabled>
+                                            Documents
+                                            </Button>
+                                            
+                                            <Button type="primary" shape="round" disabled>
+                                            Discussions
+                                            </Button>
+                                            
+                                            <Link to="/Patient"><Button type="primary" shape="round"  >
+                                            Settings
+                                            </Button></Link>
+                                          
+                                            </div>
+                                           
+                                       
+                                    </Col>
+                                </Row>
+                                <Row>
 
                                     <Col span={14}>
                                         <div style={{ marginTop: 16 }}>
@@ -211,15 +241,15 @@ class Appointments extends Component {
 
                                                                     <Avatar size={64} icon="user" />
                                                                 }
-                                                              
-                                                                
+
+
 
 
                                                             />
-                                                            <h4 style={{textTransform : 'capitalize'}}>DR. {this.state.futureappointmentarr[id].doctor.basic.name}</h4>
+                                                            <h4 style={{ textTransform: 'capitalize' }}>DR. {this.state.futureappointmentarr[id].doctor.basic.name}</h4>
                                                             <div className="upper-div-card_ap_below_detail">
-                                                        <span style={{ color: 'rgba(0, 0, 0, 0.45)' }} className="upper-div-card_reason">Reason for your visit : {item.reasonForVisit}</span>
-                                                            <p style={{ color: 'rgba(0, 0, 0, 0.45)' }} className="upper-div-card_date">{moment(item.bookedFor).format('LL')}</p>
+                                                                <span style={{ color: 'rgba(0, 0, 0, 0.45)' }} className="upper-div-card_reason">Reason for your visit : {item.reasonForVisit}</span>
+                                                                <p style={{ color: 'rgba(0, 0, 0, 0.45)' }} className="upper-div-card_date">{moment(item.bookedFor).format('LL')}</p>
                                                             </div>
 
 

@@ -116,6 +116,9 @@
     border-radius: 5px;
     overflow: hidden;
 }
+.tab_custom_btn_ap Button {
+    margin : 0 10px;
+}
 
 .upper-div-card .upper-div-card_ap_below_detail {
     position: relative;
