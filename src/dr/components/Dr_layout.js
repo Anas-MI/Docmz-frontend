@@ -10,20 +10,25 @@ import Single_patient from "./pages/patient/Single_patient";
 import History from "./pages/history/History";
 import MultiStepProfileUpdate from "./pages/profile/MultiStepProfileUpdate";
 import Tour from "react-user-tour";
+
 import "./drlayout.css";
+import WelcomeNotification from "./pages/dashboard/WelcomeNotification";
 export default class Dr_layout extends Component {
   constructor(props) {
     super(props);
     this.state = {
       collapsed: false,
       isTourActive: false,
-      tourStep: 1
+      tourStep: 1,
+      isNotifaction: true
     };
   }
   componentDidMount() {
     this.setState({
-      isTourActive: false
+      isTourActive: false,
+      isNotifaction: false
     });
+    // alert("aaa")
   }
 
   onCollapse = collapsed => {
@@ -31,7 +36,7 @@ export default class Dr_layout extends Component {
   };
   render() {
     const { Header, Content, Sider } = Layout;
-    const { steps } = this.state;
+    const { steps, isNotifaction } = this.state;
     const tourTitleStyle = {
       fontWeight: 700,
       fontSize: 16,
@@ -44,7 +49,6 @@ export default class Dr_layout extends Component {
       fontSize: 12,
       paddingLeft: 10
     };
-
     return (
       <div>
         <Layout
@@ -93,6 +97,7 @@ export default class Dr_layout extends Component {
                 <Route path="/" component={props => <Dashboard {...props} />} />
               </Switch>
             </Content>
+            {isNotifaction && <WelcomeNotification />}
             <Layout_footer />
           </Layout>
         </Layout>

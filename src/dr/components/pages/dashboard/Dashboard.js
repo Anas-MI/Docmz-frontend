@@ -79,7 +79,7 @@ class Dashboard extends Component {
   }
 
 
-  async componentDidMount() {
+   componentDidMount() {
     this.setState({
       // isTourActive: true
       // open : true
@@ -87,7 +87,7 @@ class Dashboard extends Component {
     });
     this.props.getDoctors()
     // if(this.state.open){
-    await this.props.getNotifications()
+    // await this.props.getNotifications()
     // }
     // console.log('docdetails',localStorage.getItem('user'))
     // console.log('patientdetail',localStorage.getItem('patient'))
@@ -219,9 +219,7 @@ class Dashboard extends Component {
     }
     return (
       <div>
-        {/* {!this.state.open ? '' : <WelcomeNotification />}    */}
         {/* <WelcomeNotification /> */}
-        {/* {notification.open(args)} */}
         <Row>
           <Col
             span={15}
@@ -291,7 +289,7 @@ class Dashboard extends Component {
                                 okText="Yes"
                                 cancelText="No"
                               >
-                               <Icon type="ellipsis" />
+                                <Icon type="ellipsis" />
                               </Popconfirm>
                             </div>
                           </Col>

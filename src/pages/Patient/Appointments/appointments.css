@@ -2,29 +2,67 @@
     font-family: sharp-sans-semibold, Arial, sans-serif;
     font-size: 15px;
     font-weight: bold;
-    margin-bottom: 0!important;
+    margin-bottom: 0 !important;
 }
-.card-btn-patient-appointments Button   {
-    margin : 20px 20px 0 0px;
+.card-btn-patient-appointments {
+    margin-top: -40px;
+}
+.card-btn-patient-appointments Button {
+    margin: 20px 20px 0 0px;
     border-radius: 0;
 }
+
 .card-btn-patient-appointments .primarybtn {
     /* background: rgb(255, 240, 75);
     color: rgb(0, 35, 75);
     border-color: rgb(255, 240, 75); */
     width: 30%;
+    background-color: #f34b8c;
+    border-color: #f34b8c
 }
+
 .card-btn-patient-appointments .dashedbtn {
     border-right: none;
     border-top: none;
     border-left: none;
 }
+
+.card-btn-patient-appointments .dashedbtn:hover {
+    color: #f34b8c;
+    border-bottom-color: #f34b8c;
+}
+.card-btn-patient-appointments_bottom_btn Button {
+    margin: 20px 20px 0 0px;
+    border-radius: 0;
+}
+
+.card-btn-patient-appointments_bottom_btn .primarybtn {
+    /* background: rgb(255, 240, 75);
+    color: rgb(0, 35, 75);
+    border-color: rgb(255, 240, 75); */
+    width: 30%;
+    background-color: #f34b8c;
+    border-color: #f34b8c
+}
+
+.card-btn-patient-appointments_bottom_btn .dashedbtn {
+    border-right: none;
+    border-top: none;
+    border-left: none;
+}
+
+.card-btn-patient-appointments_bottom_btn .dashedbtn:hover {
+    color: #f34b8c;
+    border-bottom-color: #f34b8c;
+}
+
 .left-card .ant-card-meta-title {
     font-family: sharp-sans-bold, Arial, sans-serif;
     font-size: 20px;
     line-height: 0.95;
     color: rgb(0, 35, 75);
 }
+
 .right-card {
     border-top: none;
     border-left: none;
@@ -32,42 +70,67 @@
     border-bottom: solid 4px #e8e8e8;
     border-radius: 10px;
 }
+
 .right-card Button {
     border-color: rgb(0, 35, 75);
     border-radius: 0;
 }
+
 .right-card .right-search {
     border-right: none;
     border-top: none;
     border-left: none;
 }
+
 .right-card .right-close-icon {
     font-size: 18px;
+    position: relative;
+    left: 35px;
 }
+
 .right-bottom-div {
     padding-top: 20px;
     padding-left: 10px;
 }
+
 .right-bottom-div .right-calendar {
     padding-right: 10px;
 }
+
 .upcoming-appointments-div {
     /* box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.12); */
 }
+
 .upcoming-appointments-div h5 {
-    margin-bottom: 0!important;
+    margin-bottom: 0 !important;
 }
+
 .upcoming-appointments-div .ant-card-meta-title {
     font-family: sharp-sans-bold, Arial, sans-serif;
     font-size: 20px;
     line-height: 0.95;
     color: rgb(0, 35, 75);
 }
+
 .upcoming-appointments-div .upper-div-card {
     border-radius: 5px;
     overflow: hidden;
 }
-.upcoming-appointments-div .upper-div-card::before{
+
+.upper-div-card .upper-div-card_ap_below_detail {
+    position: relative;
+    top: -40px;
+}
+
+.upper-div-card h4 {
+    font-size: 30px;
+    position: relative;
+    top: -65px;
+}
+.upper-div-card_upcoming_ap h4{
+text-transform: capitalize;
+}
+.upcoming-appointments-div .upper-div-card::before {
     content: "";
     display: block;
     width: 5px;
@@ -75,27 +138,76 @@
     top: 0;
     left: 0;
     bottom: 0;
-    background-color: #1890ff;
+    background-color: #f34b8c;
 }
+
 .bottom-card-div {
     margin-top: 40px;
-    
+
 }
+
 .bottom-card-div .left-card {
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.12);
     transition: all 0.3s;
     /* border-radius: 5px;
     overflow: hidden; */
 }
+
 .bottom-card-div .left-card:hover {
     transform: translateY(-10px);
 }
+
 .appointment-cancel-btn {
     transition: all 0.1s;
+    background: #f34b8c;
+    border-color: #f34b8c;
 }
+
 .appointment-cancel-btn:hover {
-background: #ff4d4f;
-border-color: #ff4d4f;
+    background: #ff4d4f;
+    border-color: #ff4d4f;
+}
+
+.custom_layout_ap_aapointment {
+    background: #f4f6f8;
+}
+
+.upper-div-card_title_ap .ant-card-meta-title {
+    color: #874285;
+    text-transform: capitalize !important;
+}
+
+.review_custom_ap_rate .ant-rate-star-full {
+    color: #f34b8c;
+}
+
+.patient_avatar_custom_ap {
+    width: 90px;
+    height: 90px;
+    line-height: 86px;
+    font-size: 55px !important;
+    position: relative;
+    right: 5px;
+}
+
+.patient_caard_ap {
+    margin: 30px 0 !important;
+}
+
+.user_detail_ap .c-label-value__value {
+    min-width: 67%;
+}
+
+.upper-div-card_reason {
+    padding-left: 77px;
+    position: relative;
+    top: -30px;
+}
+
+.upper-div-card_date {
+    padding-left: 77px;
+    position: relative;
+    top: -20px;
 }
 
 /* .bottom-card-div .left-card::before {

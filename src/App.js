@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route, Switch, withRouter } from "react-router-dom";
 import { connect } from 'react-redux'
+import { getNotifications } from './services/redux/actions';
 import Dr_list from "./components/drList/Dr_list"
 import Home from "./pages/Home/Home";
 import DoctorsProfile from "./pages/DoctorsProfile";
@@ -27,11 +28,15 @@ import PaymentList from "./pages/Patient/Settings/payment/PaymentList"
 
 
 
-function App() {
-   
+class App extends React.Component {
+  
+  componentDidMount() {
+    // this.props.getNotifications()
+  }
+   render (){
   return (
     <div className="App">
-      <Switch>
+      {/* <Switch> */}
           <Route
             path="/"
             exact
@@ -59,7 +64,7 @@ function App() {
           /> */}
      
           <Route
-            path="/dr"
+            exact path={['/dr/', '/dr/*']}
             component={props => <Dr_layout {...props} />}
           />
    
@@ -85,16 +90,19 @@ function App() {
              <Route path="/payment" component={props => <PaymentList {...props} />}
           />
              
-      </Switch>
+      {/* </Switch> */}
     </div>
   );
 }
+}
+
+// export default App
+
 const mapStateToProps = state => ({
   user: state.user,
+  notifications: state.notifications.all
 });
-export default withRouter(
-  connect(
-    mapStateToProps,
-  )(App)
-);
+export default connect(mapStateToProps, {
+   getNotifications
+})(App)
 

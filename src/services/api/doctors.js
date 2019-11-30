@@ -10,3 +10,4 @@ export const getAppointments = ({limit, doctor, date})  => axios.post(`${baseUrl
 export const updateProfile = (data)  => axios.post(`${baseUrl}/doctors/profile/update`, data)
 
 export const getDoctorDetail = doctorId => axios.get(`${baseUrl}/doctors/getdoc/${doctorId}`)
+export const getpatientDetail = patientId => axios.get(`${baseUrl}/patient/getinfo/${patientId}`)

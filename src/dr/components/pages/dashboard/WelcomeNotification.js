@@ -23,7 +23,7 @@ class WelcomeNotification extends Component {
         // }
         
             const args = {
-              message: 'Notification Title',
+              message: 'Notification Titleaa',
               description:
                 'I will never close automatically. I will be close automatically. I will never close automatically.',
               duration: 0,

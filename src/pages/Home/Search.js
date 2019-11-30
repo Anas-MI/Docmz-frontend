@@ -48,7 +48,7 @@ export default class Search extends Component {
 
 
   async componentDidMount() {
-    console.log('cariershere',carriers)
+    console.log('cariershere', carriers)
     // console.log('carriersmap',carriers.map((carrier)))
     const data = carriers.carriers.map((carrier) => ({
       text: `${carrier.name}`,
@@ -56,13 +56,13 @@ export default class Search extends Component {
       plan: carrier.plans
     }));
     this.setState({ carriers: data, isCarrierFetched: true });
-    console.log('datahere',data)
+    console.log('datahere', data)
     this.setState({ loading: true });
     const Specialty = await axios.get(`http://localhost:3001/doctors/get/specialties`)
     // .then(response => {
     //   console.log('response here', response)
     // });
-    console.log('speciality',Specialty)
+    console.log('speciality', Specialty)
     let doctors = await Specialty.data.data;
     this.setState({ doctors, loading: false });
 
@@ -72,7 +72,7 @@ export default class Search extends Component {
     //   plan: carrier.plans
     // }));
     // this.setState({ carriers: data, isCarrierFetched: true });
-    
+
   }
 
   carrierChange = (car_plan) => {
@@ -132,7 +132,7 @@ export default class Search extends Component {
         </Select>
         <LocationSearchInput className="ant-search-select" />
         <DatePicker onChange={onChange} className="ant-search-select custom-ant-search-select-home-date ant-calendar-home" />
-              <Newsearch />
+        <Newsearch />
         {/* <Select
           suffixIcon={<Icon type="bars" />}
           placeholder="custom dropdown render"
@@ -185,11 +185,9 @@ export default class Search extends Component {
 
         </Select> */}
 
-        <Link to="/search"><Button type="primary" icon="search" className="search_button custom-home-search-btn">
-         Search
-        </Button>
+        <Link to="/search"><Button type="primary" icon="search" className="search_button custom-home-search-btn" />
         </Link>
-       
+
 
         {/* <MultiStepSelect 
 					placeholder="placeholder"

@@ -43,17 +43,22 @@ class Patienthome extends Component {
     getPatientdetail = async (e) => {
         // console.log(('patienthomeid',axios.defaults.headers.common["x-auth-token"]))
         try {
-            let response = await axios.get("http://localhost:3001/patient/getinfo/5dcba17a2c9ed62528346794");
-            console.log('patientdetail', response.data.data)
+            let response = await axios.get(`http://localhost:3001/patient/getinfo/${localStorage.getItem('patientid')}`);
+            console.clear();
+            console.log(response)
+            // let newpatientarr = response.data.data.appointments
             this.setState({
                 name: response.data.data.name,
                 email: response.data.data.email,
                 phone: response.data.data.phone,
-                street: response.data.data.Address.street,
+                // street: response.data.data.Address.street,
                 sex : response.data.data.sex,
                 dob : response.data.data.dob
             })
+            console.log(this.state.email)
+            
         }
+      
         catch (e) {
             console.log(e)
         }
@@ -69,7 +74,7 @@ class Patienthome extends Component {
         e.preventDefault();
         axios
             .post(
-                'http://localhost:3001/patient/update/5dcba17a2c9ed62528346794', this.state
+                `http://localhost:3001/patient/update/${localStorage.getItem('patientid')}`, this.state
 
             )
             .then(response => {
@@ -203,16 +208,16 @@ const dateFormatList = ['DD/MM/YYYY', 'DD/MM/YY'];
                                                 {/* <p>Anas M.i. - Please call us at (855) 962-3621 to change your name.</p> */}
                                                 <Form.Item>
                                                     {getFieldDecorator('name', {
-                                                        initialValue: `${name}`,
+                                                        initialValue: `${name || 'NO DATA'}`,
 
 
-                                                    })(<Input placeholder={this.state.name} onChange={(e) => this.setState({ name: e.target.value })} />)}
+                                                    })(<Input placeholder={this.state.name || 'NO DATA'} onChange={(e) => this.setState({ name: e.target.value })} />)}
                                                 </Form.Item>
                                                 <Divider dashed />
                                                 <p className="static-header"><strong>Email</strong></p>
                                                 <Form.Item>
                                                     {getFieldDecorator('email', {
-                                                        initialValue: `${email}`,
+                                                        initialValue: `${email || 'NO DATA'}`,
 
                                                     })(<Input disabled />)}
                                                 </Form.Item>
@@ -221,7 +226,7 @@ const dateFormatList = ['DD/MM/YYYY', 'DD/MM/YY'];
                                                 <p className="static-header"><strong>Phone Number</strong></p>
                                                 <Form.Item>
                                                     {getFieldDecorator('phone', {
-                                                        initialValue: `${phone}`,
+                                                        initialValue: `${phone || 'NO DATA'}`,
 
                                                     })(<Input addonBefore={prefixSelector} style={{ width: '100%' }} onChange={(e) => this.setState({ phone: e.target.value })} />)}
                                                 </Form.Item>
@@ -229,7 +234,7 @@ const dateFormatList = ['DD/MM/YYYY', 'DD/MM/YY'];
                                                 <p className="static-header"><strong>Address</strong></p>
                                                 <Form.Item>
                                                     {getFieldDecorator('address', {
-                                                        initialValue: `${street}`,
+                                                        initialValue: `${street || 'NO DATA'}`,
 
                                                     })(
 
@@ -240,7 +245,7 @@ const dateFormatList = ['DD/MM/YYYY', 'DD/MM/YY'];
                                                 <p className="static-header"><strong>Gender</strong></p>
                                                 {getFieldDecorator('sex', {
                                                     validateTrigger: ["onChange", "onBlur"],
-                                                    initialValue: `${sex}`,
+                                                    initialValue: `${sex || 'NO DATA'}`,
                                                     rules: [
                                                         {
                                                             required: true,
@@ -270,14 +275,14 @@ const dateFormatList = ['DD/MM/YYYY', 'DD/MM/YY'];
                                                 <Form.Item>
                                                     {/* {getFieldDecorator('date-picker')(<DatePicker />)} */}
                                                     {getFieldDecorator('dob', {
-                                                        initialValue: moment(`${dob}`)
+                                                        initialValue: moment(`${dob || 'NO DATA'}`)
                                                         
                                                     })(
                                                         // <DatePicker />
 
                                                         // <Input placeholder="Basic usage" onChange={(e) => this.setState({ dob: e.target.value })}/>,
                                                         // <DatePicker format="YYYY-MM-DD" onChange={(e) => this.setState({ dob: e.target.value })} />
-                                                        <DatePicker defaultValue={moment(`${dob}`, dateFormatList[0])} format={dateFormatList} style={{width :'100%'}}/>
+                                                        <DatePicker defaultValue={moment(`${dob || 'NO DATA'}`, dateFormatList[0])} format={dateFormatList} style={{width :'100%'}}/>
                                                     )}
                                                 </Form.Item>
                                                 <Divider />

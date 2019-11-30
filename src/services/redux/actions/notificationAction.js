@@ -5,7 +5,7 @@ import { notification } from 'antd';
 export const getNotifications = () => dispatch => {
    
     const args = {
-        message: 'Notification Title',
+        message: 'Notification Titlea',
         description:
           'I will never close automatically. I will be close automatically. I will never close automatically.',
         duration: 0,
