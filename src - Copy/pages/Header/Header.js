@@ -85,18 +85,21 @@ class Navbar extends Component {
             position: "fixed",
             zIndex: 1,
             width: "100%",
-            backgroundColor: "#ffffff",
-            borderBottom: "1px solid #e8e8e8"
+            // backgroundColor: "#ffffff",
+            // borderBottom: "1px solid #e8e8e8"
           }}
+          className="custom_ap_header_login"
         >
           <div className="logo doctor-logo-home">
             <h4>LOGO</h4>
           </div>
+          <div className="custom-header-right">
           <Menu
             theme="light"
             mode="horizontal"
             defaultSelectedKeys={["2"]}
-            style={{ lineHeight: "62px", float: "right" }}
+            style={{ lineHeight: "62px", float: "right", backgroundColor : 'none'}}
+           
           >
             <Menu.Item key="1">List your practice on Docmz &nbsp; | </Menu.Item>
             {userDetails && userDetails._id ? (
@@ -117,6 +120,7 @@ class Navbar extends Component {
               </Menu.Item>
             )}
           </Menu>
+          </div>
         </Header>
         {/* code for drawer open and close start */}
         <Drawer

@@ -5,10 +5,19 @@
     margin: 5px 24px 16px 0!important;
     float: left!important;
     padding-bottom: 5px;
+    background: none!important;
   }
+  .logo {background: none!important;}
   .ant-dropdown-link-home {
       color: rgba(0, 0, 0, 0.65);
   }
   img.login-icon-image {
     width: 50px;
+}
+/* .custom-header-right .ant-menu {
+  background: none!important;
+} */
+.ant-menu-horizontal {
+  background: none!important;
+  border: none!important;
 }

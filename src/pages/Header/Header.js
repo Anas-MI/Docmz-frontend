@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { Icon, Drawer, Layout, Menu, Dropdown, Row, Col } from "antd";
+import { Icon, Drawer, Layout, Menu, Dropdown, Row, Col, Button } from "antd";
 import { AnimateOnChange } from "react-animation";
 import "./customheader.css";
 import Login_drawer from "../login/Login_drawer";
@@ -85,13 +85,14 @@ class Navbar extends Component {
             position: "fixed",
             zIndex: 1,
             width: "100%",
-            backgroundColor: "#ffffff",
-            borderBottom: "1px solid #e8e8e8"
+            // backgroundColor: "#ffffff",
+            // borderBottom: "1px solid #e8e8e8"
           }}
         >
           <div className="logo doctor-logo-home">
             <h4>LOGO</h4>
           </div>
+          <div className="custom_ap_menu">
           <Menu
             theme="light"
             mode="horizontal"
@@ -117,6 +118,7 @@ class Navbar extends Component {
               </Menu.Item>
             )}
           </Menu>
+          </div>
         </Header>
         {/* code for drawer open and close start */}
         <Drawer
@@ -148,6 +150,7 @@ class Navbar extends Component {
                     Patient Login
                   </h3>
                   <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                  <Link to="/user-sign"><Button type="primary">Register as a Patient</Button> </Link>
                 </Col>
                 <Col
                   xs={24}
@@ -212,6 +215,7 @@ class Navbar extends Component {
                   Doctor  Login
                   </h3>
                   <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                  <Link to="/signup"><Button type="primary">Register as a Doctor</Button> </Link>
                 </Col>
                 <Col
                   xs={24}

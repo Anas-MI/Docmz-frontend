@@ -12,3 +12,7 @@
   img.login-icon-image {
     width: 50px;
 }
+.custom_ap_menu .ant-menu-horizontal {
+  background: none;
+  border: none;
+}
