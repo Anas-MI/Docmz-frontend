@@ -1,0 +1,25 @@
+.dropdown-placeholder-selection-insurance {
+    width: 100%!important;
+}
+/* .insurance-ant-popover-inner-content-newsearch */
+ .ant-list.scroll-list.ant-list-sm.ant-list-split.ant-list-bordered {
+    height: 300px!important;
+}
+.insurance-ant-popover-inner-content-newsearch Input {
+    cursor: pointer;
+}
+.ant-drawer-content-wrapper {
+    /* width: 350px!important; */
+}
+.ant-drawer-body {
+    /* padding: 0!important; */
+}
+.edit-icon-insurance-ap {
+    float: right;
+}
+.insurance-popover .ant-popover-inner-content{
+    padding: 0;
+}
+.insurance-popover .ant-drawer-body{
+    padding: 0;
+}

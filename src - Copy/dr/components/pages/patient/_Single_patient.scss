@@ -1,0 +1,31 @@
+.patient-profile{
+
+    &__menu-section{
+        background: transparent ;
+    }
+    &__name-section {
+        text-align: left;
+    }
+    &__details-table{
+        width: 100%;
+        text-align: left;
+    }
+    &__details {
+        margin-top: 50px;
+    }
+    &__user-profile {
+        width: 160px;
+        border-radius: 100%;
+        box-shadow: 0px 1px 2px 2px #ccc;
+    }
+    &__details-tab-wrapper{
+        margin-top: 50px;
+        margin-top: 50px;
+    margin-bottom: 50px;
+    }
+    &__bottom-tabs{
+      &__col-icon{
+        padding: 14px 10px;
+      }
+    }
+}

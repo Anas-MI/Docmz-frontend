@@ -116,20 +116,9 @@
     border-radius: 5px;
     overflow: hidden;
 }
-/* .ab_custom_btn_ap .ant-tabs-nav .ant-tabs-tab{
-    margin : 0 10px!important;
-    border: solid 3px #1890ff!important;
-    border-radius: 22px!important;
-    background: #1890ff!important;
-    color: #fff!important;
-    padding: 5px 16px!important;
+.tab_custom_btn_ap Button {
+    margin : 0 10px;
 }
-.ab_custom_btn_ap .ant-tabs-ink-bar {
-    display: none!important;
-} */
-/* .ab_custom_btn_ap .ant-tabs-bar {
-    border: none;
-} */
 .tab_custom_btn_ap .ant-badge-count {
     margin-right: 15px;
 }
@@ -237,7 +226,3 @@ text-transform: capitalize;
     bottom: 0;
     background-color: #1890ff;
 } */
-
-.appointment_loader_ap {
-   margin-top: 100px;
-}

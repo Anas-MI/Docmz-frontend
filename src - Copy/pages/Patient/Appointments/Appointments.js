@@ -8,8 +8,8 @@ import {
     Checkbox,
     AutoComplete,
     Skeleton, Switch, Card, Avatar, Rate,
-    Badge,
-    Tabs 
+    Badge
+
 
 } from 'antd';
 import LabelValue from '../../../dr/components/objects/labelValue/LabelValue'
@@ -23,8 +23,6 @@ import Uppermsg from '../Uppermsg';
 // import Sidebar from './Sidebar';
 import { getpatientDetail } from '../../../services/api/doctors';
 import moment from 'moment'
-import Newloader from '../Newloader/Newloader';
-const { TabPane } = Tabs;
 const { Option, OptGroup } = Select;
 const { Content, Footer, Header, Sider } = Layout;
 const { Meta } = Card;
@@ -45,9 +43,7 @@ class Appointments extends Component {
         };
 
     }
-    callback(key) {
-        console.log(key);
-      }
+
     componentDidMount() {
         this.getpatient();
     }
@@ -190,121 +186,9 @@ class Appointments extends Component {
 
                                 </Row>
                                 <Row>
-                                    <Col span={24}>
-                                        <div className="ab_custom_btn_ap">
-                                    <Tabs defaultActiveKey="1" onChange={this.callback} >
-    <TabPane tab="Dashboard" key="1">
-    <Row>
-
-<Col span={14}>
-    <div style={{ marginTop: 16 }}>
-        <p style={{ color: 'rgb(0, 35, 75)', fontSize: '18px', fontWeight: 'bold' }}>Upcoming Appointments</p>
-        <Divider />
-    </div>
-    <div className="upcoming-appointments-div">
-        {this.state.futureappointmentarr.length ? (
-            this.state.futureappointmentarr.map(function (item, id) {
-                return (
-                    <Card style={{ marginTop: 16, padding: '20px' }} className="upper-div-card upper-div-card_upcoming_ap" key={id}>
-                        {/* <Col span={2}>
-                        <Avatar icon="user" className="patient_avatar_custom_ap" />
-                        </Col>
-                        <Col span={12}>
-                        <h4>DR. {this.state.futureappointmentarr[id].doctor.basic.name}</h4>
-                        <div className="upper-div-card_ap_below_detail">
-                    <span style={{ color: 'rgba(0, 0, 0, 0.45)' }} className="upper-div-card_reason">Reason for your visit : {item.reasonForVisit}</span>
-                        <p style={{ color: 'rgba(0, 0, 0, 0.45)' }} className="upper-div-card_date">{moment(item.bookedFor).format('LL')}</p>
-                        </div>
-                        </Col> */}
-                        <Meta
-                            className="upper-div-card_title_ap"
-                            avatar={
-
-                                <Avatar size={64} icon="user" />
-                            }
-
-
-
-
-                        />
-                        <h4 style={{ textTransform: 'capitalize' }}>DR. {this.state.futureappointmentarr[id].doctor.basic.name}</h4>
-                        <div className="upper-div-card_ap_below_detail">
-                            <span style={{ color: 'rgba(0, 0, 0, 0.45)' }} className="upper-div-card_reason">Reason for your visit : {item.reasonForVisit}</span>
-                            <p style={{ color: 'rgba(0, 0, 0, 0.45)' }} className="upper-div-card_date">{moment(item.bookedFor).format('LL')}</p>
-                        </div>
-
-
-
-                        <div className="card-btn-patient-appointments">
-                            <Button type="primary" className="appointment-cancel-btn"><Icon type="close" />Cancel this appointment</Button>
-
-                            <Button type="dashed" className="dashedbtn"><Icon type="bell" />&nbsp;Set a reminder</Button>
-
-                        </div>
-                    </Card>
-                );
-            }, this)
-        ) : (
-                <div className="appointment_loader_ap">
-                    <center>
-                   <Newloader />
-                   </center>
-                </div>
-            )}
-    </div>
-
-</Col>
-<Col span={9} offset={1}>
-    <div style={{ marginLeft: '20px', marginTop: 16 }}>
-        <p style={{ color: 'rgb(0, 35, 75)', fontSize: '18px', fontWeight: 'bold' }}>Previous Doctors</p>
-        <Divider />
-    </div>
-
-    <Card style={{ marginTop: 16, marginLeft: '20px', padding: '10px' }} className="right-card">
-
-        <Row>
-            <Col span={20}>
-                <Meta
-                    className="upper-div-card_title_ap"
-                    avatar={
-
-                        <Avatar size={64} icon="user" />
-                    }
-                    title="Dr. David Tarica, DMD"
-                    description="Dentist"
-
-
-
-                />
-
-            </Col>
-            <Col span={4}>
-                <Icon type="close" className="right-close-icon" />
-            </Col>
-        </Row>
-        <div className="right-bottom-div">
-            <span><Icon type="calendar" className="right-calendar" style={{ color: 'rgba(0, 0, 0, 0.30)' }} /> 9-july-2019, 10:30 A.M</span>
-            <p style={{ color: 'rgba(0, 0, 0, 0.45)', paddingTop: '10px' }}>Consult regarding toothache problem</p>
-            <p style={{ float: 'right', marginBottom: '0' }}><a href='#'>See Details</a></p>
-        </div>
-
-    </Card>
-
-
-</Col>
-</Row>
-    </TabPane>
-    <TabPane tab="CCD" key="2" disabled >
-    </TabPane>
-    <TabPane tab="Documents" key="3" disabled >
-    </TabPane>
-    <TabPane tab="Settings" key="4">
-        <Link to="Setting"><Button type="button">Settings</Button></Link>
-    </TabPane>
-  </Tabs>
-  </div>
+                                    <Col span={14}>
                                       
-                                          {/* <div className="tab_custom_btn_ap">
+                                          <div className="tab_custom_btn_ap">
                                           <Link to="/Appointments">  <Button type="primary" shape="round" active>
                                             Dashboard
                                             </Button></Link>
@@ -327,12 +211,12 @@ class Appointments extends Component {
                                             Settings
                                             </Button></Link>
                                           
-                                            </div> */}
+                                            </div>
                                            
                                        
                                     </Col>
                                 </Row>
-                                {/* <Row>
+                                <Row>
 
                                     <Col span={14}>
                                         <div style={{ marginTop: 16 }}>
@@ -344,7 +228,7 @@ class Appointments extends Component {
                                                 this.state.futureappointmentarr.map(function (item, id) {
                                                     return (
                                                         <Card style={{ marginTop: 16, padding: '20px' }} className="upper-div-card upper-div-card_upcoming_ap" key={id}>
-                                                            <Col span={2}>
+                                                            {/* <Col span={2}>
                                                             <Avatar icon="user" className="patient_avatar_custom_ap" />
                                                             </Col>
                                                             <Col span={12}>
@@ -353,7 +237,7 @@ class Appointments extends Component {
                                                         <span style={{ color: 'rgba(0, 0, 0, 0.45)' }} className="upper-div-card_reason">Reason for your visit : {item.reasonForVisit}</span>
                                                             <p style={{ color: 'rgba(0, 0, 0, 0.45)' }} className="upper-div-card_date">{moment(item.bookedFor).format('LL')}</p>
                                                             </div>
-                                                            </Col>
+                                                            </Col> */}
                                                             <Meta
                                                                 className="upper-div-card_title_ap"
                                                                 avatar={
@@ -428,7 +312,7 @@ class Appointments extends Component {
 
 
                                     </Col>
-                                </Row> */}
+                                </Row>
 
                                 <div className="bottom-card-div">
                                     <Row>

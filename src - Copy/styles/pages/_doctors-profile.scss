@@ -1,0 +1,19 @@
+.p-doctors-profile{
+    &__title{
+        font-size:  22px;
+        @media(min-width: 992px){
+            font-size:  34px;
+        }
+    }
+    &__left-col{
+        @media(min-width: 992px){
+            padding-right: 80px;
+        }
+    }
+    &__container{
+        text-align: justify;
+    }
+    &__text{
+        font-size: 18px;
+    }
+}

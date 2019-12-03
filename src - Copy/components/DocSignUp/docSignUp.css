@@ -1,0 +1,115 @@
+.search{
+    display:flex;
+    padding: 30px;
+    justify-content: center;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.loader{
+    align-items: center;
+    float: right;
+   
+}
+
+.searchBox{
+    padding-right: 11px;
+    float: left;
+}
+
+.userInfo{
+    border-top: 1px solid #eee;
+    /* background: #cca8cac4;  */
+    padding: 30px;
+}
+.userInfo > div {
+    width: 900px;
+    border-radius: 5px;
+    max-width: 100%;
+    padding: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    /* box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.12); */
+}
+.userInfo .ant-input {
+    width: 100%;
+}
+
+/* .ant-input-affix-wrapper .ant-input{
+    width:200px
+} */
+/* .userInfo .ant-form-item-label{
+    width: 120px;
+} */
+.userInfo .ant-form-item-control-wrapper{
+    /* padding-left: 10px; */
+    width: calc(100% - 10px );
+
+}
+p.doc-signup-fields__gender {
+    width: 100%;
+    text-align: right;
+}
+.userInfo .form-container{
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.doc-signup-fields__input-wrap{
+    width: 50%;
+    padding: 15px;
+}
+
+.doc-signup-fields__input{
+    width: 100%;
+}
+
+.userInfo .submit-container{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+}
+.userInfo .ant-row{
+    /* display:flex; */
+    margin-bottom: 10px;
+    width: 100%;
+}
+.c-doc-signup__searchBox{
+    width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.doc-signup-fields__title{
+    text-transform: capitalize;
+    width: 100%;
+}
+
+p.doc-signup-fields__last-update {
+    text-align: right;
+    width: 100%;
+}
+.ant-table table {
+    border-left: 1px solid #e8e8e8;
+}
+
+.c-sign-card {
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.12);
+    border-radius: 5px;
+    padding: 3px 10px;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 25px;
+    padding: 3px 10px;
+}
+.c-sign-card:before {
+    content: "";
+    display: block;
+    width: 5px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    background-color: #1890ff;
+}

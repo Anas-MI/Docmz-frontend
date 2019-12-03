@@ -1,0 +1,24 @@
+.c-label-value{
+    display: flex;
+    justify-content: space-between;
+    &:not(:last-child){
+        margin-bottom: 5px;
+    }
+    &__label{
+        color: $text-color-4;
+    }
+    &__value{
+        color: $text-color-1;
+        min-width: 50%;
+        padding-left: 10px;
+    }
+    &--top-bottom{
+        flex-direction: column; 
+        .c-label-value{
+            &__value{
+                padding-top: 5px;
+                padding-left: 0px;
+            }
+        }
+    }
+}

@@ -1,0 +1,36 @@
+@import './drList/drCardLong' ; 
+@import './drList/drList' ; 
+@import './appointment/appointmentSlider';
+@import './appointment/AppointmentCard/appointmentCard';
+@import './Banner/banner';
+@import './Sections/section';
+@import './Avatar/avatar';
+@import './drList/doctorInfo';
+@import './Container/container';
+@import './PaymentCardPopup/paymentCardPopup';
+@import './ReviewCard/review-card';
+@import './RatingCard/ratingCard';
+@import './RoundedPopup/rounded-popup';
+@import './appointment/appointment-form';
+
+.info-text{
+    padding-top: 10px;
+    padding-left: 20px;
+    position: relative;
+    font-size: 11px;
+    &::before{
+        content: "";
+        display: block;
+        position: absolute;
+        left: 5px;
+        top: 15px;
+        width: 5px;
+        height: 5px;
+        background-color: currentColor;
+        border-radius: 50%;
+    }
+}
+
+.btn-right {
+    float: right;
+}

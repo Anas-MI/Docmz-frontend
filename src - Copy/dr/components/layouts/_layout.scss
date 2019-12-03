@@ -1,0 +1,61 @@
+.c-layout-header{
+    // border-bottom:1px solid #e8e8e8 ; 
+    padding-top: 20px;
+    &__col-user a{
+        color: $main-color-1;
+        margin-right: 10px;
+        &:before{
+            content: '';
+            height: 10px;
+            width: 10px;
+            background: $main-color-1;
+            position: relative;
+            border-radius: 100%;
+            top: 27px;
+            /* right: 47px; */
+            left: -14px;
+            text-align: left;
+            float: left;
+        }
+    }
+    &__col-user img{
+        
+            width: 40px;
+            border-radius: 100%;
+            box-shadow: 0px 1px 0px 1px #ccc;
+        
+    }
+    &__col-time{
+        padding-left: 15px;
+    }
+    &__wrapper{
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    &__time-text{
+        font-size: 20px;
+        margin-bottom: 0;
+    }
+    &__user-test{
+        font-size: 14px;
+        text-transform: capitalize;
+    }
+
+}
+.ant-layout-header{
+    height: 70px;
+    background-color: #f0f2f5 !important;
+}
+.doctor-nav{
+    .ant-menu-item{
+        a, span{
+            color: #333333;
+        }
+    }
+    .ant-menu-item-selected{
+        a, span{
+            font-weight: 500;
+            color: #111111;
+        }
+    }
+}

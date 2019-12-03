@@ -1,0 +1,76 @@
+/* .custom-ant-search-select-home {
+    margin-right: 20px;
+} */
+.custom-ant-search-select-home .ant-select-selection--single {
+    height: 38px;
+}
+.custom-ant-search-select-home .ant-select-selection__placeholder, .ant-select-search__field__placeholder{
+    top: 60%!important;
+}
+/* .custom-ant-search-select-home .ant-select-arrow .ant-select-arrow-icon {
+    display: block;
+    color: #000;
+    font-size: 15px;
+} */
+.custom-ant-search-select-home-date .ant-input,
+.ant-select-selection--single {
+    height: 38px !important;
+    /* margin-right: 10px; */
+}
+.custom-ant-search-select-home-date .ant-calendar-picker-clear, .ant-calendar-picker-icon {
+    right: 20px!important;
+}
+.dropdown-placeholder-selection .ant-select-selection__placeholder, .ant-select-search__field__placeholder {
+    top: 60%!important;
+}
+
+.custom-ant-search-select-home-date > .ant-calendar-picker-clear,
+.ant-calendar-picker-icon {
+    top: 42%!important;
+    z-index: 0!important;
+
+}
+/* .custom-ant-search-select-home-date > .ant-calendar-home {
+     width: 100%!important;  
+} */
+/* .custom-ant-selection-single-home .ant-select-selection--single{
+height: 38px!important;
+} */
+.custom-home-search-btn {
+    height: 38px !important;
+}
+
+.custom-search-box-width-home {
+    width: 100% !important;
+}
+/* .custom-search-box-width-home .ant-input {
+    margin-right: 10px;
+} */
+.ant-calendar-home .ant-calendar-panel{
+        position: relative;
+        width: 100%;
+        font-size: 14px;
+        line-height: 1.5;
+        text-align: left;
+        list-style: none;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid #fff;
+        border-radius: 4px;
+        outline: none;
+        -webkit-box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    
+   
+}
+.upper-input-width-newsearch Input {
+    width: 300px;
+    height: 38px;
+    border-radius: 0;
+}
+.planvalue-render Input{
+    width: 300px;
+}
+.custom-search-box-width-home Input {
+height: 38px;
+}

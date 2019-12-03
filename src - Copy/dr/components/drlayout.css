@@ -1,0 +1,36 @@
+.custom-dashboard-sider-aakash aside{
+    min-width: 250px!important;
+    flex: 0 0 250px!important;
+    max-width: 250px!important;
+    width: 250px!important;
+}
+.custom-dashboard-sider-aakash .ant-layout-sider-trigger {
+    width: 250px!important;
+    
+}
+.custom-dashboard-sider-aakash .ant-layout-sider-collapsed .ant-layout-sider-trigger {
+width: 75px!important;
+}
+.custom-dashboard-sider-aakash .ant-layout-sider-collapsed {
+    min-width: 75px!important;
+    flex: 0 0 75px!important;
+    max-width: 75px!important;
+    width: 75px!important;
+}
+.custom-sidebar-icon-ap .ant-menu-inline-collapsed{
+    width: 75px;
+}
+.custom-sidebar-icon-ap{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.custom-sidebar-icon-ap .doctor-nav{
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+.custom-sidebar-icon-ap .custom-footer-down-frm{
+    margin-top: auto !important;
+}

@@ -1,0 +1,21 @@
+.active {
+	background-color: rgba(255, 236, 241);
+	cursor: pointer;
+	text-align: left;
+	padding: 4;
+	padding-left: 10px;
+	font-size: 1rem;
+	color: black;
+	border-bottom: 1px solid rgb(243, 243, 244);
+}
+
+.inActive {
+	background-color: white;
+	cursor: pointer;
+	text-align: left;
+	padding: 4;
+	padding-left: 10px;
+	font-size: 1rem;
+	color: black;
+	border-bottom: 1px solid rgb(243, 243, 244);
+}
