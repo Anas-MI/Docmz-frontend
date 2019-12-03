@@ -22,34 +22,34 @@ class Sidebar extends Component {
                                                
                                                 {/* <Icon type="file" /> */}
                                                 {/* <Link to="/Patient"><span>Profile</span></Link> */}
-                                                <NavLink to="/Patient" activeClassName="selected"><span><img src={require('./user.png')} />Profile</span></NavLink>
+                                                <NavLink to="/Patient" activeClassName="selected"><span><img src={require('./male.png')} width="24"/>Profile</span></NavLink>
                                             </Menu.Item>
 
                                             <Menu.Item key="2">
                                                 {/* <Icon type="file" /> */}
-                                                <NavLink to="/Password" activeClassName="selected"><span><img src={require('./key.png')} />Password</span></NavLink>
+                                                <NavLink to="/Password" activeClassName="selected"><span><img src={require('./password.png')} width="24"/>Password</span></NavLink>
                                                 {/* <Link to="/Password" ><span>Password</span></Link> */}
                                             </Menu.Item>
                                             <Menu.Item key="3">
                                                 {/* <Icon type="file" /> */}
-                                                <NavLink to="/Notification" activeClassName="selected"><span><img src={require('./mail.png')} /> Notification Settings</span></NavLink>
+                                                <NavLink to="/Notification" activeClassName="selected"><span><img src={require('./push.png')} width="24"/> Notification Settings</span></NavLink>
                                             </Menu.Item>
 
                                             <Menu.Item key="9">
                                                 {/* <Icon type="file" /> */}
-                                              <NavLink to="/Insurance" activeClassName="selected"><span><img src={require('./writing.png')} />Insurance</span></NavLink>
+                                              <NavLink to="/Insurance" activeClassName="selected"><span><img src={require('./insurance.png')}  width="24"/>Insurance</span></NavLink>
                                             </Menu.Item>
                                             <Menu.Item key="4">
                                                 {/* <Icon type="file" /> */}
-                                                <NavLink to ="/Demographic"  activeClassName="selected"><span><img src={require('./stats.png')} width="24"/>Demographic Info</span></NavLink>
+                                                <NavLink to ="/Demographic"  activeClassName="selected"><span><img src={require('./info.png')} width="24"/>Demographic Info</span></NavLink>
                                             </Menu.Item>
                                             <Menu.Item key="5">
                                                 {/* <Icon type="file" /> */}
-                                               <NavLink to="/Authorization"  activeClassName="selected"> <span><img src={require('./user_lock.png')} width="24"/>Authorizations</span></NavLink>
+                                               <NavLink to="/Authorization"  activeClassName="selected"> <span><img src={require('./validation.png')} width="24"/>Authorizations</span></NavLink>
                                             </Menu.Item>
                                             <Menu.Item key="6">
                                                 {/* <Icon type="file" /> */}
-                                               <NavLink to="/Payment"  activeClassName="selected"> <span><img src={require('./credit-card.png')} width="24"/>Payment</span></NavLink>
+                                               <NavLink to="/Payment"  activeClassName="selected"> <span><img src={require('./payment.png')} width="24"/>Payment</span></NavLink>
                                             </Menu.Item>
                                         </Menu>
                                     </Sider>

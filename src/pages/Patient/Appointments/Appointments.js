@@ -51,6 +51,9 @@ class Appointments extends Component {
     componentDidMount() {
         this.getpatient();
     }
+    tabRoute = () => {
+        this.props.history.push('/Patient')
+    }
     getpatient = async (e) => {
         getpatientDetail(localStorage.getItem('patientid'))
             .then(response => {
@@ -192,7 +195,7 @@ class Appointments extends Component {
                                 <Row>
                                     <Col span={24}>
                                         <div className="ab_custom_btn_ap">
-                                    <Tabs defaultActiveKey="1" onChange={this.callback} >
+                                    <Tabs defaultActiveKey="1" onChange={this.callback} onTabClick={this.tabRoute}>
     <TabPane tab="Dashboard" key="1">
     <Row>
 
@@ -227,7 +230,7 @@ class Appointments extends Component {
 
 
                         />
-                        <h4 style={{ textTransform: 'capitalize' }}>DR. {this.state.futureappointmentarr[id].doctor.basic.name}</h4>
+                        <h4 style={{ textTransform: 'capitalize' }}>Dr. {this.state.futureappointmentarr[id].doctor.basic.name.toLowerCase()}</h4>
                         <div className="upper-div-card_ap_below_detail">
                             <span style={{ color: 'rgba(0, 0, 0, 0.45)' }} className="upper-div-card_reason">Reason for your visit : {item.reasonForVisit}</span>
                             <p style={{ color: 'rgba(0, 0, 0, 0.45)' }} className="upper-div-card_date">{moment(item.bookedFor).format('LL')}</p>
@@ -298,8 +301,11 @@ class Appointments extends Component {
     </TabPane>
     <TabPane tab="Documents" key="3" disabled >
     </TabPane>
-    <TabPane tab="Settings" key="4">
-        <Link to="Setting"><Button type="button">Settings</Button></Link>
+    <TabPane tab="Settings" key="4" 
+    
+    
+    >
+        {/* <Link to="Setting"><Button type="button">Settings</Button></Link> */}
     </TabPane>
   </Tabs>
   </div>

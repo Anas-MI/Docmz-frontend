@@ -162,6 +162,9 @@ export default class AppointmentPayReview extends React.Component {
           this.setState({
             appointmentbookstatus: true
           })
+          setTimeout(function(){
+            window.location.reload();
+         }, 5000);
           // localStorage.removeItem('patientid', 'doctorid', 'manualbookedfor', 'doctorfee', 'reason', 'type', 'timeslotid')
           // this.setState({
           //   success : true
