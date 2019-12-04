@@ -1,0 +1,10 @@
+.c-pay-card-slider{
+    overflow: hidden;
+    &__slide{
+        padding: 20px;
+        background-color: #dcdcdc;
+        &.is-active{
+            background-color: red;
+        }
+    }
+}

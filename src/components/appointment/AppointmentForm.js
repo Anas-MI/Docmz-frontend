@@ -42,6 +42,7 @@ import ShowOnCard from "../../components/payment/ShowOnCard";
 import './newappointmentap.css'
 import Fade from 'react-reveal/Fade';
 import AppointmentShowCard from "./AppointmentShowCard";
+import PayCardSlider from "../payCardSlider/PayCardSlider";
 const stepStyle = {
   marginBottom: 37,
   boxShadow: "0px -1px 0 0 #e8e8e8 inset"
@@ -75,6 +76,15 @@ export default function AppointmentForm() {
   let formOne = React.createRef();
   let formTwo = React.createRef();
   let carousel = React.createRef();
+  
+  const [currentStep, setCurrentStep] = useState(0);
+  const [value, setValue] = useState("");
+  const [selectedCard, setSelectedCard] = useState(null);
+  const [firstStapForm, setFirstStapForm] = useState("");
+  const [secondStapForm, setSecondStapForm] = useState("");
+  const [cardDetails, setCardDetails] = useState("");
+  const [addCard, addCardToggle] = useState(false);
+
   const next = () => {
     carousel.next();
   }
@@ -118,15 +128,11 @@ export default function AppointmentForm() {
     setCardDetails(data);
     setCurrentStep(2);
   };
-
+  const onCardSelect = card => {
+    setSelectedCard(card)
+    setCurrentStep(3)
+  }
   const card = getCardData();
-  const [currentStep, setCurrentStep] = useState(0);
-  const [value, setValue] = useState("");
-  const [selectedCard, setSelectedCard] = useState(null);
-  const [firstStapForm, setFirstStapForm] = useState("");
-  const [secondStapForm, setSecondStapForm] = useState("");
-  const [cardDetails, setCardDetails] = useState("");
-  const [addCard, addCardToggle] = useState(false);
   const onStepChange = e => {
     if (e < currentStep) {
       setCurrentStep(e);
@@ -136,7 +142,7 @@ export default function AppointmentForm() {
     addCardToggle(!addCard);
   };
   const setSavedCardData = data => {
-    setCardDetails(data);
+    // setCardDetails(data);
     // setCurrentStep(3);
     console.log('currentstep', data)
     localStorage.setItem('patientcardid', data.id)
@@ -149,22 +155,14 @@ export default function AppointmentForm() {
   }
   const phonesubmit = e => {
     // setCardDetails(data);
-
     setCurrentStep(2);
-
-
-
-
   };
   const paymentslidersubmit = e => {
     // setCardDetails(data);
-
     setCurrentStep(3);
-
-
-
-
   };
+  const [cardSelect, setCardSelect] = useState(null)
+  const [slideIndex, setSlideIndex] = useState(2)
   const responsive = {
     0: {
       items: 2
@@ -178,6 +176,16 @@ export default function AppointmentForm() {
     height: '30px',
     lineHeight: '30px',
   };
+  
+ 
+  const slideTo = (i) => setSlideIndex(i)
+ 
+  const onSlideChanged = (e) => setSlideIndex(e.item)
+ 
+  const slideNext = () => setSlideIndex(slideIndex + 1)
+ 
+  const slidePrev = () => setSlideIndex(slideIndex - 1)
+ console.log({slideIndex})
   // const prefixSelector = getFieldDecorator('prefix', {
   //   initialValue: '86',
   // })(
@@ -303,194 +311,74 @@ export default function AppointmentForm() {
                         }}
                       />
                     ) : (
-
                         <div className="custom-card-list-ap image_grid">
 
-                          {/* <Slider {...settings}>
-                              <div>
-                                
-                                {
-                            cards.map( (el, i) => (
-                              <div 
-                              onClick={() => setSavedCardData(el)} >
-                             
-                              
-                              <ShowOnCard
-                                key={i}
-                                cvvOnCard={''}
-                               
-                                onDragStart={handleOnDragStart}
-                                expDateOnCard={el.exp_month + '/' + el.exp_year}
-                                numberOnCard={"xxxx xxxx xxxx " + el.last4}
-                                nameOnCard={"shubham"}
-                                transactionData=''
-                              />
-                           
-                              </div>
-                            ))
-                          }
-                              </div>
-                             
-                            </Slider> */}
-
-                          {/* <div className="container">
-                          <Slider {...settings}>
-                            <div>
-                          {
-                            cards.map( (el, i) => (
-                              <div 
-                              onClick={() => setSavedCardData(el)} >
-                             
-                              
-                              <ShowOnCard
-                                key={i}
-                                cvvOnCard={''}
-                               
-                                onDragStart={handleOnDragStart}
-                                expDateOnCard={el.exp_month + '/' + el.exp_year}
-                                numberOnCard={"xxxx xxxx xxxx " + el.last4}
-                                nameOnCard={"shubham"}
-                                transactionData=''
-                              />
-                           
-                              </div>
-                            ))
-                          }
-                          </div>
-                          </Slider>
-                          </div> */}
-                          {/* <Carousel showArrows={false} infiniteLoop emulateTouch>
-              
-                {
-                            cards.map( (el, i) => (
-                              <div 
-                              onClick={() => setSavedCardData(el)} >
-                             
-                              
-                              <ShowOnCard
-                                key={i}
-                                cvvOnCard={''}
-                               
-                                onDragStart={handleOnDragStart}
-                                expDateOnCard={el.exp_month + '/' + el.exp_year}
-                                numberOnCard={"xxxx xxxx xxxx " + el.last4}
-                                nameOnCard={"shubham"}
-                                transactionData=''
-                              />
-                           
-                              </div>
-                            ))
-                          }
-             
-            </Carousel> */}
-                          {/* <Icon type="left-circle" onClick={() => previous()} className='custom-card-list-ap__prevarrow' /> */}
-                          
+{/*                
+                            <Radio.Group   
+                              name="type"
+                              style={{
+                                width: '100%'
+                              }}
+                              // onChange={(e) => {value = e.target.value }}
+                              // defaultValue={i}
+                              > */}
                             <AliceCarousel mouseTrackingEnabled
                               infinite={false}
-                              // responsive={responsive}
+                              responsive={{
+                                0: {
+                                  items: 1,
+                              },
+                              1024: {
+                                  items: 2
+                              }
+                              }}
+                              // slideToIndex={slideIndex}
+                              // onSlideChanged={onSlideChanged}
                               buttonsDisabled={true}
                               dotsDisabled = {true}
-                            keysControlDisabled = {true}
+                              keysControlDisabled = {true}
                             >
-
+                              
+                              {/* a{cards.length}a */}
                               {
                                 cards.map((el, i) => (
-                                 
-                                  <div
-                                    onClick={() => setSavedCardData(el)}
-                                    onDragStart={handleOnDragStart}
-                                    // className="image_grid"
-                                  >
+                                  
+                                    // <Radio key={i} value={i} 
+                                    // // onChange={() => 
+                                    // // setSavedCardData(el)
+                                    // // }
+                                    // >
+                                      <div
+                                      className="c-appointment-form__card-selector"
+                                      key={i}
+                                        // onClick={() => setSavedCardData(el)}
+                                        onDragStart={handleOnDragStart}
+                                        // className="image_grid"
+                                      >
+                                        <AppointmentShowCard
+                                          key={i}
+                                          cvvOnCard={''}
+                                          flip={false}
+                                          onClick={() => console.log('appointmentformcard')}
 
+                                          expDateOnCard={el.exp_month + '/' + el.exp_year}
+                                          numberOnCard={"xxxx xxxx xxxx " + el.last4}
+                                          nameOnCard={"shubham"}
+                                          transactionData=''
 
-                                    {/* <ShowOnCard
-                                key={i}
-                                cvvOnCard={''}
-                                flip={false}
-                                onClick={() => setSavedCardData(el)} 
-                               
-                                expDateOnCard={el.exp_month + '/' + el.exp_year}
-                                numberOnCard={"xxxx xxxx xxxx " + el.last4}
-                                nameOnCard={"shubham"}
-                                transactionData=''
-                              /> */}
-                                <Radio.Group   
-                                name="type"
-                                // onChange={(e) => {value = e.target.value }}
-                                // defaultValue={i}
-                                >
-                                    <Radio value={i} onChange={() => console.log(i)}>
-                                      <AppointmentShowCard
-
-                                        key={i}
-                                        cvvOnCard={''}
-                                        flip={false}
-                                        onClick={() => console.log('appointmentformcard')}
-
-                                        expDateOnCard={el.exp_month + '/' + el.exp_year}
-                                        numberOnCard={"xxxx xxxx xxxx " + el.last4}
-                                        nameOnCard={"shubham"}
-                                        transactionData=''
-
-                                      />
-                                        </Radio>
-                                        </Radio.Group>
-                                      {/* <span class="caption">
-                                        <span>Painting</span>
-                                      </span> */}
-                                   
-
-                                  </div>
-                                
+                                        />
+                                        <br />
+                                        <Button onClick={()=> {
+                                          onCardSelect(el)
+                                        }} >Use This</Button>
+                                        <br />
+                                        <br />
+                                      </div>
+                                        // </Radio>
                                 ))
                               }
-                             
                             </AliceCarousel>
-
-                      
-                          {/* <Icon type="right-circle" onClick={() => next()} className='custom-card-list-ap__nextarrow' /> */}
-                          {/* <div className="custom-card-list-ap"> */}
-                          {/* <Icon type="left-circle" onClick={() => previous()} className='custom-card-list-ap__prevarrow'/>
-                           <Carousel ref={node => (carousel = node)} {...props}>
-                           {
-                             cards.map( (el, i) => (
-                              <div onClick={() => setSavedCardData(el)}>
-                                
-                               <ShowOnCard
-                                key={i}
-                                cvvOnCard={''}
-                                
-                                expDateOnCard={el.exp_month + '/' + el.exp_year}
-                                numberOnCard={"xxxx xxxx xxxx " + el.last4}
-                                nameOnCard={"shubham"}
-                                transactionData=''
-                               />
-                               
-                              </div>
-                             ))
-                           }
-                           </Carousel>
-                           <Icon type="right-circle" onClick={() => next()} className='custom-card-list-ap__nextarrow'/> */}
-                          {/* <List
-                            className="custom-card-list-data-ap"
-                            bordered
-                            dataSource={cards}
-                            renderItem={item => (
-                              <List.Item onClick={() => setSavedCardData(item)}>
-
-                                <p className="c-appointment-form__card-number">
-
-                                  xxxx xxxx xxxx {item.last4}
-                                  <span className="middle-content-date">{item.exp_month}/{item.exp_year}</span>
-                                  <span className="c-appointment-form__card-icon">
-                                    <span style={{ fontSize: '18px' }}>{item.brand}</span> - <Icon type="credit-card" />
-                                  </span>
-
-                                </p>
-
-                              </List.Item>
-                            )}
-                          /> */}
+                            {/* </Radio.Group> */}
                           <Button
                             className="c-appointment-form__card-tgl-btn"
                             onClick={() => {
@@ -499,15 +387,14 @@ export default function AppointmentForm() {
                           >
                             Add New <Icon type="plus" />
                           </Button>
-                          <Button
+                          {/* <Button
                             style={{ float: 'right' }}
                             type="primary"
                             className="ap-appointment-details-btn"
                             onClick={(e) => paymentslidersubmit(e)}
-
                           >
                             Next
-   </Button>
+                          </Button> */}
                         </div>
                       )}
                   </div>

@@ -19,10 +19,11 @@ import {
     Checkbox,
     AutoComplete,
     Carousel,
-   
-  
   } from "antd";
+import { connect } from 'react-redux'
+import classNames from 'classnames'
 class FormStep2 extends Component {
+  
     constructor() {
         super()
         this.state = {
@@ -59,6 +60,10 @@ class FormStep2 extends Component {
      this.setState({
        phone : localStorage.getItem('patientphone')
      })
+     
+     console.log({
+       props: this.props
+     })
    }
    phoneChange =  async (e) => {
      e.preventDefault();
@@ -71,6 +76,7 @@ class FormStep2 extends Component {
    }
    
     render() {
+      let patientInfo = JSON.parse(localStorage.getItem('patient'))
         const { getFieldDecorator } = this.props.form;
         const {phone} = this.state
         return (
@@ -90,7 +96,8 @@ class FormStep2 extends Component {
                  <div className="second-step-custom-ap">
           <Row>
             <Col span={24}>
-              <h2 >John, Let's get you taken care of</h2>
+            
+              <h2 >Hey {patientInfo.name?patientInfo.name : "John"}, Let's get you taken care of</h2>
 
             </Col>
           </Row>
@@ -101,12 +108,16 @@ class FormStep2 extends Component {
 
             <Col span={24}>
               <center>
-              <Radio.Group  onChange={this.onChange} value={this.state.value}>
+              <Radio.Group className="second-step-custom-ap__radio-group" onChange={this.onChange} value={this.state.value}>
               <Radio value="phone" >
-                <Icon type="phone" value='phone' className="second-step-custom-ap__icons" />
+                <Icon type="phone" value='phone' className={classNames("second-step-custom-ap__icons", {
+                  "second-step-custom-ap__icons--active": "phone" === this.state.value
+                })} />
                 </Radio>
               <Radio value="video"  >
-                <Icon type="mobile" className="second-step-custom-ap__icons" />
+                <Icon type="mobile"  className={classNames("second-step-custom-ap__icons", {
+                  "second-step-custom-ap__icons--active": "video" === this.state.value
+                })} />
                 </Radio>
               </Radio.Group>
                {/* <FormTwo ref={formTwo} /> */}
@@ -125,7 +136,7 @@ class FormStep2 extends Component {
               
             </Col> */}
             <Col span={24} align="middle">
-              <p className="video-phone-para"><a href="#">Video vs Phone visits. Learn how they work</a></p>
+              {/* <p className="video-phone-para"><a href="#">Video vs Phone visits. Learn how they work</a></p> */}
             </Col>
           </Row>
           <Row >
@@ -236,5 +247,7 @@ class FormStep2 extends Component {
         )
     }
 }
-
-export default Form.create()(FormStep2)
+const mapStateToProps = state => ({
+  ...state
+})
+export default Form.create()(connect(mapStateToProps)(FormStep2))

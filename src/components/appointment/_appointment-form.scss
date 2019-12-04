@@ -1,4 +1,7 @@
 .c-appointment-form{
+    padding-bottom: 30px;
+    position: relative;
+    width: 100%;
     &__doctor-wrapper{
         display: flex;
         align-items: center;
@@ -44,6 +47,29 @@
     }
     &__card-tgl-btn{
         margin-top: 20px;
+    }
+    &__card-selector{
+        &:hover{
+            .ant-btn{
+                opacity: 1;
+            }
+        }
+        .ant-btn{
+            transition: all .4s;
+            opacity: 0;
+        }
+    }
+    .ap-appointment-details-btn{
+        position: absolute;
+        left: 0;
+        right: 0;
+        width: 100% !important;
+        max-width: 200px;
+        bottom: 0;
+        margin: auto;
+    }
+    .ant-col, .ant-row-flex, .ant-row, .ant-modal-content{
+        position: static !important;
     }
 }
 

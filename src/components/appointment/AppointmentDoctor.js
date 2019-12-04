@@ -43,7 +43,7 @@ componentDidMount(){
       <p className="c-appointment-form__doctor-time">
         {/* <strong>{time}</strong> */}
         <p className="custom-doctor-time-span-ap">  {localStorage.getItem('manualtime')}</p>
-        <p className="custom-doctor-date-span-ap">
+        <p className="custom-doctor-date-span-ap" style={{fontSize:"13px"}}>
         <Moment format="LLLL">
       {localStorage.getItem('manualdate')}
       </Moment>

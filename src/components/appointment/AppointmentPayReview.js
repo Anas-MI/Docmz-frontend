@@ -300,8 +300,15 @@ export default class AppointmentPayReview extends React.Component {
               <Col span={24}>
                 <center>
                   {/* <Button type="primary">Primary</Button> */}
-                  {confirmbtn}
-
+                  {/* {confirmbtn} */}
+                  <div>
+                    <Button type="primary" disabled={!(this.state.informedconsent && this.state.privacypolicy)} className="ap-appointment-details-btn"
+                      onClick={(e) => {
+                        if(this.state.informedconsent && this.state.privacypolicy){
+                          this.handleSubmit(e)
+                        }
+                      }}>Confirm</Button>
+                  </div>
                 </center>
               </Col>
             </div>
