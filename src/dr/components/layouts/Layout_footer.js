@@ -11,7 +11,7 @@ export default class Layout_footer extends Component {
         const { Footer } = Layout;
        return (
            <div>
-               <Footer style={{ textAlign: 'center' }}>Ant Design ©2019 Created by Ant DocMZ</Footer>
+               <Footer style={{ textAlign: 'center' }}>DocMZ</Footer>
                     </div>
 			
 		);

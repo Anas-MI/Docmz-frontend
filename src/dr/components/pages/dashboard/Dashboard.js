@@ -1,33 +1,33 @@
 import React, { Component } from "react";
 // import Timelines from "../../objects/timeline/Timelines";
-import { Row, Col, Button, Icon, Card, Avatar, Badge, Spin, Tooltip, notification, Popconfirm, message } from "antd";
+import { Row, Col, Button, Icon, Card, Avatar, Spin, Tooltip, Popconfirm, message } from "antd";
 import classNames from 'classnames'
-import InfoCard from "../../objects/card/InfoCard";
+// import InfoCard from "../../objects/card/InfoCard";
 import { getDoctors } from '../../../../services/redux/actions';
 import { getNotifications } from '../../../../services/redux/actions';
 import { connect } from 'react-redux'
-import ShortCalender from "../../objects/calenders/shortCalender/ShortCalender";
-import Timeline_drovar from "../../objects/timeline/Timeline_drovar";
+// import ShortCalender from "../../objects/calenders/shortCalender/ShortCalender";
+import TimelineDrover from "../../objects/timeline/TimelineDrover";
 import { Collapse } from 'antd';
 import Tour from "react-user-tour";
 import Moment from 'react-moment';
 import "./ddemo.css";
 import axios from 'axios'
-import {
-  Accordion,
-  AccordionItem,
-  AccordionItemHeading,
-  AccordionItemButton,
-  AccordionItemPanel,
-} from 'react-accessible-accordion';
+// import {
+//   Accordion,
+//   AccordionItem,
+//   AccordionItemHeading,
+//   AccordionItemButton,
+//   AccordionItemPanel,
+// } from 'react-accessible-accordion';
 import 'react-accessible-accordion/dist/fancy-example.css';
 import moment from "moment";
 import { getDoctorDetail } from "../../../../services/api";
-import WelcomeNotification from "./WelcomeNotification";
+// import WelcomeNotification from "./WelcomeNotification";
 const Panel = Collapse.Panel;
-const text1 = `
- Reason for visit - Toothache`;
-const text2 = `Description - Notes Available`
+// const text1 = `
+//  Reason for visit - Toothache`;
+// const text2 = `Description - Notes Available`
 class Dashboard extends Component {
   constructor(props) {
     super(props);
@@ -51,7 +51,7 @@ class Dashboard extends Component {
 
         let apparr = response.data.data.appointments
         let filterapparr = apparr.filter(function (hero) {
-          return hero.booked == true;
+          return hero.booked === true;
           // console.log('hero',hero.booked == true)
         });
         console.log('filterapparrrdata', apparr)
@@ -169,7 +169,7 @@ class Dashboard extends Component {
       )
       .then(response => {
         console.log('approveappointmernt', response);
-        if (response.data.status == true) {
+        if (response.data.status === true) {
           alert(response.data.message)
           window.location.reload();
           // this.setState({
@@ -249,10 +249,10 @@ class Dashboard extends Component {
                             <Avatar size={50} icon="user" className={this.componentClass("avatar")} />
                             <div className={this.componentClass("user-content")}>
                               <p className={this.componentClass("user-name")}>
-                                {item.name || 'patient name'}
+                                {item.name || 'Patient'}
                               </p>
                               <p className={this.componentClass("user-number")}>
-                                {item.number || '1234567892'}
+                                {item.number || '--'}
                               </p>
                             </div>
                           </Col>
@@ -260,16 +260,16 @@ class Dashboard extends Component {
                             <div className={this.componentClass("calander-inner")} >
                               <div className={this.componentClass("calander-date")} >
                                 <Icon type="calendar" className={this.componentClass("icon")} />
-                                {<Moment format="LL">{item.bookedFor}</Moment> || '22 October 2019'}
+                                {<Moment format="LL">{item.bookedFor}</Moment> || '--'}
                               </div>
                               <div className={this.componentClass("calander-time")} >
                                 <Icon type="clock-circle" className={classNames(this.componentClass("icon"))} />
-                                {<Moment format="LT">{item.bookedFor}</Moment> || '8:30 A.M.'}
+                                {<Moment format="LT">{item.bookedFor}</Moment> || '--'}
                               </div>
                             </div>
                           </Col>
                           <Col span={24 / 3} className={this.componentClass("status-col")} >
-                            {item.approved == true ?
+                            {item.approved === true ?
                               <div className={classNames(this.componentClass("status"), this.componentClass("status--active"))} >
                                 Approved</div> :
                               <div className={classNames(this.componentClass("status-notapproved"), this.componentClass("status--active"))} >
@@ -388,8 +388,7 @@ class Dashboard extends Component {
               <Button onClick={this.showDrawer} className="fr timeline-toggle" type="primary">
                 <Icon style={{ fontSize: 20 }} type="schedule" />
               </Button>
-              <Timeline_drovar
-                visible={visible}
+              <TimelineDrover visible={visible}
                 onClose={() => {
                   this.onClose();
                 }}

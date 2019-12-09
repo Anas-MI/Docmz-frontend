@@ -52,6 +52,12 @@ class App extends React.Component {
           
           <Route
             path="/doctors"
+            exact
+            component={props => <DoctorsProfile {...props} />}
+          />
+          <Route
+            path="/doctors/:id"
+            exact
             component={props => <DoctorsProfile {...props} />}
           />
           <Route

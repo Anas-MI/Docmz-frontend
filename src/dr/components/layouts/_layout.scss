@@ -1,6 +1,8 @@
 .c-layout-header{
     // border-bottom:1px solid #e8e8e8 ; 
-    padding-top: 20px;
+    // padding-top: 10px;
+    padding-bottom: 5px;
+    // background-color: #fff;
     &__col-user a{
         color: $main-color-1;
         margin-right: 10px;
@@ -25,7 +27,7 @@
             box-shadow: 0px 1px 0px 1px #ccc;
         
     }
-    &__col-time{
+    &__col-time{ //c-layout=header__col-user
         padding-left: 15px;
     }
     &__wrapper{
@@ -40,7 +42,30 @@
         font-size: 14px;
         text-transform: capitalize;
     }
-
+    &__heading-wrapper{
+        text-align: center;
+        padding: 1px 10px;
+        margin: 5px;
+        line-height: 1.2;
+        background-color: #fff;
+        &--border-rgt{
+            border-right: 1px solid #ccc;
+        }
+    }
+    &__heading{
+        font-size: 25px;
+        margin-bottom: 5px;
+    }
+    &__text{
+        margin-bottom: 5px;
+    }
+    &__heading-box{
+        width: 500px;
+        max-width: 100%;
+        background: #ffffff;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+    }
 }
 .ant-layout-header{
     height: 70px;

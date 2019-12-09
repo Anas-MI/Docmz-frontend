@@ -47,6 +47,7 @@ export class StepOne extends React.Component {
     });
   };
 
+
   render () {
     const {  getFieldDecorator, getFieldsError, getFieldError, isFieldTouched } = this.props.form;
     
@@ -82,6 +83,7 @@ export class StepOne extends React.Component {
             />,
           )}
         </Form.Item>
+
         <Form.Item>
           <Button type="primary" htmlType="submit" disabled={hasErrors(getFieldsError())}>
             Log in

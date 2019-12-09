@@ -73,7 +73,12 @@ function hasErrors(fieldsError) {
 		 // To disabled submit button at the beginning.
 		 this.props.form.validateFields();
 		const doctor = JSON.parse(localStorage.getItem('user'));
-		const { _id: docId } = doctor;
+		console.log({
+			props: this.props
+		})
+		console.log({"iddddd": this.props.match.params.id})
+		// const { _id: docId } = doctor;
+		const docId = this.props.match.params.id
 		this.setState({ docId });
 		if (docId) {
 			getDoctorById(docId)
@@ -82,12 +87,13 @@ function hasErrors(fieldsError) {
 						const { data } = res.data;
 						console.log('pardoctor',{ data });
 						console.log(res.data.data.basic.name)
-						localStorage.setItem('doctorid',res.data.data._id)
-						localStorage.setItem('doctorfee',res.data.data.fee)
-						localStorage.setItem('docname',res.data.data.basic.name)
+						// localStorage.setItem('doctorid',res.data.data._id)
+						// localStorage.setItem('doctorfee',res.data.data.fee)
+						// localStorage.setItem('docname',res.data.data.basic.name)
 						this.setState({
 							appointments: data.appointments,
-							isLoading: false
+							isLoading: false,
+							doctor: data
 						});
 						// getDatesFromArray(data.appointments, new Date())
 					}
@@ -109,7 +115,7 @@ function hasErrors(fieldsError) {
 		});
 	  };
 	render() {
-		const { current } = this.state;
+		const { current, doctor } = this.state;
 		const { getFieldDecorator, getFieldsError, getFieldError, isFieldTouched } = this.props.form;
 		// Only show error after a field is touched.
 		const usernameError = isFieldTouched('username') && getFieldError('username');
@@ -120,13 +126,13 @@ function hasErrors(fieldsError) {
 				<Section
 					className="p-doctors-profile__section"
 					bgImg={
-						'https://www.thehealthy.com/wp-content/uploads/2017/09/02_doctor_Insider-Tips-to-Choosing-the-Best-Primary-Care-Doctor_519507367_Stokkete.jpg'
+						'https://demos.creative-tim.com/nextjs-material-kit/_next/static/images/profile-bg-baf6b40a654b078399e93e3d9cb6d455.jpg'
 					}
 					type={[, 'bg-black-alpha', 'shadow']}
 				>
 					<div className="c-container p-doctors-profile__container">
-						<DoctorInfo />
-						<AppointmentCard type="shadow" title="Make Your Next Appointment" />
+						<DoctorInfo doctor={doctor} />
+						<AppointmentCard doctor={doctor} type="shadow" title="Make Your Next Appointment" />
 					</div>
 				</Section>
 				<div className="c-container p-doctors-profile__container">

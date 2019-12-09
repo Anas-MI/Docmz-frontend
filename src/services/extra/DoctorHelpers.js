@@ -28,25 +28,26 @@ export const getName = doctor => {
 }
 
 export const getSlug = doctor => {
-  const {
-    basic
-  } = doctor
-  if (!basic)
-    return "no-slug"
+  return doctor._id
+  // const {
+  //   basic
+  // } = doctor
+  // if (!basic)
+  //   return "no-slug"
 
-  const {
-    name_prefix,
-    name,
-    credential
-  } = basic
-  var nameVal = getValidValue(name);
-  nameVal = nameVal.replace(" ", "-");
-  const wholeName = `${nameVal}`
+  // const {
+  //   name_prefix,
+  //   name,
+  //   credential
+  // } = basic
+  // var nameVal = getValidValue(name);
+  // nameVal = nameVal.replace(" ", "-");
+  // const wholeName = `${nameVal}`
   
-  if (wholeName.trim() === "")
-    return "No Name"
+  // if (wholeName.trim() === "")
+  //   return "No Name"
 
-  return wholeName
+  // return wholeName
 }
 
 

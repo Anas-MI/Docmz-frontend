@@ -52,7 +52,12 @@ export default class AppointmentCard extends Component {
         });
     };
     onDateChange = dates => {
-        const doctorObj = JSON.parse(localStorage.getItem("user"))
+        const doctorObj = this.props.doctor || {}// JSON.parse(localStorage.getItem("user"))
+        console.clear()
+        console.log({
+            doctorObj,
+            props: this.props
+        })
         const {
             _id: doctor
         } = doctorObj
@@ -95,6 +100,7 @@ export default class AppointmentCard extends Component {
             className,
             parentClass,
             type,
+            doctor
         } = this.props
 
         const { dates, appointments, isLoading } = this.state
@@ -110,7 +116,7 @@ export default class AppointmentCard extends Component {
                 [parent]: parentClass
             })}>
                 <Card parentClass="" title={title}>
-                    <AppointmentSlider onDateChange={this.onDateChange} />
+                    {doctor && <AppointmentSlider onDateChange={this.onDateChange} />}
                     <div className="c-appointment-card__scroll-wrapper">
                         <CustomScroll heightRelativeToParent="100%">
                             <Row type="flex" className={classNames("c-appointment-card__scroll-row", {
@@ -125,7 +131,7 @@ export default class AppointmentCard extends Component {
                                     this.setState({ isPopup: true })
                                     console.log('a obj', { e })
                                 }} dates={dates} />}
-                                {isLoading && <Spin indicator={<Icon type="loading" style={{ fontSize: 50 }} spin />} />}
+                                {(isLoading || !doctor) && <Spin indicator={<Icon type="loading" style={{ fontSize: 50 }} spin />} />}
                             </Row>
                         </CustomScroll>
                     </div>

@@ -28,13 +28,15 @@ export default class AppointmentPayReview extends React.Component {
   }
 
   componentDidMount() {
-    var today = new Date();
-    var dd = String(today.getDate()).padStart(2, '0');
-    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-    var yyyy = today.getFullYear();
+    // var today = new Date();
+    // var dd = String(today.getDate()).padStart(2, '0');
+    // var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    // var yyyy = today.getFullYear();
 
-    today = mm + '/' + dd + '/' + yyyy;
+    // today = mm + '/' + dd + '/' + yyyy;
+    let today = moment(new Date()).format("MM/DD/YYYY");
     console.log('today', today)
+   
     this.setState({
       today: today
     })
@@ -247,11 +249,11 @@ export default class AppointmentPayReview extends React.Component {
               <h2>Appointment Details</h2>
 
               <div classame="review-custom-section-ap__visit-details">
-                <p><strong>Consultation Method : </strong>{localStorage.getItem('type') || 'NO DATA'} </p>
-                <p><strong>Reason for visit :</strong> {localStorage.getItem('reason') || 'NO DATA'}</p>
+                <p><strong>Consultation Method : </strong>{localStorage.getItem('type') || '--'} </p>
+                <p><strong>Reason for visit :</strong> {localStorage.getItem('reason') || '--'}</p>
                 <p><strong>Duration : </strong>{this.state.durationdata || 'No Duration Data Given'}</p>
                 <p><strong>Consultation Cost : </strong>{localStorage.getItem('doctorfee')}</p>
-                <p><strong>Appointment Time : </strong>{localStorage.getItem('manualtime') || 'NO DATA'}</p>
+                <p><strong>Appointment Time : </strong>{localStorage.getItem('manualtime') || '--'}</p>
                 <p><strong>Specialty : </strong>Primary Care Doctor</p>
               </div>
             </Col>

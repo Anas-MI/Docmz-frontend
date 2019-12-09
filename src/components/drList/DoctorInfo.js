@@ -14,9 +14,9 @@ class DoctorInfo extends Component {
     }
     render() {
         const {
-            doctors,
+            doctors, doctor
         } = this.props
-        const doctor = doctors && doctors[0]
+        // const doctor = doctors && doctors[0]
         const name     = getName(doctor || {}).toLowerCase()
         const address   = getAddress(doctor || {})
         return (
